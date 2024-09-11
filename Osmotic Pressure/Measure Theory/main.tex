@@ -1,0 +1,688 @@
+\documentclass[11pt,x11names]{article}
+\setlength{\headheight}{22pt}
+
+
+% Typesetting Packages
+\usepackage[x11names]{xcolor}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[a4paper, total={7in, 9.5in}]{geometry}
+\usepackage{setspace}
+
+\usepackage{import}
+\usepackage{csquotes}
+\usepackage[style=alphabetic, backend=bibtex8,
+            autocite=footnote, notetype=endonly, labeldateparts]{biblatex}
+
+
+%%%%%%%%%%%%%%% HEADERS/FOOTERS %%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{Measure Theory Notes}
+\rhead{\footnotesize Email Questions, Comments and Corrections to:\\aaryan11@stanford.edu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%% COUNTER(S)  %%%%%%%%%%%%%%%%%%%%
+\newcounter{exercises}
+\counterwithin{exercises}{subsection}
+\renewcommand{\theexercises}{\thesubsection.\Alph{exercises}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Math Packages
+\usepackage{amsthm, amssymb, amsmath, centernot, graphicx}
+\usepackage{thmtools}
+\usepackage{stmaryrd}
+\usepackage[shortlabels]{enumitem}
+% Fonts
+
+\usepackage{calligra, mathrsfs}
+\usepackage{lmodern}
+\usepackage[T2A,T1]{fontenc}
+
+% Other Font Options
+% \usepackage{mathpazo} % The Rising Sea
+% \usepackage{euler}
+
+ %\usepackage{euler} % Vaughan's notes
+ %\usepackage{eulervm}
+
+%\usepackage{kpfonts}  
+
+\usepackage{libertine} 
+\usepackage{libertinust1math}
+
+%\usepackage{amsfonts} % Stacks project math font
+
+
+% Graphics Packages
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+\usepackage{framed}
+\usepackage[many]{tcolorbox}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{pagecolor}
+\usepackage{etoolbox}
+\usepackage{listings}
+\definecolor{shadecolor}{gray}{0.95}
+
+
+% General Utilities 
+
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\bbar}[1]{\overline{#1}}
+\renewcommand{\bf}[1]{\mathbf{#1}}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\newcommand{\chref}[2]{\href{#1}{\color{blue}{\underline{#2}}}}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% CUSTOM COMMANDS %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% STYLIZED LETTERS %%%%%%%%%%%%%%%%
+%% BOLD LETTERS %%
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbb{1}}
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+\newcommand{\ff}{\mathbb{F}}
+\newcommand{\rp}{\mathbb{RP}}
+\newcommand{\cp}{\mathbb{CP}}
+\renewcommand\tt{\mathbb{T}}
+\newcommand{\bp}{\mathbb{P}}
+\newcommand{\boldp}{\mathbb{P}}
+\renewcommand\aa{\mathbb{A}}
+\newcommand\ii{\mathbb{I}}
+\newcommand{\ee}{\mathbb{E}}
+% MATHFRAK LETTERS %
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\PP}{\mathfrak{P}}
+\newcommand{\frakq}{\mathfrak{q}}
+\newcommand{\frakQ}{\mathfrak{Q}}
+\newcommand{\mm}{\mathfrak{m}}
+\newcommand{\MM}{\mathfrak{M}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\fraka}{\mathfrak{a}}
+\newcommand{\frakb}{\mathfrak{b}}
+\newcommand{\frakc}{\mathfrak{c}}
+\newcommand{\frakd}{\mathfrak{d}}
+\newcommand{\frakD}{\mathfrak{D}}
+\newcommand{\frakn}{\mathfrak{n}}
+\newcommand{\frakf}{\mathfrak{f}}
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\jj}{\mathfrak{j}}
+%% MATHCAL LETTERS %%
+\newcommand{\calc}{\mathcal{C}}
+\newcommand{\cald}{\mathcal{D}}
+\newcommand{\calf}{\mathcal{F}}
+\newcommand{\calg}{\mathcal{G}}
+\newcommand{\calh}{\mathcal{H}}
+\newcommand{\cala}{\mathcal{A}}
+\newcommand{\calb}{\mathcal{B}}
+\newcommand{\cale}{\mathcal{E}}
+\newcommand{\calo}{\mathcal{O}}
+\newcommand{\cali}{\mathcal{I}}
+\newcommand{\calj}{\mathcal{J}}
+\newcommand{\call}{\mathcal{L}}
+\newcommand{\calx}{\mathcal{X}}
+\newcommand{\caly}{\mathcal{Y}}
+\newcommand{\calz}{\mathcal{Z}}
+\newcommand{\calm}{\mathcal{M}}
+\newcommand{\caln}{\mathcal{N}}
+\newcommand{\cals}{\mathcal{S}}
+%% FANCY LETTERS %%
+\newcommand{\fanc}{\mathscr{C}}
+\newcommand{\fanb}{\mathscr{B}}
+\newcommand{\fane}{\mathscr{E}}
+\newcommand{\fanf}{\mathscr{F}}
+\newcommand{\fanp}{\mathscr{P}}
+\newcommand{\fanl}{\mathscr{L}}
+\newcommand{\fana}{\mathscr{A}}
+\newcommand{\fanx}{\mathscr{X}}
+\newcommand{\fany}{\mathscr{Y}}
+\newcommand{\fanz}{\mathscr{Z}}
+\newcommand{\fang}{\mathscr{G}}
+\newcommand{\fanh}{\mathscr{H}}
+\newcommand{\fani}{\mathscr{I}}
+\newcommand{\fanm}{\mathscr{M}}
+\newcommand{\fann}{\mathscr{N}}
+\newcommand{\fans}{\mathscr{S}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% OPERATIONS, CONNECTORS & SEPARATORS %%%%%%%%%%%%
+%%% Module Things %%
+\newcommand{\tensor}{\otimes}
+\newcommand{\bigtensor}{\bigotimes}
+\newcommand{\dsum}{\oplus}
+\newcommand{\bigdsum}{\bigoplus}
+%% Maps %%
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\bij}{\overset{\sim}{\to}}
+\newcommand{\dlim}{\varinjlim}
+\newcommand{\inlim}{\varprojlim}  
+%% Topology Things %%
+\renewcommand{\bar}[1]{\overline{#1}}
+\newcommand{\csum}{\#}
+\DeclareMathOperator{\topint}{int}
+\newcommand{\topwedge}{\vee}
+\newcommand{\bigtopwedge}{\bigvee}
+%% Left-Righting Things %%
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brangle}[1]{\left\langle #1 \right\rangle}
+\renewcommand{\brack}[1]{\left(   #1 \right)}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\lVert #1 \right \rVert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\sqbrack}[1]{\left[ #1 \right]}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% CUSTOM SYMBOLS FOR FUNZIES %%%%%%%%%%%%%%%%%
+
+%% RV symbol for Poisson Distribution %%
+\newcommand{\fish}{ %% For R.V. w/ Poisson dist %%
+  \mathchoice
+    {\mathrel{\ooalign{$\alpha$\cr\hidewidth \kern -0.13em $\cdot$\hidewidth}}}% \displaystyle
+    {\mathrel{\ooalign{$\alpha$\cr\hidewidth \kern -0.13em$\cdot$\hidewidth}}}% \textstyle
+    {\mathrel{\ooalign{$\scriptstyle\alpha$\cr\hidewidth\kern -0.13em $\scriptstyle\cdot$\hidewidth}}}% \scriptstyle
+    {\mathrel{\ooalign{$\scriptscriptstyle\alpha$\cr\hidewidth \kern -0.13em $\scriptscriptstyle\cdot$\hidewidth}}}% \scriptscriptstyle
+}
+
+%% Does not Imply %%
+\newcommand{\notimplies}{
+\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+
+%% Restricted Product %%
+\newcommand{\rprod}{
+    \mathrel{\ooalign{\hidewidth $\prod$ \hidewidth \cr $\coprod$}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%% MISC OPS&COMMANDS %%%%%%%%%%%%%%%%%
+%% Categorical tingz %%
+\DeclareMathOperator{\Set}{\underline{\mathsf{Set}}}
+\DeclareMathOperator{\Ab}{\underline{\mathsf{Ab}}}
+\DeclareMathOperator{\Grp}{\underline{\mathsf{Grp}}}
+\DeclareMathOperator{\Top}{\underline{\mathsf{Top}}}
+\DeclareMathOperator{\Diff}{\underline{\mathsf{Diff}}}
+\DeclareMathOperator{\Rmod}{\underline{\mathsf{R-Mod}}}
+\DeclareMathOperator{\Zmod}{\underline{Z-\mathsf{Mod}}}
+\DeclareMathOperator{\Amod}{\underline{\mathsf{A-Mod}}}
+\DeclareMathOperator{\Vect}{\underline{\mathsf{Vect}}}
+\DeclareMathOperator{\Ring}{\underline{\mathsf{Ring}}}
+\DeclareMathOperator{\CRing}{\underline{\mathsf{CRing}}}
+\DeclareMathOperator{\Meas}{\underline{\mathsf{Meas}}}
+\DeclareMathOperator{\Met}{\underline{\mathsf{Met}}}
+\DeclareMathOperator{\Cat}{\underline{\mathsf{Cat}}}
+\DeclareMathOperator{\Man}{\underline{\mathsf{Man}}}
+\DeclareMathOperator{\Sh}{\underline{\mathsf{Sh}}}
+\DeclareMathOperator{\Presh}{\underline{\mathsf{PreSh}}}
+\DeclareMathOperator{\PreSh}{\underline{\mathsf{PreSh}}}
+\DeclareMathOperator{\Open}{\underline{\mathsf{Open}}}
+\DeclareMathOperator{\Et}{\underline{\mathsf{Et}}}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\mor}{Mor}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\ob}{Ob}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\op}{\mathsf{op}}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\coim}{coim}
+%% Algebra Tingz %%
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\gal}{Gal}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\sep}{sep}
+\newcommand{\ideal}{\trianglelefteq}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\nil}{nil}
+\DeclareMathOperator{\ann}{ann}
+\DeclareMathOperator{\ab}{ab}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\trdeg}{trdeg}
+\DeclareMathOperator{\orb}{Orb}
+\DeclareMathOperator{\stab}{Stab}
+\newcommand{\acts}{\curverightarrow}
+\newcommand{\actson}{\curverightarrow}
+\newcommand{\action}{\curverightarrow}
+%% ANT Tings %%
+\newcommand{\zzz}[1]{\zz/#1 \zz}
+\DeclareMathOperator{\pic}{Pic}
+\DeclareMathOperator{\cl}{Cl}
+\DeclareMathOperator{\bigdiv}{Div}
+\DeclareMathOperator{\smalldiv}{div}
+\DeclareMathOperator{\trace}{Tr}
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\disc}{disc}
+%% Function Tingz %%
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\image}{Im}
+\newcommand{\im}[1]{\mathfrak{Im} \left( #1 \right)}
+\newcommand{\re}[1]{\mathfrak{Re} \left( #1 \right)}
+\newcommand{\inv}[1]{#1^{-1}}
+%% Alg Geo Tingz %%
+\newcommand{\homsheaf}{\mathcal{H}\text{om}}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\mspec}{Max-Spec}
+\DeclareMathOperator{\supp}{Supp}
+\DeclareMathOperator{\ass}{Ass}
+\DeclareMathOperator{\weakass}{WeakAss}
+\DeclareMathOperator{\proj}{Proj}
+\DeclareMathOperator{\et}{et}
+%% Matrix Tingz %%
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\mat}{Mat}
+\DeclareMathOperator{\mot}{Mot}
+\DeclareMathOperator{\rep}{Rep}
+\DeclareMathOperator{\res}{Res}
+%% Analysis Tingz %%
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\curl}{curl}
+\newcommand{\dA}{\, \mathrm{d}A}
+\newcommand{\dq}{\, \mathrm{d}q}
+\newcommand{\dr}{\, \mathrm{d}r}
+\newcommand{\ds}{\, \mathrm{d}s}
+\newcommand{\dt}{\, \mathrm{d}t}
+\newcommand{\du}{\, \mathrm{d}u}
+\newcommand{\dv}{\, \mathrm{d}v}
+\newcommand{\dV}{\, \mathrm{d}V}
+\newcommand{\dx}{\, \mathrm{d}x}
+\newcommand{\dy}{\, \mathrm{d}y}
+\newcommand{\dz}{\, \mathrm{d}z}
+\newcommand{\dtheta}{\, \mathrm{d}\theta}
+\newcommand{\domega}{\, \mathrm{d}\omega}
+\newcommand{\df}{\, \mathrm{d}f}
+\newcommand{\dg}{\, \mathrm{d}g}
+\newcommand{\del}{\partial}
+\DeclareMathOperator{\vol}{Vol}
+%% Topology Tingz %%
+\DeclareMathOperator{\rel}{rel}
+\newcommand{\lift}[1]{\widetilde{#1}}
+%% Logic Tingz %%
+\newcommand{\semantics}[1]{[\![\textnormal{$ #1 $\/}]\!]}
+\newcommand{\entails}{\Vdash}
+%% Prob Tingz %%
+\newcommand{\given}{\mid}
+\DeclareMathOperator{\opt}{opt}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\bin}{Bin}
+\DeclareMathOperator{\geo}{Geo}
+\DeclareMathOperator{\poi}{Poi}
+\DeclareMathOperator{\ber}{Ber}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% ENVIRONMENTS AND PROOFS %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% RMK ENV %%
+\declaretheoremstyle[
+headfont= \color{DodgerBlue3!80!black},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=5pt,
+  skipbelow=5pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  leftline=false,
+  roundcorner=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=10pt}
+]{sidebarstyle}
+
+%%%%%%%% DEFN ENV %%%%%%%%%%%%%
+\declaretheoremstyle[
+headfont=\color{Red2!90!black},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=10pt,
+  skipbelow=10pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=Red3,
+  linewidth=3pt,
+  roundcorner=0pt,
+  backgroundcolor=LavenderBlush1,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{defstyle}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% EXAMPLE ENV %%
+\declaretheoremstyle[
+headfont= \color{Orchid4!90!black},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=10pt,
+  skipbelow=10pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=Magenta4,
+  linewidth=3pt,
+  roundcorner=0pt,
+  backgroundcolor={shadecolor},
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{examplestyle}
+
+
+%% THM ENV %%
+\declaretheoremstyle[
+headfont=\color{orange!80!black},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=10pt,
+  skipbelow=10pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=gray,
+  linewidth=3pt,
+  roundcorner=0pt,
+  backgroundcolor={shadecolor},
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{resultstyle}
+
+
+%% EXERCISE ENV %%
+\declaretheoremstyle[
+headfont= \color{black!90!black},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=5pt,
+  skipbelow=5pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=darkgray,
+  linewidth=3pt,
+  roundcorner=0pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{exercisestyle}
+
+%%% EXCLAMATION ENV %%%%%
+\declaretheoremstyle[
+headfont= \color{Red2!90!black},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=5pt,
+  skipbelow=5pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  leftline=false,
+  roundcorner=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=10pt}
+]{exclamationstyle}
+
+%%%%%%%%%%%%%%% RESULTS %%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Theorem},style=resultstyle,within=subsection]{thm}
+\declaretheorem[name=\textsc{Theorem},style=resultstyle, sibling=thm]{theorem}
+\declaretheorem[name=\textsc{Lemma},style=resultstyle,sibling=thm]{lemma}
+\declaretheorem[name=\textsc{Proposition},style=resultstyle,sibling=thm]{proposition}
+\declaretheorem[name=\textsc{Proposition},style=resultstyle,sibling=thm]{prop}
+\declaretheorem[name=\textsc{Corollary},style=resultstyle,parent=thm]{corollary}
+\declaretheorem[name=\textsc{Corollary},style=resultstyle,parent=thm]{cor}
+\declaretheorem[name=\textsc{Conjecture},style=resultstyle, numbered=no]{conj}
+%%%%%%%%%%%%  DEFINITIONS & EXAMPLES  %%%%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Definition},style=defstyle,sibling=thm]{defn}
+\declaretheorem[name=\textsc{Example},style=examplestyle,sibling=thm]{example}
+\declaretheorem[name=\textsc{Non-Example},style=examplestyle,sibling=thm]{nonexample}
+%%%%%%%%%%%%% EXERCISES %%%%%%%%%%%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Exercise},style=exercisestyle, sibling=exercises]{exercise}
+%%%%%%%%%%%%%% EXCLAMATIONS %%%%%%%%%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Sanity Check},style=exclamationstyle, numbered=no]{sanitycheck}
+\declaretheorem[name=\textsc{Warning},style=exclamationstyle, numbered=no]{warning}
+%%%%%%%%%%%%%% SIDEBARS & TANGENTS %%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Remark},style=sidebarstyle, numbered=no]{remark}
+\declaretheorem[name=\textsc{Question},style=sidebarstyle, numbered=no]{question}
+\declaretheorem[name=\textsc{Observation},style=sidebarstyle, numbered=no]{obs}
+\declaretheorem[name=\textsc{Observation},style=sidebarstyle, numbered=no]{observation}
+
+
+
+\usepackage{titlesec}
+\titleformat{\section}[display]{\Large}{\bfseries Section \thesection}{0.1em}{\bfseries \Huge \color{black}}[]
+\titleformat{\subsection}[block]{\large \centering}{\S \thesubsection}{1em}{}[]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[titles]{tocloft}
+
+\renewcommand{\cftsecfont}{\color{blue}}
+\renewcommand{\cftsecpagefont}{}
+\renewcommand{\cftsubsecfont}{\color{blue}}
+\setlength\cftparskip{-10pt}
+\setlength\cftbeforesubsecskip{10pt}
+
+\onehalfspacing
+
+\begin{document}
+
+\title{Measure Theory Notes}
+
+\author{Aaryan Sukhadia}
+\date{}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Basics}
+
+
+\subsection{Motivating $\sigma$-algebras}
+
+In $\rr$, we have an intuitive notion of a \textit{length} of an interval $[a, b]$, which we would say is $b-a$. This gives us a notion of "size" of subsets of the real numbers. What about other sets that aren't just closed intervals?\\
+
+Take the open interval $(a, b)$. Even though this is not the same as the closed interval $[a, b]$, we might want to it to have the same length, since it's just two points smaller. And both of these should have the same length as $[a, b)$ and $(a, b]$.\\
+In a similar vein, if we have a union of disjoint intervals $\bigcup_{i \in I} (a_i, b_i)$, we should expect its length to be the sum of the lengths of these intervals.\\
+Now suppose we have the set $\{1/n\}_{n \in \nn}$. Even though it has infinitely many points, they are all "disconnected" in a sense and we should intuit that in total they don't amount to any length on the real line, and thus should have length zero.\\
+
+If we were to have a "size" function that took subsets of $\rr$ as input and output the its "size", we'd be looking for a function $\psi: \wp(\rr) \to \rr_{\geq 0}$ with the following properties:
+\begin{enumerate}[(1)]
+    \item \ul{Interval Sizes} $\psi([a, b]) = \abs{b-a}$ for any such interval.
+    \item \ul{Translation Invariance} For any $A \in \wp(\rr)$ and $x \in \rr$, we should have $\psi(A) = \psi(A + x)$, where $A + x := \set{a + x : a \in A}$.
+    \item \ul{Countable Additivity} If we have a sequence of disjoint subsets $\set{A_n}_{n \in \nn}$, then we should have 
+    \begin{equation*}
+        \psi\brack{\bigcup_{n \in \nn} A_n} = \sum_{n \in \nn} \psi\brack{A_n}
+    \end{equation*}
+\end{enumerate}
+
+\begin{observation}
+    A few corollaries of the above properties:
+    \begin{enumerate}
+        \item $\psi(\{x\}) = \psi([x, x]) = 0$ for any singleton in $\rr$. Therefore, any countable union of points must also have "size" zero.
+        \item If $A \subseteq B$ then by additivity we must have $\psi(B) = \psi(A) + \psi(B \setminus A)$, so in particular $\psi(A) \leq \psi(B)$.
+    \end{enumerate}
+\end{observation}
+
+\begin{remark}
+ You might wonder why we'd want countable additivity rather than just finite additivity of sizes. Essentially, the idea is when doing geometry we often want to work with constructions involving limits, which are taken for countable sequences. For example, if we added the sizes of the sets $[0, 1/2^n]$ for $n \in \nn$ we should expect to get 2.
+\end{remark}
+
+\begin{theorem}
+There is no such function on $\wp(\rr)$ that satisfies the above desired properties.
+\end{theorem}
+\begin{proof}
+We will construct a set that cannot have a well-defined image under such a function, a so-called "sizeless set". This type of construction is known as a \textbf{Vitali set}, after the Italian mathematician.\\
+
+Consider the equivalence relation on $\rr$ given by $x \sim y$ iff $x - y \in \qq$. We construct a set $S$ by picking one representative $x_i$ from each equivalence class. Note that by letting $s_i := x_i - \floor{x_i}$, we can pick the representative so that it is in the interval $[0, 1]$. This will be our Vitali set. What must $\psi(S)$ be?\\
+
+Let $B := \set{q \in \qq : q \in [-1, 1]}$, and note there are countably many elements in $B$, so we index them by the naturals, i.e $ B = \set{b_n}_{n \in \nn}$. Define $S_n := S + b_n = \set{s + b_n}_{s \in S}$. Since $0 \in B$ note that $S_k = S$ for some $k$.\\
+
+Define $\cals := \bigcup_{n \in \nn} S_n$. Note $S \subseteq [-1, 2]$, so we have $\psi(\cals) \leq \psi([-1, 2]) = 3$.\\
+Moreover, $[0, 1] \subseteq \cals$ (check this rigorously if it's not intuitive!) so $\psi(\cals) \geq \psi([0, 1]) = 1$. 
+
+We make some more observations. We note for $n \neq m$ that $S_n$ and $S_m$ must be disjoint (verify this if it's not clear why!). Thus by countable additivity we have
+\begin{equation*}
+    \psi(\cals) = \sum_{n \in \nn} \psi(S_n) = \sum_{n \in \nn} \psi(S)
+\end{equation*}
+where the last equality follows from translation invariance.\\
+
+However, this is our contradiction. If $\psi(S) = 0$ then $\psi(\cals) = 0$ as well, a contradiction. However, if $\psi(S) > 0$ then $\psi(\cals) = \infty$, another contradiction. Thus $S$ cannot have a well-defined size.
+\end{proof}
+
+So do we give up? Obviously not. Instead, as mathematicians do, we reframe our definitions and our spaces to make them work for us.
+
+\begin{defn}
+Given a set $X$, an \textbf{outer measure} (also called an \textbf{exterior measure}) on $X$ is a function $\mu^*: \wp(X) \to \rr_{\geq 0}$ such that 
+\begin{enumerate}[(i)]
+    \item (Null-Set Property) $\mu^*(\emptyset) = 0$
+    \item (Countable Subaddivitity) For any countable family of subsets $\set{B_n}_{n \in \nn}$ and $A \subseteq \bigcup_{n \in \nn} B_n$, we have
+    \begin{equation*}
+        \mu^*(A) \leq \sum_{n \in \nn} \mu^*(B_n)
+    \end{equation*}
+\end{enumerate}
+\end{defn}
+
+\begin{example}[Trivial Outer Measure]
+For any set $X$ let $\mu^*(\emptyset) = 0$ and $\mu^*(A) = 1$ for any $A \neq \emptyset$.
+\end{example}
+
+\begin{example}[Counting Measure]
+For any $X$ we define
+\begin{equation*}
+    \mu^*(A) = \begin{cases}
+        \abs{A}, & A \text{ is finite}\\
+        \infty, & A \text{ is infinite}
+    \end{cases}
+\end{equation*}
+\end{example}
+
+\begin{sanitycheck}
+    Verify the above are valid outer measures.
+\end{sanitycheck}
+
+\begin{example}[Outer Measure on $\rr$]
+\label{Outer measure on R}
+Consider the family 
+\begin{equation*}
+    \calb = \set{[a, b) : a \leq b \in \rr}
+\end{equation*}
+we define a function $\lambda: \calb \to \rr_{\geq 0}$ that sends every interval to its normal length, i.e $\lambda([a, b)] = \abs{b-a}$.\\
+Now consider the outer measure defined by:
+\begin{equation*}
+    \mu^*(A) := \inf \set{\sum_{n \in \nn} \lambda(I_n) : I_n \in \calb, \ A \subseteq \bigcup_{n \in \nn} I_n}
+\end{equation*}
+Intuitively, we take the smallest possible total length of countably many intervals needed to completely "cover" our set.
+\end{example}
+
+\begin{proof}[proof \ref{Outer measure on R} is an outer measure]
+We note 
+\begin{equation*}
+    \mu^*(\emptyset) = \inf \set{\lambda\brack{[a + \epsilon)}}_{\epsilon > 0} = 0
+\end{equation*}
+since any arbitrarily small interval "covers" the empty set. Thus the Null-Set Property is verified.\\
+
+For countable subadditivity we note that any family of intervals that covers $\bigcup B_n$ will also cover $A$, the infimum of the measure of all such covers of $A$ must be less than the infimum of covers of $\bigcup B_n$.
+    
+\end{proof}
+
+Now we consider the "nice" sets under an outer measure. One property we might want a set to have to deserve the accolade of "nice" is that it "works well" under complements. Suppose we are in a space $X$ such that $\mu^*(X) < \infty$, i.e the entire space has finite outer measure. Then we define the \textbf{inner measure} of a set $A \in \wp(X)$ by:
+\begin{equation*}
+    \mu_*(A) := \mu^*(X) - \mu^*(X \setminus A)
+\end{equation*}
+
+Morally we want the inner and outer measure of any $A \subseteq X$ to agree. If they don't, in a sense we don't want to conisder the measure of this set, as it leads to some Vitali-type weirdness. If you've seen the definition of a Riemann integral before using inside and outside rectangles, this should feel familiar; a function is Riemann integrable iff the limit from outer and inner rectangle approximations agree. This motivates the following definition.
+
+\begin{defn}
+    A set $A \subset X$ is \textbf{measurable} or (\textbf{Caroth\'eodory\footnote{named after the French mathematician who first talked about this concept.} measurable})with respect to an outer measure $\mu^*$ if, for any $S \subseteq X$ with finite measure, we have:
+    \begin{equation*}
+        \mu^*(A) = \mu^*(S \cap A) + \mu^*(S \setminus A) 
+    \end{equation*}
+\end{defn}
+
+As it turns out, this property is actually sufficient to avoid any undesirable behavior. In other words, the measurable sets are exactly the ones we want to restrict our attention to.
+
+\begin{theorem}
+\label{Carotheodory sets are measurable}
+    The measurable sets of an outer measure $\mu^*$ on a set $X$ satisfy the following properties:
+    \begin{enumerate}[(i)]
+        \item The empty set is measurable.
+        \item If $A$ is measurable so is $X \setminus A$.
+        \item If $\set{A_n}_{n \in \nn}$ is a countable collection of measurable sets then so are $\bigcup_{n \in \nn} A_n$ and $\bigcap_{n \in \nn} A_n$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+
+recall that for any outer measure we have $\mu^*(\emptyset) = 0$. Thus for any set $S$ we have 
+\begin{equation*}
+    \mu*(S) = \mu*(S \cap \emptyset = \emptyset) + \mu^*(S \setminus \emptyset = S) = \mu^*(\emptyset) + \mu^*(S) = \mu^*(S)
+\end{equation*}
+so the desired equality is satisfied.\\
+
+In the case of a countable union, let $A = \bigcup A_n$  with all $A_i$ measurable and take any set $S$. We claim that the following identity holds:
+\begin{equation*}
+    \mu^*(A) = \sum \mu^*(A_n)
+\end{equation*}
+By subadditivity of the outer measure we already have LHS $\leq$ RHS, so it remains to show the reverse inequality. We proceed inductively. We note that $\mu^*(A_1) \leq \mu*(A_1)$, for the base case. Inductively, 
+\end{proof}
+
+
+
+\end{document}

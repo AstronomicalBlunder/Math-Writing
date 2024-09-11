@@ -1,0 +1,2297 @@
+\documentclass[11pt, x11names]{article}
+\setlength{\headheight}{22pt}
+
+% Typesetting Packages
+\usepackage[x11names]{xcolor}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[a4paper, total={7in, 9.5in}]{geometry}
+\usepackage{setspace}
+
+\usepackage{import}
+\usepackage{csquotes}
+\usepackage[style=alphabetic, backend=bibtex8,
+            autocite=footnote, notetype=endonly, labeldateparts]{biblatex}
+
+
+%%%%%%%%%%%%%%% HEADERS/FOOTERS %%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{Thesis Notes}
+\rhead{\footnotesize Email Questions,  Comments and Corrections to:\\aaryan11@stanford.edu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%% COUNTER(S)  %%%%%%%%%%%%%%%%%%%%
+\newcounter{exercises}
+\counterwithin{exercises}{subsection}
+\renewcommand{\theexercises}{\thesubsection.\Alph{exercises}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%% MATH PACKAGES %%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsthm, amssymb, amsmath, centernot, graphicx}
+\usepackage{thmtools}
+\usepackage{stmaryrd}
+\usepackage[shortlabels]{enumitem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% FONTS %%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{calligra, mathrsfs}
+\usepackage{lmodern}
+\usepackage[T2A,T1]{fontenc}
+
+% Other Font Options
+% \usepackage{mathpazo} % The Rising Sea
+% \usepackage{euler}
+
+ %\usepackage{euler} % Vaughan's notes
+ %\usepackage{eulervm}
+
+%\usepackage{kpfonts}  
+\usepackage{libertine} 
+\usepackage{libertinust1math}
+
+%\usepackage{amsfonts} % Stacks project math font
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Graphics Packages
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+\usepackage{framed}
+\usepackage[many]{tcolorbox}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{pagecolor}
+\usepackage{etoolbox}
+\usepackage{listings}
+\definecolor{shadecolor}{gray}{0.95}
+
+
+% General Utilities 
+
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\bbar}[1]{\overline{#1}}
+\renewcommand{\bf}[1]{\mathbf{#1}}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\newcommand{\chref}[2]{\href{#1}{\color{blue}{\underline{#2}}}}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% CUSTOM COMMANDS %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% STYLIZED LETTERS %%%%%%%%%%%%%%%%
+%% BOLD LETTERS %%
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbb{1}}
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\cc}{\mathbb{C}}
+\newcommand{\ff}{\mathbb{F}}
+\newcommand{\rp}{\mathbb{RP}}
+\newcommand{\cp}{\mathbb{CP}}
+\renewcommand{\tt}{\mathbb{T}}
+\newcommand{\bp}{\mathbb{P}}
+\newcommand{\boldp}{\mathbb{P}}
+\renewcommand{\aa}{\mathbb{A}}
+\newcommand{\ii}{\mathbb{I}}
+\newcommand{\ee}{\mathbb{E}}
+% MATHFRAK LETTERS %
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\PP}{\mathfrak{P}}
+\newcommand{\frakq}{\mathfrak{q}}
+\newcommand{\frakQ}{\mathfrak{Q}}
+\newcommand{\mm}{\mathfrak{m}}
+\newcommand{\MM}{\mathfrak{M}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\fraka}{\mathfrak{a}}
+\newcommand{\frakb}{\mathfrak{b}}
+\newcommand{\frakc}{\mathfrak{c}}
+\newcommand{\frakd}{\mathfrak{d}}
+\newcommand{\frakD}{\mathfrak{D}}
+\newcommand{\frakn}{\mathfrak{n}}
+\newcommand{\frakf}{\mathfrak{f}}
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\jj}{\mathfrak{j}}
+%% MATHCAL LETTERS %%
+\newcommand{\calc}{\mathcal{C}}
+\newcommand{\cald}{\mathcal{D}}
+\newcommand{\calf}{\mathcal{F}}
+\newcommand{\calg}{\mathcal{G}}
+\newcommand{\calh}{\mathcal{H}}
+\newcommand{\cala}{\mathcal{A}}
+\newcommand{\calb}{\mathcal{B}}
+\newcommand{\cale}{\mathcal{E}}\newcommand{\calo}{\mathcal{O}}
+\newcommand{\cali}{\mathcal{I}}
+\newcommand{\calj}{\mathcal{J}}
+\newcommand{\call}{\mathcal{L}}
+\newcommand{\calx}{\mathcal{X}}
+\newcommand{\caly}{\mathcal{Y}}
+\newcommand{\calz}{\mathcal{Z}}
+\newcommand{\calm}{\mathcal{M}}
+\newcommand{\caln}{\mathcal{N}}
+\newcommand{\cals}{\mathcal{S}}
+%% FANCY LETTERS %%
+\newcommand{\fanc}{\mathscr{C}}
+\newcommand{\fanb}{\mathscr{B}}
+\newcommand{\fane}{\mathscr{E}}
+\newcommand{\fanf}{\mathscr{F}}
+\newcommand{\fanp}{\mathscr{P}}
+\newcommand{\fanl}{\mathscr{L}}
+\newcommand{\fana}{\mathscr{A}}
+\newcommand{\fanx}{\mathscr{X}}
+\newcommand{\fany}{\mathscr{Y}}
+\newcommand{\fanz}{\mathscr{Z}}
+\newcommand{\fang}{\mathscr{G}}
+\newcommand{\fanh}{\mathscr{H}}
+\newcommand{\fani}{\mathscr{I}}
+\newcommand{\fanm}{\mathscr{M}}
+\newcommand{\fann}{\mathscr{N}}
+\newcommand{\fans}{\mathscr{S}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% OPERATIONS, CONNECTORS & SEPARATORS %%%%%%%%%%%%
+%%% Module Things %%
+\newcommand{\tensor}{\otimes}
+\newcommand{\bigtensor}{\bigotimes}
+\newcommand{\dsum}{\oplus}
+\newcommand{\bigdsum}{\bigoplus}
+%% Maps %%
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\bij}{\overset{\sim}{\to}}
+\newcommand{\dlim}{\varinjlim}
+\newcommand{\inlim}{\varprojlim}  
+%% Topology Things %%
+\renewcommand{\bar}[1]{\overline{#1}}
+\newcommand{\csum}{\#}
+\DeclareMathOperator{\topint}{int}
+\newcommand{\topwedge}{\vee}
+\newcommand{\bigtopwedge}{\bigvee}
+%% Left-Righting Things %%
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\brangle}[1]{\left\langle #1 \right\rangle}
+\renewcommand{\brack}[1]{\left(   #1 \right)}
+\newcommand{\abs}[1]{\left| \, #1  \,\right|}
+\newcommand{\norm}[1]{\left\lVert #1 \right \rVert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\sqbrack}[1]{\left[ #1 \right]}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% CUSTOM SYMBOLS FOR FUNZIES %%%%%%%%%%%%%%%%%
+\newcommand{\fish}{ %% For R.V. w/ Poisson dist %%
+  \mathchoice
+    {\mathrel{\ooalign{$\alpha$\cr\hidewidth \kern -0.13em $\cdot$\hidewidth}}}% \displaystyle
+    {\mathrel{\ooalign{$\alpha$\cr\hidewidth \kern -0.13em$\cdot$\hidewidth}}}% \textstyle
+    {\mathrel{\ooalign{$\scriptstyle\alpha$\cr\hidewidth\kern -0.13em $\scriptstyle\cdot$\hidewidth}}}% \scriptstyle
+    {\mathrel{\ooalign{$\scriptscriptstyle\alpha$\cr\hidewidth \kern -0.13em $\scriptscriptstyle\cdot$\hidewidth}}}% \scriptscriptstyle
+}
+
+\newcommand{\notimplies}{
+\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+
+
+%% Restricted Product %%
+\newcommand{\rprod}{
+    \mathrel{\ooalign{\hidewidth $\prod$ \hidewidth \cr $\coprod$}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%% MISC OPS&COMMANDS %%%%%%%%%%%%%%%%%
+\renewcommand{\hat}{\widehat}
+%% Categorical tingz %%
+\DeclareMathOperator{\Set}{\underline{\mathsf{Set}}}
+\DeclareMathOperator{\Ab}{\underline{\mathsf{Ab}}}
+\DeclareMathOperator{\Grp}{\underline{\mathsf{Grp}}}
+\DeclareMathOperator{\Top}{\underline{\mathsf{Top}}}
+\DeclareMathOperator{\Diff}{\underline{\mathsf{Diff}}}
+\DeclareMathOperator{\Rmod}{\underline{\mathsf{R-Mod}}}
+\DeclareMathOperator{\Zmod}{\underline{Z-\mathsf{Mod}}}
+\DeclareMathOperator{\Amod}{\underline{\mathsf{A-Mod}}}
+\DeclareMathOperator{\Vect}{\underline{\mathsf{Vect}}}
+\DeclareMathOperator{\Ring}{\underline{\mathsf{Ring}}}
+\DeclareMathOperator{\CRing}{\underline{\mathsf{CRing}}}
+\DeclareMathOperator{\Meas}{\underline{\mathsf{Meas}}}
+\DeclareMathOperator{\Met}{\underline{\mathsf{Met}}}
+\DeclareMathOperator{\Cat}{\underline{\mathsf{Cat}}}
+\DeclareMathOperator{\Man}{\underline{\mathsf{Man}}}
+\DeclareMathOperator{\Sh}{\underline{\mathsf{Sh}}}
+\DeclareMathOperator{\Presh}{\underline{\mathsf{PreSh}}}
+\DeclareMathOperator{\PreSh}{\underline{\mathsf{PreSh}}}
+\DeclareMathOperator{\Open}{\underline{\mathsf{Open}}}
+\DeclareMathOperator{\Et}{\underline{\mathsf{Et}}}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\mor}{Mor}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\ob}{Ob}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\op}{\mathsf{op}}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\coim}{coim}
+%% Algebra Tingz %%
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\gal}{Gal}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\sep}{sep}
+\newcommand{\ideal}{\trianglelefteq}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\nil}{nil}
+\DeclareMathOperator{\ann}{ann}
+\DeclareMathOperator{\ab}{ab}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\trdeg}{trdeg}
+\DeclareMathOperator{\orb}{Orb}
+\DeclareMathOperator{\stab}{Stab}
+\newcommand{\acts}{\curverightarrow}
+\newcommand{\actson}{\curverightarrow}
+\newcommand{\action}{\curverightarrow}
+%% ANT Tings %%
+\newcommand{\zzz}[1]{\zz/#1 \zz}
+\DeclareMathOperator{\pic}{Pic}
+\DeclareMathOperator{\cl}{Cl}
+\DeclareMathOperator{\bigdiv}{Div}
+\DeclareMathOperator{\smalldiv}{div}
+\DeclareMathOperator{\trace}{Tr}
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\disc}{disc}
+%% Function Tingz %%
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\image}{Im}
+\newcommand{\im}[1]{\mathfrak{Im} \left( #1 \right)}
+\newcommand{\re}[1]{\mathfrak{Re} \left( #1 \right)}
+\newcommand{\inv}[1]{#1^{-1}}
+%% Alg Geo Tingz %%
+\newcommand{\homsheaf}{\mathcal{H}\text{om}}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\mspec}{Max-Spec}
+\DeclareMathOperator{\supp}{Supp}
+\DeclareMathOperator{\ass}{Ass}
+\DeclareMathOperator{\weakass}{WeakAss}
+\DeclareMathOperator{\proj}{Proj}
+\DeclareMathOperator{\et}{et}
+%% Matrix Tingz %%
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\mat}{Mat}
+\DeclareMathOperator{\mot}{Mot}
+\DeclareMathOperator{\rep}{Rep}
+\DeclareMathOperator{\res}{Res}
+%% Analysis Tingz %%
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\curl}{curl}
+\newcommand{\dA}{\, \mathrm{d}A \ }
+\newcommand{\dq}{\, \mathrm{d}q \ }
+\newcommand{\dr}{\, \mathrm{d}r \ }
+\newcommand{\ds}{\, \mathrm{d}s \ }
+\newcommand{\dt}{\, \mathrm{d}t \ }
+\newcommand{\du}{\, \mathrm{d}u \ }
+\newcommand{\dv}{\, \mathrm{d}v \ }
+\newcommand{\dV}{\, \mathrm{d}V \ }
+\newcommand{\dx}{\, \mathrm{d}x \ }
+\newcommand{\dy}{\, \mathrm{d}y \ }
+\newcommand{\dz}{\, \mathrm{d}z \ }
+\newcommand{\df}{\, \mathrm{d}f \ }
+\newcommand{\dg}{\, \mathrm{d}g \ }
+\newcommand{\dtheta}{\, \mathrm{d}\theta \ }
+\newcommand{\domega}{\, \mathrm{d}\omega \ }
+\newcommand{\dchi}{\, \mathrm{d}\chi \ }
+\renewcommand{\d}[1]{\, \mathrm{d}#1 \ }
+\newcommand{\del}{\partial}
+\DeclareMathOperator{\vol}{Vol}
+%% Topology Tingz %%
+\DeclareMathOperator{\rel}{rel}
+\newcommand{\lift}[1]{\widetilde{#1}}
+%% Logic Tingz %%
+\newcommand{\semantics}[1]{[\![\textnormal{$ #1 $\/}]\!]}
+\newcommand{\entails}{\Vdash}
+%% Prob Tingz %%
+\newcommand{\given}{\mid}
+\DeclareMathOperator{\opt}{opt}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\bin}{Bin}
+\DeclareMathOperator{\geo}{Geo}
+\DeclareMathOperator{\poi}{Poi}
+\DeclareMathOperator{\ber}{Ber}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% ENVIRONMENTS AND PROOFS %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% RMK ENV %%
+\declaretheoremstyle[
+headfont= \color{DodgerBlue3!80!black},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=5pt,
+  skipbelow=5pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  leftline=false,
+  roundcorner=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=10pt}
+]{sidebarstyle}
+
+%%%%%%%% DEFN ENV %%%%%%%%%%%%%
+\declaretheoremstyle[
+headfont=\color{Red2!90!black},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=10pt,
+  skipbelow=10pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=Red3,
+  linewidth=3pt,
+  roundcorner=0pt,
+  backgroundcolor=LavenderBlush1,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{defstyle}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% EXAMPLE ENV %%
+\declaretheoremstyle[
+headfont= \color{Orchid4},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=10pt,
+  skipbelow=10pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=Magenta4,
+  linewidth=3pt,
+  roundcorner=0pt,
+  backgroundcolor=LavenderBlush1,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{examplestyle}
+
+
+%% THM ENV %%
+\declaretheoremstyle[
+headfont=\color{orange!80!black},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=10pt,
+  skipbelow=10pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=gray,
+  linewidth=3pt,
+  roundcorner=0pt,
+  backgroundcolor={shadecolor},
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{resultstyle}
+
+
+%% EXERCISE ENV %%
+\declaretheoremstyle[
+headfont= \color{darkgray},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=5pt,
+  skipbelow=5pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=Cyan4,
+  backgroundcolor=Azure2,
+  linewidth=3pt,
+  roundcorner=0pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{exercisestyle}
+
+%%% EXCLAMATION ENV %%%%%
+\declaretheoremstyle[
+headfont= \color{Red2!90!black},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=5pt,
+  skipbelow=5pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  leftline=false,
+  roundcorner=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=10pt}
+]{exclamationstyle}
+
+
+%%%% FORMATTING FOR INDEX %%%
+\usepackage{etoolbox}
+\renewcommand{\thmtformatoptarg}[1]{ -- #1 \newline}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%% RESULTS %%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Theorem},style=resultstyle,within=subsection]{thm}
+\declaretheorem[name=\textsc{Theorem},style=resultstyle, sibling=thm]{theorem}
+\declaretheorem[name=\textsc{Lemma},style=resultstyle,sibling=thm]{lemma}
+\declaretheorem[name=\textsc{Proposition},style=resultstyle,sibling=thm]{proposition}
+\declaretheorem[name=\textsc{Proposition},style=resultstyle,sibling=thm]{prop}
+\declaretheorem[name=\textsc{Corollary},style=resultstyle,parent=thm]{corollary}
+\declaretheorem[name=\textsc{Corollary},style=resultstyle,parent=thm]{cor}
+\declaretheorem[name=\textsc{Conjecture},style=resultstyle, numbered=no]{conj}
+%%%%%%%%%%%%  DEFINITIONS & EXAMPLES  %%%%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Definition},style=defstyle,sibling=thm]{defn}
+\declaretheorem[name=\textsc{Example},style=examplestyle,sibling=thm]{example}
+\declaretheorem[name=\textsc{Non-Example},style=examplestyle,sibling=thm]{nonexample}
+%%%%%%%%%%%%% EXERCISES %%%%%%%%%%%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Exercise},style=exercisestyle, sibling=exercises]{exercise}
+%%%%%%%%%%%%%% EXCLAMATIONS %%%%%%%%%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Sanity Check},style=exclamationstyle, numbered=no]{sanitycheck}
+\declaretheorem[name=\textsc{Warning},style=exclamationstyle, numbered=no]{warning}
+%%%%%%%%%%%%%% SIDEBARS & TANGENTS %%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Remark},style=sidebarstyle, numbered=no]{remark}
+\declaretheorem[name=\textsc{Question},style=sidebarstyle, numbered=no]{question}
+\declaretheorem[name=\textsc{Observation},style=sidebarstyle, numbered=no]{obs}
+\declaretheorem[name=\textsc{Observation},style=sidebarstyle, numbered=no]{observation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+
+\titleformat{\section}[display]{\Large}{\bfseries Section \thesection}{0.1em}{\bfseries \Huge \color{black}}[]
+\titleformat{\subsection}[block]{\Large \centering}{\S \thesubsection}{1em}{}[]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[titles]{tocloft}
+
+\renewcommand{\cftsecfont}{\color{blue}}
+\renewcommand{\cftsecpagefont}{}
+\renewcommand{\cftsubsecfont}{\color{blue}}
+\setlength\cftparskip{-10pt}
+\setlength\cftbeforesubsecskip{10pt}
+\onehalfspacing
+\allowdisplaybreaks
+
+\begin{document}
+
+\title{Tate's Thesis:\\ Fourier Analysis on Number Fields}
+
+\author{Aaryan Sukhadia}
+\date{}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{How to Read This Text}
+
+These notes assume some basic familiarity with elementary topology (including some elementary results on topological groups), measure theory, representation theory, functional analysis and algebraic number theory. Here are a bunch of quick litmus tests:
+\begin{itemize}
+    \item Topology/Measure theory: Recall/understand that every locally compact group admits a left Haar measure.
+    \item Representation theory: Recall/understand why any $G$-linear map between two irreducible representations is either the zero map or an algebraic isomorphism.
+    \item Number Theory: Recall/understand the equivalent characterizations of Dedekind domains as (i) noetherian, one-dimensional, and integrally closed or (ii) unique factorization of ideals into primes, among others.
+    \item Functional Analysis: Recall/understand why a scalar multiple of the identity is a normal operator.
+\end{itemize}
+The goal of these notes is that if you're conceptually comfortable with some open neighborhood of the above results then this text should be readable and understandable to you almost everywhere.\\
+
+In terms of formatting, there will be four main types of colored boxes in this text.
+\begin{defn} 
+    A bright, almost-blaring red-backgrounded, red-striped box to house a vital definition.
+\end{defn}
+\begin{example}
+    An equally-importantly-red-backgrounded but slightly less blaring purple-striped box to house an important or prototypical example of a concept.
+\end{example}
+\begin{theorem}
+    A neutrally-toned gray-shaded box to house a result, whether that be a theorem (such as this particular box), a proposition, etc.
+\end{theorem}
+\begin{exercise}
+    A cool green-colored box that houses an exercise that (at least in the author's experience) helps grasp or hone a core tool/technique. Exercises are meant to be reasonably doable by a reader who's paying attention, so if anything seems too hard re-read the subsection, and then e-mail me if it's still too hard.
+\end{exercise}
+
+As you might have deduced, Definitions, Examples and Results follow a [Subsection.Number] numbering scheme, all using a common counter, and Exercises follow a [Subsection.Letter] numbering scheme\footnote{I'm of the opinion that if I ever require more than 26 exercises per subsection then either I'm offshoring too much to the reader or the subsection is too long.}.\\
+As is standard in mathematical writing I've also filled this text with technically unnecessary but hopefully-enriching asides under various names such as Remarks and Observations. A less-standard one used here is the Sanity Check, which is a result that should be intuitively obvious to the reader at that point, and verifiable in some epsilon time.\\
+
+It is a corollary of Murphy's Law that this text will likely never be completely typo-free, but that doesn't mean it's something not to strive for. Please email me about any typographical, notational, mathematical or lingustic errors you might find.
+
+
+
+\newpage
+
+
+\section{Number Theory Background}
+
+\subsection*{Introduction}
+Here we build up the language required to discuss the 
+
+\subsection{Valuation Theory}
+
+
+
+\newpage
+\section{Pontryagin Duality}
+\label{section: Pontryagin Duality}
+In this section we start to do how to do Fourier transforms on an abelian topological group $G$, via the \textit{dual} $\hat{G}$, the group of continuous homomorphisms $G \to S^1$. 
+
+\begin{defn}
+The \textbf{Pontryagin Dual} of $G$, denoted $\hat{G}$, is the group of all continuous
+complex homomorphisms $G \to S^1$ (where $S^1$ is given its standard subspace topology
+from $\cc$), with multiplication as the group operation. Elements of $\hat{G}$ are often
+referred to as \textbf{characters} of $G$.
+\end{defn}
+
+\begin{example}
+\label{example: dual of S^1 is Z}
+    The dual group of the circle is the integers, i.e
+    \begin{equation*}
+        \hat{S^1} \cong \zz
+    \end{equation*}
+\end{example}
+
+\begin{proof}[proof of \ref{example: dual of S^1 is Z}]
+Recall the continuous homomorphism $\exp: \rr \to S^1$ given by $x \mapsto e^{2 \pi i x}$, the so-called \textit{universal covering map}. For any continuous homomorphism $\phi: S^1 \to S^1$, we have the following diagram:
+\begin{center}
+    \begin{tikzcd}
+        \rr \arrow[d, twoheadrightarrow, "\exp"'] \arrow[dr, "\psi"] & \\
+        S^1 \arrow[r, "\phi"'] & S^1
+    \end{tikzcd}
+\end{center} 
+from which we see that any such $\phi$ must induce a continuous homomorphism $\psi = \phi \circ \exp: \rr \to S^1$. Moreover, since the kernl of the universing covering map is exactly $\zz$, it follows $\psi$ must also have kernel containing $\zz$. \\
+A standard vector-space argument shows any continuous homomorphism  $\rr \to \rr$ is of the form $x \mapsto \lambda x$ for $\lambda \in \rr$. using the universal lift we deduce any continuous homomorphism $\rr \to S^1$ is of the form $\psi_\lambda(x) = e^{2 \pi i \lambda x}$, for $\lambda \in \rr$. Since we want $\zz$ to be in the kernel we deduce $\lambda \in \zz$.\\
+Thus we have:
+\begin{equation*}
+    \psi = e^{2 \pi i n x} = \phi (e^{2 \pi i x}) \implies \phi(y) = y^n
+\end{equation*}
+which was what we wanted to show.
+\end{proof}
+
+\begin{sanitycheck}
+Having been introduced to the definition and an example, verify rigorously the (hopefully) intuitive identity for any topological groups $G_1, G_2$:
+\begin{equation*}
+    \widehat{G_1 \times G_2} \cong \hat{G_1} \times \hat{G_2}
+\end{equation*}
+\end{sanitycheck}
+
+\subsection{Topologizing the dual}
+\label{subsection: Topologizing the dual}
+
+We want to put a topology on $\hat{G}$ that tells us if two functions are "close together".
+For a function $f \in \hat{G}$, suppose we take a compact set $K \subseteq G$, and an open 
+neighborhood $V \supseteq f(K)$ of the image of this compact set. Since $S^1$ is Hausdorff,
+$f(K)$ is a closed set. As such, we might expect that if we wiggle $f(K)$ around a little, it
+shoud still be inside $V$. Thus we want to characterize a function $g$ as being "close" to $f$
+if $g(K) \subseteq V$ as well. This motivates the following construction.
+
+\begin{defn}
+The \textbf{compact-open topology} on $\hat{G}$ is the one generated by the following neighborhood base
+of the trivial character:
+\begin{equation*}
+    \set{W(K, V) := \set{\chi \in \hat{G} : \chi(K) \subseteq V}}_{K, V}
+\end{equation*}
+where $K$ ranges over all compact sets in $G$ and $V$ ranges over all neighborhoods of the identity 
+in $S^1$.
+\end{defn}
+
+\begin{prop}
+\label{compact-open = ptwise convergence}
+If $G$ is discrete, then  the compact-open topology on $\hat{G}$ is the same as the topology 
+of pointwise convergence.
+\end{prop}
+\begin{proof}
+Recall the topology of pointwise convergence is generated by sets of the form
+\begin{equation*}
+    S(g, V) := \set{\chi \in \hat{G} : \chi(x) \in U}_{g \in G; \ V \subseteq_{\textrm{open}} S^1}
+\end{equation*}
+For any $G$, this is finer than the compact-open topology, since for any compact $K \subseteq G$ we can write:
+\begin{equation*}
+    W(K, V) = \bigcup_{g \in K} S(g, V)
+\end{equation*} 
+If $G$ is discrete then every compact set is necessarily finite (and vice versa!), and thus $\{g\}$ is compact, so every subbasis element $S(g, U)$ is also a basis element of the compact-open topology. Thus the two topologies are equivalent.
+\end{proof}
+
+We now introduce some notation that'll come in handy when doing technical analysis of $\hat{G}$.\\
+\textbf{Notation}
+\begin{itemize}
+    \item For any $X \subseteq G$ (not necessarily a subgroup), then for $n \in \nn$ we define
+    \begin{equation*}
+        X^{(n)} := \set{\prod^n_{j=1} x_j: x_j \in X, \ j \in [1, n]}
+    \end{equation*}
+    \item Let $\phi: \rr \to S^1$ be the universal cover projection map $r \mapsto e^{2 \pi i r}$.
+    Then for some $\epsilon \in (0, 1]$, we define
+    \begin{equation*}
+        N(\epsilon) := \phi\brack{\brack{\frac{-\epsilon}{3}, \frac{\epsilon}{3}}}
+    \end{equation*}
+    i.e $N(\epsilon)$ is some small symmetric arc around 1 in $S^1$.
+\end{itemize}
+
+\begin{lemma}
+\label{compact-open key lemma}
+Take $m \in \zz^+$, and take $x \in \cc$ such that $x^i \in N(1)$ for all $i \in [1, m]$.
+Then $x \in N(1/m)$.
+\end{lemma}
+\begin{proof}
+In polar coordinates, every such $x$ has radius 1 and angle some $\theta$, and note that $x^i$
+has angle $i \theta$. We are assuming that $\theta, 2 \theta, \ldots, m\theta$ are all 
+contained in $(-2\pi/3, 2\pi/3) \pmod{2\pi}$. If $x \notin N(1/m)$, that means its associated
+argument $\theta$ is in the interval $[2\pi/3m, 2\pi (3m - 1)/3m]$. In particular, this would mean that $m \theta$ would have argument between $2 \pi / 3$ and $4\pi/3$ inclusive, which is not in the open set $N(1)$, a contradiction. Thus $x \in N(1/m)$
+\end{proof}
+\begin{corollary}
+\label{compact-open key corollary}
+    If U is a subset of $G$ containing the identity then $\chi(U^{(m)}) \subseteq N(1) \implies \chi(U) \subseteq N(1/m)$. 
+\end{corollary}
+
+\begin{exercise}
+Rigorously prove the above corollary.
+\end{exercise}
+
+\begin{prop}
+Suppose $G$ is an abelian topological group. Then:
+\begin{enumerate}[(a)]
+    \item A homomorphism $\chi: G \to S^1$ is continuous (and hence in $\hat{G}$) iff
+    $\inv{\chi}(N(1))$ is a neighborhood of the identity in $G$.
+    \item The family $\set{W(K, N(1))}_{\text{compact } K \subseteq G}$ is a neighborhood
+    base for the trivial character for the compact open topology of $\hat{G}$.
+    \item $G$ discrete $\implies \hat{G}$ compact.
+    \item $G$ compact $\implies \hat{G}$ discrete.
+    \item $G$ locally compact $\implies \hat{G}$ locally compact.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+    \textbf{\underline{(a)}}\\
+    If $\chi$ is continuous then since $1 \in N(1) \subseteq_{\text{open}} S^1$ we must have that $e \in  U := \inv{\chi}(N(1)) \subseteq_{\text{open}} G$.\\
+    For the other direction, suppose $\chi(U) \subseteq N(1)$ for some neighborhood of
+    the identity. Then by continuity of multiplication, for every $m \in \zz$ there must exist an open neighborhood $V$ of the identity such that $V^{(m)} \subseteq U$. Then by \ref{compact-open key corollary} we must have $\chi(V)\subseteq N(1/m)$. Since the sets $\set{N(1/m)}_{m \in \zz_{> 0}}$ form a neighborhood base around the identity of $S^1$, this fact suffices to prove continuity.\\
+
+    \textbf{\underline{(b)}}\\
+    We want to show that for every compact $K_1 \subseteq$ and every positive integer $m$ that there exists some compact $K \subseteq G$ such that 
+    \begin{equation*}
+        W(K, N(1)) \subseteq W(K_1, N(1/m))
+    \end{equation*}
+    Define $K := K_1^{(m)}$, which is the continuous image of the topological direct product $K^m$, and thus $K$ itself is compact. If $\chi \in W(K, N(1))$ then, by construction, we know that $\chi(x), \chi(x)^2, \ldots, \chi(x)^m \in N(1)$ for all $x \in K_1$. By \ref{compact-open key lemma} we have that $\chi(x) \in N(1)$, from which it follows $\chi \in W(K_1, N(1/m))$, as desired.\\
+
+    \textbf{\underline{(c)}}\\
+    If $G$ is discrete then any group homomorphism $f: G \to S^1$ is continuous, so $\hat{G} = \Hom(G, S^1)$. Also recall from \ref{compact-open = ptwise convergence} that in this case $\hat{G}$ has exactly the topology of pointwise convergence. With respect to this topology, note $\Hom(G, S^1)$ is a closed subset of the space of $(S^1)^{\abs{G}}$ (the set of all maps from $G$ to $S^1$), which is a compact space by compactness of $S^1$. Thus $\Hom(G, S^1) = \hat{G}$ itself is compact, as desired.\\
+
+    \textbf{\underline{(d)}}\\
+    Since the image of any group homomorphism is a subgroup of $S^1$, we have $\chi(G) \nsubseteq N(1)$ for any $\chi \in \hat{G}$.\\
+    If $G$ itself is compact, the set $W(G, N(1))$ must be an open set in $\hat{G}$, which can only contain the trivial character, by what we showed. Thus the singleton of the identity is open in $\hat{G}$, so it must be a discrete group.\\
+
+    \textbf{\underline{(e)}}\\
+    FINISH LATER
+\end{proof}
+
+\subsection{Functions of Positive Type}
+\label{subsection: Positive Type Funcs}
+To motivate what a function of positive type is, we discuss some background on unitary representations. From now on let $G$ be a locally compact group with a (left) Haar measure $\ds$.\\
+
+Let $\rho$ be a representation of a topological group $G$ in the space of unitary operators on a Hilbert space $H$. Fixing some $x \in H$, define a $\cc$-valued function on $G$ by:
+\begin{equation*}
+    \varphi(s) := \brangle{\rho(s)(x) \mid x}
+\end{equation*}
+Take $s_1, \ldots, s_n \in G$ and consider
+\begin{equation*}
+    A := \sqbrack{\varphi(\inv{s_j}s_i)} \in \mat_{n \times n}(\cc)
+\end{equation*}
+We claim $A$ is Hermitian and positive semidefinite. For the first point, note that since each $\rho(s)$ is a unitary operator,
+\begin{equation*}
+\begin{split}
+    A_{i, j} &= \brangle{\rho(\inv{s_j}s_i)(x) \mid x}\\ 
+    &= \brangle{\rho(s_j)^* \rho(s_i)(x) \mid x}\\
+    &= \brangle{\rho(s_i)(x) \mid \rho(s_j)(x)}\\
+    &= \brangle{x \mid \rho(s_i)^* \rho(s_j)(x)}\\
+    &= \brangle{x \mid \rho(\inv{s_i}s_j(x))}\\
+    &= \bar{\brangle{\rho(\inv{s_i}s_j)(x) \mid x}} = \bar{A_{j, i}}
+\end{split}
+\end{equation*}
+Thus $A$ is equal to its conjugate transpose, and is Hermitian. For positive semidefiniteness, take any $z = (z_i) \in \cc^n$. Then:
+\begin{equation*}
+    \begin{split}
+        \brangle{Az \mid z} &= \sum^n_{i, j} \varphi(\inv{s_j}s_i)z_j \bar{z_i}\\
+        &= \sum^n_{i, j} \brangle{\rho(s_i)(x) \mid \rho(s_j)(x)}z_j \bar{z_i}\\
+        &= \brangle{\sum^n_{j} \rho(s_j)(z_j x) \mid \sum^n_{i} \rho(s_i)(z_ix)}\\
+        &= \abs{\sum^n_i \rho(s_i)(z_i x)}^2 \geq 0
+    \end{split}
+\end{equation*}
+Note on the third equality that there is no conjugacy required since $A$ is Hermitian.
+\begin{remark}
+    Note $A$ is actually Hermitian and positive semidifinite even in the non-locally compact case.
+\end{remark}
+
+Let $\fanc_c(G)$ denote the set of $\cc$-valued continuous functions on $G$ with compact support. Recall for every $p \in [1, \infty]$ that $\fanc_c(G) \subseteq L^p(G)$. Thus it is subject to the $L^p$-norm defined by:
+\begin{equation*}
+    \norm{f}_p = \brack{\int_G \abs{f}^p \ds}^{1/p}
+\end{equation*}
+for finite $p$, with $\norm{f}_\infty$ being the essential supremum\footnote{recall the essential supremum is the supremum over a set of comeasure zero.} of $\abs{f}$. This norm also induces a topology, under which $\fanc_c(G)$ is dense in $L^p(G)$ [JUSTIFY MORE MAYBE??]
+
+\begin{defn}
+\label{def: positive-type}
+    A Haar-measurable function $\phi \in L^\infty(G)$ is \textbf{positive definite} (or of \textbf{positive type}, we will oscillate between these two terminologies) if for any $f \in \fanc_c(G)$ we have:
+    \begin{equation*}
+        \iint \phi(\inv{s}t)f(s)\ds \bar{f(t)} \dt \geq 0
+    \end{equation*}
+    where the integrals are taken over the entire group $G$.
+\end{defn}
+
+\begin{lemma}
+\label{Haar-measure product lemma}
+    For $\phi$ a Haar-measurable function on $G$, define
+    \begin{equation*}
+        \psi(g, h) := \phi(\inv{g}h).
+    \end{equation*}
+    Then $\psi$ is Haar-measurable on $G \times G$.
+\end{lemma}
+\begin{proof}
+    [FINISH THIS]
+\end{proof}
+
+Note by \ref{Haar-measure product lemma} that Fubini's theorem applies to show that this double integral is defined.(Every locally compact group is the disjoint union of $\sigma$-compact spaces). Moreover, if $\supp(f)$ is contained in a compact subset $K$ then the integrand in \ref{def: positive-type} has support contained in $K \times K \subseteq G \times G$.\\
+Note that since $\phi \in L^\infty(G)$ that it is bounded above by $\norm{\phi}_\infty$ on a set of comeasure zero. Thus the integral is bounded by:
+\begin{equation*}
+    \abs{\iint \phi(\inv{s}t)f(s)\ds \bar{f(t)}\dt} \leq \norm{\phi}_\infty \brack{\sup \abs{f} \cdot \mu(K)}^2
+\end{equation*}
+Here $\mu(K)$ is the (finite!) Haar measure of $K$.\\
+
+We describe some relations between these functions of positive type and Hilbert spaces and unitary representations.\\
+If $\phi$ is a positive definite function then we can define a positive sesquilinear (i.e conjugate-symmetric) form on $\fanc_c(G)$ by:
+\begin{equation*}
+    \brangle{f_1 \mid f_2}_\phi := \iint \phi(\inv{s}t)f_1(s) \ds \bar{f_2(t)} \dt.
+\end{equation*}
+\begin{exercise}
+    Verify the above equation is well-defined and finite for all $f_1, f_2 \in \fanc_c(G)$.
+\end{exercise}
+Set 
+\begin{equation*}
+    W_\phi := \set{f \in \fanc_c(G) : \brangle{f \mid f}_\phi = 0}
+\end{equation*}
+i.e the functions that are degenerate wrt the form defined by $\phi$. Cauchy-Schwarz also tells us that $W_\phi$ is a subspace of $\fanc_c(G)$, and so we can form a quotient space $\fanc_c(G)/W_\phi$. By construction, $\brangle{\mid}_\phi$ is a positive-definite Hermitian form on this quotient. Let $V_\phi$ denote the completion of this quotient with respect to this form, which thus acquires the structures of a Hilbert space.\\
+For any $s \in G$ and any function $f$ on $G$, we can define the function $L_sf$ by
+\begin{equation*}
+    L_sf(t) = f(\inv{s}t).
+\end{equation*}
+Note that if $f \in \fanc_c(G)$ then $L_sf \in \fanc_c(G)$, and moreover the map
+\begin{equation*}
+    \begin{split}
+        G & \to \End(\fanc_c(G))\\
+        s &\mapsto L_s
+    \end{split}
+\end{equation*}
+is a representation of $G$.
+
+\begin{prop}
+\label{prop: Unitary representation on V_phi}
+Let $\phi$ be a $\cc$-valued positive-definite function on a locally compact group $G$. Then the mapping $s \mapsto L_s$ induces a unitary representation of $G$ on the Hilbert space $V_\phi$.
+\end{prop}
+\begin{proof}
+If $\phi$ is of positive type and $f \in \fanc_c(G)$ then:
+\begin{equation*}
+    \begin{split}
+    \brangle{L_sf \mid L_sf}_{\phi} &= \iint \phi(\inv{t}u)f(\inv{s}t)\dt \bar{f(\inv{s}u)}\du\\
+    &= \iint \phi(\inv{(\inv{s}t)}(\inv{s}u))f(\inv{s}t)\dt \bar{f(\inv{s}u)} \du\\
+    &= \iint \phi(\inv{t}u)f(t) \bar{f(u)} \du\\
+    &= \brangle{f \mid f}_\phi
+    \end{split}
+\end{equation*}
+which proves that $L_s$ is a unitary representation.
+\end{proof}
+
+\begin{remark}
+    It is also true that the above is a topological representation, the rigorous proof of which we omit here.
+\end{remark}
+
+\begin{exercise}
+\label{exercise: Unitary representation induces positive-type func}
+Let $\rho$ be a unitary representation of $G$ on a Hilbert space $V$. For any $x \in V$, show the map
+\begin{equation*}
+    \begin{split}
+    \phi: G & \to \cc\\
+    s & \mapsto \brangle{x \mid \rho(s)(x)}
+    \end{split}
+\end{equation*}
+is a function of positive type. This is essentially a converse of \ref{prop: Unitary representation on V_phi}.
+    
+\end{exercise}
+
+
+
+For further discussion of these functions of positive type, we recall the definition of a convolution.
+\begin{defn}
+    Let $f, g$ be $\cc$-valued Borel functions on a locally compact group $G$. Their \textbf{convolution} $f * g$ is defined by:
+    \begin{equation*}
+        f*g(t) := \int g(\inv{s}t)f(s) \ds = \int g(\inv{s})f(ts) \ds,
+    \end{equation*}
+    assuming this integral, taken over the full group, exists.
+\end{defn}
+\begin{sanitycheck}
+    Verify for $f \in \fanc_c(G)$ and $\phi \in L^\infty(G)$ that $f * \phi$ exists, and is continuous.
+\end{sanitycheck}
+
+\begin{prop}
+\label{prop: positive-type representation exists}
+    Let $\phi$ be a positive definite function on locally compact $G$. Then there exists some $x_\phi \in V_\phi$ such that 
+    \begin{equation*}
+        \phi(s) = \brangle{x_\phi \mid L_s x_\phi}_\phi
+    \end{equation*}
+    almost everywhere for $s \in G$.
+\end{prop}
+\begin{proof}
+Let $\set{\alpha}$ be an indexing set for the open neighborhoods $V_\alpha$ of the identity of $G$. Since $G$ is Hausdorff, we must have $\cap V_\alpha = \set{e}$. By Urysohn's Lemma, for every $\alpha$ we can construct continuous $g_\alpha: G \to \rr_{> 0}$ such that:
+\begin{itemize}
+    \item $\supp(g_\alpha)$ is a compact subset of $V_\alpha$.
+    \item The identity $\int_G g_\alpha(s) \ds = 1$ holds.
+\end{itemize}
+If we write $\alpha \leq \beta$ whenever $V_\alpha \supseteq V_\beta$, then that makes $\set{\alpha}$ a directed set, which in turn gives us a net $\set{g_\alpha(s) \ds }$ of positive linear functionals on $\fanc_c(G)$ by:
+\begin{equation*}
+    f \mapsto \int_G f(s)g_\alpha(s) \ds
+\end{equation*}
+Note these converge (weakly) to the Dirac measure $\delta_e$, which we recall is defined by
+\begin{equation*}
+    \delta_e(f) := f(e),
+\end{equation*}
+i.e evaluation at the identity. Consider the integral 
+\begin{equation*}
+    \brangle{f \mid g_\alpha}_\phi = \iint \phi(\inv{s}t)f(s)\ds g_\alpha(t) \dt = \int f * \phi(t) \cdot g_\alpha(t) \dt,
+\end{equation*}
+which exists, since $f * \phi$ is continuous and $g_\alpha$ has compact support. We can now define a linear form $\Phi$ on $V_\phi$ that on $\fanc_c(G)$ is given by:
+\begin{equation*}
+    \Phi(f) := \lim_{\alpha} \brangle{f \mid g_\alpha}_\phi = \lim_{\alpha} \int f * \phi(t) \cdot g_\alpha(t) \dt.
+\end{equation*}
+Note for any $h \in \fanc_c(G)$ that $(f * \phi) \cdot h \in \fanc_c(G)$ as well. Thus the above limit exists since the $g_\alpha$ weakly converge to the Dirac measure, which also tells us
+\begin{equation*}
+    \Phi(f) = f*\phi(e) = \int \phi(\inv{s})f(s)\ds
+\end{equation*}
+Since $V_\phi$ is a Hilbert space, it's self-dual and therefore there exists $x_\phi \in V_\phi$ such that 
+\begin{equation*}
+    \Phi(\xi) = \brangle{\xi \mid x_\phi}_\phi
+\end{equation*}
+for all $\xi \in V_\phi$.\\  
+We shall now see how $x_\phi$ behaves under the group representation $s \mapsto L_s$. 
+\begin{equation}
+\label{eqn: positive-def rep proof}
+    \begin{split}
+        \brangle{\xi \mid L_sx_\phi}_\phi &= \lim_\alpha \brangle{\xi \mid L_s g_\alpha}_\phi\\
+        &= \lim_\alpha \iint \phi(\inv{t}u)\xi(t)\dt g_\alpha(\inv{s}u)\du\\
+        &= \lim_\alpha \iint \phi(\inv{t}su) \xi(t) \dt g_\alpha(u)\du\\
+        &= \int \phi(\inv{t}s)\xi(t)\dt.
+    \end{split}
+\end{equation}
+Swapping the arguments in Equation (\ref{eqn: positive-def rep proof}), and using conjugate-symmetry of Hermitian forms, we deduce that:
+\begin{equation*}
+      \begin{split}
+        \brangle{L_s x_\phi \mid \xi}_\phi &= \bar{\brangle{\xi \mid L_s x_\phi}_\phi}\\
+        &= \int \bar{\phi(\inv{t}s)\xi(t)} \dt\\
+        &= \int \phi(\inv{s}t) \bar{\xi(t)}\dt,
+      \end{split}
+\end{equation*}
+and taking the case $s = e$ above we get:
+\begin{equation*}
+    \brangle{x_\phi \mid \xi}_\phi = \int \phi(t)\bar{\xi(t)} \dt.
+\end{equation*}
+By Equation (\ref{eqn: positive-def rep proof}), we can also deduce for any $\xi \in V_\phi$ and $h \in \fanc_c(G)$ that:
+\begin{equation}
+\label{eqn: V_phi CG-module generated}
+    \brangle{\xi \mid h}_\phi = \iint \phi(\inv{s}t)\xi(s)\ds \bar{h(t)}\dt = \int \brangle{\xi \mid L_tx_\phi}_\phi \bar{h(t)} \dt,
+\end{equation}
+and by continuity this extends to all of $V_\phi$.
+\begin{observation}
+    In Equation (\ref{eqn: V_phi CG-module generated}), if we set $h = \xi$, note that if $\xi$ is orthogonal to the $\cc G$-submodule of $V_\phi$ generated by $x_\phi$, then the integrand is zero for every $t \in G$, and thus $\brangle{\xi \mid \xi}_\phi = 0$. Thus $V_\phi$ is generated (as a $\cc G$-module) by $x_\phi$. This fact will come in useful later.
+\end{observation}
+To complete the proof of the main result, let us take $\xi = x_\phi$ in equation \ref{eqn: V_phi CG-module generated} and apply the above results to deduce that for any $\psi \in V_\phi$ we have:
+\begin{equation*}
+    \int \phi(s) \bar{\psi(s)} \ds = \brangle{x_\phi \mid \psi}_\phi = \int \brangle{x_\phi \mid L_s x_\phi}_\phi \bar{\psi(s)} \ds.
+\end{equation*}
+By equality of the two integrals above for every $\psi$, it follows that
+\begin{equation*}
+    \phi(s) = \brangle{x_\phi \mid L_s x_\phi}_\phi
+\end{equation*}
+almost everywhere, as desired.
+\end{proof}
+
+\begin{sanitycheck}
+    For $\phi$ positive definite on locally compact $G$, verify that $\phi$ is equal to a continuous function almost everywhere. In fact, if $\phi$ IS continuous then the representation of \ref{prop: positive-type representation exists} is true everywhere, not just on a comeasure-zero set.
+\end{sanitycheck}
+
+\begin{corollary}
+\label{cor: positive-type representation}
+    If $\phi$ as above is continuous, then:
+    \begin{enumerate}[(a)]
+        \item $\phi(e) \geq 0$.
+        \item $\phi(e) = \sup_{s \in G} \abs{\phi(s)}$.
+        \item $\phi(\inv{s}) = \bar{\phi(s)}$ for every $s \in G$.
+    \end{enumerate}
+\end{corollary}
+
+\begin{exercise}
+    Prove \ref{cor: positive-type representation} rigorously. (Hint: Use the representation in \ref{prop: positive-type representation exists} for (a), Cauchy-Schwarz for (b), and the fact that $L_s$ is unitary for (c)).
+\end{exercise}
+
+\subsection{Elementary Functions}
+\label{subsection: Elementary Functions}
+The positive-definite, continuous functions on $G$ bounded by 1 in the $L^\infty$ norm comprise an important subset of $L^\infty(G)$. We set 
+\begin{equation*}
+    \fanp(G) := \set{\phi \in \fanc(G) \cap L^\infty(G) : \phi \text{ is positive-definite and } \norm{\phi}_\infty \leq 1}
+\end{equation*}
+Related to this is the class of functions we are interested in.
+\begin{defn}
+    Define the set $\fane(G)$ as the zero function unioned with any function satisfying:
+    \begin{enumerate}[(i)]
+        \item $\phi$ is continuous and of positive type.
+        \item $\phi(e) = 1$.
+        \item For every decomposition $\phi = \phi_1 + \phi_2$, where $\phi_1,\phi_2 \in \fanp(G)$, there exist $\lambda_1, \lambda_2 \in \rr_{> 0}$ such that:
+        \begin{equation*}
+            \phi_1 = \lambda_1 \phi, \quad \phi_2 = \lambda_2 \phi
+        \end{equation*}
+    \end{enumerate}
+    The non-zero elements of $\fane(G)$ are called \textbf{elementary functions}.
+\end{defn}
+
+\begin{sanitycheck}
+    Verify that $\fane(G) \subseteq \fanp(G)$ (Hint: \ref{cor: positive-type representation} might be helpful).
+\end{sanitycheck}
+
+\begin{lemma}
+\label{lemma: elementary function properties}
+The sets $\fanp(G)$ and $\fane(G)$ satisfy the following properties:
+\begin{enumerate}[(a)]
+    \item $\fanp(G)$ is a convex, bounded subset of $L^\infty(G)$. It is also weakly compact as a subset of $L^1(G)^*$.
+    \item Any convex, closed subset of $\fanp(G)$ containing its extreme points is all of $\fanp(G)$.
+    \item The extreme points of $\fanp(G)$ are exactly the points of $\fane(G)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\textbf{\underline{(a)}}\\
+By definition $\fanp(G)$ is bounded. Convexity follows from the fact that if we take a linear combination of two positive definite functions then that function must be positive definite as well (if this isn't immediately clear, verify it!), and that if both the coefficients have norm $\leq 1$ then the supremum of that sum must also have norm $\leq 1$.\\
+For the second statement, first note that if we have a sequence $\set{\phi_n}$ of elements in $\fanp(G)$ weakly converging to $\phi$ then by definition we have 
+\begin{equation*}
+    \norm{\phi_n - \phi}_\infty \to 0
+\end{equation*}
+and the fact that $\norm{\phi_n}_\infty \leq 1$ for all $n$ implies $\norm{\phi}_\infty \leq 1$ as well. Moreover, recall the standard fact from functional analysis that we can identify $L^\infty(G)$ and $L^1(G)^*$ via an isometry. A sequence $\phi_n$ of functions in $\fanp(G)$ weaky converging to $\phi \in L^\infty(G)$ is equivalent to saying that:
+\begin{equation*}
+    \int f \phi_n \ds \to \int f \phi \ds,
+\end{equation*}
+from which it follows that:
+\begin{equation*}
+    \iint \phi_n(\inv{s}t)f(s)\ds \bar{f(t)} \dt \to \iint \phi(\inv{s}t)f(s) \ds \bar{f(t)} \dt
+\end{equation*}
+and thus positive-definiteness of all the $\phi_n$ also implies positive-definiteness of $\phi$. Recall that this also implies $\phi$ is continuous.
+\begin{warning}
+    Technically $\phi$ is an equivalence class in $L^\infty(G)$ of functions that are measure-zero-different to a continuous function.
+\end{warning}
+Thus $\fanp(G)$, as a subset of $L^1(G)^*$, is a closed subset of the unit ball, and thus compact under the weak-star topology via Alaoglu's theorem.\\
+
+\textbf{\underline{(b)}}\\
+This is a special case of the Krein-Milman theorem.\\
+
+\textbf{\underline{(c)}}\\
+FINISH THIS
+\end{proof}
+
+Now we come to a result that brings together the theory of elementary functions with irreducible representations, using the theory we built in 
+
+\begin{theorem}
+\label{thm: elementary iff rep is irred}
+Let $\phi$ be continuous of positive type on $G$ such that $\phi(e) = 1$. Then $\phi \in \fane(G)$ if and only if the unitary representation $s \mapsto L_s$ of $G$ in $V_\phi$ is irreducible.
+\end{theorem}
+\begin{proof}
+For the forward direction, suppose $\phi$ is an elementary function. Let $W$ be a closed, $G$-invariant subpsace of $V_\phi$ with orthogonal complement $W^\perp$. Let $\proj_W$ denote the orthogonal projection map onto $W$. Then since each $L_s$ is unitary, we have the following commutative diagram:
+\begin{center}
+    \begin{tikzcd}
+        W \dsum W^\perp \arrow[r, "\proj_W"] \arrow[d, "L_s"'] &  W \arrow[d, "L_s"]\\
+        W \dsum W^\perp  \arrow[r, "\proj_W"'] & W
+    \end{tikzcd}
+\end{center}
+Thus, to show irreducibility of $s \mapsto L_s$ it suffices to show that if $A$ is any orthogonal projection operator commuting with every $L_s$, then $A$ is either the zero map or the identity map on $V_\phi$.\\
+Recall for any projection that $\brangle{Ax \mid y}_\phi = \brangle{Ax \mid Ay}_\phi$. It follows from this and our "representation result" in \ref{prop
+} then that:
+\begin{equation*}
+    \begin{split}
+        \phi(s) &= \brangle{x_\phi \mid L_s x_\phi}_\phi\\
+        &= \brangle{Ax_\phi \mid L_s x_\phi}_\phi + \brangle{x_\phi - Ax_\phi \mid L_sx_\phi}_\phi\\
+        &= \brangle{Ax_\phi \mid L_s Ax_\phi } + \brangle{x_\phi - Ax_\phi \mid L_s(x_\phi - Ax_\phi)}_\phi.
+    \end{split}
+\end{equation*}
+By \ref{exercise: Unitary representation induces positive-type func}, we have decomposed $\phi$ into the sum of two functions of positive type, i.e two elements of $\fanp(G)$. Since we assumed $\phi$ to be elementary, by definition we must have:
+\begin{equation*}
+    \brangle{Ax_\phi \mid L_s Ax_\phi } = \brangle{Ax_\phi \mid A L_s x_\phi } = \brangle{Ax_\phi \mid L_s x_\phi } = \lambda \brangle{x_\phi \mid L_s x_\phi}
+\end{equation*}
+for all $s \in G$, where the first equality follows from $A$ commuting with $L_s$ and the second follows from the property of projection maps. Recall from our observation in the proof of \ref{prop: positive-type representation exists} that $V_\phi$ is generated by $x_\phi$ as a $\cc G$-module, so in fact the above identity holds over all of $V_\phi$, which tells us $A = \lambda \cdot \id_{V_\phi}$. Since $A$ is a projection map however, it is idempotent, so $\lambda = 0$ (i.e $A$ is the zero map) or $\lambda = 1$ (i.e $A$ is the identity map), which completes the proof of the forward direction.\\
+
+For the reverse direction, suppose that the representation $s \mapsto L_s$ is irreducible. We have to show that, for any decomposition of $\phi = \phi_1 + \phi_2$ into a sum of functions from $\fanp(G)$, that each $\phi_i$ is of the form $\lambda_i \phi$. Note for each $f \in \fanc_c(G)$ that
+\begin{equation*}
+    \begin{split}
+        \brangle{f \mid f}_{\phi} &= \iint \phi(\inv{s}t)f(s) \ds \bar{f(t)} \dt \\
+        &= \iint \brack{\phi_1(\inv{s}t) +\phi_2(\inv{s}t)}f(s) \ds \bar{f(t)} \dt\\
+        &= \iint \phi_1(\inv{s}t)f(s)\ds \bar{f(t)}\dt + \iint \phi_2(\inv{s}t)f(s)\ds \bar{f(t)}\dt\\
+        &= \brangle{f \mid f}_{\phi_1} + \brangle{f \mid f}_{\phi_2},
+    \end{split}
+\end{equation*}
+and so we get the key inequality
+\begin{equation}
+\label{eqn: Elementary-function irred-rep result key inequality}
+    \brangle{f \mid f}_{\phi_1} \leq \brangle{f \mid f}_\phi.
+\end{equation}
+Thus any compactly-supported continuous function degenerate wrt $\brangle{\mid}_\phi$ is also degenerate wrt $\brangle{\mid}_{\phi_1}$. Thus $\phi$ also defines a Hermitian form on the (completed) quotient $V_\phi$. There must exist a continuous, positive-definite $A \in \End(V_\phi)$ such that 
+\begin{equation*}
+    \brangle{A\xi \mid \psi}_\phi = \brangle{\xi \mid \psi}_{\phi_1}
+\end{equation*}
+for all $\xi, \psi \in V_\phi$. In particular, we must also have
+\begin{equation*}
+    \brangle{A x_\phi \mid L_s x_\phi}_\phi = \brangle{ x_\phi \mid L_s x_\phi}_{\phi_1}
+\end{equation*}
+for all $s \in G$. We claim that $A$ commutes with all the $L_s$. To see this, note that:
+\begin{equation*}
+    \begin{split}
+        \brangle{A L_s x_\phi \mid \psi}_\phi &= \brangle{L_s \phi \mid \psi}_{\phi_1}\\
+        &= \brangle{\phi \mid L_{\inv{s}}\psi}_{\phi_1} \ \text{ by the fact that $L_s$ is unitary,}\\
+        &= \brangle{A \phi \mid L_{\inv{s}} \psi}_{\phi}\\
+        &= \brangle{L_s A \phi \mid \psi}_\phi
+    \end{split}
+\end{equation*}
+for all $\phi, \psi \in \fanc_C(G)$, and thus $A$ must commute with $L_s$ in $V_\phi$.\\
+We claim that:
+\begin{equation*}
+    \brangle{x_\phi \mid L_s x_\phi}_{\phi_1} = \phi_1(s)
+\end{equation*}
+everywhere in $G$. To see this, recall that the key construction of the proof of the representation in \ref{prop: positive-type representation exists} involved the convergence of the net of functionals $\set{g_\alpha}$. The inequality in Equation (\ref{eqn: Elementary-function irred-rep result key inequality}) tells us that convergence in the norm induced by $\phi$ also implies convergence in the norm induced by $\phi_1$, and from this the rest of the proof implies the same equality for the $\phi_1$-induced norm.\\
+Putting everything together then, we have:
+\begin{equation*}
+    \phi_1(s) = \brangle{x_\phi \mid L_s x_\phi}_{\phi_1} = \brangle{A x_\phi \mid L_s x_\phi}_{\phi}
+\end{equation*}
+A consequence of Schur's Lemma specific to the case of unitary representations (which we hand-wave for now) tells us that, provided $A$ commutes with every $L_s$ (which we've shown), $A$ must be a scalar multiple of $\id_{V_\phi}$. Thus,
+\begin{equation*}
+    \phi_1(s) = \brangle{\lambda x_\phi \mid L_s x_\phi}_\phi = \lambda \phi(s)
+\end{equation*}
+for all $s \in G$. The same argument follows for $\phi_2$, which completes our proof that $\phi$ is elementary.
+\end{proof}
+
+We conclude this section with a very nice characterization of elementary functions in the abelian case.
+\begin{theorem}
+\label{thm: pos-def on LCAG is cont. char}
+    If $G$ is locally compact abelian, then the elementary functions on $G$ are precisely the continuous characters $G \to S^1$.
+\end{theorem}
+\begin{proof}
+First off, a character $\chi$ on $G$ is bounded and $L^\infty(G)$. To show it is positive type, we see that:
+\begin{equation*}
+    \begin{split}
+        \iint \chi(\inv{s}t)f(s)\ds \bar{f(t)} \dt &= \iint \bar{\chi(s)}\chi(t) f(s) \ds \bar{f(t)} \dt\\
+        &= \int \bar{\chi(s)}f(s) \ds \int \chi(t)\bar{f(t)} \dt\\
+        &= \abs{\int \chi(s)f(s)\ds}^2 \geq 0
+    \end{split}
+\end{equation*}
+for all $f \in \fanc_c(G)$. Moreover, necessarily we must have $\chi(e) = 1$ for any character. Using our previous result \ref{thm: elementary iff rep is irred}, all we have left to show is, for all $\phi$ positive definite with value 1 at the identity, that $\phi$ is a character iff the representation of $G$ in $V_\phi$ is irreducible.\\
+
+For one direction, suppose $\phi$ is a character. Then, for any $f \in \fanc_c(G)$ we have:
+\begin{equation*}
+    \brangle{f \mid f}_\phi = \abs{\int \bar{\phi(s)} f(s) \ds}^2
+\end{equation*}
+This induces a function $f \mapsto \brangle{f \mid f}_\phi$, and since its image lies in $\cc$, its kernal must have codimension one. Thus the quotient $V_\phi$ is one-dimensional and therefore must be an irreucible representation.\\
+
+For the reverse direction, assume the representation of $G$ in $V_\phi$ is irreducible. Then by another consequence of Schur's Lemma (which we again handwave for now), the representation $s \mapsto L_s$ is one-dimensional. It follows that $L_s(\xi) = \lambda(s)\xi$ for all $\xi \in V_\phi$, where $\lambda(s)$ depends continuously on $s$. Moreover, recall from \ref{prop: Unitary representation on V_phi} that each $L_s$ is unitary, so we must have $\abs{\lambda(s)} = 1$ for all $s$, and thus $\lambda$ is a character (continuous map to $S^1$) of $G$. Putting it together with our result from \ref{prop: positive-type representation exists} and our assumption that $\phi(e) = 1$, we get:
+\begin{equation*}
+    \phi(s) = \brangle{x_\phi \mid L_s x_\phi}_\phi = \bar{\lambda(s)}\brangle{x_\phi \mid x_\phi}_\phi = \bar{\lambda(s)}\phi(e) = \bar{\lambda(s)}
+\end{equation*}
+and thus $\phi$ must also be a continuous character, as desired.
+\end{proof}
+
+\subsection{Fourier Inversion}
+\label{subsection: Fourier Inverstion}
+Throughout this subsection we let $G$ be a locally compact abelian group (we'll use the acronym LCAG for this) with bi-invariant Haar measure $\dx$, with continuous character group $\hat{G}$. We'll Our main tool for establishing Pontryagin duality is the Fourier Inversion formula.
+
+\begin{defn}
+\label{def: Fourier transform}
+    For $f \in L^1(G)$, we define its \textbf{Fourier transform} as:
+    \begin{equation*}
+        \begin{split}
+            \hat{f}: \hat{G} &\to \cc\\
+            \chi & \mapsto \int_G f(y)\bar{\chi(y)}\dy
+        \end{split}
+    \end{equation*}
+\end{defn}
+\begin{sanitycheck}
+    Verify that $\hat{f}$ is well-defined, and that $\abs{\hat{f}(\chi)} \leq \norm{f}_1$.
+\end{sanitycheck}
+
+\begin{example}
+\label{example: Fourier transform on R}
+In the case $G = \rr$, with the addition operation, we can identify each $t \in \rr$ with the character $s \mapsto e^{ist}$. The Fourier transform then gives us:
+\begin{equation*}
+    \hat{f}(t) = \int_\rr f(s)e^{-ist} \ds
+\end{equation*}
+which is the classical Fourier transform. 
+\end{example}
+\begin{warning}
+    Pedantically speaking, the Fourier transform in the above example is a function on $\hat{\rr}$ rather than $\rr$.
+\end{warning}
+
+Let $V(G)$ denote the complex span of the continuous functions of positive type on $G$, and define
+\begin{equation*}
+    V^1(G) := V(G) \cap L^1(G).
+\end{equation*} 
+
+\begin{theorem}[Fourier Inversion]
+\label{thm: Fourier inversion}
+    There exists a Haar measure $\dchi$ on $\hat{G}$ such that, for all $f \in V^1(G)$,
+    \begin{equation*}
+        f(y) = \int_{\hat{G}} \hat{f}(\chi)\chi(y)\dchi.
+    \end{equation*}
+    Moreover, the Fourier transform $f \mapsto \hat{f}$ identifies $V^1(G)$ with $V^1(\hat{G})$.
+\end{theorem}
+\begin{defn}
+\label{def: dual measure}
+    The measure $\dchi$ is called the \textbf{dual measure} of $\dx$, the given Haar measure on $G$.
+\end{defn}
+To prove the existence of the dual measure, we discuss some more properties of convolution.
+
+\begin{prop}[Properties of Convolution]
+\label{prop: Properties of Convolution}
+    Let $f, g$ be $\cc$-valued Borel functions on LCAG $G$. Then:
+    \begin{enumerate}[(a)]
+        \item If the convolution $f * g(x)$ exists for some $x \in G$, then so does $g * f(x)$, and they are equal to one another.
+        \item If $f, g \in L^1(G)$, then $f * g(x)$ exists for almost all $x \in G$. Moreover, $f * g \in L^1(G)$ and 
+        \begin{equation*}
+            \norm{f * g}_1 \leq \norm{f}_1 \norm{g}_1.
+        \end{equation*}
+        \item If $f, g, h \in L^1(G)$ then $(f * g) * h = f * (g * h)$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+\textbf{\underline{(a)}}\\
+By translation-invariance of the Haar measure on $G$, we can replace $y$ by $yx$ in the convolution integrand to get:
+\begin{equation*}
+    \begin{split}
+        f*g(x) &= \int g(\inv{y}x)f(y)\dy\\
+        &= \int g(\inv{y})f(yx) \dy\\
+        &= g * f (x),
+    \end{split}
+\end{equation*}
+where the last equality follows from the fact that the Haar measure is inversion-invariant for Borel subsets of $G$.\\
+
+\textbf{\underline{(b)}}\\
+Consider the homeomorphism 
+\begin{equation*}
+    \begin{split}
+        \alpha: G \times G &\bij G \times G\\
+        (x, y) &\mapsto (yx, y).
+    \end{split}
+\end{equation*}
+Note the inverse map $\inv{\alpha}$ sends $(x, y) \mapsto (\inv{y}x, y)$. For any open $U \subseteq \cc$, we note that $\alpha(\inv{f}(U) \times G)$ is a Borel subset of $G \times G$. By construction, we observe that $(x, y) \in \alpha(\inv{f}(U) \times G)$ iff $\inv{y}x \in \inv{f}(U)$. Thus the map
+\begin{equation*}
+    (x, y) \mapsto f(\inv{y}x)
+\end{equation*}
+is a Borel function on $G \times G$, and therefore so is the map
+\begin{equation*}
+    (x, y) \mapsto f(\inv{y}x)g(y),
+\end{equation*}
+since the product of Borel functions is also Borel. Since both $f$ and $g$ are $L^1$-functions, we have
+\begin{equation*}
+    \iint \abs{f(\inv{y}x)}\dx \abs{g(y)} \dy < \infty.
+\end{equation*}
+Thus Fubini's theorem applies here to give us
+\begin{equation*}
+    \iint \abs{f(\inv{y}x)g(y)}\dy \dx = \norm{f}_1 \norm{g}_1 \ .
+\end{equation*}
+It follows that $\abs{f} * \abs{g}$ is an $L^1$-function and is thus finite almost everywhere. Thus $f * g$ must also be $L^1$, and the norm inequality also follows from this.\\
+
+\textbf{\underline{(c)}}\\
+By work similar to our proof of part (b), Fubini's theorem applies here.
+\begin{equation*}
+    \begin{split}
+        f * (g * h)(x) &= \int f(\inv{y}x)(g * h)(y) \dy\\
+        &= \int f(\inv{y}x)\int g(\inv{z}y) h(z) \dz \dy\\
+        &= \iint f(\inv{y}x)g(\inv{z}y)h(z)\dy \dz\\
+        &= \iint f(\inv{y} \inv{z}x)g(y)h(z) \dy \dz, \ \text{by replacing $y$ with $yz$},\\
+        &= \int f * g(\inv{z}x)h(z)\dz \\
+        &= (f * g) * h(x),
+    \end{split}
+\end{equation*}
+as desired.
+\end{proof}
+
+\begin{observation}
+The above properties of convolution essentially tell us that $L^1(G)$ is a Banach algebra with respect to convolution. If $G$ is discrete, then the characteristic function of the identity also maps $L^1(G)$ unital. It is also a fact (that we do not prove here) that the converse is true: i.e if $L^1(G)$ is unital wrt convolution then $G$ must be discrete.
+\end{observation}
+
+\begin{exercise}
+\label{exercise: fourier transform of convolution is product}
+Show that the Fourier transform of the convolution $f* g$ is exactly the product of Fourier transforms $\hat{f} \hat{g}$.
+\end{exercise}
+
+\begin{prop}
+Let $B$ denote the Banach algebra $L^1(G)$, and let $\hat{B} := \hom_\cc(B, \cc) \setminus \set{\zero} $ be the non-zero complex characters of $B$. For any $\chi \in \hat{G}$ and $f \in B$, define
+\begin{equation*}
+    v_\chi(f) = \hat{f}(\chi) = \int f(y)\bar{\chi(y)} \dy.
+\end{equation*}
+Then $v_\chi \in \hat{B}$ for all $\chi$. Moreover, the map
+\begin{equation*}
+    \begin{split}
+        \hat{G} & \to \hat{B}\\
+        \chi &\mapsto v_\chi
+    \end{split}
+\end{equation*}
+is a bijection.
+\end{prop}
+\begin{proof}
+Linearity of $v_\chi$ follows from the direct calculation:
+\begin{equation*}
+    \begin{split}
+        v_\chi(\lambda f + g) &= \int (\lambda f + g)(y)\bar{\chi(y)}\dy\\
+        &= \lambda \int f(y)\bar{\chi(y)}\dy + \int g(y)\bar{\chi(y)} \dy\\
+        &= \lambda v_\chi(f) + v_\chi(g)
+    \end{split}
+\end{equation*}
+for any $\lambda \in \cc$. Exercise \ref{exercise: fourier transform of convolution is product} shows that $v_\chi$ is compatible with the convolution operation on $B$.  Moreover, since each $\chi$ takes values of norm 1, $v_\chi$ is not identically zero on $L^1(G)$.\\
+
+To show injectivity of the map $\hat{G} \to \hat{B}$, suppose for some $\chi, \chi' \in G$ that
+\begin{equation*}
+    v_\chi(f) = \int f(y)\bar{\chi(y)} \dy = \int f(y)\bar{\chi'(y)} \dy = v_{\chi'}(f)
+\end{equation*}
+for all $f \in B$. Then $\chi, \chi'$ must agree on a set of comeasure zero on $G$. Since they are both continuous characters, we must have $\chi = \chi'$, proving injectivity.\\
+
+It now remains to show that every nonzero character of $B$ is of the form $v_\chi$ for some $\chi \in \hat{G}$. Let $\psi: B \to \cc$ be a non-trivial algebra homomorphism. Standard Gelfand theory tells us that $\psi$ is a functional on $L^1(G) = B$ of norm $\leq 1$ under the Gelfand topology. By the duality of $L^\infty$ and $L^1$ there must exist some $\phi \in L^\infty(G)$ with the same norm such that
+\begin{equation*}
+    \psi(f) = \int f(x)\phi(x)\dx 
+\end{equation*}
+for all $f \in B$. Our goal is thus to show that $\phi$ is a continuous character, from which we deduce $\psi = v_{\inv{\phi}}$, which will prove the map in the theorem statement gives us our bijection between $\hat{G}$ and $\hat{B}$. Our strategy will be to prove $\phi$ is multiplicative on $G$, and combining this with the fact that it has $L^\infty$-norm bounded by 1 will force $\abs{\phi(x)} = 1$ for all $x \in G$, and therefore will imply $\phi$ is a character.\\
+Recall the representation of $G$ given by $L_sf(x) = f(\inv{s}x)$. We compute:
+\begin{equation*}
+    \begin{split}
+        \int \psi(f)\phi(y)g(y) \dy &= \psi(f) \psi(g)\\
+        &= \psi(f * g)\\
+        &= \iint f(\inv{y}x)g(y)\dy \phi(x) \dx\\
+        &= \int L_yf(x)\phi(x) \dx g(y)\dy \\
+        &= \int \psi(L_yf)g(y) \dy .
+    \end{split}
+\end{equation*}
+This equality of integrals tells gives us the equality
+\begin{equation*}
+\label{eqn: B-hat and G-hat bijection key step}
+    \psi(f)\phi(y) = \psi(L_yf)
+\end{equation*}
+for almost all $y \in G$. The RHS above is continuous in y [WHY??? EXPLAIN MORE] and thus the LHS must be too (a deduction we can make by the assumption that $\psi$ is non-zero), which tells us $\phi$ is a continuous function.\\
+To show $\phi$ must be multiplicative, we apply Equation (\ref{eqn: B-hat and G-hat bijection key step}) repeatedly to get:
+\begin{equation*}
+    \psi(f)\phi(xy) = \psi(L_{xy}f) = \psi(L_xL_yf) = \psi(L_yf)\phi(x) = \psi(f)\phi(x)\phi(y),
+\end{equation*}
+which implies $\phi$ is multiplicative, as we wanted (again, we must use the fact that $\psi$ is nonzero here). Thus $\phi$ is a continuous character and $\psi = v_{\bar{\phi}}$, completing our proof.
+\end{proof}
+
+To prove more serious results about dual measures on 
+
+\subsection{Pontryagin Duality}
+\label{subsection: Pontryagin Duality}
+
+
+\newpage
+\section{Adeles and Ideles}
+\label{section: Adeles&Ideles}
+
+
+\subsection{Background: Defining Restricted Products}
+\label{subsection: Restricted Products Def}
+Let $J$ be an indexing set (the reason for choosing $J$ over $I$ will become apparent
+later when we get introduced to the Ideles), suppose that for every $v \in J$ we have 
+a locally compact group indexed by $G_v$. We fix a finite subset $J_\infty$ of $J$ (which
+will later represent the infinite places), and suppose that for all $v \notin J_\infty$
+we have a compact open (and thus closed) subgroup $H_v \leq G_v$.
+
+\begin{defn}
+The \textbf{restricted direct product} of the $G_v$ with respect to the $H_v$ is defined as 
+\begin{equation*}
+    \rprod_{v \in J} G_v := \set{(x_v) \in \prod G_v : x_v \in H_v \text{ for all but finitely many } v}
+\end{equation*}
+\end{defn}
+
+\begin{remark}
+The notation I've used for the restricted product (product and coproduct symbol overlayed on one another) is non-standard, but more distinct than the usual $\prod'$, in my opinion. I first saw this in Andrew Sutherland's lecture notes for 18.875 course at MIT, and I've also seen it in Keith Conrad's notes.
+\end{remark}
+
+Let us denote this restricted product $G$. Note $G \subseteq \prod G_v$ (the normal
+direct product of groups). We want to topologize $G$, but as it turns out, the subspace topology induced by the product topology on $\prod G_v$ is insufficient. For reasons that will become clear later, we'll want sets like $\prod H_v$ to be open, which won't be true in the subspace topology unless $H_v = G_v$ for all but finitely many $v \in J$.
+
+\begin{defn}
+    The \textbf{restricted product topology} on $\rprod G_v$ is given by the basis
+    \begin{equation*}
+        \calb := \set{\prod U_v : U_v \subseteq_{\text{open}} G_v, \ e \in U_v \text{ and } U_v = H_v \text{ for all but finitely many } v}
+    \end{equation*}
+\end{defn}
+
+\begin{sanitycheck}
+Suppose we have a family of compact opens $H'_v \subseteq G_v$ such that $H'_v = H_v$ for all but finitely many $v \in J$. Then confirm that $\rprod G_v$ wrt to the $H_v$ is the same (both set-theoretically and topologically) as $\rprod G_v$ wrt to the $H'_v$. It thus suffices to specify the $H_v$ for all but finitely many $v$.
+\end{sanitycheck}
+
+We introduce a handy piece of notation that'll come in useful later. Let $S$ be any finite subset of the index set $J$ containing $J_\infty$. Then we define
+\begin{equation*}
+    G_S := \prod_{v \in S} G_v \times \prod_{v \notin S} H_v
+\end{equation*}
+
+For every $S, T$ such that $S \subseteq T$, consider the inclusion maps $i_{S, T}: G_S \inj G_T$. Then with respect to this directed system, we have:
+\begin{equation*}
+    G = \dlim_{S} G_S
+\end{equation*}
+
+\begin{exercise}
+\label{restricted product as colimit}
+    Verify the above statement rigorously.
+\end{exercise}
+
+\begin{prop}
+\label{restricted product properties}
+Let $G_v, H_v$ be as defined above and $G$ be the restricted product. Then
+\begin{enumerate}[(a)]
+    \item $G$ is a locally compact group.
+    \item A subset $Y \subseteq G$ has compact closure iff $Y \subseteq \prod K_v$ for some family of compact subsets $K_v \subseteq G_v$ such that $K_v = H_v$ for all but finitely many $v$.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+\textbf{\underline{(a)}}\\
+Since each $H_v$ is compact, Tychonoff tells us $\prod_{v \notin S} H_v$ is also compact. Thus $G_S$ is the product of finitely many locally compact spaces with a compact space, and is thus itself locally compact. Moreover, the product topology on $G_S$ is the SAME as the subspace topology induced by $G$, and since any $(x_v) \in G$ is contained in such a $G_S$, we conclude $G$ must be locally compact as well.\\
+
+\textbf{\underline{(b)}}\\
+If $Y$ is contained in some product of compact sets $ K = \prod K_v$ (which is compact by Tychonoff) its closure $\bar{Y}$ is a closed subset of a compact subset of a Hausdorff space $G$, and thus $\bar{Y}$ is compact too.\\
+For the other direction, suppose $\bar{Y}$ is a compact subset of $G$. Since the sets $G_S$ defined above cover $G$, a finite number of $G_S$ must cover $\bar{Y}$. Note a union of a finite number of $G_S$ is just a set of the form $G_{\fans}$, for $\fans$ being the union of all the $S$ such that $G_S$ is in the cover of $\bar{Y}$.\\
+Consider the (continuous!) projection maps $\rho_v: G \to G_v$. Thus each $\rho_v(\bar{Y}) \subseteq G_v$ is compact. And since all but finitely many components of $G_{\fans}$ are equal to $H_v$, the image $\rho_v(\bar{Y}) \subseteq H_v$ for all but finitely many $v$.\\
+Thus $\bar{Y}$, and therefore $Y$, is contained in a set of the desired form.
+\end{proof}
+
+
+\subsection{Measures on Restricted Products}
+\label{subsection: restricted product measures}
+Inline with the notation from the previous section, let $G$ be the restricted direct product of locally compact $G_v$ wrt a family of compact subgroups $H_v$, for $v \notin J_\infty$. For any finite subset $S$ containing $J_\infty$, let $G_S$ be the same as defined before.
+\begin{prop}
+\label{Haar Measure on restricted product}
+For all but finitely many $v$, suppose $\dg_v$ be a (left) Haar measure on $G_v$ normalized so that $\int_{H_v} \dg_v = 1$. Then there is a unique Haar measure $\dg$ on $G$ such that the restriction $\dg_S$ of $\dg$ on any $G_S$ is exactly the product measure.
+\end{prop}
+\begin{proof}
+Choose such a set $S$ and define $\dg_S$ as the product of the measures $\dg_v$. Note the measure of the compact group $\prod_{v \notin S} H_v$ is indeed finite, by how we've normalized things. It is a verification of axioms to deduce the rest that $\dg_S$ is indeed a Haar measure on $G_S$.\\
+Suppose we have another finite set of indices $T \supseteq S$. Then, by construction it follows that $\dg_S$ coincides with the restriction of $\dg_T$ to $G_S \leq G_T$.\\
+
+Since $G$ is locally compact, we know it has a Haar measure, which restructs to a Haar measure on any $G_S$. Fixing any $S$, we can define [ASK QUESTION HERE ABOUT EXISTENCE OF THING THAT RESTRICTS APPROPRIATELY]
+\end{proof}
+
+Thus we write 
+\begin{equation*}
+    \dg = \prod_v \dg_v
+\end{equation*}
+for the left Haar measure on $G$, oftened referred to as the measure induced by the component measures.\\
+
+Our next goal is integration.
+\begin{prop}
+\label{Restricted Product Integral is limit of finite integrals}
+
+Let $f$ be an integrable function on $G$. Then
+\begin{equation*}
+    \int_G f(g) \dg = \lim_S \int_{G_S}f(g_S) \dg_S
+\end{equation*}
+
+\end{prop}
+
+\begin{exercise}
+    Verify the above.
+\end{exercise}
+
+Our next result will be that integrals behave fairly well with respect to products. We first introduce a bunch of notation.\\
+Let $S_0$ be a finite set of indices containing $J_\infty$ and the $v$ for which $\vol(H_v, \dg_v) \neq 1$.\\
+Suppose for each $v$ we have a continuous integrable $f_v$ on $G_v$ such that $f_v \mid_{H_v} = 1$ for all $v \notin S_0$.\\
+For $g = (g_v) \in G$, define
+\begin{equation*}
+    f(g) = \prod_v f_v(g_v)
+\end{equation*}
+\begin{prop}
+\label{Product of integrals is Integral in restricted product}
+With the notation above, the function $f$ is well-defined and continuous. For any $S \supseteq S_0$, we have
+\begin{equation*}
+    \int_{G_S}f(g_S)\dg_S = \prod_{v \in S} \int_{G_v}f_v(g_v)\dg_v
+\end{equation*}
+\end{prop}
+\begin{proof}
+Since $g = (g_v)$ is in the restricted direct product, then $g_v \in H_v$ for all but finitely many $v$. Combining this with the fact that $f_v \mid_{H_v} = 1$ for almost all $v$, we deduce $\prod f_v(g_v)$ is a finite product, and thus well-defined.\\
+To show $f$ is continuous, consider a base for $G$ consisting of sets of the form
+\begin{equation*}
+    \prod U_v \times \prod H_v
+\end{equation*}
+where the first product contains all the (finitely many!) components of $G$ where $f_v$ is non-trivial. Thus $f$ can be computed locally as a finite product of continuous functions, and is thus locally continuous, and thus globally.\\
+The fact that the integral behaves well with products is a consequence of definitions itself, and the fact that $f$ is a well-defined function.
+\end{proof}
+
+\begin{corollary}
+\label{Product integral restricted product Corollary}
+    With the notation as in the above result, 
+    \begin{equation*}
+        \int_G f(g) \dg = \prod_v \int_{G_v}f_v(g_v) \dg_v
+    \end{equation*}
+    and $f \in L^1(G)$ provided that the RHS is a finite product.
+\end{corollary}
+\begin{proof}
+By \ref{Restricted Product Integral is limit of finite integrals}, we know $f$ is integrable iff $\lim_S \int_{G_S}f(g_S)\dg_S < \infty$, which is true iff
+\begin{equation*}
+    \lim_S \prod_{v \in S}\int_{G_v}f_v(g_v) \dg_v = \prod_{v} \int_{G_v}f_v(g_v) \dg_v < \infty,
+\end{equation*}
+by the equation in \ref{Product of integrals is Integral in restricted product}.
+\end{proof}
+
+
+\begin{prop}
+\label{Fourier Transform on restricted product is integrable}
+Suppose all the $G_v$ are abelian, and suppose we have functions $\{f_v\}$ on $G_v$ such that they are the characteristic functions for $H_v$ for all but finitely many $v$. Then $f$'s Fourier transform is integrable and given by
+\begin{equation*}
+    \hat{f}_v(g) = \prod_v \hat{f}_v(g_v)
+\end{equation*}
+\end{prop}
+\begin{proof}
+Firstly note that even in the non-abelian case, by \ref{Product integral restricted product Corollary}, we have 
+\begin{equation*}
+    \int_G f(g) \dg = \prod_v \int_{G_v}f_v(g_v) \dg_v = \prod_{v \in S} \int_{G_v} f_v(g_v) \dg_v
+\end{equation*}
+for some finite set $S$, since $f_v$ is the characteristic function of $H_v$. Thus we have a finite product of continuous functions, and thus integrable.\\
+In the abelian case, let $\chi = (\chi_v)$ denote a character of $G$, and define
+\begin{equation*}
+    h = \prod_v \brack{h_v := f_v\chi_v}
+\end{equation*}
+Since $\chi$ is unitary, $h$ must be integrable, and applying the identity in \ref{Product integral restricted product Corollary}, we get our desired result in terms of the Fourier transform.
+\end{proof}
+
+From now on assume all groups are abelian. We want to build a measure on the Pontryagin dual $\hat{G}$ that is dual to $\dg$ in the sense of the Fourier inversion theorem.
+
+[FINISH THIS PART HERE]
+
+
+\subsection{Adeles, Ideles and Approximations}
+\label{subsection: Approximation theorem Adeles}
+
+Let $K$ be a global field, and let $K_v$ denote its completion at a place $v$. With respect to addition, note $K_v$ is a locally compact additive group. For all finite places $v$, recall $K_v$ admits its local ring of integers $\calo_v$ as an open compact subgroup.
+
+\begin{defn}
+    The \textbf{adele group} $\aa_K$ of a global field $K$ is the restricted direct product of $K_v$ with respect to the open subgroups $\calo_v$. Since this admits a natural ring structure as well, it is also referred to as the \textbf{adele ring}.
+\end{defn}
+
+Note we have an embedding
+\begin{equation*}
+\begin{split}
+    K & \inj \aa_K\\
+    x &\mapsto (x, x, \ldots)
+\end{split}
+\end{equation*}
+This is well-defined since $K$ always has a natural embedding in $K_v$ for any place $v$, and by unique factorization, every element is a local integer for all but finitely many $v$.\\
+
+Similarly, we can conisder $K^\times$, the locally compact group of units of $K$ wrt to multiplication. Then the local units $\calo_v^\times$ are an open compact subgroup of each $K_v^\times$.
+\begin{defn}
+The \textbf{idele group} $\ii_K$ of a global field $K$ is the restricted direct product of the $K_v^\times$ with respect to $\calo_v^\times$.
+\end{defn}
+
+We have a similar embedding
+\begin{equation*}
+    \begin{split}
+    K^\times &\inj \ii_K\\
+    x &\mapsto (x, x, \ldots)
+    \end{split}
+\end{equation*}
+which is again well-defined.
+
+The induced topologies on the adele and idele group are called the \textbf{adelic} and \textbf{idelic} topologies, respectively.
+
+\begin{remark}
+Note that $\ii_K \cong \aa_K^\times$ as an algebraic isomorphism. However, this is not a topological embedding. For example, taking $K = \qq$ and $S$ being any finite collection of primes, and let $U_p$ be any neighborhood of 1 in $\qq_p$ for $P \in S$. Then
+\begin{equation*}
+    \brack{\prod_{p \in S}N_p \times \prod_{p \notin S}\zz_p} \cap \ii_\qq \nsubseteq \rr^\times \times \prod_{p < \infty} \zz_p^\times = \aa_\qq^\times 
+\end{equation*}
+Note we can select some $(x_p) \in \ii_\qq$ such that $x_p \in \zz_p \setminus \zz_p^\times$ for some $p \notin S$, which therefore excludes it from being in $\aa_\qq^\times$ on the RHS.\\
+Thus the idelic topology is finer than the induced subspace topology.
+\end{remark}
+
+Let $S_\omega$ denote the infinite places of $K$. We denote by $\aa_\omega$ the open subgroup $\aa_{S_\omega} \subseteq \aa_k$, i.e the elements of the adele group where all the components at the finite places are integral.
+
+\begin{theorem}[Approximation]
+\label{Approximation Theorem}
+For every global field $K$,
+\begin{equation*}
+    \aa_K = K + A_\omega
+\end{equation*}
+where $K$ is identified with its natural diagonal embedding.
+\end{theorem}
+\begin{proof}
+Given some $x = (x_v) \in \aa_K$, we want to find some $y \in K$ such that $x_v - y \in \calo_v$ for all $v$.\\
+By definition, $x_v \in \calo_v$ for all but finitely many places $v$, each corresponding to a prime $\pp_v \ideal \calo_v$. Letting $p_v \in \calo_K$ be an element of $\pp$-adic valuation 1 in each of these ideals, note that there must exist some $n_v \in \nn$ such that $p_v^{n_v}x_v \in \calo_v$. Set 
+\begin{equation*}
+    q := \prod_{v \in T} p_v^{n_v} 
+\end{equation*}
+where $T$ is the (finite!) set of finite places where $x_v \notin \calo_v$. By CRT, we can find some $\lambda \in \calo_K$ such that $qx_v - \lambda \in \pp_v^{n_v}$ for all $v \in T$. Letting $y = \lambda/q$, then by construction $x_v - y \in \calo_v$ for all $v$, as desired. [FILL IN MORE DETAIL LATER]
+\end{proof}
+\begin{corollary}
+    With the notation above, $K \cap \aa_\omega = \calo_K$
+\end{corollary}
+\begin{sanitycheck}
+    Verify the above corollary.
+\end{sanitycheck}
+
+\subsection{Geometry of $\aa_K/K$}
+\label{subsection: Geometry of A_K/K}
+We explore the behavior of the adeles under base-change.
+\begin{lemma}
+\label{A_K/K Lemma}
+Take $E/K$ a finite extension of global fields, and let $\set{u_1, \ldots u_n}$ be a $K$-basis of $E$. Then the natural map
+\begin{equation*}
+    \begin{split}
+    \alpha: \prod^n_{j=1} \aa_K &\to \aa_E\\
+    ((x_{v, j})_v)_j &\mapsto \sum_j u_j(x_{v, j})v
+    \end{split}
+\end{equation*}
+is an isomorphism of topological groups.
+\end{lemma}
+\begin{proof}
+[FINISH LATER]
+\end{proof}
+
+
+\begin{theorem}
+\label{thm: K discrete and cocompact in A_K}
+
+Any global field is a discrete, cocompact subgroup of its adele ring.
+
+\end{theorem}
+\begin{proof}
+Let $K_0$ denote the smallest global subfield of $K$ (i.e $\qq$ or $\ff_p(t)]$), and let $n := [K: K_0]$. Then by \ref{A_K/K Lemma}, we have the following commutative diagram:
+\begin{center}
+    \begin{tikzcd}
+        \prod^n_{j=1}\aa_{K_0} \arrow[r] & \aa_K\\
+        \prod^n_{j=1} K_0 \arrow[r] \arrow[u, hookrightarrow] & K \arrow[u, hookrightarrow]
+    \end{tikzcd}
+\end{center}
+where the horizontal maps are topological isomorphisms. Thus $\aa_K/K$ is compact iff $(\aa_{K_0}/K_0)^n$ is compact, which is true iff $\aa_{K_0}/K_0$ is compact.\\
+Thus it suffices to consider $K=K_0$, in which case we have exactly one infinite place. Define a subset $C$ of the adele group by 
+\begin{equation*}
+    C := \set{x \in \aa_K : \abs{x_\infty}_\infty \leq \frac{1}{2} \text{ and } \abs{x_v}_v \leq 1, \ \forall v \neq \infty}
+\end{equation*}
+If we show that $C \cap K = \set{0}$ and $\aa_K = C+K$, we will be done, since $C \cong \aa_K/K$.\\
+If $x \in K \cap C$, then we must have $x \in \calo_K$, since $x \in \calo_v$ for every place $v$. If $K = \qq$ then this condition ($x \in \zz$) combined with the condition that $\abs{x_\infty}_\infty \leq 1/2$ forces. $x = 0$. If $K = \ff_p(t)$, then let the infinite place be the one defined by $1/t$. Then $\abs{x}_\infty  = p^{-\ord_{1/t}(x)}$, which is $\geq 1$ for anything in $\calo_K = \ff_p[t]$. Thus $C \cap K = \set{0}$.\\
+
+[FINISH TEDIOUS DETAILS HERE]
+\end{proof}
+
+
+
+[FINISH STUFF HERE]
+
+\subsection{Class Groups}
+\label{subsection: Class Groups}
+\begin{defn}
+For a global field $K$, the quotient
+\begin{equation*}
+    C_K := \ii_K/K^\times
+\end{equation*}
+is called the \textbf{idele class group} of $K$.
+\end{defn}
+\begin{warning}
+As seen in the previous section, $\aa_K/K$ is compact. One might be led to think $\ii_K/K^\times$ is also compact but this is NOT the case, as we'll see later.
+\end{warning}
+
+To analyze this, we first standardize the absolute value functions we're using.
+
+\begin{defn}
+For $k$ a local field, the \textbf{normalized} absolute value $\abs{\cdot}_k$ on $k$ is defined as follows:
+\begin{enumerate}[(a)]
+    \item For $k = \rr$ we set $\abs{\cdot}_k$ to be the usual absolute value function.
+    \item For $k = \cc$ we set $\abs{z}_k := z \bar{z}$, which is the square of the usual absolute value function on $\cc$.
+    \item For $k$ non-Archimedean with uniformizer $\pi$ and residue order $q$, we set $\abs{\pi}_k := \inv{q}$. (Note this extends uniquely to $k$). 
+\end{enumerate}
+\end{defn}
+
+Recall that if $k'/k$ is a finite extension of local fields then $\abs{x}_{k'} = \abs{N_{k'/k}(x)}_k$. 
+
+\begin{defn}
+    Let $K$ be a global field, and let $\abs{\cdot}_v$ denote the normalized absolute value on the completion $K_v$. Then the \textbf{idelic absolute value} is defined by:
+    \begin{equation*}
+        \begin{split}
+            \abs{\cdot}_{\aa_K} : \ii_K &\to \rr_{> 0} \\
+            x = (x_v)_v &\mapsto \prod_v \abs{x_v}_v
+        \end{split}
+    \end{equation*}
+\end{defn}
+\begin{sanitycheck}
+    Why is the product defined above well-defined?
+\end{sanitycheck}
+
+\begin{theorem}[Artin's Product Formula]
+\label{Artin product formula}
+    Let $K$ be a global field. Then for every $x \in K^\times$ we have $\abs{x}_{\aa_K} = 1$
+\end{theorem}
+\begin{proof}
+Let $E/K$ be finite separable. Then 
+\begin{equation*}
+    \begin{split}
+        \abs{x}_{\aa_E} &= \prod_{u \in \fanp_K} \prod_{v \in \fanp_E, v \mid u} \abs{x}_v\\
+        &= \prod_{u \in \fanp_K} \prod_{v \in \fanp_E, v \mid u} \abs{N_{E_v/K_u}(x)}_u\\
+        &= \prod_u \abs{N_{E/K}(x)}_u
+    \end{split}
+\end{equation*}
+[ASK QUESTION ABOUT MISSING EXPONENT ABOVE]
+\end{proof}
+
+We are now ready to define a subgroup of the ideles for which the embedding of $K$ IS cocompact.
+
+\begin{defn}
+For $K$ a global field, the \textbf{ideles of norm one} are:
+\begin{equation*}
+    \ii^1_K := \ker(\abs{\cdot}_{\aa_K})
+\end{equation*}
+and the \textbf{norm-one idele class group} is the quotient:
+\begin{equation*}
+    C^1_K := \ii_K^1/K^\times
+\end{equation*}
+\end{defn}
+
+Note by the Artin product formula (\ref{Artin product formula}) that $K^\times \subseteq \ii_K^1$, so this quotient is well-defined. We also have the SES
+\begin{equation*}
+    1 \to C^1_K \to C_K \to \abs{\ii_K}_{\aa_K} \to 1.
+\end{equation*}
+
+
+\begin{theorem}
+The norm-one idele class-group is always compact.
+\end{theorem}
+\begin{proof}
+Recall from the proof of \ref{thm: K discrete and cocompact in A_K} that there exists some compact subset $Y \subseteq \aa_K$ such that $\aa_K = K + Y$. Fix a Haar measure $\mu$ on $\aa_K$ (which exists as it's a locally compact group), then $\mu(Y) < \infty$. Choose a compact subset $Z \subseteq \aa_K$ such that $\mu(Z) > \mu(Y)$. Consider the following two subsets:
+\begin{equation*}
+    \begin{split}
+        Z_1 & := \set{z_1 - z_2 : z_1, z_2 \in Z}\\
+        Z_2 & := \set{z_1z_2 : z_1, z_2 \in Z}
+    \end{split}
+\end{equation*}
+By continuity of addition and multiplication these two sets are also compact. Since $K$ is discrete in $\aa_K$, we have $K \cap Z_2$ is finite, with non-zero elements $x_1, \ldots, x_r$. 
+[LOTS OF EXERCISE NONSENSE READ IN DETAIL and COMPLETE LATER]
+\end{proof}
+
+
+For a given finite set $S$ of places of $K$ containing $S_\infty$, the Archimedean places, it is useful to have $S$-versions of the aforementioned groups.
+
+\begin{warning}
+[SOME WEIRD SHIT ABOUT NOTATION EXCLUDING INFINITE PLACES]
+\end{warning}
+
+\begin{defn}
+Take $S$ a finite set of places of a global field $K$ containing the Archimedean places. Then:
+\begin{enumerate}[(a)]
+    \item The \textbf{$S$-adeles} of $K$ are defined as:
+    \begin{equation*}
+        \aa_{K, S} := \prod_{v \in S} K_v \times \prod_{v \notin S} \calo_v
+    \end{equation*}
+    \item The \textbf{ring of $S$-integers} is defined as:
+    \begin{equation*}
+        \calo_{K, S} := K \cap \aa_{K, S}
+    \end{equation*}
+    i.e the elements of $K$ that are $v$-integral for all $v \notin S$.
+    \item The \textbf{$S$-ideles} are defined as:
+    \begin{equation*}
+        \ii_{K, S} := \prod_{v \in S}K_v^\times \times \prod_{v \notin S}\calo_v^\times 
+    \end{equation*}
+    \item The \textbf{$S$-ideles of norm one} defined as:
+    \begin{equation*}
+        \ii_{K, S}^1 := \ii_K^1 \cap \ii_{K, S}
+    \end{equation*}
+\end{enumerate}
+\end{defn}
+
+\begin{observation}
+
+\end{observation}
+
+\begin{exercise}
+    Prove the above observation.
+\end{exercise}
+
+\subsection{Practical Example: Characters on $\qq$ and $C_\qq$}
+\label{subsection: character group of Q}
+We begin by computing the character group $\hat{\qq}$ of homomorphisms $\qq \to S^1$.
+\begin{warning}
+    Despite previous instances where we've used the notation $\hat{G}$, in this case we are NOT requiring that $\chi \in \hat{\qq}$ be a continuous map (unless of course we give $\qq$ the discrete topology).
+\end{warning}
+It is a standard result from algebraic topology that the only continuous homomorphisms from $\rr$ to $S^1$ are of the form
+\begin{equation*}
+    x \mapsto e^{i \lambda x}
+\end{equation*}
+for any $\lambda \in \rr$. It follows that the restriction of the above map to $\qq$ is also a homomorphism to the circle. One might be tempted to think that this, too, characterizes all homomorphisms, but this is NOT the case.\\
+
+[Insert stuff here]
+
+We now proceed to a slightly more advanced task
+
+
+\newpage
+\section{Tate's Thesis and Applications}
+\label{section: Tate's Thesis and Applications}
+
+\subsection*{Introduction}
+A lot of the major strides in classical analytic number theory were made in the 19th and 20th century, where it was discovered that a lot of information about the structure of prime numbers could be deduced by studying the Riemann zeta function
+\begin{equation*}
+    \zeta(s) := \sum^\infty_{n=1} \frac{1}{n^s},
+\end{equation*}
+which is absolutely convergent for complex $s$ such that $\re{s} > 1$. This function admits an analytic continuation to the entire complex plane, save for a simple pole at $s=1$, and satisfies the functional equation:
+\begin{equation*}
+    \xi(s) = \xi(1-s),
+\end{equation*}
+where the Riemann-xi function is defined as
+\begin{equation*}
+    \xi(s) := \frac{1}{2}s(s-1)\pi^{-s/2} \Gamma(s/2) \zeta(s.
+\end{equation*}
+Much of the early work for $\zeta(s)$ for real $s$ was done by Euler, who established the classic Euler product expansion
+\begin{equation*}
+    \zeta(s) = \prod_{p \text{ prime}} \frac{1}{1-p^{-s}}.
+\end{equation*}
+A generalization of the zeta function can be done via Dirichlet series. Given any multiplicative sequence $\set{a_n}$ (i.e $\gcd(m, n) = 1 \implies a{mn} = a_ma_n$) we can create the series 
+\begin{equation*}
+    L(s) := \sum \frac{a_n}{n^s}.
+\end{equation*}
+
+\begin{example}[Dirichlet $L$-function]
+\label{example: Dirichlet L-func}
+    Recall a \textbf{Dirichlet character} with modulus $m \in \zz_{> 0}$ is a completely multiplicative function $\chi: \zz \to \cc$ that is $m$-periodic, nonzero on any input coprime to $m$ and zero otherwise.\\
+    Given a Dirichlet character $\chi$, its \textbf{Dirichlet $L$-series} is given by:
+    \begin{equation*}
+        L(s, \chi) = \sum^\infty_{n=1} \frac{\chi(n)}{n^s}.
+    \end{equation*}
+    These $L$-series are vital to the proof of Dirichlet's theorem on primes in arithmetic progressions.
+\end{example}
+
+\begin{example}[Generalized Dedekind Zeta Function]
+\label{example: Generalized Dedekind Zeta}
+Let $K$ be a number field, and let $\chi$ be a character of standard ideal class group $\cl(K)$, then we can construction the Dirichlet series:
+\begin{equation*}
+    L(s, \chi) = \sum_{(0) \neq \fraka \ideal \calo_K} \frac{\chi(\fraka)}{N(\fraka)^s},
+\end{equation*}
+where $N(\fraka)$ is the standard ideal norm taken over $\qq$ as the base field. When $\chi = 1$ this is known as the \textbf{Dedekind zeta function}.
+\end{example}
+
+One can generalize the above even further to consider crafting a series $L(s, \chi)$ for any $\chi$ that is a continuous character of the idele class group $C_K$. It is a famous result of Hecke that $L(s, \chi)$ has analytic continuation and satisfies an appropriate functional equation for any number field $K$ and any idele class character $\chi$. The original formulation of this result involved a complicated computation with these things called theta functions. Moreover in the functional equation a so-called \textit{root number} $W(\chi)$ associated o each $\chi$ kept popping up, with no good explanation for its value.\\
+Under the guidance of Emil Artin, in his 1950 thesis John Tate made use of Fourier analysis on adele groups to reprove the results of Hecke and establish these "local" functional equations that gave an "explicit factorization" of the root number.\\
+
+In his thesis, Tate worked with some ad-hoc function spaces over local and global fields. We standardize our workings over the so-called \textit{Schwarz-Bruhat functions} on local fields. Over an Archimedean number field (i.e $\rr$ or $\cc$), recall a \textbf{Schwarz} function (more commonly known as a \textit{rapidly-decreasing function}) is a smooth $\cc$-valued function $f$ such that
+\begin{equation*}
+    \lim_{x \to \infty} p(x)f(x) = 0
+\end{equation*}
+for all polynomials $p(x)$.
+\begin{defn}
+\label{def: Schwarz-Bruhat functions}
+A \textbf{Schwarz-Bruhat} function on a local field $F$ is a Schwarz function if $F$ is Archimedean and a smooth\footnote{A function on a non-Archimedean local field is smooth if it is locally constant.}, compactly-supported function in $F$ is non-Archimedean. We denote by $S(F)$ the complex vector space of Schwarz-Bruhat functions on $F$.
+\end{defn}
+We use these functions because they guarantee that taking their integral over the entire group is well-defined.
+
+\subsection{Local Zeta Functions}
+The goal of this section will be to introduce this thing called the \textit{local $L$-factor} associated to a character $\chi$, and in particular to realize it as the gcd of some "local zeta integrals", which will be objects that [WHAT IS THE MOTIVATION??]. We start with a slew of notations and definitions, so buckle up.
+
+Let $F$ be a local field with absolute value $\abs{\cdot}$ and Haar measure $\dx$.
+Let $X(F^\times) := \Hom_{cont}(F^\times, \cc^\times)$ be the continuous group homomorphisms into the complex numbers. The elements $\chi \in X(F^\times)$ will be referred to as \textbf{characters} of $F^\times$.
+\begin{remark}
+    Sometimes the elements of $X(F^\times)$ are called \textbf{quasi-characters} instead, with characters being reserved for continuous homomorphisms into the circle (in fact, this is the convention used by Tate in his original thesis). For our purposes we refer to the latter cases as \textbf{unitary characters}. Using the notation of Section \ref{section: Pontryagin Duality}, unitary characters would be the elements of $\hat{F^\times}$. We use this convention as the term "character" used more generally for a multiplicative homomorphism into the unit group of an arbitrary field.
+\end{remark}
+
+When $F$ is non-Archimedean, let $\calo_F$ denote its ring of integers, $\pp_F$ (or just $\pp$ if it's clear from context) its maximal ideal, $\pi_F$ its uniformizer and $\ff_q$ its residue field. Recall that we can write $F^\times \cong U_F \times \cals_F$, where $U_F$ is the group of unit-absolute-value elements of $F$, and $\cals_F = \abs{F^\times}$, i.e. the image of $F^\times$ in the valuation map\footnote{recall this is $\rr_{> 0}$ in the Archimedean case and $q^\zz$ otherwise}.\\
+We make the observation that any $\chi \in X(F^\times)$ factors into a product:
+\begin{equation*}
+    \chi = \mu \abs{\cdot}^s,
+\end{equation*}
+where $s \in \cc$ and $\mu$ is the pullback of a unitary character on $U_F$ (defined uniquely by restriction of $\chi$!). This is because compactness of $U_F$ forces any character on it to be unitary, and the only characters on $\cals_F$ are maps $t \mapsto t^s$.
+\begin{defn}
+    For any character $\chi = \mu \abs{\cdot}^s \in X(F^\times)$, we call $\re{s}$ the \textbf{exponent} of $\chi$.\\
+    Furthermore, we say $\chi$ is \textbf{unramified} if $\mu = 1$.
+\end{defn}
+\begin{warning}
+    Recall that for any $q \in \rr_{> 0}$ we have the formula:
+    \begin{equation*}
+        q^i = \cos(\ln(q)) + i \sin(\ln(q)).
+    \end{equation*}
+    In particular, in the non-Archimedean case the value of $s$ is NOT uniquely determined (e.g $i$ and $(1 + 2\pi)i$ would correspond to the same map). However, the real part of $s$ IS uniquely determined, so the exponent is well-defined.
+\end{warning}
+
+We now define the local $L$-factors $L(\chi)$.
+
+\begin{enumerate}[(1)]
+    \item In the non-Archimedean case, we set:
+    \begin{equation}
+        \label{eqn: non-Arch local L-factor}
+        L(\chi) := \begin{cases}
+            \inv{\brack{1 - \chi(\pi_F)}}, & \text{ if } \chi \text{ is unramified,}\\
+            1, & \text{otherwise}.
+        \end{cases}
+    \end{equation}
+    \item In the Archimedean case we recall by Gelfand-Mazur that $F = \cc$ or $\rr$. 
+    \begin{enumerate}[(i)]
+        \item If $F = \cc$, note any $\chi$ is of the form:
+        \begin{equation*}
+            \chi_{s, n}: re^{i\theta} \mapsto r^s e^{i n \theta}
+        \end{equation*}
+         for $s \in \cc$ and $n \in \zz$ uniquely defined. Here we use our result in \ref{example: dual of S^1 is Z} to characterize the unitary characters of $U_\cc = S^1$ and writing our domain in polar coordinates automatically makes $r$ equal to the absolute value of our complex input. We then set:
+         \begin{equation}
+        \label{eqn: complex local L-factor}
+            L(\chi_{s, n}) := \Gamma_\cc(s + \frac{\abs{n}}{2}) := \brack{2 \pi}^{-\brack{s + \frac{\abs{n}}{2}}}\Gamma(s + \frac{\abs{n}}{2}).
+         \end{equation} 
+         \item If $F = \rr$ the $U_F = \set{\pm 1}$. Note any character is of the form $\chi = \mu \abs{\cdot}^s$, where $\mu$ and $s$ are uniquely defined, and $\mu$ is either trivial or the sign character $\sgn: x \mapsto x/\abs{x}$. We then set:
+         \begin{equation}
+        \label{eqn: real local L-factor}
+             L(\chi) := \begin{cases}
+                 \Gamma_\rr(s) := \pi^{-s/2}\Gamma(s/2), & \mu = 1,\\
+                 \Gamma_\rr(s+1), & \mu = \sgn.
+             \end{cases}
+         \end{equation}
+    \end{enumerate}
+\end{enumerate}
+
+
+\begin{defn}
+    If $\chi \in X(F^\times)$ and $s \in \cc$ then $\chi \abs{\cdot}^s$ is also a character, and we use the following notation for its local $L$-factor:
+    \begin{equation*}
+        L(s, \chi) := L(\chi \abs{\cdot}^s).
+    \end{equation*}
+    Moreover we define the \textbf{shifted dual} of $\chi$ by:
+    \begin{equation*}
+        \chi^\lor := \inv{\chi}\abs{\cdot},
+    \end{equation*}
+    so that
+    \begin{equation*}
+        L\brack{(\chi \abs{\cdot}^s)^\lor} = L\brack{1-s, \inv{\chi}}.
+    \end{equation*}
+\end{defn}
+
+We now state a result that we will later extend to adele groups.
+\begin{prop}
+\label{prop: local field is isomorphic to dual}
+Any local field $F$ is isomorphic (as a LCAG) to $\hat{F} = \Hom_{cont}(F, S^1)$. For any fixed $\psi \in \hat{F}$, the map
+\begin{equation*}
+    a \mapsto \psi_a := \psi(a \cdot  -)
+\end{equation*}
+is an topological group isomorphism.
+\end{prop}
+\begin{exercise}
+    Prove \ref{prop: local field is isomorphic to dual}. [CHANGE THIS this is way too lengthy to be an exercise]
+\end{exercise}
+
+In such a case of a \textit{self-dual} local field $F$, we can also speak of its Haar measure $\dx$ being self-dual, with the dual defined in \ref{def: dual measure}. Define 
+\begin{equation}
+\label{eqn: measure on F^times}
+    \d{^*x} := c \cdot \frac{\dx}{\abs{x}}
+\end{equation}
+for some $c \in \rr_{> 0}$, which we always set to 1 in the Archimedean case. Then $\d{^*x}$ is a Haar measure on $F^\times$.\\
+Fixing an additive (unitary) character $\psi \in \hat{F}$, for any $f \in S(F)$ we can define its Fourier transform by:
+\begin{equation}
+\label{eqn: Fourier transform local-zeta-func}
+    \hat{f}(y) := \int_F f(x)\psi(xy)\dx.
+\end{equation}
+Note this almost the same formulation as in \ref{def: Fourier transform}, though we drop the conjugation in the second factor of the integrand, as a simple matter of notational convenience to make our lives easier in coming calculations. The function $\hat{f}$ is well-defined and in-fact again lies in $S(F)$, though it depends on our choice of $\psi$ and $\dx$. In Tate's original thesis he normalizes his Haar measure to be self-dual relative to $\psi$, from which he obtained the nice identity $f(x) = \hat{\hat{f}}(x)$. We avoid this normalization for the local non-Archimedean case (WHY??).
+
+\begin{defn}
+\label{def: local zeta function}
+    Given $f \in S(F)$ and $\chi \in X(F^\times)$, we define the associated \textbf{local zeta function} to be:
+    \begin{equation*}
+        Z(f, \chi) := \int_{F^\times} f(x)\chi(x)\d{^*x}.
+    \end{equation*} 
+\end{defn}
+
+The following is the main result of this subsection.
+
+\begin{theorem}
+\label{thm: local zeta function convergence and func-eqn}
+    Let $F$ be a local field, and take  $f \in S(F)$ and $\chi = \mu \abs{\cdot}^s \in X(F^\times)$ with exponent $\sigma = \re{s}$. Then:
+    \begin{enumerate}[(a)]
+        \item \label{thmitem: abs-convg of local zeta function} If $\sigma > 0$ then the local zeta function $Z(f, \chi)$ is absolutely convergent.
+        \item \label{thmitem: functional-eqn of local zeta func} If $\sigma \in (0, 1)$ then the following functional equation holds:
+        \begin{equation*}
+            Z(\hat{f}, \chi^\lor) = \gamma(\chi, \psi, \dx) Z(f, \chi)
+        \end{equation*}
+        for some $\gamma$ independent of $f$ and meromorphic as a function of $s$.
+        \item \label{thmitem: epsilon factor local-zeta-func}There exists a factor $\varepsilon(\chi, \psi, \dx)$ nonzero for all inputs and satisfies:
+        \begin{equation*}
+            \gamma(\chi, \psi, \dx ) = \varepsilon(\chi, \psi, \dx) \frac{L(\chi^\lor)}{L(\chi)}
+        \end{equation*}
+    \end{enumerate} 
+\end{theorem}
+
+\begin{proof}[proof of \ref{thmitem: abs-convg of local zeta function} in \ref{thm: local zeta function convergence and func-eqn}]
+To show $Z(f, \chi)$ is absolutely convergent, using our relationship between our Haar measures in Equation \ref{eqn: measure on F^times} and the fact that $\mu$ is unitary, it suffices to show that:
+\begin{equation*}
+    I(f, \sigma) = c \int_{F \setminus \set{0}} \abs{f(x)} \abs{x}^{\sigma - 1} \dx < \infty.
+\end{equation*}
+In the Archimedean case, finiteness of $I(f, \sigma)$ follows from the fact that $f$ is a Schwarz function, and thus rapidly decaying as $\abs{x}$ approaches infinity. Moreover, around zero since $\sigma > 0$ the $\abs{x}^{\sigma - 1}$ part is integrable, so we are happy.
+
+In the non-Archimedean case, $f$ is locally constant with compact support, it must factor through some finite group quotient of the form $\brangle{\pi_F^m}/\brangle{\pi_F^n}$, for some integers $m \leq n$ (here $\brangle{\pi_F^k}$ represents the fractional ideal of $\calo_F$ generated by the $k$-th power of its uniformizer). By linearity and translation-invariance of the Haar measure, it suffices to check finiteness of the integral for functions $f$ that are just the characteristic functions of the various ideals $\brangle{\pi_F^j}$.\\
+Using unique factorizaition in any fractional ideal, we can decompose it into a disjoint union:
+\begin{equation*}
+    \brangle{\pi_F^j} \setminus \set{0} = \bigsqcup^\infty_{k=j} \pi_F^k \calo_F^\times.
+\end{equation*}
+Thus our integral becomes:
+\begin{align*}
+        I(f, \sigma) &= c \int_{F \setminus \set{0}} \abs{f(x)} \abs{x}^{\sigma - 1} \dx \\
+        &= \int_{F^\times} \abs{f(x)} \abs{x}^\sigma \d{^*x}\\
+        &= \sum_{k \geq j} \int_{\pi^k_F \calo_F^\times} \abs{x}^\sigma \d{^*x}\\
+        &= \sum_{k \geq j}\vol(\calo_F^\times, \d{^*x})q^{-k \sigma}\\
+        &= \vol(\calo_F^\times, \d{^*x}) \frac{q^{-j\sigma}}{1 - q^{- \sigma}}
+\end{align*}
+which is finite when $\sigma > 0$, as desired.
+\end{proof}
+
+To prove the next part of our main theorem, we use a lemma that was key in Tate's original thesis. 
+\begin{lemma}
+\label{lemma: local-zeta-func func eqn}
+    Select some auxiliary function $g \in S(F)$. Then for all characters $\chi$ with exponent $\sigma \in (0, 1)$, we have:
+    \begin{equation*}
+        Z(f, \chi) Z(\hat{g}, \chi^\lor) = Z(\hat{f}, \chi^\lor)Z(g, \chi).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+Expanded out, the LHS of the Lemma statement is the following product of integrals:
+\begin{equation*}
+    Z(f, \chi) Z(\hat{g}, \chi^\lor) = \int_{F^\times} f(x) \chi(x) \d{^*x} \cdot \int_{F^\times} \hat{g}(y) \inv{\chi}(y) \abs{y} \d{^*y},
+\end{equation*}
+both of which are absolutely convergent by part \ref{thmitem: abs-convg of local zeta function} of \ref{thm: local zeta function convergence and func-eqn}. We can turn this into a double integral over the product space by:
+\begin{equation*}
+    \iint_{F^\times \times F^\times} f(x)\hat{g}(y) \chi(x \inv{y}) \abs{y} \d{^*x} \d{^*y}.
+\end{equation*}
+Using invariance of the product measure under the "shearing" automorphism $(x, y) \mapsto (x, xy)$, we obtain:
+\begin{equation*}
+    \iint_{F^\times \times F^\times} f(x)\hat{g}(xy)\chi(\inv{y}) \abs{xy} \d{^*x} \d{^*y},
+\end{equation*}
+which, by Fubini's theorem, is equal to:
+\begin{equation*}
+    \int \brack{\int f(x)\hat{g}(xy) \abs{x} \d{^*x}} \chi(\inv{y}) \abs{y} \d{^*y}.
+\end{equation*}
+To prove the lemma it remains to show that the inner integral is symmetric in $f$ and $g$. Expanding out the Fourier transform of $g$ (recalling our convention in Equation \ref{eqn: Fourier transform local-zeta-func} and transferring it to an integral over $F$ using Equation \ref{eqn: measure on F^times}), we get that the inner integral is equal to:
+\begin{equation*}
+    c \iint_{F \times F} f(x) g(z) \psi(xyz) \dz \dx.
+\end{equation*}
+Note there is a (slight) abuse of notation here as technically we shouldn't be integrating over elements in the product containing a 0, but we ignore it as a set of measure zero. We switch the order of the derivatives via Fubini to obtain:
+\begin{equation*}
+    c \iint_{F \times F} f(x) g(z) \psi(xyz) \dx \dz = c \int_F g(z) \hat{f}(zy) \dz = \int_{F^\times}  g(z) \hat{f}(zy) \abs{z} \d{^*z}
+\end{equation*}
+which gives us the desired result.
+\end{proof}
+
+\begin{proof}[proof of \ref{thmitem: functional-eqn of local zeta func} in \ref{thm: local zeta function convergence and func-eqn}]
+Our functional equation in Lemma \ref{lemma: local-zeta-func func eqn} tells us that:
+\begin{equation*}
+    \gamma(\chi, \psi, \dx) := \frac{Z(\hat{f}, \chi^\lor)}{Z(f, \chi)}
+\end{equation*}
+is independent of our choice of $f \in S(F)$. Note that:
+\begin{equation*}
+    \chi^lor = \brack{\mu \abs{\cdot}^s}^\lor = \inv{\mu} \abs{\cdot}^{1-s}
+\end{equation*}
+By part \ref{thmitem: abs-convg of local zeta function} of the main theorem, we deduce that $Z(\hat{f}, \chi^\lor)$ is absolutely convergent when $\sigma = \re{s} < 1$, and we have already seen that the denominator of $\gamma$ is absolutely convergent for all positive $\sigma$, so the functional equation in terms of $\gamma$ holds for all $\sigma \in (0, 1)$ as desired.\\
+To show $\gamma$ is meromorphic as a function of $s$, we turn to the proof of part \ref{thmitem: epsilon factor local-zeta-func} of the theorem.
+\end{proof}
+
+\begin{proof}[proof of \ref{thmitem: epsilon factor local-zeta-func} in \ref{thm: local zeta function convergence and func-eqn} in the Archimedean case]
+As shown in the proof of part \ref{thmitem: functional-eqn of local zeta func} of the theorem, the value of the $\gamma$ function is independent of our choice of $f \in S(F)$. Thus we may choose a special function, or family of functions, for each of the possible cases of $F$ to make our computations convenient. We will select a standard measure $\dx$ for each case, which is self-dual for an appropriate choice of $\psi$, and then extend our results to arbitrary $\dx$ and $\psi$ afterwords.\\
+
+\textbf{\underline{Case 1: $F = \rr$}}\\
+We take $\dx$ to be the usual Lebesgue measure, and set our additive character to be:
+\begin{equation*}
+    \psi(x) = e^{- 2 \pi i x}.
+\end{equation*}
+As we noted in our discussion of the local $L$-factors, any $\chi \in X(\rr^\times)$ is of the form $\abs{\cdot}^s$ or $\sgn \abs{\cdot}^s$.\\
+
+\underline{Sub-Case (i): $\chi = \abs{\cdot}^s$}\\
+Take $f(x) = e^{- \pi x^2}$, which is visibly in $S(\rr)$. Then recalling that we set the scaling constant in the measure transformation of Equation \ref{eqn: measure on F^times} to 1, we get:
+\begin{equation*}
+    Z(f, \chi) = \int_{\rr^\times} e^{-\pi x^2} \abs{x}^s \d{^*x} = 2 \int^\infty_0 e^{-\pi x^2} x^{s-1} \dx.
+\end{equation*}
+Using a substitution $u = \pi x^2$ (hence $\du = 2 \pi x \dx$),  the integral becomes:
+\begin{equation*}
+    \pi^{-s/2} \int^\infty_0 e^{-u} u^{s/2 - 1} \du = \pi^{-s/2} \Gamma(s/2).
+\end{equation*}
+and we see from Equation \ref{eqn: real local L-factor} that this is exactly our local $L$-factor, so in fact $Z(f, \chi) = L(\chi)$ for all characters of this form. Next we claim that $f$ is self-dual via the Fourier transform, i.e.
+\begin{equation*}
+    \hat{f}(y) = \int_\rr e^{-\pi x^2} e^{-2 \pi i xy} \dx = f(x).
+\end{equation*}
+We are omitting the details of the final equality but this is a well-known identity in classical functional analysis, and provable via a simple countour integral. Thus, we have:
+\begin{equation*}
+    Z(\hat{f}, \chi^\lor) = \int_{\rr^\times} \hat{f}(x) \chi^\lor(x) \d{^*x} = \int_{\rr^\times} f(x) \chi^\lor(x) \d{^*x} = Z(f, \chi^\lor)
+\end{equation*}
+which is equal to $L(\chi^\lor)$ by our previous calculation in this proof. Thus if $\chi = \abs{\cdot}^s$, we have:
+\begin{equation*}
+    \gamma(\chi) = \frac{L(\chi^\lor)}{L(\chi)}
+\end{equation*}
+so we may set $\varepsilon(\chi) = 1$ in this case.\\
+
+\underline{Sub-Case (ii): $\chi = \sgn \abs{\cdot}^s$}\\
+In this case we choose $f(x) = xe^{-\pi x^2}$, which is again immediately verifiable as rapidly decaying. Expanding the local zeta function we get:
+\begin{align*}
+    Z(f, \chi) &= \int_{\rr^\times} x e^{-\pi x^2} \frac{x}{\abs{x}} \abs{x}^s \d{^*x}\\
+    &= \int_{\rr^\times} e^{-\pi x^2} \abs{x}^{s+1} \d{^*x}\\
+    &= \pi^{-(s+1)/2} \Gamma\brack{\frac{s+1}{2}}.\\
+    &= \Gamma_\rr(s+1)
+\end{align*}
+which we again recall from Equation \ref{eqn: real local L-factor} as by definition our real local $L$-factor $L(\chi)$.\\
+Via another contour integral that we handwave, it can be shown that the Fourier transform of this function is of the form:
+\begin{equation*}
+    \hat{f}(y) = i y e^{- \pi y^2 } = i f(y)
+\end{equation*} 
+from which it follows 
+\begin{equation*}
+    Z(\hat{f}, \chi^\lor) = \int_{\rr^\times} i f(y) \chi^\lor \d{^*x} = i L(\chi^\lor),
+\end{equation*}
+and thus by a similar calculation to the last sub-case we deduce $\varepsilon(\chi) = i$ in this case.\\
+
+\textbf{\underline{Case 2: $F = \cc$}}\\
+Here we let our measure on $\cc$ be $\dz \d{\bar{z}} = 2 \dx\dy$, or double the standard Lebesgue measure. We choose this as it is self-dual with respect to the character
+\begin{equation*}
+    \psi(z) := e^{- 2 \pi i (z + \bar{z})}.
+\end{equation*} 
+We also adjust the standard norm on $\cc$ to agree with the module, i.e
+\begin{equation*}
+    \abs{z} := 
+\end{equation*}
+[FINISH LATER]
+\end{proof}
+
+Before we proceed complete the proof of the final part of the theorem for the non-Archimedean case, we need to build some more tools and lemmas to use.
+\begin{defn}
+    \label{def: Gauss sum}
+    Given a ring $R$ with an additive (unitary) character $\psi: R \to S^1$ and a multiplicative (unitary) character $\chi: R^\times \to S^1$, we define their associated \textbf{Gauss sum} to be:
+    \begin{equation*}
+        g(\chi, \psi) := \int_{R^\times} \chi(u) \psi(u) \d{^*u}.
+    \end{equation*}
+    \end{defn}
+    \begin{remark}
+        Gauss sums turn out to be a hugely convenient notation that show up in a host of different applications, from theta-functions to cyclotomic fields. In fact, Weil made use of these Gauss-sums as a key step in his diagonal variety point-counting argument to motivate the famed Weil Conjectures in his original 1936 paper.
+    \end{remark}
+
+
+We now build the notion of a conductor of a character. As is standard we work with a local field $F$ with ring of integers $\calo_F$, prime ideal $\pp$, and  uniformizer $\pi$.
+\begin{defn}
+\label{def: conductor}
+Let $\psi$ be an additive character on $F$. Then the \textbf{conductor} of $\psi$ is the ideal $\pp^m$, where 
+\begin{equation*}
+    m := \min \set{r \in \zz : \psi \vert_{\pp^r} = 1},
+\end{equation*}
+i.e the conductor is the largest fractional ideal of $\calo_F$ on which $\psi$ is trivial. In the case that $\psi$ is trivial we set the conductor to be $\calo_F$ itself.\\
+
+Now suppose $\chi$ is a multiplicative character on $F^\times$. Then its \textbf{conductor} is $\pp^n$, where
+\begin{equation*}
+    n := \min \set{r \in \nn : \chi \vert_{1 + \pp^n} = 1},
+\end{equation*}
+i.e the conductor is the largest possible unit subgroup of $\calo_F$ on which $\chi$ is trivial.\\
+
+Sometimes the conductors are defined as the integers $m$ and $n$ themselves rather than the ideals, but we avoid this convention.
+\end{defn}
+\begin{warning}[Overloaded Term]
+    The conductor ideal is also something associated to ring extensions $A \subseteq B$, defined as $\ann_A(B/A)$. There is no meaningful relation between this conductor and the conductor defined above (as far as I'm aware).
+\end{warning}
+
+\begin{lemma}
+\label{lemma: gauss-sum conductor relations}
+Let $\chi$ be a multiplicative (unitary) character on $\calo_F^\times$ and $\psi$ be an additive (unitary) character, and suppose they have conductors $\pp^n$ and $\pp^m$ respectively. Then:
+\begin{enumerate}[(a)]
+    \item If $m < n$ then $g(\chi, \psi) = 0$.
+    \item If $m = n$ then $\abs{g(\chi, \psi)}^2 = c \vol(\calo_F, \dx) \vol(1 + \pp^n, \d{^*x})$.
+    \item If $m > n$ then $\abs{g(\chi, \psi)}^2 = c \vol(\calo_F, \dx) \brack{\vol(1 + \pp^n, \d{^*x}) - \vol(1 + \pp^{m-1}, \d{^*x})}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\underline{Case 1: $m < n$}\\
+We decompose $\calo_F^\times$ into the disjoint union of (finitely many!) cosets of the unit subgroup $U_m := 1 + \pp^m$. Note for any $a, b \in \calo_F$ we have
+\begin{equation*}
+    \psi(a(1 + \pi^m b)) = \psi(a) \psi(a\pi^m b) = \psi(a),
+\end{equation*}
+by definition of the conductor $\pp^m = \brangle{\pi^m}$. The Gauss sum thus becomes:
+\begin{equation*}
+    g(\chi, \psi) = \sum_{\calo_F^\times/U_m} \brack{\psi(a) \chi(a) \int_{U_m} \chi(u) \d{^*u}}.
+\end{equation*}
+However since $m < n$, the subgroup $U_m$ is a strict superset of $U_n$, and so, by definition of the conductor, the character $\chi$ is non-trivial on $U_m$. Recall the integral of a character over a compact subgroup is zero, which in turn makes the entire Gauss sum zero, as desired. This proves (i).\\
+
+\underline{Case 2: $m \geq n$}\\
+Expanding out the expression and making use of Fubini, we get:
+\begin{align*}
+    \abs{g(\chi, \psi)}^2 &= g(\chi, \psi) \bar{g(\chi, \psi)}\\
+    &= \int_{\calo_F^\times} \chi(x) \psi(x) \d{^*x} \cdot \bar{\int_{\calo_F^\times} \chi(y) \psi(y) \d{^*y}}\\
+    &= \iint_{\calo_F^\times} \chi(x\inv{y})\psi(x-y)  \d{^*x} \d{^*y}.
+\end{align*}
+Making the substitution $x\inv{y} \mapsto z$ the above integral becomes
+\begin{equation*}
+    \int_{\calo_F^\times} \chi(z) h(z) \d{^*z},
+\end{equation*}
+where 
+\begin{equation*}
+    h(z) := \int_{\calo_F^\times} \psi(yz - y)\d{^*y} = c \int_{\calo_F^\times} \psi(y(z-1)) \dy.
+\end{equation*}
+Note we can switch the Haar measure in the second equality using Equation \ref{eqn: measure on F^times} and the fact that $\abs{y} = 1$ for all $y \in \calo_F^\times$. Making use of the fact that $\calo_F$ is a local ring, we get:
+\begin{equation*}
+    h(z) = c \brack{\int_{\calo_F} \psi(y(z - 1)) \dy - \int_\pp \psi(y(z - 1)) \dy}.
+\end{equation*}
+Note that if $\nu_\pp(z-1)  <  m-1$ then in the above expression $\psi$ takes values outside of its conductor in both of the integrals, and thus is a non-trivial character over $\calo_F$. If $\nu_\pp(z-1) = m - 1$ then $\psi$ is trivial only over $\pp$, not $\calo_F$, and otherwise it is trivial over the entire ring. These observations give us:
+\begin{equation*}
+    h(z) = \begin{cases}
+        0, & \nu_\pp(z-1) < m-1\\
+        -c\frac{\vol(\calo_F, \dx)}{q}, & \nu_\pp(z-1) = m-1\\
+        c\vol(\calo_F, \dx)\brack{1 - \frac{1}{q}}, &   \nu_\pp(z-1) \geq m.
+    \end{cases}
+\end{equation*}
+All that remains is to substitute these cases back into the integral $\int \chi(z)h(z) \d{*^z}$ to show the desired equalities in part (ii) and part (iii), which we leave as an exercise.
+\end{proof}
+
+\begin{exercise}
+\label{exercise: last part of gauss-sum conductor proof}
+Finish the last part of the proof of \ref{lemma: gauss-sum conductor relations}.
+\end{exercise}
+
+\begin{proof}[proof of \ref{thmitem: epsilon factor local-zeta-func} in \ref{thm: local zeta function convergence and func-eqn} in the non-Archimedean char 0 case]
+Here $F$ is a finite extension of $\qq_p$ for $p$ a prime number. We first define our "canonical" additive character $\psi_p$.\\
+ finish this
+
+\end{proof}
+
+
+
+
+\subsection{The Root Number}
+\label{subsection: The Root Number}
+
+
+\subsection{Riemann-Roch Theorem}
+\label{subsection: Riemann-Roch}
+
+A standard result of classical Fourier analysis is the Poisson summation formula, and its nontrivial extension the Riemann-Roch theorem. We explore both these results in an adelic setting. We begin with another slew of notation.\\
+Let $K$ be a global field.
+\begin{defn}
+\label{def: adelic SB-functions}
+An \textbf{adelic Schwartz-Bruhat function} is a "restricted tensor product" of Schwartz-Bruhat functions on the completions of $K$, i.e
+\begin{equation*}
+    f = \bigtensor f_v : \forall v, \ f_v \in S(K_v) \text{ and } f_v\mid_{\calo_v} = 1 \text{ for almost all } v.
+\end{equation*}
+The space of such functions is denoted $S(\aa_K)$.
+\end{defn}
+\begin{sanitycheck}
+    Verify for any $x = (x_v) \in \aa_K$ and $f \in S(\aa_K)$ that it makes sense to write $f(x) = \prod f_v(x_v)$ (i.e. this is a well-defined product), and that the integral $\int_{\aa_K} f(x) \dx$ is finite, for $\dx$ a Haar measure on $\aa_K$.
+\end{sanitycheck}
+\begin{exercise}
+\label{exercise: S(A_K) dense in L^2(A_K)}
+    Let $\dx$ be a Haar measure on $\aa_K$, and define the space $L^2(\aa_K)$ using this measure. Show $S(\aa_K)$ is dense in $L^2(\aa_K)$.
+\end{exercise}
+Fix a nontrivial, continuous unitary character $\psi$ on $\aa_K$ such that $\psi \mid_K = 1$, and normalize a Haar measure $\dx$ to be self dual for $\psi$. We define the adelic Fourier transform on any $f \in S(\aa_K)$ by:
+\begin{equation*}
+    \hat{f}(y) := \int_{\aa_K} f(x) \psi(xy) \dx.
+\end{equation*}
+It is a non-obvious fact that this transform $f \mapsto \hat{f}$ induces an automorphism of $S(\aa_K)$. [Put in appendix or smth].\\
+
+We want to explore functions on the adele group that are invariant under translations by $K$ (recall we can diagonally embed $K$ into $\aa_K$). One such example is the aforementioned $\psi$. Another strategy we can do is to take an "average" over all of $K$. Specifically, for any $\phi \in S(\aa_K)$ we can take the following sum:
+\begin{equation*}
+    \widetilde{\phi}(x) := \sum_{y \in K} \phi(x + y).
+\end{equation*}
+When this sum is convergent then for any $z \in K$ we use the fact that $y \mapsto y + z$ is an automorphism of $K$ to see $\widetilde{\phi}(x + z) = \widetilde{x}$ for all $x \in \aa_K$.
+\begin{defn}
+\label{def: admissible function}
+    For any complex-valued function $f$ on $\aa_K$, define $\widetilde{f}$ as before. We say $f$ is \textbf{admissible} if both $\widetilde{f}$ and $\widetilde{\hat{f}}$ are absolutely and uniformly convergent on a compact subset. 
+\end{defn}
+
+\begin{lemma}
+\label{lemma: all adelic-SB-functions are admissible}
+All $f \in S(\aa_K)$ are admissible.
+\end{lemma}
+\begin{proof}
+    [Finish later]
+\end{proof}
+
+\begin{theorem}[Poisson Summation Formula]
+\label{thm: Poisson Summation formula}
+For a global field $K$, any adelic Schwartz-Bruhat function $f$ on $\aa_K$ satisfies
+\begin{equation*}
+    \widetilde{f} = \widetilde{\hat{f}}.
+\end{equation*}
+\end{theorem}
+\begin{proof}
+[FINISH LATER]
+\end{proof}
+
+Number theorists are interested [Why??] in the "average"
+\begin{equation*}
+    \sum_{\alpha \in K} f(x\alpha )
+\end{equation*}
+for $x \in \ii_K$. 
+
+\begin{theorem}[(Adelic) Riemann-Roch]
+\label{thm: Riemann-Roch}
+Let $x$ be an idele of a global field $K$ and let $f$ be an element of $S(\aa_K)$. Then
+\begin{equation*}
+    \sum_{ \alpha \in K}f(x\alpha ) = \frac{1}{\abs{x}}\sum_{\alpha  \in K} \hat{f}(\inv{x}\alpha)
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Fix some $x \in \aa_K$ and for some arbitrary $y \in \aa_K$ define
+\begin{equation*}
+    h(y) := f(xy).
+\end{equation*}
+It is evident that $h \in S(\aa_K)$ as well, so by the Poisson summation formula (\ref{thm: Poisson Summation formula}) we have:
+\begin{equation*}
+    \sum_{\alpha \in K} h(\alpha) = \sum_{\alpha \in K} \hat{h}(\alpha).
+\end{equation*}
+Expanding and manipulating the Fourier transform, we get:
+\begin{align*}
+    \hat{h}(y) &= \int_{\aa_K} f(xy) \psi(\alpha y) \d{\alpha}\\
+    &= \frac{1}{\abs{x}} \int_{\aa_K} f(y) \psi(\alpha y \inv{x}) \d{\alpha}\\
+    &= \frac{1}{\abs{x}} \hat{f}(\alpha \inv{x}),
+\end{align*}
+whence the theorem follows.
+\end{proof}
+
+We now explore the Riemann-Roch in a more geometric setting.
+\begin{defn}
+    A \textbf{divisor} on a 
+\end{defn}
+
+\end{document}
