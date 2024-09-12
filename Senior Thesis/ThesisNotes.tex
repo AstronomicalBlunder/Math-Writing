@@ -1,4 +1,4 @@
-\documentclass[11pt, x11names]{article}
+\documentclass[11pt, x11names]{book}
 \setlength{\headheight}{22pt}
 
 % Typesetting Packages
@@ -18,16 +18,10 @@
 %%%%%%%%%%%%%%% HEADERS/FOOTERS %%%%%%%%%%%%%%%%%%%%
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\fancyhead[L]{Thesis Notes}
+\fancyhead[L]{Senior Thesis}
 \rhead{\footnotesize Email Questions,  Comments and Corrections to:\\aaryan11@stanford.edu}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-%%%%%%%%%%%%%%%%%%% COUNTER(S)  %%%%%%%%%%%%%%%%%%%%
-\newcounter{exercises}
-\counterwithin{exercises}{subsection}
-\renewcommand{\theexercises}{\thesubsection.\Alph{exercises}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%% MATH PACKAGES %%%%%%%%%%%%%%%%%%%%%%
 \usepackage{amsthm, amssymb, amsmath, centernot, graphicx}
@@ -353,6 +347,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% SECTION FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+\usepackage[titles]{tocloft}
+\allowdisplaybreaks
+
+\setlength\cftbeforesecskip{5pt}
+\setlength\cftbeforesubsecskip{-2.5pt}
+\renewcommand\cftsecfont{\color{Blue4}}
+\renewcommand\cftsubsecfont{\color{Blue3}}
+\titleformat{\chapter}[frame]{\LARGE}{\bfseries \centering Chapter \thechapter}{1em}{\bfseries \centering \Huge}[]
+\titleformat{\section}[display]{\large}{\bfseries Section \thesection}{0.1em}{\bfseries \LARGE}[]
+\titleformat{\subsection}[block]{\Large \centering}{\S \thesubsection}{1em}{}[]
+
+\counterwithout{section}{chapter}
+\renewcommand{\thechapter}{\Roman{chapter}}
+
+%%%%%%%%%%%%%%%%%%% CUSTOM COUNTER(S)  %%%%%%%%%%%%%%%%%%%%
+\newcounter{exercises}
+\counterwithin{exercises}{subsection}
+\renewcommand{\theexercises}{\thesubsection.\Alph{exercises}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% ENVIRONMENTS AND PROOFS %%%%%%%%%%%%%%%%%%%
@@ -484,10 +505,6 @@ mdframed={
 ]{exclamationstyle}
 
 
-%%%% FORMATTING FOR INDEX %%%
-\usepackage{etoolbox}
-\renewcommand{\thmtformatoptarg}[1]{ -- #1 \newline}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%% RESULTS %%%%%%%%%%%%%%%
 \declaretheorem[name=\textsc{Theorem},style=resultstyle,within=subsection]{thm}
@@ -516,37 +533,58 @@ mdframed={
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{titlesec}
-
-\titleformat{\section}[display]{\Large}{\bfseries Section \thesection}{0.1em}{\bfseries \Huge \color{black}}[]
-\titleformat{\subsection}[block]{\Large \centering}{\S \thesubsection}{1em}{}[]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage[titles]{tocloft}
-
-\renewcommand{\cftsecfont}{\color{blue}}
-\renewcommand{\cftsecpagefont}{}
-\renewcommand{\cftsubsecfont}{\color{blue}}
-\setlength\cftparskip{-10pt}
-\setlength\cftbeforesubsecskip{10pt}
-\onehalfspacing
-\allowdisplaybreaks
 
 \begin{document}
 
-\title{Tate's Thesis:\\ Fourier Analysis on Number Fields}
+\title{Senior Thesis}
 
 \author{Aaryan Sukhadia}
-\date{}
+\date{Last Updated September 2024}
+\onehalfspacing
 
 \maketitle
+
 \tableofcontents
+
 \newpage
 
-\section{How to Read This Text}
+\section*{How to Read This Text}
+\label{section: How to Read This Text}
+\addcontentsline{toc}{section}{\protect\numberline{}How to Read This Text}
+
+In terms of formatting, there will be four main types of colored boxes in this text.
+\begin{defn} 
+    A bright, almost-blaring red-backgrounded, red-striped box to house a vital Definition.
+\end{defn}
+\begin{example}
+    An equally-importantly-red-backgrounded but slightly less blaring purple-striped box to house an important or prototypical Example of a concept.
+\end{example}
+\begin{theorem}
+    A neutrally-toned gray-shaded box to house a Result, whether that be a theorem (such as this particular box), a proposition, etc.
+\end{theorem}
+\begin{exercise}
+    A cool green-colored box that houses an Exercise that (at least in the author's experience) helps grasp or hone a core tool/technique. Exercises are meant to be reasonably doable by a reader who's paying attention, so if anything seems too hard re-read the subsection, and then e-mail me if it's still too hard.
+\end{exercise}
+
+As you might have deduced, Definitions, Examples and Results follow a [Subsection.Number] numbering scheme (except for corollaries, whose counters have the relevant result as their parent), all using a common counter, and Exercises follow a [Subsection.Letter] numbering scheme\footnote{I'm of the opinion that if I ever require more than 26 exercises per subsection then either I'm offshoring too much to the reader or the subsection is too long.}.\\
+
+As is standard in mathematical writing I've also filled this text with technically unnecessary but hopefully-enriching Remarks. Less-standard variants of asides I've used here are Sanity Checks (statements that should be intuitively obvious and verifiable in some epsilon time to an attentive reader) and Warnings (cautionary interventions about potentially confusing or unintuitive notation, terminology or concepts).\\
+
+It is a corollary of Murphy's Law that this text will likely never be completely typo-free, but that doesn't mean it's something not to strive for. Please email me about any typographical, notational, mathematical or lingustic errors you might find.
+
+
+
+\newpage
+
+\chapter{Background and Preliminaries}
+
+\subsection*{Assumed Knowledge}
+\addcontentsline{toc}{subsection}{\protect\numberline{}Assumed Knowledge}
 
 These notes assume some basic familiarity with elementary topology (including some elementary results on topological groups), measure theory, representation theory, functional analysis and algebraic number theory. Here are a bunch of quick litmus tests:
 \begin{itemize}
@@ -555,44 +593,25 @@ These notes assume some basic familiarity with elementary topology (including so
     \item Number Theory: Recall/understand the equivalent characterizations of Dedekind domains as (i) noetherian, one-dimensional, and integrally closed or (ii) unique factorization of ideals into primes, among others.
     \item Functional Analysis: Recall/understand why a scalar multiple of the identity is a normal operator.
 \end{itemize}
-The goal of these notes is that if you're conceptually comfortable with some open neighborhood of the above results then this text should be readable and understandable to you almost everywhere.\\
-
-In terms of formatting, there will be four main types of colored boxes in this text.
-\begin{defn} 
-    A bright, almost-blaring red-backgrounded, red-striped box to house a vital definition.
-\end{defn}
-\begin{example}
-    An equally-importantly-red-backgrounded but slightly less blaring purple-striped box to house an important or prototypical example of a concept.
-\end{example}
-\begin{theorem}
-    A neutrally-toned gray-shaded box to house a result, whether that be a theorem (such as this particular box), a proposition, etc.
-\end{theorem}
-\begin{exercise}
-    A cool green-colored box that houses an exercise that (at least in the author's experience) helps grasp or hone a core tool/technique. Exercises are meant to be reasonably doable by a reader who's paying attention, so if anything seems too hard re-read the subsection, and then e-mail me if it's still too hard.
-\end{exercise}
-
-As you might have deduced, Definitions, Examples and Results follow a [Subsection.Number] numbering scheme, all using a common counter, and Exercises follow a [Subsection.Letter] numbering scheme\footnote{I'm of the opinion that if I ever require more than 26 exercises per subsection then either I'm offshoring too much to the reader or the subsection is too long.}.\\
-As is standard in mathematical writing I've also filled this text with technically unnecessary but hopefully-enriching asides under various names such as Remarks and Observations. A less-standard one used here is the Sanity Check, which is a result that should be intuitively obvious to the reader at that point, and verifiable in some epsilon time.\\
-
-It is a corollary of Murphy's Law that this text will likely never be completely typo-free, but that doesn't mean it's something not to strive for. Please email me about any typographical, notational, mathematical or lingustic errors you might find.
-
-
+The goal of these notes is that if you're conceptually comfortable with some open neighborhood of the above results then this text should be readable and understandable to you almost everywhere.
 
 \newpage
 
-
-\section{Number Theory Background}
+\section{Local and Global Fields}
+\label{section: Local and Global Fields}
 
 \subsection*{Introduction}
 Here we build up the language required to discuss the 
 
-\subsection{Valuation Theory}
+\subsection{Valuations}
 
 
 
 \newpage
-\section{Pontryagin Duality}
+\section{Fourier Theory of Locally Compact Groups}
 \label{section: Pontryagin Duality}
+
+\subsection*{Introduction}
 In this section we start to do how to do Fourier transforms on an abelian topological group $G$, via the \textit{dual} $\hat{G}$, the group of continuous homomorphisms $G \to S^1$. 
 
 \begin{defn}
@@ -1278,6 +1297,7 @@ Show that the Fourier transform of the convolution $f* g$ is exactly the product
 \end{exercise}
 
 \begin{prop}
+\label{prop: L^1(G) is bijective with hatG}
 Let $B$ denote the Banach algebra $L^1(G)$, and let $\hat{B} := \hom_\cc(B, \cc) \setminus \set{\zero} $ be the non-zero complex characters of $B$. For any $\chi \in \hat{G}$ and $f \in B$, define
 \begin{equation*}
     v_\chi(f) = \hat{f}(\chi) = \int f(y)\bar{\chi(y)} \dy.
@@ -1336,7 +1356,20 @@ To show $\phi$ must be multiplicative, we apply Equation (\ref{eqn: B-hat and G-
 which implies $\phi$ is multiplicative, as we wanted (again, we must use the fact that $\psi$ is nonzero here). Thus $\phi$ is a continuous character and $\psi = v_{\bar{\phi}}$, completing our proof.
 \end{proof}
 
-To prove more serious results about dual measures on 
+
+We now analyze the space of Fourier transforms with a ring structure. We define:
+\begin{equation*}
+    \hat{A} := \set{\hat{f} : f \in L^1(G)}
+\end{equation*}
+to be the \textit{ring of Fourier transforms} on $G$ (sometimes also denoted $\hat{A}(G)$, if the underling group isn't already clear from context). By \ref{prop: L^1(G) is bijective with hatG}, we know that 
+\begin{defn}
+    The \textbf{transform topology} on $\hat{G}$ is the weakest topology that makes all the $\hat{f} \in \hat{A}$ continuous.
+\end{defn}
+\begin{sanitycheck}
+    Why is $\hat{A}$ closed under multiplication of elements?
+\end{sanitycheck}
+
+
 
 \subsection{Pontryagin Duality}
 \label{subsection: Pontryagin Duality}
@@ -1777,10 +1810,14 @@ We now proceed to a slightly more advanced task
 
 
 \newpage
-\section{Tate's Thesis and Applications}
-\label{section: Tate's Thesis and Applications}
 
-\subsection*{Introduction}
+\chapter{Tate's Thesis}
+
+\newpage
+
+
+\section{Id\'ele Zeta Functions}
+\label{section: Id\'ele Zeta Functions}
 A lot of the major strides in classical analytic number theory were made in the 19th and 20th century, where it was discovered that a lot of information about the structure of prime numbers could be deduced by studying the Riemann zeta function
 \begin{equation*}
     \zeta(s) := \sum^\infty_{n=1} \frac{1}{n^s},
@@ -1836,7 +1873,7 @@ A \textbf{Schwarz-Bruhat} function on a local field $F$ is a Schwarz function if
 We use these functions because they guarantee that taking their integral over the entire group is well-defined.
 
 \subsection{Local Zeta Functions}
-The goal of this section will be to introduce this thing called the \textit{local $L$-factor} associated to a character $\chi$, and in particular to realize it as the gcd of some "local zeta integrals", which will be objects that [WHAT IS THE MOTIVATION??]. We start with a slew of notations and definitions, so buckle up.
+Motivated by the "local-global principle", before analyzing the global zeta function of a function on an adele group of a global field, we first understand the induced zeta functions on each of the local components. The goal of this subsection will be to introduce so-called \textit{local $L$-factors} associated to a character $\chi$ (and its dual under the Fourier transform $\chi^\lor$) of a local field. In particular, these local $L$-factors will be realized as the gcd of some local zeta functions. We start with a slew of notations and definitions, so buckle up.
 
 Let $F$ be a local field with absolute value $\abs{\cdot}$ and Haar measure $\dx$.
 Let $X(F^\times) := \Hom_{cont}(F^\times, \cc^\times)$ be the continuous group homomorphisms into the complex numbers. The elements $\chi \in X(F^\times)$ will be referred to as \textbf{characters} of $F^\times$.
@@ -1844,13 +1881,14 @@ Let $X(F^\times) := \Hom_{cont}(F^\times, \cc^\times)$ be the continuous group h
     Sometimes the elements of $X(F^\times)$ are called \textbf{quasi-characters} instead, with characters being reserved for continuous homomorphisms into the circle (in fact, this is the convention used by Tate in his original thesis). For our purposes we refer to the latter cases as \textbf{unitary characters}. Using the notation of Section \ref{section: Pontryagin Duality}, unitary characters would be the elements of $\hat{F^\times}$. We use this convention as the term "character" used more generally for a multiplicative homomorphism into the unit group of an arbitrary field.
 \end{remark}
 
-When $F$ is non-Archimedean, let $\calo_F$ denote its ring of integers, $\pp_F$ (or just $\pp$ if it's clear from context) its maximal ideal, $\pi_F$ its uniformizer and $\ff_q$ its residue field. Recall that we can write $F^\times \cong U_F \times \cals_F$, where $U_F$ is the group of unit-absolute-value elements of $F$, and $\cals_F = \abs{F^\times}$, i.e. the image of $F^\times$ in the valuation map\footnote{recall this is $\rr_{> 0}$ in the Archimedean case and $q^\zz$ otherwise}.\\
+When $F$ is non-Archimedean, let $\calo_F$ denote its ring of integers, $\pp$ its maximal ideal with uniformizer $\pi$ and residue field $\ff_q$. Recall that we can write $F^\times \cong U_F \times \cals_F$, where $U_F$ is the group of unit-absolute-value elements of $F$, and $\cals_F = \abs{F^\times}$, i.e. the image of $F^\times$ in the valuation map\footnote{recall this is $\rr_{> 0}$ in the Archimedean case and $q^\zz$ otherwise}.\\
 We make the observation that any $\chi \in X(F^\times)$ factors into a product:
 \begin{equation*}
     \chi = \mu \abs{\cdot}^s,
 \end{equation*}
 where $s \in \cc$ and $\mu$ is the pullback of a unitary character on $U_F$ (defined uniquely by restriction of $\chi$!). This is because compactness of $U_F$ forces any character on it to be unitary, and the only characters on $\cals_F$ are maps $t \mapsto t^s$.
 \begin{defn}
+\label{def: exponent and unramified character}
     For any character $\chi = \mu \abs{\cdot}^s \in X(F^\times)$, we call $\re{s}$ the \textbf{exponent} of $\chi$.\\
     Furthermore, we say $\chi$ is \textbf{unramified} if $\mu = 1$.
 \end{defn}
@@ -1897,6 +1935,7 @@ We now define the local $L$-factors $L(\chi)$.
 
 
 \begin{defn}
+\label{def: shifted dual and L(s, chi) notation}
     If $\chi \in X(F^\times)$ and $s \in \cc$ then $\chi \abs{\cdot}^s$ is also a character, and we use the following notation for its local $L$-factor:
     \begin{equation*}
         L(s, \chi) := L(\chi \abs{\cdot}^s).
@@ -1971,16 +2010,16 @@ To show $Z(f, \chi)$ is absolutely convergent, using our relationship between ou
 \end{equation*}
 In the Archimedean case, finiteness of $I(f, \sigma)$ follows from the fact that $f$ is a Schwarz function, and thus rapidly decaying as $\abs{x}$ approaches infinity. Moreover, around zero since $\sigma > 0$ the $\abs{x}^{\sigma - 1}$ part is integrable, so we are happy.
 
-In the non-Archimedean case, $f$ is locally constant with compact support, it must factor through some finite group quotient of the form $\brangle{\pi_F^m}/\brangle{\pi_F^n}$, for some integers $m \leq n$ (here $\brangle{\pi_F^k}$ represents the fractional ideal of $\calo_F$ generated by the $k$-th power of its uniformizer). By linearity and translation-invariance of the Haar measure, it suffices to check finiteness of the integral for functions $f$ that are just the characteristic functions of the various ideals $\brangle{\pi_F^j}$.\\
+In the non-Archimedean case, $f$ is locally constant with compact support, it must factor through some finite group quotient of the form $\pp^m/\pp^m$, for some integers $m \leq n$ (here $\pp^k = \brangle{\pi^k}$ represents the fractional ideal of $\calo_F$ generated by the $k$-th power of its uniformizer). By linearity and translation-invariance of the Haar measure, it suffices to check finiteness of the integral for functions $f$ that are just the characteristic functions of the various ideals $\pp^j$.\\
 Using unique factorizaition in any fractional ideal, we can decompose it into a disjoint union:
 \begin{equation*}
-    \brangle{\pi_F^j} \setminus \set{0} = \bigsqcup^\infty_{k=j} \pi_F^k \calo_F^\times.
+    \pp^j \setminus \set{0} = \bigsqcup^\infty_{k=j} \pi^k \calo_F^\times.
 \end{equation*}
 Thus our integral becomes:
 \begin{align*}
         I(f, \sigma) &= c \int_{F \setminus \set{0}} \abs{f(x)} \abs{x}^{\sigma - 1} \dx \\
         &= \int_{F^\times} \abs{f(x)} \abs{x}^\sigma \d{^*x}\\
-        &= \sum_{k \geq j} \int_{\pi^k_F \calo_F^\times} \abs{x}^\sigma \d{^*x}\\
+        &= \sum_{k \geq j} \int_{\pi^k \calo_F^\times} \abs{x}^\sigma \d{^*x}\\
         &= \sum_{k \geq j}\vol(\calo_F^\times, \d{^*x})q^{-k \sigma}\\
         &= \vol(\calo_F^\times, \d{^*x}) \frac{q^{-j\sigma}}{1 - q^{- \sigma}}
 \end{align*}
@@ -2121,18 +2160,18 @@ Let $\psi$ be an additive character on $F$. Then the \textbf{conductor} of $\psi
     m := \min \set{r \in \zz : \psi \vert_{\pp^r} = 1},
 \end{equation*}
 i.e the conductor is the largest fractional ideal of $\calo_F$ on which $\psi$ is trivial. In the case that $\psi$ is trivial we set the conductor to be $\calo_F$ itself.\\
-
 Now suppose $\chi$ is a multiplicative character on $F^\times$. Then its \textbf{conductor} is $\pp^n$, where
 \begin{equation*}
     n := \min \set{r \in \nn : \chi \vert_{1 + \pp^n} = 1},
 \end{equation*}
 i.e the conductor is the largest possible unit subgroup of $\calo_F$ on which $\chi$ is trivial.\\
-
 Sometimes the conductors are defined as the integers $m$ and $n$ themselves rather than the ideals, but we avoid this convention.
 \end{defn}
-\begin{warning}[Overloaded Term]
-    The conductor ideal is also something associated to ring extensions $A \subseteq B$, defined as $\ann_A(B/A)$. There is no meaningful relation between this conductor and the conductor defined above (as far as I'm aware).
-\end{warning}
+\begin{remark}[Terminology]
+    The origin of the term "conductor" comes from Dedekind, who denoted by "\textit{F\"uhrer}" (whose meaning was closer to "guide", "attendant" or "conductor" in the original German, rather than its modern assocations) an ideal of an order in a number field, which is why classical texts denote conductors using $\frakf$. It drifted via osmosis to other fields in number theory, and its use in relation to characters and representations was popularized in large part by Artin and the eponymous Artin conductor of local field extensions.
+\end{remark}
+
+Our goal will be to use this language and notation of conductors and Gauss sums to simplify the integrands of the local-zeta functions. The main tool is the following key lemma.
 
 \begin{lemma}
 \label{lemma: gauss-sum conductor relations}
@@ -2182,8 +2221,10 @@ Note that if $\nu_\pp(z-1)  <  m-1$ then in the above expression $\psi$ takes va
         c\vol(\calo_F, \dx)\brack{1 - \frac{1}{q}}, &   \nu_\pp(z-1) \geq m.
     \end{cases}
 \end{equation*}
-All that remains is to substitute these cases back into the integral $\int \chi(z)h(z) \d{*^z}$ to show the desired equalities in part (ii) and part (iii), which we leave as an exercise.
+All that remains is to substitute these cases back into the integral $\int \chi(z)h(z) \d{^*z}$ to show the desired equalities in part (ii) and part (iii), which we leave as an exercise.
 \end{proof}
+
+
 
 \begin{exercise}
 \label{exercise: last part of gauss-sum conductor proof}
@@ -2192,7 +2233,71 @@ Finish the last part of the proof of \ref{lemma: gauss-sum conductor relations}.
 
 \begin{proof}[proof of \ref{thmitem: epsilon factor local-zeta-func} in \ref{thm: local zeta function convergence and func-eqn} in the non-Archimedean char 0 case]
 Here $F$ is a finite extension of $\qq_p$ for $p$ a prime number. We first define our "canonical" additive character $\psi_p$.\\
- finish this
+ finish this\\
+
+Next we classify our multiplicative characters. Recall from our discussion in the prelude to Definition \ref{def: exponent and unramified character} that any such character of $F^\times$ is of the form:
+\begin{equation*}
+    \chi_{s, n} := \brack{x \mapsto \abs{x}^s \omega(x/\abs{x})},
+\end{equation*}
+where $\omega$ is a unitary character with conductor $\pp^n$. Note the indices $s, n$ do not completely determine the character $\chi_{s, n}$, as there is some choice of $\omega$ to be made, but this notation will end up sufficing for the computations ahead.\\
+
+Now the class of functions we work with. Supposing our additive character $\psi$ have conductor $\pp^m$, we define:
+\begin{equation*}
+    f(x) := \begin{cases}
+        \psi(x), & x \in \pp^{m-n}\\
+        0, & \text{ otherwise}.
+    \end{cases}
+\end{equation*}
+This is a Schwartz-Bruhat function as it is compactly-supported by definition and the canonical character $\psi$ is trivial on $\zz_p$, so it is also locally constant. We now compute the local zeta functions $Z(f, \chi_{s, n})$ in two cases: $n$ zero, and $n$ positive.\\
+
+\underline{\textbf{Case 1: $n = 0$}}\\
+This means that $\omega$ is trivial everywhere, i.e $\chi_{s, 0}$ is an unramified character. We recall $\psi$ is trivial on $\pp^m$, and therefore $f$ is zero outside of the conductor of $\psi$. Using similar methods as in the proof of \ref{lemma: gauss-sum conductor relations}, we compute:
+\begin{align*}
+    Z(f, \chi_{s, 0}) &= \int_{F^\times} f(x)\chi_{s, 0}(x) \d{^*x}\\
+    &= \int_{\pp^m \setminus \set{0}} \psi(x) \abs{x}^s \omega(x/\abs{x}) \d{^*x}\\
+    &= \int_{\pp^m \setminus \set{0}} \abs{x}^s \d{^*x}\\
+    &= \sum_{k \geq m} \brack{\int_{\pi^k \calo_F^\times} \abs{x}^s \d{^*x}}\\
+    &= \vol(\calo_F^\times, \d{^*x}) \sum_{k \geq m} q^{-ks}\\
+    &= q^{-ms} \vol(\calo_F^\times, \d{^*x} ) L(\chi_{s, 0}),
+\end{align*}
+where we recall our definition of the local $L$-factor in the unramified case in Equation \ref{eqn: non-Arch local L-factor}.\\
+
+\underline{\textbf{Case 2: $n > 0$}}\\
+Recalling that $f$ is zero outside of $\pp^{m-n}$, by similar logic as in the $n=0$ case we get:
+\begin{align*}
+    Z(f, \chi_{s, n}) &= \sum_{k \geq m-n} \brack{ \int_{\pi^k \calo_F^\times} \psi(x) \omega(x/\abs{x}) \d{^*x}}\\
+    &= \sum_{k \geq m-n} \brack{ \int_{\calo_F^\times} \psi(\pi^k u) \omega(\pi^k u)/\omega(\pi^k) \d{^*u}}\\
+    &= \sum_{k \geq m-n} q^{-ks} \brack{\int_{\calo_F^\times} \psi(\pi^k u) \omega(u) \d{^*u}}\\
+    &= \sum_{k \geq m-n}q^{-ks}g(\omega, \psi_{\pi^k}).
+\end{align*}
+In the last line the Gauss sum notation comes as a typographical godsave for us, where $\psi_{\pi^k}(x) := \psi(x \pi^k)$. We note that the conductor of $\psi_{\pi^k}$ is $m-k$, so in particular if $k > m - n$ it contains the conductor of $\omega$. From $\ref{lemma: gauss-sum conductor relations}$ we thus get:
+\begin{equation*}
+    Z(f, \chi_{s, n}) = q^{(n-m)s} g(\omega, \psi_{\pi^{m-n}}) = q^{(n-m)s} c \vol(\calo_F, \dx) \vol(1 + \pp^n, \d{^*x})
+\end{equation*}
+which is nothing but a non-trivial exponential function in $s$ with no zeroes or poles, which is what we want since the local $L$-factor is 1 in this case.\\
+
+Now we need to compute the local zeta function of the dual. Note by definition that:
+\begin{equation}
+\label{eqn: non-Arch Fourier transform integral}
+    \hat{f}(y) = \int_F f(x)\psi(xy) \dx = \int_{\pp^{m-n}} \psi(x(y+1)) \dx. 
+\end{equation}
+We proceed with similar casework to before.\\
+
+\underline{\textbf{Case 1: $n=0$}}\\
+Since the conductor of $\psi$ is $\pp^m$, we observe from the integral in Equation \ref{eqn: non-Arch Fourier transform integral} that $\hat{f}(y)$ is the integral of $\psi(x(y+1))$ taken over $\pp^m$. The character is non-trivial on $\pp^m$, and thus $\hat{f}(y)$ is zero, exactly when $y \notin \calo_F$. Thus in this case we have:
+\begin{equation*}
+    \hat{f}(y) = \begin{cases}
+    \vol(\pp^m, \dx), & y \in \calo_F\\
+    0, & \textbf{ otherwise},
+    \end{cases}
+\end{equation*}
+i.e we have a scaled characteristic function of the ring of integers. Using this, we compute:
+\begin{align*}
+    Z(\hat{f}, \chi^\lor_{s, 0}) &= \int_{\calo_F \setminus \set{0}} \hat{f}(x) \chi^\lor_{s, 0} \d{^*x}\\
+    &= \vol(\pp^m, \dx) \sum_{k \geq 0} \int_{\calo_F^\times} \abs{\pi^k x}^{1-s} \d{^*x}\\
+    &= \vol(\pp^m, \dx) \vol(\calo_F^\times, \d{^*x}) \frac{1}{1 - q^{(1-s)}}\\
+    &= 
+\end{align*}
 
 \end{proof}
 
@@ -2201,6 +2306,11 @@ Here $F$ is a finite extension of $\qq_p$ for $p$ a prime number. We first defin
 
 \subsection{The Root Number}
 \label{subsection: The Root Number}
+
+
+\section{Riemann-Roch}
+\label{section: Riemann-roch}
+
 
 
 \subsection{Riemann-Roch Theorem}

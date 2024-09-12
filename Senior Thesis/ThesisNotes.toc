@@ -1,21 +1,25 @@
 \babel@toc {english}{}\relax 
-\contentsline {section}{\numberline {1}How to Read This Text}{2}{section.1}%
-\contentsline {section}{\numberline {2}Number Theory Background}{4}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Valuation Theory}{4}{subsection.2.1}%
-\contentsline {section}{\numberline {3}Pontryagin Duality}{5}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Topologizing the dual}{5}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Functions of Positive Type}{8}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Elementary Functions}{13}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Fourier Inversion}{17}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Pontryagin Duality}{21}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Adeles and Ideles}{22}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Background: Defining Restricted Products}{22}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Measures on Restricted Products}{23}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Adeles, Ideles and Approximations}{25}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Geometry of $\mathbb {A}_K/K$}{27}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Class Groups}{28}{subsection.4.5}%
-\contentsline {subsection}{\numberline {4.6}Practical Example: Characters on $\mathbb {Q}$ and $C_\mathbb {Q}$}{30}{subsection.4.6}%
-\contentsline {section}{\numberline {5}Tate's Thesis and Applications}{31}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Local Zeta Functions}{32}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}The Root Number}{41}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Riemann-Roch Theorem}{41}{subsection.5.3}%
+\contentsline {section}{\numberline {}How to Read This Text}{4}{chapter*.1}%
+\contentsline {chapter}{\numberline {I}Background and Preliminaries}{5}{chapter.1}%
+\contentsline {subsection}{\numberline {}Assumed Knowledge}{5}{section*.2}%
+\contentsline {section}{\numberline {1}Local and Global Fields}{6}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1}Valuations}{6}{subsection.1.1.1}%
+\contentsline {section}{\numberline {2}Fourier Theory of Locally Compact Groups}{7}{section.1.2}%
+\contentsline {subsection}{\numberline {2.1}Topologizing the dual}{7}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {2.2}Functions of Positive Type}{10}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {2.3}Elementary Functions}{15}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {2.4}Fourier Inversion}{19}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {2.5}Pontryagin Duality}{23}{subsection.1.2.5}%
+\contentsline {section}{\numberline {3}Adeles and Ideles}{24}{section.1.3}%
+\contentsline {subsection}{\numberline {3.1}Background: Defining Restricted Products}{24}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {3.2}Measures on Restricted Products}{25}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {3.3}Adeles, Ideles and Approximations}{27}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {3.4}Geometry of $\mathbb {A}_K/K$}{29}{subsection.1.3.4}%
+\contentsline {subsection}{\numberline {3.5}Class Groups}{30}{subsection.1.3.5}%
+\contentsline {subsection}{\numberline {3.6}Practical Example: Characters on $\mathbb {Q}$ and $C_\mathbb {Q}$}{32}{subsection.1.3.6}%
+\contentsline {chapter}{\numberline {II}Tate's Thesis}{33}{chapter.2}%
+\contentsline {section}{\numberline {4}Id\'ele Zeta Functions}{34}{section.2.4}%
+\contentsline {subsection}{\numberline {4.1}Local Zeta Functions}{35}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {4.2}The Root Number}{46}{subsection.2.4.2}%
+\contentsline {section}{\numberline {5}Riemann-Roch}{46}{section.2.5}%
+\contentsline {subsection}{\numberline {5.1}Riemann-Roch Theorem}{46}{subsection.2.5.1}%
