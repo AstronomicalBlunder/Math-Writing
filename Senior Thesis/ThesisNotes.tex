@@ -356,8 +356,10 @@
 
 \setlength\cftbeforesecskip{5pt}
 \setlength\cftbeforesubsecskip{-2.5pt}
+\setlength\cftparskip{0pt}
 \renewcommand\cftsecfont{\color{Blue4}}
 \renewcommand\cftsubsecfont{\color{Blue3}}
+
 \titleformat{\chapter}[frame]{\LARGE}{\bfseries \centering Chapter \thechapter}{1em}{\bfseries \centering \Huge}[]
 \titleformat{\section}[display]{\large}{\bfseries Section \thesection}{0.1em}{\bfseries \LARGE}[]
 \titleformat{\subsection}[block]{\Large \centering}{\S \thesubsection}{1em}{}[]
@@ -583,8 +585,8 @@ It is a corollary of Murphy's Law that this text will likely never be completely
 
 \chapter{Background and Preliminaries}
 
-\subsection*{Assumed Knowledge}
-\addcontentsline{toc}{subsection}{\protect\numberline{}Assumed Knowledge}
+\section*{Assumed Knowledge}
+\addcontentsline{toc}{section}{\protect\numberline{}Assumed Knowledge}
 
 These notes assume some basic familiarity with elementary topology (including some elementary results on topological groups), measure theory, representation theory, functional analysis and algebraic number theory. Here are a bunch of quick litmus tests:
 \begin{itemize}
@@ -1873,7 +1875,7 @@ A \textbf{Schwarz-Bruhat} function on a local field $F$ is a Schwarz function if
 We use these functions because they guarantee that taking their integral over the entire group is well-defined.
 
 \subsection{Local Zeta Functions}
-Motivated by the "local-global principle", before analyzing the global zeta function of a function on an adele group of a global field, we first understand the induced zeta functions on each of the local components. The goal of this subsection will be to introduce so-called \textit{local $L$-factors} associated to a character $\chi$ (and its dual under the Fourier transform $\chi^\lor$) of a local field. In particular, these local $L$-factors will be realized as the gcd of some local zeta functions. We start with a slew of notations and definitions, so buckle up.
+Motivated by the "local-global principle", before analyzing the global zeta function of a function on an adele group of a global field, we first understand the induced zeta functions on each of the local components. The goal of this subsection will be to introduce so-called \textit{local $L$-factors} associated to a character $\chi$ (and its dual under the Fourier transform $\chi^\lor$) of a local field. In particular, these local $L$-factors will be realized as the gcd of some local zeta functions. We start with a slew of notations and definitions, so buckle up.\\
 
 Let $F$ be a local field with absolute value $\abs{\cdot}$ and Haar measure $\dx$.
 Let $X(F^\times) := \Hom_{cont}(F^\times, \cc^\times)$ be the continuous group homomorphisms into the complex numbers. The elements $\chi \in X(F^\times)$ will be referred to as \textbf{characters} of $F^\times$.
@@ -2002,6 +2004,10 @@ The following is the main result of this subsection.
         \end{equation*}
     \end{enumerate} 
 \end{theorem}
+
+\begin{observation}
+Note that part \ref{thmitem: abs-convg of local zeta function} tells us that $Z(f, \chi)$ is absolutely convergent to the right of 0 on the complex plane, from which it follows by construction that $Z(\hat{f}, \chi^\lor)$ is absolutely convergent to the left of 1. Using this domain overlap along with part \ref{thmitem: functional-eqn of local zeta func}, we see that this theorem automatically yields a meromorphic continuation of the local zeta function. 
+\end{observation}
 
 \begin{proof}[proof of \ref{thmitem: abs-convg of local zeta function} in \ref{thm: local zeta function convergence and func-eqn}]
 To show $Z(f, \chi)$ is absolutely convergent, using our relationship between our Haar measures in Equation \ref{eqn: measure on F^times} and the fact that $\mu$ is unitary, it suffices to show that:
@@ -2239,7 +2245,7 @@ Next we classify our multiplicative characters. Recall from our discussion in th
 \begin{equation*}
     \chi_{s, n} := \brack{x \mapsto \abs{x}^s \omega(x/\abs{x})},
 \end{equation*}
-where $\omega$ is a unitary character with conductor $\pp^n$. Note the indices $s, n$ do not completely determine the character $\chi_{s, n}$, as there is some choice of $\omega$ to be made, but this notation will end up sufficing for the computations ahead.\\
+where $\omega$ is a unitary character with conductor $\pp^n$. Note the indices $s, n$ do not completely determine the character $\chi_{s, n}$, as there is some choice of $\omega$ to be made, but this notation will end up sufficing for the computations ahead. Note also that in the unramified case (i.e $n=0$), the unitary character $\omega$ is trivial. This fact will be used later.
 
 Now the class of functions we work with. Supposing our additive character $\psi$ have conductor $\pp^m$, we define:
 \begin{equation*}
@@ -2252,14 +2258,15 @@ This is a Schwartz-Bruhat function as it is compactly-supported by definition an
 
 \underline{\textbf{Case 1: $n = 0$}}\\
 This means that $\omega$ is trivial everywhere, i.e $\chi_{s, 0}$ is an unramified character. We recall $\psi$ is trivial on $\pp^m$, and therefore $f$ is zero outside of the conductor of $\psi$. Using similar methods as in the proof of \ref{lemma: gauss-sum conductor relations}, we compute:
-\begin{align*}
-    Z(f, \chi_{s, 0}) &= \int_{F^\times} f(x)\chi_{s, 0}(x) \d{^*x}\\
-    &= \int_{\pp^m \setminus \set{0}} \psi(x) \abs{x}^s \omega(x/\abs{x}) \d{^*x}\\
-    &= \int_{\pp^m \setminus \set{0}} \abs{x}^s \d{^*x}\\
-    &= \sum_{k \geq m} \brack{\int_{\pi^k \calo_F^\times} \abs{x}^s \d{^*x}}\\
-    &= \vol(\calo_F^\times, \d{^*x}) \sum_{k \geq m} q^{-ks}\\
+\begin{align}
+\label{eqn: local zeta function non-Arch unramified}
+    Z(f, \chi_{s, 0}) &= \int_{F^\times} f(x)\chi_{s, 0}(x) \d{^*x} \nonumber \\
+    &= \int_{\pp^m \setminus \set{0}} \psi(x) \abs{x}^s \omega(x/\abs{x}) \d{^*x} \nonumber \\
+    &= \int_{\pp^m \setminus \set{0}} \abs{x}^s \d{^*x}\nonumber \\
+    &= \sum_{k \geq m} \brack{\int_{\pi^k \calo_F^\times} \abs{x}^s \d{^*x}}\nonumber \\
+    &= \vol(\calo_F^\times, \d{^*x}) \sum_{k \geq m} q^{-ks}\nonumber \\
     &= q^{-ms} \vol(\calo_F^\times, \d{^*x} ) L(\chi_{s, 0}),
-\end{align*}
+\end{align}
 where we recall our definition of the local $L$-factor in the unramified case in Equation \ref{eqn: non-Arch local L-factor}.\\
 
 \underline{\textbf{Case 2: $n > 0$}}\\
@@ -2271,9 +2278,10 @@ Recalling that $f$ is zero outside of $\pp^{m-n}$, by similar logic as in the $n
     &= \sum_{k \geq m-n}q^{-ks}g(\omega, \psi_{\pi^k}).
 \end{align*}
 In the last line the Gauss sum notation comes as a typographical godsave for us, where $\psi_{\pi^k}(x) := \psi(x \pi^k)$. We note that the conductor of $\psi_{\pi^k}$ is $m-k$, so in particular if $k > m - n$ it contains the conductor of $\omega$. From $\ref{lemma: gauss-sum conductor relations}$ we thus get:
-\begin{equation*}
+\begin{equation}
+\label{eqn: local zeta function non-Arch ramified}
     Z(f, \chi_{s, n}) = q^{(n-m)s} g(\omega, \psi_{\pi^{m-n}}) = q^{(n-m)s} c \vol(\calo_F, \dx) \vol(1 + \pp^n, \d{^*x})
-\end{equation*}
+\end{equation}
 which is nothing but a non-trivial exponential function in $s$ with no zeroes or poles, which is what we want since the local $L$-factor is 1 in this case.\\
 
 Now we need to compute the local zeta function of the dual. Note by definition that:
@@ -2281,26 +2289,55 @@ Now we need to compute the local zeta function of the dual. Note by definition t
 \label{eqn: non-Arch Fourier transform integral}
     \hat{f}(y) = \int_F f(x)\psi(xy) \dx = \int_{\pp^{m-n}} \psi(x(y+1)) \dx. 
 \end{equation}
-We proceed with similar casework to before.\\
+We proceed with similar casework to before.
 
 \underline{\textbf{Case 1: $n=0$}}\\
 Since the conductor of $\psi$ is $\pp^m$, we observe from the integral in Equation \ref{eqn: non-Arch Fourier transform integral} that $\hat{f}(y)$ is the integral of $\psi(x(y+1))$ taken over $\pp^m$. The character is non-trivial on $\pp^m$, and thus $\hat{f}(y)$ is zero, exactly when $y \notin \calo_F$. Thus in this case we have:
 \begin{equation*}
     \hat{f}(y) = \begin{cases}
     \vol(\pp^m, \dx), & y \in \calo_F\\
-    0, & \textbf{ otherwise},
+    0, & \text{ otherwise},
     \end{cases}
 \end{equation*}
 i.e we have a scaled characteristic function of the ring of integers. Using this, we compute:
-\begin{align*}
-    Z(\hat{f}, \chi^\lor_{s, 0}) &= \int_{\calo_F \setminus \set{0}} \hat{f}(x) \chi^\lor_{s, 0} \d{^*x}\\
-    &= \vol(\pp^m, \dx) \sum_{k \geq 0} \int_{\calo_F^\times} \abs{\pi^k x}^{1-s} \d{^*x}\\
-    &= \vol(\pp^m, \dx) \vol(\calo_F^\times, \d{^*x}) \frac{1}{1 - q^{(1-s)}}\\
-    &= 
-\end{align*}
+\begin{align}
+\label{eqn: dual local zeta function non-Arch unramified case}
+    Z(\hat{f}, \chi^\lor_{s, 0}) &= \int_{\calo_F \setminus \set{0}} \hat{f}(x) \chi^\lor_{s, 0}(x) \d{^*x} \nonumber \\
+    &= \vol(\pp^m, \dx) \sum_{k \geq 0} \brack{\int_{\calo_F^\times} \abs{\pi^k x}^{1-s} \d{^*x}} \nonumber \\
+    &= \vol(\pp^m, \dx) \vol(\calo_F^\times, \d{^*x}) \frac{1}{1 - q^{(1-s)}} \nonumber \\
+    &= \vol(\pp^m, \dx) \vol(\calo_F^\times, \d{^*x}) L(\chi^\lor_{s, 0})
+\end{align}
+which is what we wanted. Combing \ref{eqn: local zeta function non-Arch unramified} and \ref{eqn: dual local zeta function non-Arch unramified case}, we get that for $\chi = \chi_{s, 0}$ we have:
+\begin{align}
+\label{eqn: local epsilon factor non-Arch unramified}
+    \gamma(\chi, \psi, \dx) &= q^{ms} \vol(\pp^m, \dx) \frac{L(\chi^\lor)}{L(\chi)} \nonumber \\
+    \implies \epsilon(\chi, \psi, \dx) &= q^{ms}\vol(\pp^m, \dx).
+\end{align}
 
+\textbf{\underline{Case 2: $n > 0$}}\\
+Examining \ref{eqn: Fourier transform local-zeta-func} again, we see that the integrand $\psi(x(y+1))$ is trivial over $\pp^{m-n}$ exactly when $y + 1 \in \pp^n$, and otherwise it is a trivial character and thus $\hat{f}(y) = 0$. We deduce then that $\hat{f}$ is the characteristic function of $\pp^n - 1$ scaled by the factor $\vol(\pp^{m-n}, \dx)$. Noting that $\pp^n - 1 \subseteq \calo_F^\times$, we computing the dual local zeta function:
+\begin{align}
+\label{eqn: dual local zeta funtion non-Arch ramified}
+    Z(\hat{f}, \chi^\lor_{s, n}) &= \int_{\pp^n - 1} \hat{f}(x) \chi^\lor_{s, n}(x) \d{^*x} \nonumber \\
+    &= \vol(\pp^{m-n}, \dx) \int_{\pp^n - 1} \abs{x}^{1-s} \bar{\omega}(x) \d{^*x} \nonumber \\
+    &= q^{n-m} \vol(\calo_F, \dx) \int_{1 + \pp^n} \bar{\omega}(x) \d{^*x} \nonumber \\
+    &= q^{n-m} \vol(\calo_F, \dx) \vol(1 + \pp^n, \d{^*x}) \omega(-1),
+\end{align}
+where the last line follows from the fact that the conductor of $\omega$ is equal to the conductor of its conjugate, so it is trivial on all of $\vol(1 + \pp^n, \d{^*x})$. We also note that this is constant in $s$, which is what we want, as we recall from $\ref{eqn: non-Arch local L-factor}$ that the local $L$-factor of a non-unramified character is 1. Combining \ref{eqn: local zeta function non-Arch ramified} and \ref{eqn: dual local zeta funtion non-Arch ramified} for $\chi = \chi_{s, n}$, we get:
+\begin{equation}
+\label{eqn: epsilon factor non-Arch ramified}
+    \epsilon(\chi, \psi, \dx) = \gamma(\chi, \psi, \dx) = \frac{q^{(m-n)(s-1)} \omega(-1)}{ c g( \omega, \psi_{\pi^{m-n}})} = \frac{1}{c}q^{(m-n)(s-1)}g(\bar{\omega}, \psi_{\pi^{m-n}}).
+\end{equation}
+\begin{sanitycheck}
+    If it's not already clear, the final equality above made use of the following string of identities that any Gauss sum satisfies:
+    \begin{equation*}
+        1/g(\chi, \psi) = \bar{g(\chi, \psi)} = \chi(-1) g(\bar{\chi}, \psi).
+    \end{equation*}
+    Verify that each one of them makes sense.
+\end{sanitycheck}
+
+We now conclude our analysis. The equality involving the epsilon factor and relevant local $L$-factors have been shown in\ref{eqn: local epsilon factor non-Arch unramified} and \ref{eqn: epsilon factor non-Arch ramified}, from all of which $\gamma(\chi, \psi, \dx)$ is visibly meromorphic, completing our proof.
 \end{proof}
-
 
 
 

@@ -1,7 +1,7 @@
 \babel@toc {english}{}\relax 
 \contentsline {section}{\numberline {}How to Read This Text}{4}{chapter*.1}%
 \contentsline {chapter}{\numberline {I}Background and Preliminaries}{5}{chapter.1}%
-\contentsline {subsection}{\numberline {}Assumed Knowledge}{5}{section*.2}%
+\contentsline {section}{\numberline {}Assumed Knowledge}{5}{section*.2}%
 \contentsline {section}{\numberline {1}Local and Global Fields}{6}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1}Valuations}{6}{subsection.1.1.1}%
 \contentsline {section}{\numberline {2}Fourier Theory of Locally Compact Groups}{7}{section.1.2}%
