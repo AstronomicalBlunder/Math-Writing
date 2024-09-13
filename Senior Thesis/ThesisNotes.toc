@@ -1,25 +1,26 @@
 \babel@toc {english}{}\relax 
-\contentsline {section}{\numberline {}How to Read This Text}{4}{chapter*.1}%
-\contentsline {chapter}{\numberline {I}Background and Preliminaries}{5}{chapter.1}%
-\contentsline {section}{\numberline {}Assumed Knowledge}{5}{section*.2}%
-\contentsline {section}{\numberline {1}Local and Global Fields}{6}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1}Valuations}{6}{subsection.1.1.1}%
-\contentsline {section}{\numberline {2}Fourier Theory of Locally Compact Groups}{7}{section.1.2}%
-\contentsline {subsection}{\numberline {2.1}Topologizing the dual}{7}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {2.2}Functions of Positive Type}{10}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {2.3}Elementary Functions}{15}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {2.4}Fourier Inversion}{19}{subsection.1.2.4}%
-\contentsline {subsection}{\numberline {2.5}Pontryagin Duality}{23}{subsection.1.2.5}%
-\contentsline {section}{\numberline {3}Adeles and Ideles}{24}{section.1.3}%
-\contentsline {subsection}{\numberline {3.1}Background: Defining Restricted Products}{24}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {3.2}Measures on Restricted Products}{25}{subsection.1.3.2}%
-\contentsline {subsection}{\numberline {3.3}Adeles, Ideles and Approximations}{27}{subsection.1.3.3}%
-\contentsline {subsection}{\numberline {3.4}Geometry of $\mathbb {A}_K/K$}{29}{subsection.1.3.4}%
-\contentsline {subsection}{\numberline {3.5}Class Groups}{30}{subsection.1.3.5}%
-\contentsline {subsection}{\numberline {3.6}Practical Example: Characters on $\mathbb {Q}$ and $C_\mathbb {Q}$}{32}{subsection.1.3.6}%
-\contentsline {chapter}{\numberline {II}Tate's Thesis}{33}{chapter.2}%
-\contentsline {section}{\numberline {4}Id\'ele Zeta Functions}{34}{section.2.4}%
-\contentsline {subsection}{\numberline {4.1}Local Zeta Functions}{35}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {4.2}The Root Number}{46}{subsection.2.4.2}%
-\contentsline {section}{\numberline {5}Riemann-Roch}{46}{section.2.5}%
-\contentsline {subsection}{\numberline {5.1}Riemann-Roch Theorem}{46}{subsection.2.5.1}%
+\contentsline {chapter}{\numberline {}Introduction}{5}{chapter.0}%
+\contentsline {section}{\numberline {}Abstract}{5}{section*.2}%
+\contentsline {section}{\numberline {}Acknowledgements}{6}{section*.2}%
+\contentsline {section}{\numberline {}Format, Notation and Conventions}{7}{section*.2}%
+\contentsline {chapter}{\numberline {I}Preliminaries}{11}{chapter.1}%
+\contentsline {section}{\numberline {1}Local and Global Fields}{11}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1}Valuations}{11}{subsection.1.1.1}%
+\contentsline {section}{\numberline {2}Fourier Theory of Locally Compact Groups}{12}{section.1.2}%
+\contentsline {subsection}{\numberline {2.1}Topologizing the dual}{13}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {2.2}Positive-Definite and Elementary Functions}{15}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {2.3}Fourier Inversion}{24}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {2.4}Pontryagin Duality}{28}{subsection.1.2.4}%
+\contentsline {chapter}{\numberline {II}Tate's Thesis}{29}{chapter.2}%
+\contentsline {section}{\numberline {3}Adeles and Ideles}{30}{section.2.3}%
+\contentsline {subsection}{\numberline {3.1}Background: Defining Restricted Products}{30}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {3.2}Measures on Restricted Products}{31}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {3.3}Adeles, Ideles and Approximations}{33}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {3.4}Geometry of $\mathbb {A}_K/K$}{35}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {3.5}Class Groups}{36}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {3.6}Practical Example: Characters on $\mathbb {Q}$ and $C_\mathbb {Q}$}{38}{subsection.2.3.6}%
+\contentsline {section}{\numberline {4}Id\'ele Zeta Functions}{39}{section.2.4}%
+\contentsline {subsection}{\numberline {4.1}Local Zeta Functions}{40}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {4.2}The Root Number}{53}{subsection.2.4.2}%
+\contentsline {section}{\numberline {5}Riemann-Roch}{53}{section.2.5}%
+\contentsline {subsection}{\numberline {5.1}Riemann-Roch Theorem}{53}{subsection.2.5.1}%

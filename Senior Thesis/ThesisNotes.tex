@@ -359,6 +359,8 @@
 \setlength\cftparskip{0pt}
 \renewcommand\cftsecfont{\color{Blue4}}
 \renewcommand\cftsubsecfont{\color{Blue3}}
+\setlength{\parindent}{0pt}
+\setcounter{chapter}{-1}
 
 \titleformat{\chapter}[frame]{\LARGE}{\bfseries \centering Chapter \thechapter}{1em}{\bfseries \centering \Huge}[]
 \titleformat{\section}[display]{\large}{\bfseries Section \thesection}{0.1em}{\bfseries \LARGE}[]
@@ -543,22 +545,38 @@ mdframed={
 
 \begin{document}
 
-\title{Senior Thesis}
+\title{Iwasawa-Tate Theory and its Applications}
 
 \author{Aaryan Sukhadia}
-\date{Last Updated September 2024}
+\date{Honors Thesis, Stanford University}
 \onehalfspacing
 
 \maketitle
 
 \tableofcontents
 
+\chapter{Introduction}
+
+\section*{Abstract}
+\label{section: Abstract}
+\addcontentsline{toc}{section}{\protect\numberline{}Abstract}
+
+
 \newpage
 
-\section*{How to Read This Text}
-\label{section: How to Read This Text}
-\addcontentsline{toc}{section}{\protect\numberline{}How to Read This Text}
 
+\section*{Acknowledgements}
+\label{section: Acknowledgements}
+\addcontentsline{toc}{section}{\protect\numberline{}Acknowledgements}
+
+
+\newpage
+
+\section*{Format, Notation and Conventions}
+\label{section: Format, Notation and Conventions}
+\addcontentsline{toc}{section}{\protect\numberline{}Format, Notation and Conventions}
+
+\subsection*{Format}
 In terms of formatting, there will be four main types of colored boxes in this text.
 \begin{defn} 
     A bright, almost-blaring red-backgrounded, red-striped box to house a vital Definition.
@@ -579,25 +597,48 @@ As is standard in mathematical writing I've also filled this text with technical
 
 It is a corollary of Murphy's Law that this text will likely never be completely typo-free, but that doesn't mean it's something not to strive for. Please email me about any typographical, notational, mathematical or lingustic errors you might find.
 
-
-
 \newpage
+\subsection*{Assumed Knowledge}
 
-\chapter{Background and Preliminaries}
-
-\section*{Assumed Knowledge}
-\addcontentsline{toc}{section}{\protect\numberline{}Assumed Knowledge}
-
-These notes assume some basic familiarity with elementary topology (including some elementary results on topological groups), measure theory, representation theory, functional analysis and algebraic number theory. Here are a bunch of quick litmus tests:
+This text assumes some basic familiarity with elementary topology (including some elementary results on topological groups), measure theory, representation theory, functional analysis and algebraic number theory. Here are a bunch of quick litmus tests:
 \begin{itemize}
     \item Topology/Measure theory: Recall/understand that every locally compact group admits a left Haar measure.
     \item Representation theory: Recall/understand why any $G$-linear map between two irreducible representations is either the zero map or an algebraic isomorphism.
     \item Number Theory: Recall/understand the equivalent characterizations of Dedekind domains as (i) noetherian, one-dimensional, and integrally closed or (ii) unique factorization of ideals into primes, among others.
     \item Functional Analysis: Recall/understand why a scalar multiple of the identity is a normal operator.
 \end{itemize}
-The goal of these notes is that if you're conceptually comfortable with some open neighborhood of the above results then this text should be readable and understandable to you almost everywhere.
+The goal of this text is that if you're conceptually comfortable with some open neighborhood of the above results then it should be readable and understandable to you almost everywhere.
+
 
 \newpage
+\subsection*{Notation and Conventions}
+
+\textbf{Fields and Rings}
+\begin{itemize}
+    \item All rings are assumed to be unital and commutative.
+    \item $\nn, \zz, \qq, \rr$ and $\cc$ will denote the set of Naturals, Integers, Rationals, Reals and Complex Numbers respectively.
+    \item $R^\times$ will denote the set of invertible elements of a ring $R$.
+\end{itemize}
+
+\textbf{Functions}
+\begin{itemize}
+    \item $\fanc(X)$ denotes the set of continuous functions on a topological space $X$.
+    \item $\supp(f)$ denotes the \textbf{support} (i.e pre-image of non-zero values) of a function.
+    \item $\fanc_0(X)$ denotes the set of continuous functions on $X$ that vanish at infinity (recall a function \textbf{vanishes at infinity} if $f(x) \to 0$ as $x \to \infty$\footnote{More precisely, the absolute value of $x$. We refine this notion in the text.})
+    \item $\fanc_c(X)$ denotes the set of continuous compactly supported functions on $X$. (Recall $f$ is \textbf{compactly supported} its support has compact closure).
+    \item 
+\end{itemize}
+
+\textbf{Measures and Topological Groups}
+\begin{itemize}
+    \item Almost everywhere in this text, we work with locally compact topological groups. In most cases we the groups are also assumed to be abelian. We use the abreviation LCAG for these groups.
+    \item Recall that every locally compact group admits a (bi-invariant) Haar measure, which we often denote by $\dx$ or $\dy$ or $\dz$, and so on.
+\end{itemize}
+
+
+
+\chapter{Preliminaries}
+\label{chapter: Preliminaries}
 
 \section{Local and Global Fields}
 \label{section: Local and Global Fields}
@@ -617,7 +658,7 @@ Here we build up the language required to discuss the
 In this section we start to do how to do Fourier transforms on an abelian topological group $G$, via the \textit{dual} $\hat{G}$, the group of continuous homomorphisms $G \to S^1$. 
 
 \begin{defn}
-The \textbf{Pontryagin Dual} of $G$, denoted $\hat{G}$, is the group of all continuous
+The \textbf{Pontryagin\footnote{A Russian name, sometimes also anglicized as Pontrjagin or Pontriagin} Dual} of $G$, denoted $\hat{G}$, is the group of all continuous
 complex homomorphisms $G \to S^1$ (where $S^1$ is given its standard subspace topology
 from $\cc$), with multiplication as the group operation. Elements of $\hat{G}$ are often
 referred to as \textbf{characters} of $G$.
@@ -647,13 +688,22 @@ Thus we have:
 \end{equation*}
 which was what we wanted to show.
 \end{proof}
+ 
+\begin{exercise}
+\label{exercise: dual of Z is S^1}
+    Using a similar argument to above, show that $\hat{\zz} \cong S^1$.
+\end{exercise}
 
-\begin{sanitycheck}
-Having been introduced to the definition and an example, verify rigorously the (hopefully) intuitive identity for any topological groups $G_1, G_2$:
+Combining \ref{example: dual of S^1 is Z} and $\ref{exercise: dual of Z is S^1}$, we get the wonderful identities:
 \begin{equation*}
-    \widehat{G_1 \times G_2} \cong \hat{G_1} \times \hat{G_2}
+    \hat{\hat{S^1}} \cong S^1 \text{ and } \hat{\hat{\zz}} \cong \zz.
 \end{equation*}
-\end{sanitycheck}
+ 
+It turns out this duality holds true for ANY topological group that is locally compact. Proving this result, and developing the theory of Fourier analysis over arbitrary topological groups along the way to do so, will be the main goal of this section.
+
+\begin{remark}
+    Lev Pontryagin's foundational work on this duality result initially imposed some auxiliary conditions of second-countabilitiy and compactness; it was later generalized to locally compact groups by van Kampen and Weil. Pontryagin's other contributions were largely in topology (he is often referred to as one of the co-founders of cobordism theory), which is especially surprising considering he was blind since the age of 14, and so was making huge strides in the study of shapes and spaces without being able to draw or see!
+\end{remark}
 
 \subsection{Topologizing the dual}
 \label{subsection: Topologizing the dual}
@@ -692,8 +742,7 @@ For any $G$, this is finer than the compact-open topology, since for any compact
 If $G$ is discrete then every compact set is necessarily finite (and vice versa!), and thus $\{g\}$ is compact, so every subbasis element $S(g, U)$ is also a basis element of the compact-open topology. Thus the two topologies are equivalent.
 \end{proof}
 
-We now introduce some notation that'll come in handy when doing technical analysis of $\hat{G}$.\\
-\textbf{Notation}
+We now introduce some notation that'll come in handy when doing technical analysis of $\hat{G}$.
 \begin{itemize}
     \item For any $X \subseteq G$ (not necessarily a subgroup), then for $n \in \nn$ we define
     \begin{equation*}
@@ -763,8 +812,8 @@ Suppose $G$ is an abelian topological group. Then:
     FINISH LATER
 \end{proof}
 
-\subsection{Functions of Positive Type}
-\label{subsection: Positive Type Funcs}
+\subsection{Positive-Definite and Elementary Functions}
+\label{subsection: Pos-Def and Elementary Funcs}
 To motivate what a function of positive type is, we discuss some background on unitary representations. From now on let $G$ be a locally compact group with a (left) Haar measure $\ds$.\\
 
 Let $\rho$ be a representation of a topological group $G$ in the space of unitary operators on a Hilbert space $H$. Fixing some $x \in H$, define a $\cc$-valued function on $G$ by:
@@ -1007,8 +1056,6 @@ almost everywhere, as desired.
     Prove \ref{cor: positive-type representation} rigorously. (Hint: Use the representation in \ref{prop: positive-type representation exists} for (a), Cauchy-Schwarz for (b), and the fact that $L_s$ is unitary for (c)).
 \end{exercise}
 
-\subsection{Elementary Functions}
-\label{subsection: Elementary Functions}
 The positive-definite, continuous functions on $G$ bounded by 1 in the $L^\infty$ norm comprise an important subset of $L^\infty(G)$. We set 
 \begin{equation*}
     \fanp(G) := \set{\phi \in \fanc(G) \cap L^\infty(G) : \phi \text{ is positive-definite and } \norm{\phi}_\infty \leq 1}
@@ -1378,6 +1425,15 @@ to be the \textit{ring of Fourier transforms} on $G$ (sometimes also denoted $\h
 
 
 \newpage
+
+
+
+\newpage
+
+\chapter{Tate's Thesis}
+
+\newpage
+
 \section{Adeles and Ideles}
 \label{section: Adeles&Ideles}
 
@@ -1810,13 +1866,7 @@ for any $\lambda \in \rr$. It follows that the restriction of the above map to $
 
 We now proceed to a slightly more advanced task
 
-
 \newpage
-
-\chapter{Tate's Thesis}
-
-\newpage
-
 
 \section{Id\'ele Zeta Functions}
 \label{section: Id\'ele Zeta Functions}
@@ -1848,8 +1898,11 @@ A generalization of the zeta function can be done via Dirichlet series. Given an
     \begin{equation*}
         L(s, \chi) = \sum^\infty_{n=1} \frac{\chi(n)}{n^s}.
     \end{equation*}
-    These $L$-series are vital to the proof of Dirichlet's theorem on primes in arithmetic progressions.
 \end{example}
+
+Studying the analytic properties of the various $L$-series is vital for decoding properties of prime numbers in the integers. In particular, it is famously used to show Dirichlet's theorem that any arithmetic series with coprime base and difference contains infinitely many primes.\\
+
+As a generalization, we can craft similar $L$-functions over number fields.
 
 \begin{example}[Generalized Dedekind Zeta Function]
 \label{example: Generalized Dedekind Zeta}
@@ -1859,6 +1912,8 @@ Let $K$ be a number field, and let $\chi$ be a character of standard ideal class
 \end{equation*}
 where $N(\fraka)$ is the standard ideal norm taken over $\qq$ as the base field. When $\chi = 1$ this is known as the \textbf{Dedekind zeta function}.
 \end{example}
+
+It turns out the residues of the analytic continutations these generalized Dedekind zeta functions encode information about the class numbers of the their number fields. 
 
 One can generalize the above even further to consider crafting a series $L(s, \chi)$ for any $\chi$ that is a continuous character of the idele class group $C_K$. It is a famous result of Hecke that $L(s, \chi)$ has analytic continuation and satisfies an appropriate functional equation for any number field $K$ and any idele class character $\chi$. The original formulation of this result involved a complicated computation with these things called theta functions. Moreover in the functional equation a so-called \textit{root number} $W(\chi)$ associated o each $\chi$ kept popping up, with no good explanation for its value.\\
 Under the guidance of Emil Artin, in his 1950 thesis John Tate made use of Fourier analysis on adele groups to reprove the results of Hecke and establish these "local" functional equations that gave an "explicit factorization" of the root number.\\
@@ -2016,6 +2071,7 @@ To show $Z(f, \chi)$ is absolutely convergent, using our relationship between ou
 \end{equation*}
 In the Archimedean case, finiteness of $I(f, \sigma)$ follows from the fact that $f$ is a Schwarz function, and thus rapidly decaying as $\abs{x}$ approaches infinity. Moreover, around zero since $\sigma > 0$ the $\abs{x}^{\sigma - 1}$ part is integrable, so we are happy.
 
+
 In the non-Archimedean case, $f$ is locally constant with compact support, it must factor through some finite group quotient of the form $\pp^m/\pp^m$, for some integers $m \leq n$ (here $\pp^k = \brangle{\pi^k}$ represents the fractional ideal of $\calo_F$ generated by the $k$-th power of its uniformizer). By linearity and translation-invariance of the Haar measure, it suffices to check finiteness of the integral for functions $f$ that are just the characteristic functions of the various ideals $\pp^j$.\\
 Using unique factorizaition in any fractional ideal, we can decompose it into a disjoint union:
 \begin{equation*}
@@ -2109,10 +2165,11 @@ We are omitting the details of the final equality but this is a well-known ident
     Z(\hat{f}, \chi^\lor) = \int_{\rr^\times} \hat{f}(x) \chi^\lor(x) \d{^*x} = \int_{\rr^\times} f(x) \chi^\lor(x) \d{^*x} = Z(f, \chi^\lor)
 \end{equation*}
 which is equal to $L(\chi^\lor)$ by our previous calculation in this proof. Thus if $\chi = \abs{\cdot}^s$, we have:
-\begin{equation*}
-    \gamma(\chi) = \frac{L(\chi^\lor)}{L(\chi)}
-\end{equation*}
-so we may set $\varepsilon(\chi) = 1$ in this case.\\
+\begin{align}
+\label{eqn: real epsilon factor 1}
+    \gamma(\chi, \psi, \dx) &= \frac{L(\chi^\lor)}{L(\chi)} \nonumber \\
+    \implies \varepsilon(\chi, \psi, \dx) &= 1.
+\end{align}
 
 \underline{Sub-Case (ii): $\chi = \sgn \abs{\cdot}^s$}\\
 In this case we choose $f(x) = xe^{-\pi x^2}$, which is again immediately verifiable as rapidly decaying. Expanding the local zeta function we get:
@@ -2131,18 +2188,60 @@ from which it follows
 \begin{equation*}
     Z(\hat{f}, \chi^\lor) = \int_{\rr^\times} i f(y) \chi^\lor \d{^*x} = i L(\chi^\lor),
 \end{equation*}
-and thus by a similar calculation to the last sub-case we deduce $\varepsilon(\chi) = i$ in this case.\\
+and thus by a similar calculation to the last sub-case we deduce:
+\begin{align}
+\label{eqn: real epsilon factor 2}
+    \varepsilon(\chi, \psi, \dx) = i.
+\end{align}
 
 \textbf{\underline{Case 2: $F = \cc$}}\\
-Here we let our measure on $\cc$ be $\dz \d{\bar{z}} = 2 \dx\dy$, or double the standard Lebesgue measure. We choose this as it is self-dual with respect to the character
+Here we let our measure on $\cc$ be $\dz \d{\bar{z}} = 2 \dx\dy$, or double the standard Lebesgue measure. In polar coordinates this means $\dz = 2 \dr \dtheta$, which also implies $\d{^*z} = (2/r) \dr \dtheta$. We choose this as it is self-dual with respect to the character
 \begin{equation*}
     \psi(z) := e^{- 2 \pi i (z + \bar{z})}.
 \end{equation*} 
 We also adjust the standard norm on $\cc$ to agree with the module, i.e
 \begin{equation*}
-    \abs{z} := 
+    \abs{z} := z \bar{z}.
 \end{equation*}
-[FINISH LATER]
+Since $\cc^\times = \rr_{> 0} \times S^1$, any multiplicative character must be of the form:
+\begin{equation*}
+    \chi_{s, n} := (re^{i\theta} \mapsto r^s e^{i n \theta})
+\end{equation*}
+for $s \in \cc$ and $n \in \zz$ uniquely defined. We choose our class of functions to be:
+\begin{equation*}
+    f_n(z) := \begin{cases}
+        \frac{1}{2\pi} \brack{\bar{z}}^n e^{- 2 \pi z \bar{z}}, & n \geq 0,\\
+        \frac{1}{2\pi} z^{-n} e^{- 2 \pi z \bar{z}}, & n < 0.
+    \end{cases}
+\end{equation*}
+We note that $f$ is visibly a Schwartz function for any $n$. Computing the local zeta function for non-negative $n$, we get:
+\begin{align*}
+    Z(f_n, \chi_{s, n}) &= \int_{\cc^\times} f_n(z) \chi_{s, n}(z)\d{^*z}\\
+    &= \frac{1}{2\pi} \int_{\cc^\times}\brack{\bar{z}}^ne^{ - 2 \pi z \bar{z}}(z \bar{z})^s e^{i n \arg(z)}\d{^*z}\\
+    &= \frac{1}{2\pi} \int^{2 \pi}_0 \int^\infty_0 (re^{-i \theta})^n e^{-2 \pi r^2} (r^2)^s e^{i n \theta} (2/r) \dr \dtheta\\
+    &= \frac{1}{\pi} \int^{2\pi}_0 \int^\infty_0 r^{2s + n - 1} e^{-2 \pi r^2} \dr \dtheta\\
+    &= (2 \pi)^{-\brack{s + \frac{n}{2}}} \int_0^\infty e^{- 2 \pi r^2} (2 \pi r)^{s + \frac{n}{2} - 1} 4 \pi r \dr\\
+    &= (2 \pi)^{-\brack{s + \frac{n}{2}}} \int^\infty_0 e^{-t} t^{s + \frac{n}{2} - 1} \dt\\
+    &= (2\pi)^{-\brack{s + \frac{n}{2}}} \Gamma(s + \frac{n}{2}) = L(\chi_{s, n})
+\end{align*}
+where we recall our definition of the local $L$-factor in \ref{eqn: complex local L-factor}. A similar calculation also shows that $Z(f_n, \chi_{s, n}) = L(\chi_{s, n})$ when $n < 0$.\\
+It remains to compute the "dual" local zeta function. We do this via a mixture of handwaving and clever observations. First we notice that $\chi^\lor_{n, s} = \chi_{1-s, -n}$ for any $s$ and $n$. Moreover, we via yet another hand-waved complex integral, we deduce that
+\begin{equation*}
+    \hat{f_n}(z) = \frac{1}{2\pi} i^{\abs{n}}f_{-n}(z)
+\end{equation*}
+for all $n$. Thus, using the fact that our computation was linear in the exponents $s$ and $n$, we deduce that
+\begin{equation*}
+    Z(\hat{f_n}, \chi^\lor_{s, n})  = i^{\abs{n}}L(\chi^\lor_{s, n}).
+\end{equation*}
+The reader is welcome to rigorously verify this calculation. In any event, as a consequence we get that:
+\begin{align*}
+    \label{eqn: complex epislon factor}
+    \gamma(\chi_{s, n}, \psi, \dx) &= i^{\abs{n}} \frac{L(\chi^\lor_{s, n})}{\chi_{s, n}}\\
+    \implies  \varepsilon(\chi_{s, n}, \psi, \dx) &= i^{\abs{n}},
+\end{align*}
+completing the complex case.\\
+
+To conclude our analysis on the Archimdean local fields, we note by looking at all the (nowhere-vanishing!) local epsilon factors computed in \ref{eqn: real epsilon factor 1}, \ref{eqn: real epsilon factor 2} and \ref{eqn: complex epislon factor}, and their corresponding local $L$-factors that $\gamma(\chi, \psi, \dx)$ is indeed meromorphic as a function of $s$, completing our proof.
 \end{proof}
 
 Before we proceed complete the proof of the final part of the theorem for the non-Archimedean case, we need to build some more tools and lemmas to use.
@@ -2231,7 +2330,6 @@ All that remains is to substitute these cases back into the integral $\int \chi(
 \end{proof}
 
 
-
 \begin{exercise}
 \label{exercise: last part of gauss-sum conductor proof}
 Finish the last part of the proof of \ref{lemma: gauss-sum conductor relations}.
@@ -2311,7 +2409,7 @@ which is what we wanted. Combing \ref{eqn: local zeta function non-Arch unramifi
 \begin{align}
 \label{eqn: local epsilon factor non-Arch unramified}
     \gamma(\chi, \psi, \dx) &= q^{ms} \vol(\pp^m, \dx) \frac{L(\chi^\lor)}{L(\chi)} \nonumber \\
-    \implies \epsilon(\chi, \psi, \dx) &= q^{ms}\vol(\pp^m, \dx).
+    \implies \varepsilon(\chi, \psi, \dx) &= q^{ms}\vol(\pp^m, \dx).
 \end{align}
 
 \textbf{\underline{Case 2: $n > 0$}}\\
@@ -2326,7 +2424,7 @@ Examining \ref{eqn: Fourier transform local-zeta-func} again, we see that the in
 where the last line follows from the fact that the conductor of $\omega$ is equal to the conductor of its conjugate, so it is trivial on all of $\vol(1 + \pp^n, \d{^*x})$. We also note that this is constant in $s$, which is what we want, as we recall from $\ref{eqn: non-Arch local L-factor}$ that the local $L$-factor of a non-unramified character is 1. Combining \ref{eqn: local zeta function non-Arch ramified} and \ref{eqn: dual local zeta funtion non-Arch ramified} for $\chi = \chi_{s, n}$, we get:
 \begin{equation}
 \label{eqn: epsilon factor non-Arch ramified}
-    \epsilon(\chi, \psi, \dx) = \gamma(\chi, \psi, \dx) = \frac{q^{(m-n)(s-1)} \omega(-1)}{ c g( \omega, \psi_{\pi^{m-n}})} = \frac{1}{c}q^{(m-n)(s-1)}g(\bar{\omega}, \psi_{\pi^{m-n}}).
+    \varepsilon(\chi, \psi, \dx) = \gamma(\chi, \psi, \dx) = \frac{q^{(m-n)(s-1)} \omega(-1)}{ c g( \omega, \psi_{\pi^{m-n}})} = \frac{1}{c}q^{(m-n)(s-1)}g(\bar{\omega}, \psi_{\pi^{m-n}}).
 \end{equation}
 \begin{sanitycheck}
     If it's not already clear, the final equality above made use of the following string of identities that any Gauss sum satisfies:
