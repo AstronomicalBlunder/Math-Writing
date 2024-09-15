@@ -84,6 +84,7 @@
       <file>ThesisNotes-blx.bib</file>
     </requires>
     <requires type="editable">
+      <file>refs.bib</file>
     </requires>
     <requires type="static">
       <file>biblatex.bst</file>

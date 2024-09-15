@@ -13,7 +13,7 @@
 \usepackage{csquotes}
 \usepackage[style=alphabetic, backend=bibtex8,
             autocite=footnote, notetype=endonly, labeldateparts]{biblatex}
-
+\addbibresource{refs.bib}
 
 %%%%%%%%%%%%%%% HEADERS/FOOTERS %%%%%%%%%%%%%%%%%%%%
 \usepackage{fancyhdr}
@@ -142,6 +142,7 @@
 \newcommand{\calm}{\mathcal{M}}
 \newcommand{\caln}{\mathcal{N}}
 \newcommand{\cals}{\mathcal{S}}
+\newcommand{\calu}{\mathcal{U}}
 %% FANCY LETTERS %%
 \newcommand{\fanc}{\mathscr{C}}
 \newcommand{\fanb}{\mathscr{B}}
@@ -159,6 +160,7 @@
 \newcommand{\fanm}{\mathscr{M}}
 \newcommand{\fann}{\mathscr{N}}
 \newcommand{\fans}{\mathscr{S}}
+\newcommand{\fanu}{\mathscr{U}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -516,7 +518,7 @@ mdframed={
 \declaretheorem[name=\textsc{Lemma},style=resultstyle,sibling=thm]{lemma}
 \declaretheorem[name=\textsc{Proposition},style=resultstyle,sibling=thm]{proposition}
 \declaretheorem[name=\textsc{Proposition},style=resultstyle,sibling=thm]{prop}
-\declaretheorem[name=\textsc{Corollary},style=resultstyle,parent=thm]{corollary}
+\declaretheorem[name=\textsc{Corollary},style=resultstyle,sibling=thm]{corollary}
 \declaretheorem[name=\textsc{Corollary},style=resultstyle,parent=thm]{cor}
 \declaretheorem[name=\textsc{Conjecture},style=resultstyle, numbered=no]{conj}
 %%%%%%%%%%%%  DEFINITIONS & EXAMPLES  %%%%%%%%%%%%%%%%%
@@ -616,7 +618,7 @@ The goal of this text is that if you're conceptually comfortable with some open 
 \textbf{Fields and Rings}
 \begin{itemize}
     \item All rings are assumed to be unital and commutative.
-    \item $\nn, \zz, \qq, \rr$ and $\cc$ will denote the set of Naturals, Integers, Rationals, Reals and Complex Numbers respectively.
+    \item $\nn, \zz, \qq, \rr$ and $\cc$ will denote the set of Naturals, Integers, Rationals, Reals and Complex Numbers respectively. Naturals include 0, as we are not savages.
     \item $R^\times$ will denote the set of invertible elements of a ring $R$.
 \end{itemize}
 
@@ -631,8 +633,9 @@ The goal of this text is that if you're conceptually comfortable with some open 
 
 \textbf{Measures and Topological Groups}
 \begin{itemize}
-    \item Almost everywhere in this text, we work with locally compact topological groups. In most cases we the groups are also assumed to be abelian. We use the abreviation LCAG for these groups.
+    \item Almost everywhere in this text, we work with locally compact topological groups. In most cases we the groups are also assumed to be abelian. We use the abreviation "LCA group" in such cases.
     \item Recall that every locally compact group admits a (bi-invariant) Haar measure, which we often denote by $\dx$ or $\dy$ or $\dz$, and so on.
+    \item Given a Borel (i.e measurable) set on $A \subseteq G$ with Haar measure $\dx$, for sake of clarity we denote by $\vol(A, \dx)$ the value $\dx(A)$, i.e the measure of $A$ with respect to $\dx$.
 \end{itemize}
 
 
@@ -1438,8 +1441,8 @@ to be the \textit{ring of Fourier transforms} on $G$ (sometimes also denoted $\h
 \label{section: Adeles&Ideles}
 
 
-\subsection{Background: Defining Restricted Products}
-\label{subsection: Restricted Products Def}
+\subsection{The General Restricted Product}
+\label{subsection: Restricted Products}
 Let $J$ be an indexing set (the reason for choosing $J$ over $I$ will become apparent
 later when we get introduced to the Ideles), suppose that for every $v \in J$ we have 
 a locally compact group indexed by $G_v$. We fix a finite subset $J_\infty$ of $J$ (which
@@ -1447,43 +1450,53 @@ will later represent the infinite places), and suppose that for all $v \notin J_
 we have a compact open (and thus closed) subgroup $H_v \leq G_v$.
 
 \begin{defn}
-The \textbf{restricted direct product} of the $G_v$ with respect to the $H_v$ is defined as 
+\label{def: resprod}
+The \textbf{restricted direct product} (also just called the \textbf{restricted product}) of the $G_v$ with respect to the $H_v$ is defined as 
 \begin{equation*}
     \rprod_{v \in J} G_v := \set{(x_v) \in \prod G_v : x_v \in H_v \text{ for all but finitely many } v}
 \end{equation*}
 \end{defn}
 
 \begin{remark}
-The notation I've used for the restricted product (product and coproduct symbol overlayed on one another) is non-standard, but more distinct than the usual $\prod'$, in my opinion. I first saw this in Andrew Sutherland's lecture notes for 18.875 course at MIT, and I've also seen it in Keith Conrad's notes.
+The notation I've used for the restricted product (product and coproduct symbol overlayed on one another) is non-standard, but more distinct than the usual $\prod'$. I first saw this in Andrew Sutherland's lecture notes for 18.875 at MIT.
 \end{remark}
 
 Let us denote this restricted product $G$. Note $G \subseteq \prod G_v$ (the normal
 direct product of groups). We want to topologize $G$, but as it turns out, the subspace topology induced by the product topology on $\prod G_v$ is insufficient. For reasons that will become clear later, we'll want sets like $\prod H_v$ to be open, which won't be true in the subspace topology unless $H_v = G_v$ for all but finitely many $v \in J$.
 
 \begin{defn}
+\label{def: resprod topology}
     The \textbf{restricted product topology} on $\rprod G_v$ is given by the basis
     \begin{equation*}
         \calb := \set{\prod U_v : U_v \subseteq_{\text{open}} G_v, \ e \in U_v \text{ and } U_v = H_v \text{ for all but finitely many } v}
     \end{equation*}
 \end{defn}
 
-\begin{sanitycheck}
-Suppose we have a family of compact opens $H'_v \subseteq G_v$ such that $H'_v = H_v$ for all but finitely many $v \in J$. Then confirm that $\rprod G_v$ wrt to the $H_v$ is the same (both set-theoretically and topologically) as $\rprod G_v$ wrt to the $H'_v$. It thus suffices to specify the $H_v$ for all but finitely many $v$.
-\end{sanitycheck}
+\begin{observation}
+Suppose we have a family of compact opens $H'_v \subseteq G_v$ such that $H'_v = H_v$ for all but finitely many $v \in J$. Then we note that $\rprod G_v$ wrt to the $H_v$ is the same (both set-theoretically and topologically) as $\rprod G_v$ wrt to the $H'_v$ (work this out rigorously if it's not clear!). It thus suffices to specify the $H_v$ for all but finitely many $v$. A parallel observation we make is that for any finite positive integer $n$ we have the topological isomorphism:
+\begin{align}
+\label{eqn: resprod dir-prod isomorphism}
+    \rprod_v G_v^n  &\cong \prod^n \brack{ \rprod_v G_v} \nonumber \\
+    \brack{ \ldots, \brack{g_{v, 1}, \ldots, g_{v, n}}, \ldots}_v &\mapsto \brack{\brack{g_{v, 1}}_v, \ldots, \brack{g_{v, n}}_v},
+\end{align}
+where, naturally, $G^n_v$ is the $n$-fold direct-product of $G_v$ with itself. 
+\end{observation}
 
 We introduce a handy piece of notation that'll come in useful later. Let $S$ be any finite subset of the index set $J$ containing $J_\infty$. Then we define
-\begin{equation*}
+\begin{equation}
+\label{eqn: G_S restricted prod}
     G_S := \prod_{v \in S} G_v \times \prod_{v \notin S} H_v
-\end{equation*}
+\end{equation}
 
-For every $S, T$ such that $S \subseteq T$, consider the inclusion maps $i_{S, T}: G_S \inj G_T$. Then with respect to this directed system, we have:
-\begin{equation*}
-    G = \dlim_{S} G_S
-\end{equation*}
+For every $S, T$ such that $S \subseteq T$, consider the inclusion maps $i_{S, T}: G_S \inj G_T$. Then the restricted product $G$ is in fact the colimit of this directed system, i.e:
+\begin{equation}
+\label{eqn: resprod colim expression}
+    G = \dlim_{S} G_S 
+\end{equation}
 
 \begin{exercise}
-\label{restricted product as colimit}
-    Verify the above statement rigorously.
+\label{exercise: restricted product as colimit}
+Verify the abstract-nonsense characterization of the restricted product given in Equation \ref{eqn: resprod colim expression} coincides (as a topological isomorphism) with the explicit description in \ref{def: resprod}.
 \end{exercise}
 
 \begin{prop}
@@ -1496,7 +1509,28 @@ Let $G_v, H_v$ be as defined above and $G$ be the restricted product. Then
 \end{prop}
 \begin{proof}
 \textbf{\underline{(a)}}\\
-Since each $H_v$ is compact, Tychonoff tells us $\prod_{v \notin S} H_v$ is also compact. Thus $G_S$ is the product of finitely many locally compact spaces with a compact space, and is thus itself locally compact. Moreover, the product topology on $G_S$ is the SAME as the subspace topology induced by $G$, and since any $(x_v) \in G$ is contained in such a $G_S$, we conclude $G$ must be locally compact as well.\\
+We first verify (in perhaps a bit more rigor than required, but as good practice to get a feel for this construction) that it is indeed a topological group. The group structure is clear; for continuity of the group maps, recall any open set is of the form
+\begin{equation*}
+    \calu := \prod_{v \in S} U_v \times \prod_{v \notin S} H_v
+\end{equation*}
+for some finite indexing set $S$ and opens $U_v \subseteq G_v$. Since each $H_v$ is a subgroup, the preimage of $\calu$ under the inversion map is:
+\begin{equation*}
+    \prod_{v \in S} \inv{\brack{U_v}} \times \prod_{v \notin S} H_v,
+\end{equation*}
+which is also open since each $G_v$ is a topological group, thereby giving us continuity of inversion.\\
+For multiplication, the topological isomorphism in Equation \ref{eqn: resprod dir-prod isomorphism} gives us $G \times G \cong \rprod_v (G_v \times G_v)$, allowing us to similarly look at preimages component by component. In particular, consider any element
+\begin{equation*}
+    \brack{ \brack{k_v, k'_v}_{v \in S}, \brack{k_v, k'_v}_{v \notin S}}
+\end{equation*}
+in the preimage of $\calu$ under the addition map. We note that by definition, away from some finite index set $T \supseteq S$, we must have that $(k_v, k'_v) \in H_v \times H_v$ for all $v \notin T$, and clearly $H_v \times H_v$ is in the pre-image of $\calu$. For any $v \in T$, we know from the fact that $G_v$ is a topological group that $(k_v, k'_v)$ has some open neighborhood $W_v \times W'_v$ contained in the pre-image of $\calu$. Thus:
+\begin{equation*}
+    \brack{ \brack{k_v, k'_v}_{v \in S}, \brack{k_v, k'_v}_{v \notin S}}  \in \prod_{v \in T} \brack{W_v \times W'_v} \times \prod_{v \notin T} \brack{H_v \times H_v} \subseteq \inv{\text{add}}(\calu),  
+\end{equation*}
+and so multiplication is continuous. Thus $G$ is a topological group.
+\begin{warning}
+    Our work above seems (and may very well be) a tad pedantic with the details, and indeed several texts leave the fact of the restricted product being a topological group as a trivial observation. However it is worth being careful about constructions such as this; one might be tempted to think that if we have \textit{any} directed system of topological groups with inclusion maps and define a colimit as in \ref{eqn: resprod colim expression}, that the product must surely be a topological group. The editors of MIT's second-edition \textit{Encyclopedic Dictionary of Mathematics} thought so too. However this turns out NOT the case: the colimit of the directed system of $G_i := \qq \times \rr^i$ does not have continuous addition; \cite{Shimomura-topgrp-colimit} shows that we do get a nice output in this colimit construction when the groups are all locally compact.
+\end{warning}
+We now show local compactness. Since each $H_v$ is compact, Tychonoff tells us $\prod_{v \notin S} H_v$ is also compact. Thus $G_S$ is the product of finitely many locally compact spaces with a compact space, and is thus itself locally compact. Moreover, the product topology on $G_S$ is the SAME as the subspace topology induced by $G$, and since any $(x_v) \in G$ is contained in such a $G_S$, we conclude $G$ must be locally compact as well.\\
 
 \textbf{\underline{(b)}}\\
 If $Y$ is contained in some product of compact sets $ K = \prod K_v$ (which is compact by Tychonoff) its closure $\bar{Y}$ is a closed subset of a compact subset of a Hausdorff space $G$, and thus $\bar{Y}$ is compact too.\\
@@ -1505,10 +1539,14 @@ Consider the (continuous!) projection maps $\rho_v: G \to G_v$. Thus each $\rho_
 Thus $\bar{Y}$, and therefore $Y$, is contained in a set of the desired form.
 \end{proof}
 
+\begin{corollary}
+\label{cor: each component is closed subgrp of resprod}
 
-\subsection{Measures on Restricted Products}
-\label{subsection: restricted product measures}
-Inline with the notation from the previous section, let $G$ be the restricted direct product of locally compact $G_v$ wrt a family of compact subgroups $H_v$, for $v \notin J_\infty$. For any finite subset $S$ containing $J_\infty$, let $G_S$ be the same as defined before.
+\end{corollary}
+
+We now proceed to flesh out the theory of measures on this restricted product.
+
+
 \begin{prop}
 \label{Haar Measure on restricted product}
 For all but finitely many $v$, suppose $\dg_v$ be a (left) Haar measure on $G_v$ normalized so that $\int_{H_v} \dg_v = 1$. Then there is a unique Haar measure $\dg$ on $G$ such that the restriction $\dg_S$ of $\dg$ on any $G_S$ is exactly the product measure.
@@ -2539,4 +2577,6 @@ We now explore the Riemann-Roch in a more geometric setting.
     A \textbf{divisor} on a 
 \end{defn}
 
+
+\printbibliography
 \end{document}

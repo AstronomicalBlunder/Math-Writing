@@ -16,5 +16,52 @@
   {}
 \endgroup
 
-\datalist[entry]{anyt/global//global/global}\enddatalist
+\datalist[entry]{anyt/global//global/global}
+  \entry{Shimomura-topgrp-colimit}{article}{}
+    \name{author}{3}{}{%
+      {{hash=TN}{%
+         family={Tatsuuma},
+         familyi={T\bibinitperiod},
+         given={Nobuhiko},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=SH}{%
+         family={Shimomura},
+         familyi={S\bibinitperiod},
+         given={Hiroaki},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=HT}{%
+         family={Hirai},
+         familyi={H\bibinitperiod},
+         given={Takeshi},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Duke University Press}%
+    }
+    \strng{namehash}{TNSHHT1}
+    \strng{fullhash}{TNSHHT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{TSH98}
+    \field{labelyear}{1998}
+    \field{labeldatesource}{}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \verb{doi}
+    \verb 10.1215/kjm/1250518067
+    \endverb
+    \field{number}{3}
+    \field{pages}{551 \bibrangedash  578}
+    \field{title}{{On group topologies and unitary representations of inductive limits of topological groups and the case of the group of diffeomorphisms}}
+    \verb{url}
+    \verb https://doi.org/10.1215/kjm/1250518067
+    \endverb
+    \field{volume}{38}
+    \field{journaltitle}{Journal of Mathematics of Kyoto University}
+    \field{year}{1998}
+  \endentry
+\enddatalist
 \endinput
