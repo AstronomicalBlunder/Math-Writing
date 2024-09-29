@@ -17,6 +17,29 @@
 \endgroup
 
 \datalist[entry]{anyt/global//global/global}
+  \entry{CharGroupOfQ}{unpublished}{}
+    \name{author}{1}{}{%
+      {{hash=CK}{%
+         family={Conrad},
+         familyi={C\bibinitperiod},
+         given={K.},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CK1}
+    \strng{fullhash}{CK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Con}
+    \field{labeldatesource}{nodate}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{The Character Group of Q}
+    \verb{url}
+    \verb https://kconrad.math.uconn.edu/blurbs/gradnumthy/characterQ.pdf
+    \endverb
+  \endentry
+
   \entry{Shimomura-topgrp-colimit}{article}{}
     \name{author}{3}{}{%
       {{hash=TN}{%

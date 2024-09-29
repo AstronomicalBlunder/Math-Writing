@@ -1,4 +1,4 @@
-\documentclass[11pt, x11names]{book}
+\documentclass[11pt, x11names, openany]{book}
 \setlength{\headheight}{22pt}
 
 % Typesetting Packages
@@ -8,7 +8,7 @@
 \usepackage[english]{babel}
 \usepackage[a4paper, total={7in, 9.5in}]{geometry}
 \usepackage{setspace}
-
+\usepackage{changepage}
 \usepackage{import}
 \usepackage{csquotes}
 \usepackage[style=alphabetic, backend=bibtex8,
@@ -350,26 +350,27 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%% SECTION FORMATTING %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% SECTION & COUNTER FORMATTING %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{titlesec}
 \usepackage[titles]{tocloft}
 \allowdisplaybreaks
 
-\setlength\cftbeforesecskip{5pt}
+\setlength\cftbeforesecskip{0pt}
 \setlength\cftbeforesubsecskip{-2.5pt}
 \setlength\cftparskip{0pt}
-\renewcommand\cftsecfont{\color{Blue4}}
-\renewcommand\cftsubsecfont{\color{Blue3}}
+\renewcommand\cftchapfont{\bfseries \color{Blue4}}
+\renewcommand\cftsecfont{\color{Blue3}}
+\renewcommand\cftsubsecfont{\color{Blue2}}
 \setlength{\parindent}{0pt}
-\setcounter{chapter}{-1}
 
-\titleformat{\chapter}[frame]{\LARGE}{\bfseries \centering Chapter \thechapter}{1em}{\bfseries \centering \Huge}[]
-\titleformat{\section}[display]{\large}{\bfseries Section \thesection}{0.1em}{\bfseries \LARGE}[]
+\titleformat{\chapter}[frame]{\LARGE}{\bfseries \centering Chapter \thechapter}{1em}{\bfseries \centering \Huge \scshape}[]
+\titleformat{\section}[display]{\Large}{\bfseries \scshape Section \thesection}{0.1em}{ \huge \scshape}[]
 \titleformat{\subsection}[block]{\Large \centering}{\S \thesubsection}{1em}{}[]
 
 \counterwithout{section}{chapter}
 \renewcommand{\thechapter}{\Roman{chapter}}
+\setcounter{chapter}{-1}
 
 %%%%%%%%%%%%%%%%%%% CUSTOM COUNTER(S)  %%%%%%%%%%%%%%%%%%%%
 \newcounter{exercises}
@@ -384,6 +385,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% ENVIRONMENTS AND PROOFS %%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{myquote}[3]
+{
+    \begin{flushright}
+    \begin{adjustwidth}{0.125\textwidth}{}
+    "\textit{#1}"\\
+    \end{adjustwidth}
+    \rule{.75\linewidth}{0.5pt}\\
+    #2\\ \textsc{#3}
+
+}
+{
+    \end{flushright}
+}
+
 
 %% RMK ENV %%
 \declaretheoremstyle[
@@ -442,7 +458,6 @@ mdframed={
   linecolor=Magenta4,
   linewidth=3pt,
   roundcorner=0pt,
-  backgroundcolor=LavenderBlush1,
   innerleftmargin=10pt,
   innerrightmargin=10pt}
 ]{examplestyle}
@@ -535,6 +550,9 @@ mdframed={
 \declaretheorem[name=\textsc{Question},style=sidebarstyle, numbered=no]{question}
 \declaretheorem[name=\textsc{Observation},style=sidebarstyle, numbered=no]{obs}
 \declaretheorem[name=\textsc{Observation},style=sidebarstyle, numbered=no]{observation}
+\declaretheorem[name=\textsc{Blackbox},style=sidebarstyle, numbered=no]{blackbox}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -547,29 +565,42 @@ mdframed={
 
 \begin{document}
 
-\title{Iwasawa-Tate Theory and its Applications}
+\scshape
 
-\author{Aaryan Sukhadia}
-\date{Honors Thesis, Stanford University}
+\title{\Huge Adeles and the Number Theorist's Langlands}
+
+\author{\Large Honors Thesis \\ \Large by \\ \Large Aaryan Sukhadia}
+\date{Supervised by Brian Conrad \\ Stanford University}
+
 \onehalfspacing
 
-\maketitle
+\maketitle 
+
+\upshape
+
+\section*{Acknowledgements}
+
+TBC. Some key ones:\\
+- Prof BC, for helping me choose topic and guiding me through some heinous material.\\
+- Andrew Lee (classmate), for helping me work through some of the more nasty analysis bits.
+
 
 \tableofcontents
 
 \chapter{Introduction}
 
-\section*{Abstract}
-\label{section: Abstract}
-\addcontentsline{toc}{section}{\protect\numberline{}Abstract}
+\section*{Overview}
+\label{section: Overview}
+\addcontentsline{toc}{section}{\protect\numberline{}Overview}
+ Add smth here. Broadly: Expository work on adelic language, and what Langlands has to say about it (at least the NT side). We'll see how far into this we get before the thesis deadline.\\
+
+ Dream Goal:\\
+ - Ch 1: Adeles - Motivation, basic properties, adelic points of a scheme maybe??\\
+ - Ch 2: Tate's Thesis, basically.\\
+ - Ch 3: A primer on modular forms, and why they correspond to $GL_2(\aa)$\\
+ - Ch 4: A (very) rough overview of what the Langlands conjectures say and some of the ideas that motivate(d) them.
 
 
-\newpage
-
-
-\section*{Acknowledgements}
-\label{section: Acknowledgements}
-\addcontentsline{toc}{section}{\protect\numberline{}Acknowledgements}
 
 
 \newpage
@@ -579,18 +610,18 @@ mdframed={
 \addcontentsline{toc}{section}{\protect\numberline{}Format, Notation and Conventions}
 
 \subsection*{Format}
-In terms of formatting, there will be four main types of colored boxes in this text.
+In terms of formatting, there will be four main types of colored envrionments in this text.
 \begin{defn} 
     A bright, almost-blaring red-backgrounded, red-striped box to house a vital Definition.
 \end{defn}
 \begin{example}
-    An equally-importantly-red-backgrounded but slightly less blaring purple-striped box to house an important or prototypical Example of a concept.
+    A purpled-striped environment to indicate an important or prototypical Example of a concept is contained in its confines.
 \end{example}
 \begin{theorem}
     A neutrally-toned gray-shaded box to house a Result, whether that be a theorem (such as this particular box), a proposition, etc.
 \end{theorem}
 \begin{exercise}
-    A cool green-colored box that houses an Exercise that (at least in the author's experience) helps grasp or hone a core tool/technique. Exercises are meant to be reasonably doable by a reader who's paying attention, so if anything seems too hard re-read the subsection, and then e-mail me if it's still too hard.
+    A cool green-colored box that houses an Exercise that (at least in the my experience) helps grasp or hone a core tool/technique. Exercises are meant to be reasonably doable by a reader who's paying attention, so if anything seems too hard re-read the subsection, and then e-mail me if it's still too hard.
 \end{exercise}
 
 As you might have deduced, Definitions, Examples and Results follow a [Subsection.Number] numbering scheme (except for corollaries, whose counters have the relevant result as their parent), all using a common counter, and Exercises follow a [Subsection.Letter] numbering scheme\footnote{I'm of the opinion that if I ever require more than 26 exercises per subsection then either I'm offshoring too much to the reader or the subsection is too long.}.\\
@@ -615,11 +646,19 @@ The goal of this text is that if you're conceptually comfortable with some open 
 \newpage
 \subsection*{Notation and Conventions}
 
-\textbf{Fields and Rings}
+\textbf{Standard Mathematical Objects}
+\begin{itemize}
+    \item $\nn, \zz, \qq, \rr$ and $\cc$ will denote the set of Naturals, Integers, Rationals, Reals and Complex Numbers respectively. Naturals include 0, as we are not savages.
+    \item $S^1$ denotes the circle, i.e the set of norm-one complex numbers.
+\end{itemize}
+
+\textbf{Algebraic Number Theory}
 \begin{itemize}
     \item All rings are assumed to be unital and commutative.
-    \item $\nn, \zz, \qq, \rr$ and $\cc$ will denote the set of Naturals, Integers, Rationals, Reals and Complex Numbers respectively. Naturals include 0, as we are not savages.
     \item $R^\times$ will denote the set of invertible elements of a ring $R$.
+    \item We use $I \ideal R$ to say "$I$ is an ideal of the ring $R$". If $r_1, r_2, \ldots$ is a set of elements in $R$ we denote by $\brangle{r_1, r_2, \ldots}$ the ideal generated by the $r_i$.
+    \item For $K$ a non-Archimedean local field with valuation $v$, we denote by $\calo_K$ the \textbf{ring of integers} (i.e elements of $K$ with non-negative valuation). Moreover we denote by $K_v$ the \textbf{completion} of $K$ with respect to $v$, and $\calo_v$ the ring of integers of $K_v$.
+    \item The symbol $\pp$ ALWAYS refers to a prime ideal, and in the case that we are working in a DVR we denote its uniformizer by $\pi$. When necessary we add subscripts to indicate the relevant field we are working over.
 \end{itemize}
 
 \textbf{Functions}
@@ -628,32 +667,1283 @@ The goal of this text is that if you're conceptually comfortable with some open 
     \item $\supp(f)$ denotes the \textbf{support} (i.e pre-image of non-zero values) of a function.
     \item $\fanc_0(X)$ denotes the set of continuous functions on $X$ that vanish at infinity (recall a function \textbf{vanishes at infinity} if $f(x) \to 0$ as $x \to \infty$\footnote{More precisely, the absolute value of $x$. We refine this notion in the text.})
     \item $\fanc_c(X)$ denotes the set of continuous compactly supported functions on $X$. (Recall $f$ is \textbf{compactly supported} its support has compact closure).
-    \item 
 \end{itemize}
 
 \textbf{Measures and Topological Groups}
 \begin{itemize}
-    \item Almost everywhere in this text, we work with locally compact topological groups. In most cases we the groups are also assumed to be abelian. We use the abreviation "LCA group" in such cases.
+    \item The phrase \textbf{"almost everywhere"} means we are considering a set whose complement has measure zero.
+    \item Almost everywhere in this text, we work with locally compact topological groups. In most cases we the groups are also assumed to be abelian. We use the abreviation "\textbf{LCA group}" in such cases.
     \item Recall that every locally compact group admits a (bi-invariant) Haar measure, which we often denote by $\dx$ or $\dy$ or $\dz$, and so on.
     \item Given a Borel (i.e measurable) set on $A \subseteq G$ with Haar measure $\dx$, for sake of clarity we denote by $\vol(A, \dx)$ the value $\dx(A)$, i.e the measure of $A$ with respect to $\dx$.
+    \item We use terms like \textbf{comeasure/covolume}/etc, to mean "measure/volume/etc of the complement".
+    \item For $G$ a topological group, we denote by $\hat{G}$ the \textbf{Pontryagin dual group} of continuous characters $G \to S^1$. See Appendix \ref{section: Pontryagin Duality} for a detailed discussion.
+\end{itemize}
+
+\textbf{Misc Conventions}
+\begin{itemize}
+    \item When we have an infinite product we say \textbf{"almost everywhere"} to mean "in all but finitely many components".
 \end{itemize}
 
 
 
-\chapter{Preliminaries}
-\label{chapter: Preliminaries}
-
-\section{Local and Global Fields}
-\label{section: Local and Global Fields}
-
-\subsection*{Introduction}
-Here we build up the language required to discuss the 
-
-\subsection{Valuations}
+\chapter{Hello, Adele}
+\label{chapter: Hello, Adele}
 
 
+\section{Adeles and Ideles}
+\label{section: Adeles&Ideles}
 
-\newpage
+\begin{myquote}{In retrospect, we see now that the real numbers appear there as one of the infinitely many completions of the prime field, one which is neither more nor less interesting to the arithmetician than its p-adic companions, and that there is at least one language and one technique, that of the \textbf{adeles}, for bringing them all together under one roof and making them cooperate for a common purpose.}{Preface to \textit{Basic Number Theory}}{Andr\'e Weil}
+
+\end{myquote}
+
+We begin by computing the character group $\hat{\qq}$ of homomorphisms $\qq \to S^1$, a task often done with assumptions of deep algebraic number theory. We follow the more elementary method of \cite{CharGroupOfQ}, and from it we motivate the object of our interest: adeles.
+\begin{warning}
+    Although $\hat{G}$ usually refers to group of \textit{continuous characters} on $G$ (see \ref{def: Pontryagin Dual}), in this case we are NOT requiring that $\chi \in \hat{\qq}$ be a continuous map (unless of course we give $\qq$ the discrete topology).
+\end{warning}
+It is a standard result that the only continuous homomorphisms from $\rr$ to $S^1$ are of the form
+\begin{equation*}
+    x \mapsto e^{i \lambda x}
+\end{equation*}
+for any $\lambda \in \rr$ (see the proof of \ref{example: dual of S^1 is Z} for a more detailed discussion). It follows that the restriction of the above map to $\qq$ is also a homomorphism to the circle. One might be tempted to think that this, too, characterizes all homomorphisms on $\qq$, but this is NOT the case.\\
+
+
+\begin{remark}
+    Some texts 
+\end{remark}
+
+\subsection{The General Restricted Product}
+\label{subsection: Restricted Products}
+Let $J$ be an indexing set (the reason for choosing $J$ over $I$ will become apparent
+later when we get introduced to the Ideles), suppose that for every $v \in J$ we have 
+a locally compact group indexed by $G_v$. We fix a finite subset $J_\infty$ of $J$ (which
+will later represent the infinite places), and suppose that for all $v \notin J_\infty$
+we have a compact open (and thus closed) subgroup $H_v \leq G_v$.
+
+\begin{defn}
+\label{def: resprod}
+The \textbf{restricted direct product} (also just called the \textbf{restricted product}) of the $G_v$ with respect to the $H_v$ is defined as 
+\begin{equation*}
+    \rprod_{v \in J} G_v := \set{(x_v) \in \prod_{v \in J} G_v : x_v \in H_v \text{ for all but finitely many } v}
+\end{equation*}
+\end{defn}
+
+\begin{remark}[Notation]
+The notation I've used for the restricted product (product and coproduct symbol overlayed on one another) is non-standard, but more distinct than the usual $\prod'$. I first saw this in Andrew Sutherland's lecture notes for 18.875 at MIT.
+\end{remark}
+
+Let us denote this restricted product $G$. Note $G \subseteq \prod G_v$ (the normal
+direct product of groups). We want to topologize $G$, but as it turns out, the subspace topology induced by the product topology on $\prod G_v$ is insufficient. For reasons that will become clear later, we'll want sets like $\prod H_v$ to be open, which won't be true in the subspace topology unless $H_v = G_v$ for all but finitely many $v \in J$.
+
+\begin{defn}
+\label{def: resprod topology}
+    The \textbf{restricted product topology} on $\rprod G_v$ is given by the basis
+    \begin{equation*}
+        \set{\prod U_v : U_v \subseteq_{\text{open}} G_v, \ e \in U_v \text{ and } U_v = H_v \text{ for all but finitely many } v}
+    \end{equation*}
+\end{defn}
+
+\begin{observation}
+Suppose we have a family of compact opens $H'_v \subseteq G_v$ such that $H'_v = H_v$ for all but finitely many $v \in J$. Then we note that $\rprod G_v$ wrt to the $H_v$ is the same (both set-theoretically and topologically) as $\rprod G_v$ wrt to the $H'_v$ (work this out rigorously if it's not clear!). It thus suffices to specify the $H_v$ for all but finitely many $v$. A parallel observation we make is that for any finite positive integer $n$ we have the topological isomorphism:
+\begin{align}
+\label{eqn: resprod dir-prod isomorphism}
+    \rprod_v G_v^n  &\cong \prod^n \brack{ \rprod_v G_v} \nonumber \\
+    \brack{ \ldots, \brack{g_{v, 1}, \ldots, g_{v, n}}, \ldots}_v &\mapsto \brack{\brack{g_{v, 1}}_v, \ldots, \brack{g_{v, n}}_v},
+\end{align}
+where, naturally, $G^n_v$ is the $n$-fold direct-product of $G_v$ with itself. 
+\end{observation}
+
+We introduce a handy piece of notation that'll come in useful later. Let $S$ be any finite subset of the index set $J$ containing $J_\infty$. Then we define
+\begin{equation}
+\label{eqn: G_S restricted prod}
+    G_S := \prod_{v \in S} G_v \times \prod_{v \notin S} H_v
+\end{equation}
+
+For every $S, T$ such that $S \subseteq T$, consider the inclusion maps $i_{S, T}: G_S \inj G_T$. Then the restricted product $G$ is in fact the colimit of this directed system, i.e:
+\begin{equation}
+\label{eqn: resprod colim expression}
+    G = \dlim_{S} G_S 
+\end{equation}
+
+\begin{exercise}
+\label{exercise: restricted product as colimit}
+Verify the abstract-nonsense characterization of the restricted product given in Equation \ref{eqn: resprod colim expression} coincides (as a topological isomorphism) with the explicit description in \ref{def: resprod}.
+\end{exercise}
+
+\begin{prop}
+\label{restricted product properties}
+Let $G_v, H_v$ be as defined above and $G$ be the restricted product. Then
+\begin{enumerate}[(a)]
+    \item $G$ is a locally compact group.
+    \item A subset $Y \subseteq G$ has compact closure iff $Y \subseteq \prod K_v$ for some family of compact subsets $K_v \subseteq G_v$ such that $K_v = H_v$ for all but finitely many $v$.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+\textbf{\underline{(a)}}\\
+We first verify (in perhaps a bit more rigor than required, but as good practice to get a feel for this construction) that it is indeed a topological group. The group structure is clear; for continuity of the group maps, recall any open set is of the form
+\begin{equation*}
+    \calu := \prod_{v \in S} U_v \times \prod_{v \notin S} H_v
+\end{equation*}
+for some finite indexing set $S$ and opens $U_v \subseteq G_v$. Since each $H_v$ is a subgroup, the preimage of $\calu$ under the inversion map is:
+\begin{equation*}
+    \prod_{v \in S} \inv{\brack{U_v}} \times \prod_{v \notin S} H_v,
+\end{equation*}
+which is also open since each $G_v$ is a topological group, thereby giving us continuity of inversion.\\
+For multiplication, the topological isomorphism in Equation \ref{eqn: resprod dir-prod isomorphism} gives us $G \times G \cong \rprod_v (G_v \times G_v)$, allowing us to similarly look at preimages component by component. In particular, consider any element
+\begin{equation*}
+    \brack{ \brack{k_v, k'_v}_{v \in S}, \brack{k_v, k'_v}_{v \notin S}}
+\end{equation*}
+in the preimage of $\calu$ under the addition map. We note that by definition, away from some finite index set $T \supseteq S$, we must have that $(k_v, k'_v) \in H_v \times H_v$ for all $v \notin T$, and clearly $H_v \times H_v$ is in the pre-image of $\calu$. For any $v \in T$, we know from the fact that $G_v$ is a topological group that $(k_v, k'_v)$ has some open neighborhood $W_v \times W'_v$ contained in the pre-image of $\calu$. Thus:
+\begin{equation*}
+    \brack{ \brack{k_v, k'_v}_{v \in S}, \brack{k_v, k'_v}_{v \notin S}}  \in \prod_{v \in T} \brack{W_v \times W'_v} \times \prod_{v \notin T} \brack{H_v \times H_v} \subseteq \inv{\text{add}}(\calu),  
+\end{equation*}
+and so multiplication is continuous. Thus $G$ is a topological group.
+\begin{warning}
+    Our work above seems (and may very well be) a tad pedantic with the details, and indeed several texts leave the fact of the restricted product being a topological group as a trivial observation. However it is worth being careful about constructions such as this; one might be tempted to think that if we have \textit{any} directed system of topological groups with inclusion maps and define a colimit as in \ref{eqn: resprod colim expression}, that the product must surely be a topological group. The editors of MIT's second-edition \textit{Encyclopedic Dictionary of Mathematics} thought so too. However this turns out NOT the case: the colimit of the directed system of $G_i := \qq \times \rr^i$ does not have continuous addition; \cite{Shimomura-topgrp-colimit} shows that we do get a nice output in this colimit construction when the groups are all locally compact.
+\end{warning}
+We now show local compactness. Since each $H_v$ is compact, Tychonoff tells us $\prod_{v \notin S} H_v$ is also compact. Thus $G_S$ is the product of finitely many locally compact spaces with a compact space, and is thus itself locally compact. Moreover, the product topology on $G_S$ is the SAME as the subspace topology induced by $G$, and since any $(x_v) \in G$ is contained in such a $G_S$, we conclude $G$ must be locally compact as well.\\
+
+\textbf{\underline{(b)}}\\
+If $Y$ is contained in some product of compact sets $ K = \prod K_v$ (which is compact by Tychonoff) its closure $\bar{Y}$ is a closed subset of a compact subset of a Hausdorff space $G$, and thus $\bar{Y}$ is compact too.\\
+For the other direction, suppose $\bar{Y}$ is a compact subset of $G$. Since the sets $G_S$ defined above cover $G$, a finite number of $G_S$ must cover $\bar{Y}$. Note a union of a finite number of $G_S$ is just a set of the form $G_{\fans}$, for $\fans$ being the union of all the $S$ such that $G_S$ is in the cover of $\bar{Y}$.\\
+Consider the (continuous!) projection maps $\rho_v: G \to G_v$. Thus each $\rho_v(\bar{Y}) \subseteq G_v$ is compact. And since all but finitely many components of $G_{\fans}$ are equal to $H_v$, the image $\rho_v(\bar{Y}) \subseteq H_v$ for all but finitely many $v$.\\
+Thus $\bar{Y}$, and therefore $Y$, is contained in a set of the desired form.
+\end{proof}
+
+\begin{observation}
+    For each $v$ we have a natural topological embedding $G_v \inj G$ into the $v$-th component of the restricted product. Thus we naturally identify $G_v$ with a closed subgroup of $G$.
+\end{observation}
+
+
+We now proceed to flesh out the theory of measures on this restricted product.
+
+\begin{prop}
+\label{Haar Measure on restricted product}
+For all but finitely many $v$, suppose $\dg_v$ be a (left) Haar measure on $G_v$ normalized so that $\vol(H_v, \d{g_v}) = 1$. Then there is a unique Haar measure $\dg$ on $G$ such that the restriction $\d{g_S}$ of $\dg$ on any $G_S$ is exactly the product measure.
+\end{prop}
+\begin{proof}
+Choose such a set $S$ and define $\d{g_S}$ as the product of the measures $\d{g_v}$. Note the measure of the compact group $\prod_{v \notin S} H_v$ is indeed finite, by how we've normalized things. It is a verification of axioms to deduce the rest that $\dg_S$ is indeed a Haar measure on $G_S$.\\
+Suppose we have another finite set of indices $T \supseteq S$. Then, by construction,
+it follows that $\d{g_S}$ coincides with the restriction of $\d{g_T}$ to $G_S \leq G_T$.\\
+
+Since $G$ is locally compact, we know it has a Haar measure, which restructs to a Haar measure on any $G_S$. Fixing any $S$, we can define [ASK QUESTION HERE ABOUT EXISTENCE OF THING THAT RESTRICTS APPROPRIATELY]
+\end{proof}
+
+Thus we write 
+\begin{equation}
+\label{eqn: measure on restricted product}
+    \dg = \prod_v \d{g_v}
+\end{equation}
+for the left Haar measure on $G$, oftened referred to as the measure induced by the component measures.\\
+
+Our next goal is integration.
+\begin{prop}
+\label{Restricted Product Integral is limit of finite integrals}
+
+Let $f$ be an integrable function on $G$. Then
+\begin{equation*}
+    \int_G f(g) \dg = \lim_S \int_{G_S}f(g_S) \dg_S
+\end{equation*}
+
+\end{prop}
+
+\begin{exercise}
+    Verify the above.
+\end{exercise}
+
+Our next result will be that integrals behave fairly well with respect to products. We first introduce a bunch of notation.\\
+Let $S_0$ be a finite set of indices containing $J_\infty$ and the $v$ for which $\vol(H_v, \dg_v) \neq 1$.\\
+Suppose for each $v$ we have a continuous integrable $f_v$ on $G_v$ such that $f_v \mid_{H_v} = 1$ for all $v \notin S_0$.\\
+For $g = (g_v) \in G$, define
+\begin{equation*}
+    f(g) = \prod_v f_v(g_v)
+\end{equation*}
+\begin{prop}
+\label{Product of integrals is Integral in restricted product}
+With the notation above, the function $f$ is well-defined and continuous. For any $S \supseteq S_0$, we have
+\begin{equation*}
+    \int_{G_S}f(g_S)\dg_S = \prod_{v \in S} \int_{G_v}f_v(g_v)\dg_v
+\end{equation*}
+\end{prop}
+\begin{proof}
+Since $g = (g_v)$ is in the restricted direct product, then $g_v \in H_v$ for all but finitely many $v$. Combining this with the fact that $f_v \mid_{H_v} = 1$ for almost all $v$, we deduce $\prod f_v(g_v)$ is a finite product, and thus well-defined.\\
+To show $f$ is continuous, consider a base for $G$ consisting of sets of the form
+\begin{equation*}
+    \prod U_v \times \prod H_v
+\end{equation*}
+where the first product contains all the (finitely many!) components of $G$ where $f_v$ is non-trivial. Thus $f$ can be computed locally as a finite product of continuous functions, and is thus locally continuous, and thus globally.\\
+The fact that the integral behaves well with products is a consequence of definitions itself, and the fact that $f$ is a well-defined function.
+\end{proof}
+
+\begin{corollary}
+\label{Product integral restricted product Corollary}
+    With the notation as in the above result, 
+    \begin{equation*}
+        \int_G f(g) \dg = \prod_v \int_{G_v}f_v(g_v) \dg_v
+    \end{equation*}
+    and $f \in L^1(G)$ provided that the RHS is a finite product.
+\end{corollary}
+\begin{proof}
+By \ref{Restricted Product Integral is limit of finite integrals}, we know $f$ is integrable iff $\lim_S \int_{G_S}f(g_S)\dg_S < \infty$, which is true iff
+\begin{equation*}
+    \lim_S \prod_{v \in S}\int_{G_v}f_v(g_v) \dg_v = \prod_{v} \int_{G_v}f_v(g_v) \dg_v < \infty,
+\end{equation*}
+by the equation in \ref{Product of integrals is Integral in restricted product}.
+\end{proof}
+
+
+\begin{prop}
+\label{Fourier Transform on restricted product is integrable}
+Suppose all the $G_v$ are abelian, and suppose we have functions $\{f_v\}$ on $G_v$ such that they are the characteristic functions for $H_v$ for all but finitely many $v$. Then $f$'s Fourier transform is integrable and given by
+\begin{equation*}
+    \hat{f}_v(g) = \prod_v \hat{f}_v(g_v)
+\end{equation*}
+\end{prop}
+\begin{proof}
+Firstly note that even in the non-abelian case, by \ref{Product integral restricted product Corollary}, we have 
+\begin{equation*}
+    \int_G f(g) \dg = \prod_v \int_{G_v}f_v(g_v) \dg_v = \prod_{v \in S} \int_{G_v} f_v(g_v) \dg_v
+\end{equation*}
+for some finite set $S$, since $f_v$ is the characteristic function of $H_v$. Thus we have a finite product of continuous functions, and thus integrable.\\
+In the abelian case, let $\chi = (\chi_v)$ denote a character of $G$, and define
+\begin{equation*}
+    h = \prod_v \brack{h_v := f_v\chi_v}
+\end{equation*}
+Since $\chi$ is unitary, $h$ must be integrable, and applying the identity in \ref{Product integral restricted product Corollary}, we get our desired result in terms of the Fourier transform.
+\end{proof}
+
+From now on assume all groups are abelian. We want to build a measure on the Pontryagin dual $\hat{G}$ that is dual to $\dg$ in the sense of the Fourier inversion theorem (\ref{thm: Fourier inversion}). For each $v$, let
+\begin{equation*}
+    \d{\chi_v} = \hat{\d{g_v}}
+\end{equation*}
+denote the dual measure to $\d{g_v}$ on $\hat{G_v}$. Note for any $f_v \in L^1(G_v)$, we have that
+\begin{equation*}
+    \hat{f_v}(\chi_v) = \int_{G_v} f_v(g_v)\bar{\chi_v}(g_v)\d{g_v}
+\end{equation*}
+by definition. If $f_v$ is the characteristic function of $H_v$ (which is visibly integrable and positive definite) then 
+\begin{equation*}
+    \hat{f_v}(\chi_v) = \int_{H_v} \chi_v(g_v)\d{g_v} = \begin{cases}
+        \vol(H_v, \d{g_v}), & \chi_v \vert_{H_v} = 1\\
+        0, & \text{otherwise,}
+    \end{cases}
+\end{equation*}
+since the integral of a non-trivial character over a group is zero. In other words, if $H_v^*$ is the subgroup of $\hat{G_v}$ of characters trivial on $H_v$, then $\hat{f_v}(\chi_v)$ is the characteristic function of $H^*_v$ scaled by $\vol(H_v, \d{g_v})$. Thus, computing the fourier inversion formula, for $y \in H_v$ we have:
+\begin{equation*}
+    f_v(y) = \int_{\hat{G_v}} \hat{f_v}(\chi_v) \chi_v(y) \d{\chi_v} = \vol(H_v, \d{g_v}) \int_{H^*_v} \d{\chi_v} = \vol(H_v, \d{g_v}) \vol(H^*_v, \d{\chi_v}) = 1,
+\end{equation*}
+where the last equality follows from our choice of $f_v$ as the characteristic function of $H_v$ and $y \in H_v$. Recall in our construction of $\dg$ that $\d{g_v}$ assigns volume 1 to $H_v$ for all but finitely many $v$. The above equation then tells us $\vol(H_v, \d{\chi_v}) = 1$ almost everywhere as well, and so we can define
+\begin{equation}
+    \label{eqn: dual measure on restricted product}
+    \d{\chi} := \prod_v \d{\chi_v}
+\end{equation}
+as in \ref{eqn: measure on restricted product}, and this is also well-defined.
+
+\begin{prop}
+\label{prop: duality of measure on restricted product}
+The measure $\d{\chi}$, as defined in \ref{eqn: dual measure on restricted product}, is dual to $\dg$, defined in \ref{eqn: measure on restricted product}, in the sense that:
+\begin{equation*}
+    f(g) = \int_{\hat{G}} \hat{f}(\chi) \chi(g) \d{\chi}
+\end{equation*}
+for all $f \in V^1(G)$.
+\end{prop}
+\begin{proof}
+    It suffices [WHY] to check on a functions that are product functions of the form
+    \begin{equation*}
+        f = \prod f_v,
+    \end{equation*}
+    where $f_v$ is the characteristic function of $H_v$ for almost all $v$. For any input $g$, the LHS above is $\prod f_v(g_v)$ by definition, and using the fact that each $\d{\chi_v}$ is dual to $\d{g_v}$, we get:
+    \begin{equation*}
+        f_v(g_v) = \int_{\hat{G_v}} \hat{f_v}(\chi_v) \chi_v(g_v) \d{\chi_v},
+    \end{equation*}
+    and multiplying them together (while applying Fubini) gives us our desired result.
+\end{proof}
+
+
+\subsection{Adeles, Ideles and Approximations}
+\label{subsection: Approximation theorem Adeles}
+
+Let $K$ be a global field, and let $K_v$ denote its completion at a place $v$. With respect to addition, note $K_v$ is a locally compact additive group. For all finite places $v$, recall $K_v$ admits its local ring of integers $\calo_v$ as an open compact subgroup.
+
+\begin{defn}
+    The \textbf{adele group} $\aa_K$ of a global field $K$ is the restricted direct product of $K_v$ with respect to the open subgroups $\calo_v$. Since this admits a natural ring structure as well, it is also referred to as the \textbf{adele ring}.
+\end{defn}
+
+Note we have an embedding
+\begin{equation*}
+\begin{split}
+    K & \inj \aa_K\\
+    x &\mapsto (x, x, \ldots)
+\end{split}
+\end{equation*}
+This is well-defined since $K$ always has a natural embedding in $K_v$ for any place $v$, and by unique factorization, every element is a local integer for all but finitely many $v$.\\
+
+Similarly, we can conisder $K^\times$, the locally compact group of units of $K$ wrt to multiplication. Then the local units $\calo_v^\times$ are an open compact subgroup of each $K_v^\times$.
+\begin{defn}
+The \textbf{idele group} $\ii_K$ of a global field $K$ is the restricted direct product of the $K_v^\times$ with respect to $\calo_v^\times$.
+\end{defn}
+
+We have a similar embedding
+\begin{equation*}
+    \begin{split}
+    K^\times &\inj \ii_K\\
+    x &\mapsto (x, x, \ldots)
+    \end{split}
+\end{equation*}
+which is again well-defined.
+
+The induced topologies on the adele and idele group are called the \textbf{adelic} and \textbf{idelic} topologies, respectively.
+
+\begin{warning}
+Although $\ii_K$ is algebraically isomorphic to $\aa_K^\times$, this is not a topological embedding. For example, taking $K = \qq$ and $S$ being any finite collection of primes, and let $U_p$ be any neighborhood of 1 in $\qq_p$ for $P \in S$. Then
+\begin{equation*}
+    \brack{\prod_{p \in S}N_p \times \prod_{p \notin S}\zz_p} \cap \ii_\qq \nsubseteq \rr^\times \times \prod_{p < \infty} \zz_p^\times = \aa_\qq^\times 
+\end{equation*}
+Note we can select some $(x_p) \in \ii_\qq$ such that $x_p \in \zz_p \setminus \zz_p^\times$ for some $p \notin S$, which therefore excludes it from being in $\aa_\qq^\times$ on the RHS. In particular, the idelic topology is finer than the induced subspace topology.
+\end{warning}
+
+Let $S_\omega$ denote the infinite places of $K$. We denote by $\aa_\omega$ the open subgroup $\aa_{S_\omega} \subseteq \aa_k$, i.e the elements of the adele group where all the components at the finite places are integral.
+
+\begin{theorem}[Approximation]
+\label{Approximation Theorem}
+For every global field $K$,
+\begin{equation*}
+    \aa_K = K + A_\omega
+\end{equation*}
+where $K$ is identified with its natural diagonal embedding.
+\end{theorem}
+\begin{proof}
+Given some $x = (x_v) \in \aa_K$, we want to find some $y \in K$ such that $x_v - y \in \calo_v$ for all $v$.\\
+By definition, $x_v \in \calo_v$ for all but finitely many places $v$, each corresponding to a prime $\pp_v \ideal \calo_v$. Letting $p_v \in \calo_K$ be an element of $\pp$-adic valuation 1 in each of these ideals, note that there must exist some $n_v \in \nn$ such that $p_v^{n_v}x_v \in \calo_v$. Set 
+\begin{equation*}
+    q := \prod_{v \in T} p_v^{n_v} 
+\end{equation*}
+where $T$ is the (finite!) set of finite places where $x_v \notin \calo_v$. By CRT, we can find some $\lambda \in \calo_K$ such that $qx_v - \lambda \in \pp_v^{n_v}$ for all $v \in T$. Letting $y = \lambda/q$, then by construction $x_v - y \in \calo_v$ for all $v$, as desired. [FILL IN MORE DETAIL LATER]
+\end{proof}
+\begin{corollary}
+    With the notation above, $K \cap \aa_\omega = \calo_K$
+\end{corollary}
+\begin{sanitycheck}
+    Verify the above corollary.
+\end{sanitycheck}
+
+\subsection{Geometry of $\aa_K/K$}
+\label{subsection: Geometry of A_K/K}
+We explore the behavior of the adeles under base-change.
+\begin{lemma}
+\label{A_K/K Lemma}
+Take $E/K$ a finite extension of global fields, and let $\set{u_1, \ldots u_n}$ be a $K$-basis of $E$. Then the natural map
+\begin{equation*}
+    \begin{split}
+    \alpha: \prod^n_{j=1} \aa_K &\to \aa_E\\
+    ((x_{v, j})_v)_j &\mapsto \sum_j u_j(x_{v, j})v
+    \end{split}
+\end{equation*}
+is an isomorphism of topological groups.
+\end{lemma}
+\begin{proof}
+[FINISH LATER]
+\end{proof}
+
+
+\begin{theorem}
+\label{thm: K discrete and cocompact in A_K}
+
+Any global field is a discrete, cocompact subgroup of its adele ring.
+
+\end{theorem}
+\begin{proof}
+Let $K_0$ denote the smallest global subfield of $K$ (i.e $\qq$ or $\ff_p(t)]$), and let $n := [K: K_0]$. Then by \ref{A_K/K Lemma}, we have the following commutative diagram:
+\begin{center}
+    \begin{tikzcd}
+        \prod^n_{j=1}\aa_{K_0} \arrow[r] & \aa_K\\
+        \prod^n_{j=1} K_0 \arrow[r] \arrow[u, hookrightarrow] & K \arrow[u, hookrightarrow]
+    \end{tikzcd}
+\end{center}
+where the horizontal maps are topological isomorphisms. Thus $\aa_K/K$ is compact iff $(\aa_{K_0}/K_0)^n$ is compact, which is true iff $\aa_{K_0}/K_0$ is compact.\\
+Thus it suffices to consider $K=K_0$, in which case we have exactly one infinite place. Define a subset $C$ of the adele group by 
+\begin{equation*}
+    C := \set{x \in \aa_K : \abs{x_\infty}_\infty \leq \frac{1}{2} \text{ and } \abs{x_v}_v \leq 1, \ \forall v \neq \infty}
+\end{equation*}
+If we show that $C \cap K = \set{0}$ and $\aa_K = C+K$, we will be done, since $C \cong \aa_K/K$.\\
+If $x \in K \cap C$, then we must have $x \in \calo_K$, since $x \in \calo_v$ for every place $v$. If $K = \qq$ then this condition ($x \in \zz$) combined with the condition that $\abs{x_\infty}_\infty \leq 1/2$ forces. $x = 0$. If $K = \ff_p(t)$, then let the infinite place be the one defined by $1/t$. Then $\abs{x}_\infty  = p^{-\ord_{1/t}(x)}$, which is $\geq 1$ for anything in $\calo_K = \ff_p[t]$. Thus $C \cap K = \set{0}$.\\
+
+[FINISH TEDIOUS DETAILS HERE]
+\end{proof}
+
+
+
+[FINISH STUFF HERE]
+
+\subsection{Class Groups}
+\label{subsection: Class Groups}
+\begin{defn}
+For a global field $K$, the quotient
+\begin{equation*}
+    C_K := \ii_K/K^\times
+\end{equation*}
+is called the \textbf{idele class group} of $K$.
+\end{defn}
+\begin{warning}
+As seen in the previous section, $\aa_K/K$ is compact. One might be led to think $\ii_K/K^\times$ is also compact but this is NOT the case, as we'll see later.
+\end{warning}
+
+To analyze this, we first standardize the absolute value functions we're using.
+
+\begin{defn}
+For $k$ a local field, the \textbf{normalized} absolute value $\abs{\cdot}_k$ on $k$ is defined as follows:
+\begin{enumerate}[(a)]
+    \item For $k = \rr$ we set $\abs{\cdot}_k$ to be the usual absolute value function.
+    \item For $k = \cc$ we set $\abs{z}_k := z \bar{z}$, which is the square of the usual absolute value function on $\cc$.
+    \item For $k$ non-Archimedean with uniformizer $\pi$ and residue order $q$, we set $\abs{\pi}_k := \inv{q}$. (Note this extends uniquely to $k$). 
+\end{enumerate}
+\end{defn}
+
+Recall that if $k'/k$ is a finite extension of local fields then $\abs{x}_{k'} = \abs{N_{k'/k}(x)}_k$. 
+
+\begin{defn}
+    Let $K$ be a global field, and let $\abs{\cdot}_v$ denote the normalized absolute value on the completion $K_v$. Then the \textbf{idelic absolute value} is defined by:
+    \begin{equation*}
+        \begin{split}
+            \abs{\cdot}_{\aa_K} : \ii_K &\to \rr_{> 0} \\
+            x = (x_v)_v &\mapsto \prod_v \abs{x_v}_v
+        \end{split}
+    \end{equation*}
+\end{defn}
+\begin{sanitycheck}
+    Why is the product defined above well-defined?
+\end{sanitycheck}
+
+\begin{theorem}[Artin's Product Formula]
+\label{Artin product formula}
+    Let $K$ be a global field. Then for every $x \in K^\times$ we have $\abs{x}_{\aa_K} = 1$
+\end{theorem}
+\begin{proof}
+Let $E/K$ be finite separable. Then 
+\begin{equation*}
+    \begin{split}
+        \abs{x}_{\aa_E} &= \prod_{u \in \fanp_K} \prod_{v \in \fanp_E, v \mid u} \abs{x}_v\\
+        &= \prod_{u \in \fanp_K} \prod_{v \in \fanp_E, v \mid u} \abs{N_{E_v/K_u}(x)}_u\\
+        &= \prod_u \abs{N_{E/K}(x)}_u
+    \end{split}
+\end{equation*}
+[ASK QUESTION ABOUT MISSING EXPONENT ABOVE]
+\end{proof}
+
+We are now ready to define a subgroup of the ideles for which the embedding of $K$ IS cocompact.
+
+\begin{defn}
+For $K$ a global field, the \textbf{ideles of norm one} are:
+\begin{equation*}
+    \ii^1_K := \ker(\abs{\cdot}_{\aa_K})
+\end{equation*}
+and the \textbf{norm-one idele class group} is the quotient:
+\begin{equation*}
+    C^1_K := \ii_K^1/K^\times
+\end{equation*}
+\end{defn}
+
+Note by the Artin product formula (\ref{Artin product formula}) that $K^\times \subseteq \ii_K^1$, so this quotient is well-defined. We also have the SES
+\begin{equation*}
+    1 \to C^1_K \to C_K \to \abs{\ii_K}_{\aa_K} \to 1.
+\end{equation*}
+
+
+\begin{theorem}
+The norm-one idele class-group is always compact.
+\end{theorem}
+\begin{proof}
+Recall from the proof of \ref{thm: K discrete and cocompact in A_K} that there exists some compact subset $Y \subseteq \aa_K$ such that $\aa_K = K + Y$. Fix a Haar measure $\mu$ on $\aa_K$ (which exists as it's a locally compact group), then $\mu(Y) < \infty$. Choose a compact subset $Z \subseteq \aa_K$ such that $\mu(Z) > \mu(Y)$. Consider the following two subsets:
+\begin{equation*}
+    \begin{split}
+        Z_1 & := \set{z_1 - z_2 : z_1, z_2 \in Z}\\
+        Z_2 & := \set{z_1z_2 : z_1, z_2 \in Z}
+    \end{split}
+\end{equation*}
+By continuity of addition and multiplication these two sets are also compact. Since $K$ is discrete in $\aa_K$, we have $K \cap Z_2$ is finite, with non-zero elements $x_1, \ldots, x_r$. 
+[LOTS OF EXERCISE NONSENSE READ IN DETAIL and COMPLETE LATER]
+\end{proof}
+
+
+For a given finite set $S$ of places of $K$ containing $S_\infty$, the Archimedean places, it is useful to have $S$-versions of the aforementioned groups.
+
+\begin{warning}
+[SOME WEIRD SHIT ABOUT NOTATION EXCLUDING INFINITE PLACES]
+\end{warning}
+
+\begin{defn}
+Take $S$ a finite set of places of a global field $K$ containing the Archimedean places. Then:
+\begin{enumerate}[(a)]
+    \item The \textbf{$S$-adeles} of $K$ are defined as:
+    \begin{equation*}
+        \aa_{K, S} := \prod_{v \in S} K_v \times \prod_{v \notin S} \calo_v
+    \end{equation*}
+    \item The \textbf{ring of $S$-integers} is defined as:
+    \begin{equation*}
+        \calo_{K, S} := K \cap \aa_{K, S}
+    \end{equation*}
+    i.e the elements of $K$ that are $v$-integral for all $v \notin S$.
+    \item The \textbf{$S$-ideles} are defined as:
+    \begin{equation*}
+        \ii_{K, S} := \prod_{v \in S}K_v^\times \times \prod_{v \notin S}\calo_v^\times 
+    \end{equation*}
+    \item The \textbf{$S$-ideles of norm one} defined as:
+    \begin{equation*}
+        \ii_{K, S}^1 := \ii_K^1 \cap \ii_{K, S}
+    \end{equation*}
+\end{enumerate}
+\end{defn}
+
+\begin{observation}
+
+\end{observation}
+
+\begin{exercise}
+    Prove the above observation.
+\end{exercise}
+
+\subsection{Characters on Adeles}
+\label{subsection: Characters on Adeles}
+
+
+[Insert stuff here]
+
+We now proceed to a slightly more advanced task
+
+
+
+
+
+\chapter{The Thesis of Tate (a.k.a, $\GL_1$)}
+\label{chapter: Tate's thesis}
+
+
+\section{Idele Zeta Functions}
+\label{section: Id\'ele Zeta Functions}
+A lot of the major strides in classical analytic number theory were made in the 19th and 20th century, where it was discovered that a lot of information about the structure of prime numbers could be deduced by studying the Riemann zeta function
+\begin{equation*}
+    \zeta(s) := \sum^\infty_{n=1} \frac{1}{n^s},
+\end{equation*}
+which is absolutely convergent for complex $s$ such that $\re{s} > 1$. This function admits an analytic continuation to the entire complex plane, save for a simple pole at $s=1$, and satisfies the functional equation:
+\begin{equation*}
+    \xi(s) = \xi(1-s),
+\end{equation*}
+where the Riemann-xi function is defined as
+\begin{equation*}
+    \xi(s) := \frac{1}{2}s(s-1)\pi^{-s/2} \Gamma(s/2) \zeta(s.
+\end{equation*}
+Much of the early work for $\zeta(s)$ for real $s$ was done by Euler, who established the classic Euler product expansion
+\begin{equation*}
+    \zeta(s) = \prod_{p \text{ prime}} \frac{1}{1-p^{-s}}.
+\end{equation*}
+A generalization of the zeta function can be done via Dirichlet series. Given any multiplicative sequence $\set{a_n}$ (i.e $\gcd(m, n) = 1 \implies a{mn} = a_ma_n$) we can create the series 
+\begin{equation*}
+    L(s) := \sum \frac{a_n}{n^s}.
+\end{equation*}
+
+\begin{example}[Dirichlet $L$-function]
+\label{example: Dirichlet L-func}
+    Recall a \textbf{Dirichlet character} with modulus $m \in \zz_{> 0}$ is a completely multiplicative function $\chi: \zz \to \cc$ that is $m$-periodic, nonzero on any input coprime to $m$ and zero otherwise.\\
+    Given a Dirichlet character $\chi$, its \textbf{Dirichlet $L$-series} is given by:
+    \begin{equation*}
+        L(s, \chi) = \sum^\infty_{n=1} \frac{\chi(n)}{n^s}.
+    \end{equation*}
+\end{example}
+
+Studying the analytic properties of the various $L$-series is vital for decoding properties of prime numbers in the integers. In particular, it is famously used to show Dirichlet's theorem that any arithmetic series with coprime base and difference contains infinitely many primes.\\
+
+As a generalization, we can craft similar $L$-functions over number fields.
+
+\begin{example}[Generalized Dedekind Zeta Function]
+\label{example: Generalized Dedekind Zeta}
+Let $K$ be a number field, and let $\chi$ be a character of standard ideal class group $\cl(K)$, then we can construction the Dirichlet series:
+\begin{equation*}
+    L(s, \chi) = \sum_{(0) \neq \fraka \ideal \calo_K} \frac{\chi(\fraka)}{N(\fraka)^s},
+\end{equation*}
+where $N(\fraka)$ is the standard ideal norm taken over $\qq$ as the base field. When $\chi = 1$ this is known as the \textbf{Dedekind zeta function}.
+\end{example}
+
+It turns out the residues of the analytic continutations these generalized Dedekind zeta functions encode information about the class numbers of the their number fields. 
+
+One can generalize the above even further to consider crafting a series $L(s, \chi)$ for any $\chi$ that is a continuous character of the idele class group $C_K$. It is a famous result of Hecke that $L(s, \chi)$ has analytic continuation and satisfies an appropriate functional equation for any number field $K$ and any idele class character $\chi$. The original formulation of this result involved a complicated computation with these things called theta functions. Moreover in the functional equation a so-called \textit{root number} $W(\chi)$ associated to each $\chi$ kept popping up, with no good explanation for its value.\\
+Under the guidance of Emil Artin, in his 1950 thesis John Tate made use of Fourier analysis on adele groups to reprove the results of Hecke and establish these "local" functional equations that gave an "explicit factorization" of the root number.
+
+Because of the limits of space and time we do not go into Hecke's original approach via theta functions here, but 
+
+In his thesis, Tate worked with some ad-hoc function spaces over local and global fields. We standardize our workings over the so-called \textit{Schwarz-Bruhat functions} on local fields. Over an Archimedean number field (i.e $\rr$ or $\cc$), recall a \textbf{Schwarz} function (more commonly known as a \textit{rapidly-decreasing function}) is a smooth $\cc$-valued function $f$ such that
+\begin{equation*}
+    \lim_{x \to \infty} p(x)f(x) = 0
+\end{equation*}
+for all polynomials $p(x)$.
+\begin{defn}
+\label{def: Schwarz-Bruhat functions}
+A \textbf{Schwarz-Bruhat} function on a local field $F$ is a Schwarz function if $F$ is Archimedean and a smooth\footnote{A function on a non-Archimedean local field is smooth if it is locally constant.}, compactly-supported function in $F$ is non-Archimedean. We denote by $S(F)$ the complex vector space of Schwarz-Bruhat functions on $F$.
+\end{defn}
+We use these functions because they guarantee that taking their integral over the entire group is well-defined.
+
+\subsection{Local Zeta Integrals}
+Before analyzing the global zeta function of a function on an adele group of a global field, we first understand the induced zeta functions on each of the local components. The goal of this subsection will be to introduce so-called \textit{local $L$-factors} associated to a character $\chi$ (and its dual under the Fourier transform $\chi^\lor$) of a local field. In particular, these local $L$-factors will be realized as the gcd of some local zeta functions. We start with a slew of notations and definitions, so buckle up.\\
+
+Let $F$ be a local field with absolute value $\abs{\cdot}$ and Haar measure $\dx$.
+Let $X(F^\times) := \Hom_{cont}(F^\times, \cc^\times)$ be the continuous group homomorphisms into the complex numbers. The elements $\chi \in X(F^\times)$ will be referred to as \textbf{quasi-characters} of $F^\times$.
+\begin{remark}
+    Sometimes the elements of $X(F^\times)$ are just called \textbf{characters} instead, and continuous homomorphisms into $S^1$ (i.e elements of $\hat{F^\times}$, with the notation of \ref{section: Pontryagin Duality}) are called \textbf{unitary characters}. We use the other convention because it is consistent with Tate's own formulation in his original thesis and because it gives us an excuse to say and write the prefix "quasi". Also note that we use the hyphenation convention with "qausi".
+\end{remark}
+
+When $F$ is non-Archimedean, let $\calo_F$ denote its ring of integers, $\pp$ its maximal ideal with uniformizer $\pi$ and residue field $\ff_q$. Recall that we can write $F^\times \cong U_F \times \cals_F$, where $U_F$ is the (compact!) subgroup of absolute-value-one elements, and $\cals_F = \abs{F^\times}$, i.e. the image of $F^\times$ in the valuation map\footnote{recall this is $\rr_{> 0}$ in the Archimedean case and $q^\zz$ otherwise}.\\
+We make the observation that any quasi-character $\chi \in X(F^\times)$ factors into a product:
+\begin{equation*}
+    \chi = \mu \abs{\cdot}^s,
+\end{equation*}
+where $s \in \cc$ and $\mu$ is the pullback of a character on $U_F$ (defined uniquely by restriction of $\chi$!). This is because compactness of $U_F$ forces any quasi-character on it to have image in $S^1$, and the only quasi-characters on $\cals_F$ are maps $t \mapsto t^s$.
+\begin{defn}
+\label{def: exponent and unramified character}
+    For any quasi-character  $\chi = \mu \abs{\cdot}^s \in X(F^\times)$, we call $\re{s}$ the \textbf{exponent} of $\chi$.\\
+    Furthermore, we say $\chi$ is \textbf{unramified} if $\mu = 1$.
+\end{defn}
+\begin{warning}
+    Recall that for any $q \in \rr_{> 0}$ we have the formula:
+    \begin{equation*}
+        q^i = \cos(\ln(q)) + i \sin(\ln(q)).
+    \end{equation*}
+    In particular, in the non-Archimedean case the value of $s$ is NOT uniquely determined (e.g $i$ and $(1 + 2\pi)i$ would correspond to the same map), which is why we take the exponent to be the real part, which IS uniquely determined.
+\end{warning}
+
+We now define the local $L$-factors $L(\chi)$.
+
+\begin{enumerate}[(1)]
+    \item In the non-Archimedean case, we set:
+    \begin{equation}
+        \label{eqn: non-Arch local L-factor}
+        L(\chi) := \begin{cases}
+            \inv{\brack{1 - \chi(\pi_F)}}, & \text{ if } \chi \text{ is unramified,}\\
+            1, & \text{otherwise}.
+        \end{cases}
+    \end{equation}
+    \item In the Archimedean case we recall by Gelfand-Mazur that $F = \cc$ or $\rr$. 
+    \begin{enumerate}[(i)]
+        \item If $F = \cc$, note any $\chi$ is of the form:
+        \begin{equation*}
+            \chi_{s, n}: re^{i\theta} \mapsto r^s e^{i n \theta}
+        \end{equation*}
+         for $s \in \cc$ and $n \in \zz$ uniquely defined. Here we use our result in \ref{example: dual of S^1 is Z} to characterize the characters of $U_\cc = S^1$ and writing our domain in polar coordinates automatically makes $r$ equal to the absolute value of our complex input. We then set:
+         \begin{equation}
+        \label{eqn: complex local L-factor}
+            L(\chi_{s, n}) := \Gamma_\cc(s + \frac{\abs{n}}{2}) := \brack{2 \pi}^{-\brack{s + \frac{\abs{n}}{2}}}\Gamma(s + \frac{\abs{n}}{2}).
+         \end{equation} 
+         \item If $F = \rr$ the $U_F = \set{\pm 1}$. Here any quasi-character is of the form $\chi = \mu \abs{\cdot}^s$, where $\mu$ and $s$ are uniquely defined, and $\mu$ is either trivial or the sign homomorphism $\sgn: x \mapsto x/\abs{x}$. We then set:
+         \begin{equation}
+        \label{eqn: real local L-factor}
+             L(\chi) := \begin{cases}
+                 \Gamma_\rr(s) := \pi^{-s/2}\Gamma(s/2), & \mu = 1,\\
+                 \Gamma_\rr(s+1), & \mu = \sgn.
+             \end{cases}
+         \end{equation}
+    \end{enumerate}
+\end{enumerate}
+
+
+\begin{defn}
+\label{def: shifted dual and L(s, chi) notation}
+    If $\chi \in X(F^\times)$ and $s \in \cc$ then $\chi \abs{\cdot}^s$ is also a quasi-character, and we use the following notation for its local $L$-factor:
+    \begin{equation*}
+        L(s, \chi) := L(\chi \abs{\cdot}^s).
+    \end{equation*}
+    Moreover we define the \textbf{shifted dual} of $\chi$ by:
+    \begin{equation*}
+        \chi^\lor := \inv{\chi}\abs{\cdot},
+    \end{equation*}
+    so that
+    \begin{equation*}
+        L\brack{(\chi \abs{\cdot}^s)^\lor} = L\brack{1-s, \inv{\chi}}.
+    \end{equation*}
+\end{defn}
+
+We now state a result that we will later extend to adele groups.
+\begin{prop}
+\label{prop: local field is isomorphic to dual}
+Any local field $F$ is isomorphic (as a LCAG) to $\hat{F} = \Hom_{cont}(F, S^1)$. For any fixed $\psi \in \hat{F}$, the map
+\begin{equation*}
+    a \mapsto \psi_a := \psi(a \cdot  -)
+\end{equation*}
+is an topological group isomorphism.
+\end{prop}
+\begin{exercise}
+    Prove \ref{prop: local field is isomorphic to dual}.
+\end{exercise}
+
+In such a case of a \textit{self-dual} local field $F$, we can also speak of its Haar measure $\dx$ being self-dual, with the dual defined in \ref{def: dual measure}. Define 
+\begin{equation}
+\label{eqn: measure on F^times}
+    \d{^*x} := c \cdot \frac{\dx}{\abs{x}}
+\end{equation}
+for some $c \in \rr_{> 0}$, which we always set to 1 in the Archimedean case. Then $\d{^*x}$ is a Haar measure on $F^\times$.\\
+Fixing an additive character $\psi \in \hat{F}$, for any $f \in S(F)$ we can define its Fourier transform by:
+\begin{equation}
+\label{eqn: Fourier transform local-zeta-func}
+    \hat{f}(y) := \int_F f(x)\psi(xy)\dx.
+\end{equation}
+Note this almost the same formulation as in \ref{def: Fourier transform}, though we drop the conjugation in the second factor of the integrand, as a simple matter of notational convenience to make our lives easier in coming calculations. The function $\hat{f}$ is well-defined and in-fact again lies in $S(F)$, though it depends on our choice of $\psi$ and $\dx$. In Tate's original thesis he normalizes his Haar measure to be self-dual relative to $\psi$, from which he obtained the nice identity $f(x) = \hat{\hat{f}}(x)$. We avoid this normalization for the local non-Archimedean case, as it allows for more flexibility when we actually want to apply our theory more concretely.
+
+\begin{defn}
+\label{def: local zeta function}
+    Given $f \in S(F)$ and $\chi \in X(F^\times)$, we define the associated \textbf{local zeta function} to be:
+    \begin{equation*}
+        Z(f, \chi) := \int_{F^\times} f(x)\chi(x)\d{^*x}.
+    \end{equation*} 
+\end{defn}
+
+The following is the main result of this subsection.
+
+\begin{theorem}
+\label{thm: local zeta function convergence and func-eqn}
+    Let $F$ be a local field, and take  $f \in S(F)$ and $\chi = \mu \abs{\cdot}^s \in X(F^\times)$ with exponent $\sigma = \re{s}$. Then:
+    \begin{enumerate}[(a)]
+        \item \label{thmitem: abs-convg of local zeta function} If $\sigma > 0$ then the local zeta function $Z(f, \chi)$ is absolutely convergent.
+        \item \label{thmitem: functional-eqn of local zeta func} If $\sigma \in (0, 1)$ then the following functional equation holds:
+        \begin{equation*}
+            Z(\hat{f}, \chi^\lor) = \gamma(\chi, \psi, \dx) Z(f, \chi)
+        \end{equation*}
+        for some $\gamma$ independent of $f$ and meromorphic as a function of $s$.
+        \item \label{thmitem: epsilon factor local-zeta-func}There exists a factor $\varepsilon(\chi, \psi, \dx)$ nonzero for all inputs and satisfies:
+        \begin{equation*}
+            \gamma(\chi, \psi, \dx ) = \varepsilon(\chi, \psi, \dx) \frac{L(\chi^\lor)}{L(\chi)}
+        \end{equation*}
+    \end{enumerate} 
+\end{theorem}
+
+\begin{observation}
+Note that part \ref{thmitem: abs-convg of local zeta function} tells us that $Z(f, \chi)$ is absolutely convergent to the right of 0 on the complex plane, from which it follows by construction that $Z(\hat{f}, \chi^\lor)$ is absolutely convergent to the left of 1. Using this domain overlap along with part \ref{thmitem: functional-eqn of local zeta func}, we see that this theorem automatically yields a meromorphic continuation of the local zeta function. 
+\end{observation}
+
+\begin{proof}[proof of \ref{thmitem: abs-convg of local zeta function} in \ref{thm: local zeta function convergence and func-eqn}]
+To show $Z(f, \chi)$ is absolutely convergent, using our relationship between our Haar measures in Equation \ref{eqn: measure on F^times} and the fact that $\mu$ is unitary, it suffices to show that:
+\begin{equation*}
+    I(f, \sigma) = c \int_{F \setminus \set{0}} \abs{f(x)} \abs{x}^{\sigma - 1} \dx < \infty.
+\end{equation*}
+In the Archimedean case, finiteness of $I(f, \sigma)$ follows from the fact that $f$ is a Schwarz function, and thus rapidly decaying as $\abs{x}$ approaches infinity. Moreover, around zero since $\sigma > 0$ the $\abs{x}^{\sigma - 1}$ part is integrable, so we are happy.
+
+
+In the non-Archimedean case, $f$ is locally constant with compact support, it must factor through some finite group quotient of the form $\pp^m/\pp^m$, for some integers $m \leq n$ (here $\pp^k = \brangle{\pi^k}$ represents the fractional ideal of $\calo_F$ generated by the $k$-th power of its uniformizer). By linearity and translation-invariance of the Haar measure, it suffices to check finiteness of the integral for functions $f$ that are just the characteristic functions of the various ideals $\pp^j$.\\
+Using unique factorizaition in any fractional ideal, we can decompose it into a disjoint union:
+\begin{equation*}
+    \pp^j \setminus \set{0} = \bigsqcup^\infty_{k=j} \pi^k \calo_F^\times.
+\end{equation*}
+Thus our integral becomes:
+\begin{align*}
+        I(f, \sigma) &= c \int_{F \setminus \set{0}} \abs{f(x)} \abs{x}^{\sigma - 1} \dx \\
+        &= \int_{F^\times} \abs{f(x)} \abs{x}^\sigma \d{^*x}\\
+        &= \sum_{k \geq j} \int_{\pi^k \calo_F^\times} \abs{x}^\sigma \d{^*x}\\
+        &= \sum_{k \geq j}\vol(\calo_F^\times, \d{^*x})q^{-k \sigma}\\
+        &= \vol(\calo_F^\times, \d{^*x}) \frac{q^{-j\sigma}}{1 - q^{- \sigma}}
+\end{align*}
+which is finite when $\sigma > 0$, as desired.
+\end{proof}
+
+To prove the next part of our main theorem, we use a lemma that was key in Tate's original thesis. 
+\begin{lemma}
+\label{lemma: local-zeta-func func eqn}
+    Select some auxiliary function $g \in S(F)$. Then for all quasi-characters $\chi$ with exponent $\sigma \in (0, 1)$, we have:
+    \begin{equation*}
+        Z(f, \chi) Z(\hat{g}, \chi^\lor) = Z(\hat{f}, \chi^\lor)Z(g, \chi).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+Expanded out, the LHS of the Lemma statement is the following product of integrals:
+\begin{equation*}
+    Z(f, \chi) Z(\hat{g}, \chi^\lor) = \int_{F^\times} f(x) \chi(x) \d{^*x} \cdot \int_{F^\times} \hat{g}(y) \inv{\chi}(y) \abs{y} \d{^*y},
+\end{equation*}
+both of which are absolutely convergent by part \ref{thmitem: abs-convg of local zeta function} of \ref{thm: local zeta function convergence and func-eqn}. We can turn this into a double integral over the product space by:
+\begin{equation*}
+    \iint_{F^\times \times F^\times} f(x)\hat{g}(y) \chi(x \inv{y}) \abs{y} \d{^*x} \d{^*y}.
+\end{equation*}
+Using invariance of the product measure under the "shearing" automorphism $(x, y) \mapsto (x, xy)$, we obtain:
+\begin{equation*}
+    \iint_{F^\times \times F^\times} f(x)\hat{g}(xy)\chi(\inv{y}) \abs{xy} \d{^*x} \d{^*y},
+\end{equation*}
+which, by Fubini's theorem, is equal to:
+\begin{equation*}
+    \int \brack{\int f(x)\hat{g}(xy) \abs{x} \d{^*x}} \chi(\inv{y}) \abs{y} \d{^*y}.
+\end{equation*}
+To prove the lemma it remains to show that the inner integral is symmetric in $f$ and $g$. Expanding out the Fourier transform of $g$ (recalling our convention in Equation \ref{eqn: Fourier transform local-zeta-func} and transferring it to an integral over $F$ using Equation \ref{eqn: measure on F^times}), we get that the inner integral is equal to:
+\begin{equation*}
+    c \iint_{F \times F} f(x) g(z) \psi(xyz) \dz \dx.
+\end{equation*}
+Note there is a (slight) abuse of notation here as technically we shouldn't be integrating over elements in the product containing a 0, but we ignore it as a set of measure zero. We switch the order of the derivatives via Fubini to obtain:
+\begin{equation*}
+    c \iint_{F \times F} f(x) g(z) \psi(xyz) \dx \dz = c \int_F g(z) \hat{f}(zy) \dz = \int_{F^\times}  g(z) \hat{f}(zy) \abs{z} \d{^*z}
+\end{equation*}
+which gives us the desired result.
+\end{proof}
+
+\begin{proof}[proof of \ref{thmitem: functional-eqn of local zeta func} in \ref{thm: local zeta function convergence and func-eqn}]
+Our functional equation in Lemma \ref{lemma: local-zeta-func func eqn} tells us that:
+\begin{equation*}
+    \gamma(\chi, \psi, \dx) := \frac{Z(\hat{f}, \chi^\lor)}{Z(f, \chi)}
+\end{equation*}
+is independent of our choice of $f \in S(F)$. Note that:
+\begin{equation*}
+    \chi^lor = \brack{\mu \abs{\cdot}^s}^\lor = \inv{\mu} \abs{\cdot}^{1-s}
+\end{equation*}
+By part \ref{thmitem: abs-convg of local zeta function} of the main theorem, we deduce that $Z(\hat{f}, \chi^\lor)$ is absolutely convergent when $\sigma = \re{s} < 1$, and we have already seen that the denominator of $\gamma$ is absolutely convergent for all positive $\sigma$, so the functional equation in terms of $\gamma$ holds for all $\sigma \in (0, 1)$ as desired.\\
+To show $\gamma$ is meromorphic as a function of $s$, we turn to the proof of part \ref{thmitem: epsilon factor local-zeta-func} of the theorem.
+\end{proof}
+
+\begin{proof}[proof of \ref{thmitem: epsilon factor local-zeta-func} in \ref{thm: local zeta function convergence and func-eqn} in the Archimedean case]
+As shown in the proof of part \ref{thmitem: functional-eqn of local zeta func} of the theorem, the value of the $\gamma$ function is independent of our choice of $f \in S(F)$. Thus we may choose a special function, or family of functions, for each of the possible cases of $F$ to make our computations convenient. We will select a standard measure $\dx$ for each case, which is self-dual for an appropriate choice of $\psi$, and then extend our results to arbitrary $\dx$ and $\psi$ afterwords.\\
+
+\textbf{\underline{Case 1: $F = \rr$}}\\
+We take $\dx$ to be the usual Lebesgue measure, and set our additive character to be:
+\begin{equation*}
+    \psi(x) = e^{- 2 \pi i x}.
+\end{equation*}
+As we noted in our discussion of the local $L$-factors, any $\chi \in X(\rr^\times)$ is of the form $\abs{\cdot}^s$ or $\sgn \abs{\cdot}^s$.\\
+
+\underline{Sub-Case (i): $\chi = \abs{\cdot}^s$}\\
+Take $f(x) = e^{- \pi x^2}$, which is visibly in $S(\rr)$. Then recalling that we set the scaling constant in the measure transformation of Equation \ref{eqn: measure on F^times} to 1, we get:
+\begin{equation*}
+    Z(f, \chi) = \int_{\rr^\times} e^{-\pi x^2} \abs{x}^s \d{^*x} = 2 \int^\infty_0 e^{-\pi x^2} x^{s-1} \dx.
+\end{equation*}
+Using a substitution $u = \pi x^2$ (hence $\du = 2 \pi x \dx$),  the integral becomes:
+\begin{equation*}
+    \pi^{-s/2} \int^\infty_0 e^{-u} u^{s/2 - 1} \du = \pi^{-s/2} \Gamma(s/2).
+\end{equation*}
+and we see from Equation \ref{eqn: real local L-factor} that this is exactly our local $L$-factor, so in fact $Z(f, \chi) = L(\chi)$ for all characters of this form. Next we claim that $f$ is self-dual via the Fourier transform, i.e.
+\begin{equation*}
+    \hat{f}(y) = \int_\rr e^{-\pi x^2} e^{-2 \pi i xy} \dx = f(x).
+\end{equation*}
+We are omitting the details of the final equality but this is a well-known identity in classical functional analysis, and provable via a simple countour integral. Thus, we have:
+\begin{equation*}
+    Z(\hat{f}, \chi^\lor) = \int_{\rr^\times} \hat{f}(x) \chi^\lor(x) \d{^*x} = \int_{\rr^\times} f(x) \chi^\lor(x) \d{^*x} = Z(f, \chi^\lor)
+\end{equation*}
+which is equal to $L(\chi^\lor)$ by our previous calculation in this proof. Thus if $\chi = \abs{\cdot}^s$, we have:
+\begin{align}
+\label{eqn: real epsilon factor 1}
+    \gamma(\chi, \psi, \dx) &= \frac{L(\chi^\lor)}{L(\chi)} \nonumber \\
+    \implies \varepsilon(\chi, \psi, \dx) &= 1.
+\end{align}
+
+\underline{Sub-Case (ii): $\chi = \sgn \abs{\cdot}^s$}\\
+In this case we choose $f(x) = xe^{-\pi x^2}$, which is again immediately verifiable as rapidly decaying. Expanding the local zeta function we get:
+\begin{align*}
+    Z(f, \chi) &= \int_{\rr^\times} x e^{-\pi x^2} \frac{x}{\abs{x}} \abs{x}^s \d{^*x}\\
+    &= \int_{\rr^\times} e^{-\pi x^2} \abs{x}^{s+1} \d{^*x}\\
+    &= \pi^{-(s+1)/2} \Gamma\brack{\frac{s+1}{2}}.\\
+    &= \Gamma_\rr(s+1)
+\end{align*}
+which we again recall from Equation \ref{eqn: real local L-factor} as by definition our real local $L$-factor $L(\chi)$.\\
+Via another contour integral that we handwave, it can be shown that the Fourier transform of this function is of the form:
+\begin{equation*}
+    \hat{f}(y) = i y e^{- \pi y^2 } = i f(y)
+\end{equation*} 
+from which it follows 
+\begin{equation*}
+    Z(\hat{f}, \chi^\lor) = \int_{\rr^\times} i f(y) \chi^\lor \d{^*x} = i L(\chi^\lor),
+\end{equation*}
+and thus by a similar calculation to the last sub-case we deduce:
+\begin{align}
+\label{eqn: real epsilon factor 2}
+    \varepsilon(\chi, \psi, \dx) = i.
+\end{align}
+
+\textbf{\underline{Case 2: $F = \cc$}}\\
+Here we let our measure on $\cc$ be $\dz \d{\bar{z}} = 2 \dx\dy$, or double the standard Lebesgue measure. In polar coordinates this means $\dz = 2 \dr \dtheta$, which also implies $\d{^*z} = (2/r) \dr \dtheta$. We choose this as it is self-dual with respect to the additive quasi-character
+\begin{equation*}
+    \psi(z) := e^{- 2 \pi i (z + \bar{z})}.
+\end{equation*} 
+We also adjust the standard norm on $\cc$ to agree with the module, i.e
+\begin{equation*}
+    \abs{z} := z \bar{z}.
+\end{equation*}
+Since $\cc^\times \cong \rr_{> 0} \times S^1$, any multiplicative quasi-character must be of the form:
+\begin{equation*}
+    \chi_{s, n} := (re^{i\theta} \mapsto r^s e^{i n \theta})
+\end{equation*}
+for $s \in \cc$ and $n \in \zz$ uniquely defined. We choose our class of functions to be:
+\begin{equation*}
+    f_n(z) := \begin{cases}
+        \frac{1}{2\pi} \brack{\bar{z}}^n e^{- 2 \pi z \bar{z}}, & n \geq 0,\\
+        \frac{1}{2\pi} z^{-n} e^{- 2 \pi z \bar{z}}, & n < 0.
+    \end{cases}
+\end{equation*}
+We note that $f$ is visibly a Schwartz function for any $n$. Computing the local zeta function for non-negative $n$, we get:
+\begin{align*}
+    Z(f_n, \chi_{s, n}) &= \int_{\cc^\times} f_n(z) \chi_{s, n}(z)\d{^*z}\\
+    &= \frac{1}{2\pi} \int_{\cc^\times}\brack{\bar{z}}^ne^{ - 2 \pi z \bar{z}}(z \bar{z})^s e^{i n \arg(z)}\d{^*z}\\
+    &= \frac{1}{2\pi} \int^{2 \pi}_0 \int^\infty_0 (re^{-i \theta})^n e^{-2 \pi r^2} (r^2)^s e^{i n \theta} (2/r) \dr \dtheta\\
+    &= \frac{1}{\pi} \int^{2\pi}_0 \int^\infty_0 r^{2s + n - 1} e^{-2 \pi r^2} \dr \dtheta\\
+    &= (2 \pi)^{-\brack{s + \frac{n}{2}}} \int_0^\infty e^{- 2 \pi r^2} (2 \pi r)^{s + \frac{n}{2} - 1} 4 \pi r \dr\\
+    &= (2 \pi)^{-\brack{s + \frac{n}{2}}} \int^\infty_0 e^{-t} t^{s + \frac{n}{2} - 1} \dt\\
+    &= (2\pi)^{-\brack{s + \frac{n}{2}}} \Gamma(s + \frac{n}{2}) = L(\chi_{s, n})
+\end{align*}
+where we recall our definition of the local $L$-factor in \ref{eqn: complex local L-factor}. A similar calculation also shows that $Z(f_n, \chi_{s, n}) = L(\chi_{s, n})$ when $n < 0$.\\
+It remains to compute the "dual" local zeta function. We do this via a mixture of handwaving and clever observations. First we notice that $\chi^\lor_{n, s} = \chi_{1-s, -n}$ for any $s$ and $n$. Moreover, we via yet another hand-waved complex integral, we deduce that
+\begin{equation*}
+    \hat{f_n}(z) = \frac{1}{2\pi} i^{\abs{n}}f_{-n}(z)
+\end{equation*}
+for all $n$. Thus, using the fact that our computation was linear in the exponents $s$ and $n$, we deduce that
+\begin{equation*}
+    Z(\hat{f_n}, \chi^\lor_{s, n})  = i^{\abs{n}}L(\chi^\lor_{s, n}).
+\end{equation*}
+The reader is welcome to rigorously verify this calculation. In any event, as a consequence we get that:
+\begin{align*}
+    \label{eqn: complex epislon factor}
+    \gamma(\chi_{s, n}, \psi, \dx) &= i^{\abs{n}} \frac{L(\chi^\lor_{s, n})}{\chi_{s, n}}\\
+    \implies  \varepsilon(\chi_{s, n}, \psi, \dx) &= i^{\abs{n}},
+\end{align*}
+completing the complex case.\\
+
+To conclude our analysis on the Archimdean local fields, we note by looking at all the (nowhere-vanishing!) local epsilon factors computed in \ref{eqn: real epsilon factor 1}, \ref{eqn: real epsilon factor 2} and \ref{eqn: complex epislon factor}, and their corresponding local $L$-factors that $\gamma(\chi, \psi, \dx)$ is indeed meromorphic as a function of $s$, completing our proof.
+\end{proof}
+
+Before we proceed complete the proof of the final part of the theorem for the non-Archimedean case, we need to build some more tools and lemmas to use.
+\begin{defn}
+    \label{def: Gauss sum}
+    Given a ring $R$ with an additive character $\psi: R \to S^1$ and a multiplicative character $\chi: R^\times \to S^1$, we define their associated \textbf{Gauss sum} to be:
+    \begin{equation*}
+        g(\chi, \psi) := \int_{R^\times} \chi(u) \psi(u) \d{^*u}.
+    \end{equation*}
+    \end{defn}
+    \begin{remark}
+        Gauss sums turn out to be a hugely convenient notation that show up in a host of different applications, from theta-functions to cyclotomic fields. In fact, Weil made use of these Gauss-sums as a key step in his diagonal variety point-counting argument to motivate the famed Weil Conjectures in his original 1936 paper.
+    \end{remark}
+
+
+We now build the notion of a conductor of a (quasi-)character. As is standard we work with a local field $F$ with ring of integers $\calo_F$, prime ideal $\pp$, and  uniformizer $\pi$.
+\begin{defn}
+\label{def: conductor}
+Let $\psi$ be an additive quasi-character on $F$. Then the \textbf{conductor} of $\psi$ is the ideal $\pp^m$, where 
+\begin{equation*}
+    m := \min \set{r \in \zz : \psi \vert_{\pp^r} = 1},
+\end{equation*}
+i.e the conductor is the largest fractional ideal of $\calo_F$ on which $\psi$ is trivial. In the case that $\psi$ is trivial we set the conductor to be $\calo_F$ itself.\\
+Now suppose $\chi$ is a multiplicative quasi-character on $F^\times$. Then its \textbf{conductor} is $\pp^n$, where
+\begin{equation*}
+    n := \min \set{r \in \nn : \chi \vert_{1 + \pp^n} = 1},
+\end{equation*}
+i.e the conductor is the largest possible unit subgroup of $\calo_F$ on which $\chi$ is trivial.\\
+Sometimes the conductors are defined as the integers $m$ and $n$ themselves rather than the ideals, but we avoid this convention.
+\end{defn}
+\begin{remark}[Terminology]
+    The origin of the term "conductor" comes from Dedekind, who denoted by "\textit{F\"uhrer}" (whose meaning was closer to "guide", "attendant" or "conductor" in the original German, rather than its modern assocations) an ideal of an order in a number field, which is why classical texts denote conductors using $\frakf$. It drifted via osmosis to other fields in number theory, and its use in relation to characters and representations was popularized in large part by Artin and the eponymous Artin conductor of local field extensions.
+\end{remark}
+
+Our goal will be to use this language and notation of conductors and Gauss sums to simplify the integrands of the local-zeta functions. The main tool is the following key lemma.
+
+\begin{lemma}
+\label{lemma: gauss-sum conductor relations}
+Let $\chi$ be a multiplicative character on $\calo_F^\times$ and $\psi$ be an additive character, and suppose they have conductors $\pp^n$ and $\pp^m$ respectively. Then:
+\begin{enumerate}[(a)]
+    \item If $m < n$ then $g(\chi, \psi) = 0$.
+    \item If $m = n$ then $\abs{g(\chi, \psi)}^2 = c \vol(\calo_F, \dx) \vol(1 + \pp^n, \d{^*x})$.
+    \item If $m > n$ then $\abs{g(\chi, \psi)}^2 = c \vol(\calo_F, \dx) \brack{\vol(1 + \pp^n, \d{^*x}) - \vol(1 + \pp^{m-1}, \d{^*x})}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\underline{Case 1: $m < n$}\\
+We decompose $\calo_F^\times$ into the disjoint union of (finitely many!) cosets of the unit subgroups $U_m := 1 + \pp^m$. Note for any $a, b \in \calo_F$ we have
+\begin{equation*}
+    \psi(a(1 + \pi^m b)) = \psi(a) \psi(a\pi^m b) = \psi(a),
+\end{equation*}
+by definition of the conductor $\pp^m = \brangle{\pi^m}$. The Gauss sum thus becomes:
+\begin{equation*}
+    g(\chi, \psi) = \sum_{\calo_F^\times/U_m} \brack{\psi(a) \chi(a) \int_{U_m} \chi(u) \d{^*u}}.
+\end{equation*}
+However since $m < n$, the subgroup $U_m$ is a strict superset of $U_n$, and so, by definition of the conductor, the character $\chi$ is non-trivial on $U_m$. Recall the integral of a character over a compact subgroup is zero, which in turn makes the entire Gauss sum zero, as desired. This proves (i).\\
+
+\underline{Case 2: $m \geq n$}\\
+Expanding out the expression and making use of Fubini, we get:
+\begin{align*}
+    \abs{g(\chi, \psi)}^2 &= g(\chi, \psi) \bar{g(\chi, \psi)}\\
+    &= \int_{\calo_F^\times} \chi(x) \psi(x) \d{^*x} \cdot \bar{\int_{\calo_F^\times} \chi(y) \psi(y) \d{^*y}}\\
+    &= \iint_{\calo_F^\times} \chi(x\inv{y})\psi(x-y)  \d{^*x} \d{^*y}.
+\end{align*}
+Making the substitution $x\inv{y} \mapsto z$ the above integral becomes
+\begin{equation*}
+    \int_{\calo_F^\times} \chi(z) h(z) \d{^*z},
+\end{equation*}
+where 
+\begin{equation*}
+    h(z) := \int_{\calo_F^\times} \psi(yz - y)\d{^*y} = c \int_{\calo_F^\times} \psi(y(z-1)) \dy.
+\end{equation*}
+Note we can switch the Haar measure in the second equality using Equation \ref{eqn: measure on F^times} and the fact that $\abs{y} = 1$ for all $y \in \calo_F^\times$. Making use of the fact that $\calo_F$ is a local ring, we get:
+\begin{equation*}
+    h(z) = c \brack{\int_{\calo_F} \psi(y(z - 1)) \dy - \int_\pp \psi(y(z - 1)) \dy}.
+\end{equation*}
+Note that if $\nu_\pp(z-1)  <  m-1$ then in the above expression $\psi$ takes values outside of its conductor in both of the integrals, and thus is a non-trivial character over $\calo_F$. If $\nu_\pp(z-1) = m - 1$ then $\psi$ is trivial only over $\pp$, not $\calo_F$, and otherwise it is trivial over the entire ring. These observations give us:
+\begin{equation*}
+    h(z) = \begin{cases}
+        0, & \nu_\pp(z-1) < m-1\\
+        -c\frac{\vol(\calo_F, \dx)}{q}, & \nu_\pp(z-1) = m-1\\
+        c\vol(\calo_F, \dx)\brack{1 - \frac{1}{q}}, &   \nu_\pp(z-1) \geq m.
+    \end{cases}
+\end{equation*}
+All that remains is to substitute these cases back into the integral $\int \chi(z)h(z) \d{^*z}$ to show the desired equalities in part (ii) and part (iii), which we leave as an exercise.
+\end{proof}
+
+
+\begin{exercise}
+\label{exercise: last part of gauss-sum conductor proof}
+Finish the last part of the proof of \ref{lemma: gauss-sum conductor relations}.
+\end{exercise}
+
+\begin{proof}[proof of \ref{thmitem: epsilon factor local-zeta-func} in \ref{thm: local zeta function convergence and func-eqn} in the non-Archimedean char 0 case]
+Here $F$ is a finite extension of $\qq_p$ for $p$ a prime number. We first define our "canonical" additive character $\psi_p$.\\
+ finish this\\
+
+Next we classify our multiplicative characters. Recall from our discussion in the prelude to Definition \ref{def: exponent and unramified character} that any such character of $F^\times$ is of the form:
+\begin{equation*}
+    \chi_{s, n} := \brack{x \mapsto \abs{x}^s \omega(x/\abs{x})},
+\end{equation*}
+where $\omega$ is a unitary character with conductor $\pp^n$. Note the indices $s, n$ do not completely determine the character $\chi_{s, n}$, as there is some choice of $\omega$ to be made, but this notation will end up sufficing for the computations ahead. Note also that in the unramified case (i.e $n=0$), the unitary character $\omega$ is trivial. This fact will be used later.
+
+Now the class of functions we work with. Supposing our additive character $\psi$ have conductor $\pp^m$, we define:
+\begin{equation*}
+    f(x) := \begin{cases}
+        \psi(x), & x \in \pp^{m-n}\\
+        0, & \text{ otherwise}.
+    \end{cases}
+\end{equation*}
+This is a Schwartz-Bruhat function as it is compactly-supported by definition and the canonical character $\psi$ is trivial on $\zz_p$, so it is also locally constant. We now compute the local zeta functions $Z(f, \chi_{s, n})$ in two cases: $n$ zero, and $n$ positive.\\
+
+\underline{\textbf{Case 1: $n = 0$}}\\
+This means that $\omega$ is trivial everywhere, i.e $\chi_{s, 0}$ is an unramified character. We recall $\psi$ is trivial on $\pp^m$, and therefore $f$ is zero outside of the conductor of $\psi$. Using similar methods as in the proof of \ref{lemma: gauss-sum conductor relations}, we compute:
+\begin{align}
+\label{eqn: local zeta function non-Arch unramified}
+    Z(f, \chi_{s, 0}) &= \int_{F^\times} f(x)\chi_{s, 0}(x) \d{^*x} \nonumber \\
+    &= \int_{\pp^m \setminus \set{0}} \psi(x) \abs{x}^s \omega(x/\abs{x}) \d{^*x} \nonumber \\
+    &= \int_{\pp^m \setminus \set{0}} \abs{x}^s \d{^*x}\nonumber \\
+    &= \sum_{k \geq m} \brack{\int_{\pi^k \calo_F^\times} \abs{x}^s \d{^*x}}\nonumber \\
+    &= \vol(\calo_F^\times, \d{^*x}) \sum_{k \geq m} q^{-ks}\nonumber \\
+    &= q^{-ms} \vol(\calo_F^\times, \d{^*x} ) L(\chi_{s, 0}),
+\end{align}
+where we recall our definition of the local $L$-factor in the unramified case in Equation \ref{eqn: non-Arch local L-factor}.\\
+
+\underline{\textbf{Case 2: $n > 0$}}\\
+Recalling that $f$ is zero outside of $\pp^{m-n}$, by similar logic as in the $n=0$ case we get:
+\begin{align*}
+    Z(f, \chi_{s, n}) &= \sum_{k \geq m-n} \brack{ \int_{\pi^k \calo_F^\times} \psi(x) \omega(x/\abs{x}) \d{^*x}}\\
+    &= \sum_{k \geq m-n} \brack{ \int_{\calo_F^\times} \psi(\pi^k u) \omega(\pi^k u)/\omega(\pi^k) \d{^*u}}\\
+    &= \sum_{k \geq m-n} q^{-ks} \brack{\int_{\calo_F^\times} \psi(\pi^k u) \omega(u) \d{^*u}}\\
+    &= \sum_{k \geq m-n}q^{-ks}g(\omega, \psi_{\pi^k}).
+\end{align*}
+In the last line the Gauss sum notation comes as a typographical godsave for us, where $\psi_{\pi^k}(x) := \psi(x \pi^k)$. We note that the conductor of $\psi_{\pi^k}$ is $m-k$, so in particular if $k > m - n$ it contains the conductor of $\omega$. From $\ref{lemma: gauss-sum conductor relations}$ we thus get:
+\begin{equation}
+\label{eqn: local zeta function non-Arch ramified}
+    Z(f, \chi_{s, n}) = q^{(n-m)s} g(\omega, \psi_{\pi^{m-n}}) = q^{(n-m)s} c \vol(\calo_F, \dx) \vol(1 + \pp^n, \d{^*x})
+\end{equation}
+which is nothing but a non-trivial exponential function in $s$ with no zeroes or poles, which is what we want since the local $L$-factor is 1 in this case.\\
+
+Now we need to compute the local zeta function of the dual. Note by definition that:
+\begin{equation}
+\label{eqn: non-Arch Fourier transform integral}
+    \hat{f}(y) = \int_F f(x)\psi(xy) \dx = \int_{\pp^{m-n}} \psi(x(y+1)) \dx. 
+\end{equation}
+We proceed with similar casework to before.
+
+\underline{\textbf{Case 1: $n=0$}}\\
+Since the conductor of $\psi$ is $\pp^m$, we observe from the integral in Equation \ref{eqn: non-Arch Fourier transform integral} that $\hat{f}(y)$ is the integral of $\psi(x(y+1))$ taken over $\pp^m$. The character is non-trivial on $\pp^m$, and thus $\hat{f}(y)$ is zero, exactly when $y \notin \calo_F$. Thus in this case we have:
+\begin{equation*}
+    \hat{f}(y) = \begin{cases}
+    \vol(\pp^m, \dx), & y \in \calo_F\\
+    0, & \text{ otherwise},
+    \end{cases}
+\end{equation*}
+i.e we have a scaled characteristic function of the ring of integers. Using this, we compute:
+\begin{align}
+\label{eqn: dual local zeta function non-Arch unramified case}
+    Z(\hat{f}, \chi^\lor_{s, 0}) &= \int_{\calo_F \setminus \set{0}} \hat{f}(x) \chi^\lor_{s, 0}(x) \d{^*x} \nonumber \\
+    &= \vol(\pp^m, \dx) \sum_{k \geq 0} \brack{\int_{\calo_F^\times} \abs{\pi^k x}^{1-s} \d{^*x}} \nonumber \\
+    &= \vol(\pp^m, \dx) \vol(\calo_F^\times, \d{^*x}) \frac{1}{1 - q^{(1-s)}} \nonumber \\
+    &= \vol(\pp^m, \dx) \vol(\calo_F^\times, \d{^*x}) L(\chi^\lor_{s, 0})
+\end{align}
+which is what we wanted. Combing \ref{eqn: local zeta function non-Arch unramified} and \ref{eqn: dual local zeta function non-Arch unramified case}, we get that for $\chi = \chi_{s, 0}$ we have:
+\begin{align}
+\label{eqn: local epsilon factor non-Arch unramified}
+    \gamma(\chi, \psi, \dx) &= q^{ms} \vol(\pp^m, \dx) \frac{L(\chi^\lor)}{L(\chi)} \nonumber \\
+    \implies \varepsilon(\chi, \psi, \dx) &= q^{ms}\vol(\pp^m, \dx).
+\end{align}
+
+\textbf{\underline{Case 2: $n > 0$}}\\
+Examining \ref{eqn: Fourier transform local-zeta-func} again, we see that the integrand $\psi(x(y+1))$ is trivial over $\pp^{m-n}$ exactly when $y + 1 \in \pp^n$, and otherwise it is a trivial character and thus $\hat{f}(y) = 0$. We deduce then that $\hat{f}$ is the characteristic function of $\pp^n - 1$ scaled by the factor $\vol(\pp^{m-n}, \dx)$. Noting that $\pp^n - 1 \subseteq \calo_F^\times$, we computing the dual local zeta function:
+\begin{align}
+\label{eqn: dual local zeta funtion non-Arch ramified}
+    Z(\hat{f}, \chi^\lor_{s, n}) &= \int_{\pp^n - 1} \hat{f}(x) \chi^\lor_{s, n}(x) \d{^*x} \nonumber \\
+    &= \vol(\pp^{m-n}, \dx) \int_{\pp^n - 1} \abs{x}^{1-s} \bar{\omega}(x) \d{^*x} \nonumber \\
+    &= q^{n-m} \vol(\calo_F, \dx) \int_{1 + \pp^n} \bar{\omega}(x) \d{^*x} \nonumber \\
+    &= q^{n-m} \vol(\calo_F, \dx) \vol(1 + \pp^n, \d{^*x}) \omega(-1),
+\end{align}
+where the last line follows from the fact that the conductor of $\omega$ is equal to the conductor of its conjugate, so it is trivial on all of $\vol(1 + \pp^n, \d{^*x})$. We also note that this is constant in $s$, which is what we want, as we recall from $\ref{eqn: non-Arch local L-factor}$ that the local $L$-factor of a non-unramified character is 1. Combining \ref{eqn: local zeta function non-Arch ramified} and \ref{eqn: dual local zeta funtion non-Arch ramified} for $\chi = \chi_{s, n}$, we get:
+\begin{equation}
+\label{eqn: epsilon factor non-Arch ramified}
+    \varepsilon(\chi, \psi, \dx) = \gamma(\chi, \psi, \dx) = \frac{q^{(m-n)(s-1)} \omega(-1)}{ c g( \omega, \psi_{\pi^{m-n}})} = \frac{1}{c}q^{(m-n)(s-1)}g(\bar{\omega}, \psi_{\pi^{m-n}}).
+\end{equation}
+\begin{sanitycheck}
+    If it's not already clear, the final equality above made use of the following string of identities that any Gauss sum satisfies:
+    \begin{equation*}
+        1/g(\chi, \psi) = \bar{g(\chi, \psi)} = \chi(-1) g(\bar{\chi}, \psi).
+    \end{equation*}
+    Verify that each one of them makes sense.
+\end{sanitycheck}
+
+We now conclude our analysis. The equality involving the epsilon factor and relevant local $L$-factors have been shown in\ref{eqn: local epsilon factor non-Arch unramified} and \ref{eqn: epsilon factor non-Arch ramified}, from all of which $\gamma(\chi, \psi, \dx)$ is visibly meromorphic, completing our proof.
+\end{proof}
+
+
+
+\subsection{The Root Number}
+\label{subsection: The Root Number}
+
+
+\subsection{The Global Zeta Function}
+\label{subsection: global zeta function}
+
+\begin{defn}
+\label{def: adele standard character}
+
+\end{defn}
+
+We first present a large multi-part lemma on some basic properties of adelic characters.
+\begin{lemma}
+\label{lemma: properties of adelic characters}
+We fix a global field $K$ with standard character $\psi_K$ on the adele group $\aa_K$. Then:
+\begin{enumerate}[(a)]
+    \item \label{thmitem: adele group self-duality} $\aa_K$ is self-dual via the map $y \mapsto \psi_{K, y}$.
+    \item \label{thmitem: triviality of adele character on K} The character $\psi_K$ is trivial on $K \subseteq $ and thus induces a character on $\aa_K/K$.
+    \item \label{thmitem: duality of A_K/K} We have the following isomorphism:
+    \begin{align}
+        \label{eqn: A_K/K and K pontryagin duality}
+        \hat{\aa_K/K} & \bij K \nonumber \\
+        \psi_{K, x} & \mapsfrom x
+    \end{align}
+    \item \label{thmitem: character has O_v conductor almost everywhere} For any character $\psi$ of $\aa_K/K$, the component $\psi_v$ has conductor $\calo_v$ almost everywhere.
+\end{enumerate}
+\end{lemma}
+
+\section{Riemann-Roch}
+\label{section: Riemann-roch}
+
+
+
+\subsection{Riemann-Roch Theorem}
+\label{subsection: Riemann-Roch}
+
+A standard result of classical Fourier analysis is the Poisson summation formula, and its nontrivial extension the Riemann-Roch theorem. We explore both these results in an adelic setting. We begin with another slew of notation.\\
+Let $K$ be a global field.
+\begin{defn}
+\label{def: adelic SB-functions}
+An \textbf{adelic Schwartz-Bruhat function} is a "restricted tensor product" of Schwartz-Bruhat functions on the completions of $K$, i.e
+\begin{equation*}
+    f = \bigtensor f_v : \forall v, \ f_v \in S(K_v) \text{ and } f_v\mid_{\calo_v} = 1 \text{ for almost all } v.
+\end{equation*}
+The space of such functions is denoted $S(\aa_K)$.
+\end{defn}
+\begin{sanitycheck}
+    Verify for any $x = (x_v) \in \aa_K$ and $f \in S(\aa_K)$ that it makes sense to write $f(x) = \prod f_v(x_v)$ (i.e. this is a well-defined product), and that the integral $\int_{\aa_K} f(x) \dx$ is finite, for $\dx$ a Haar measure on $\aa_K$.
+\end{sanitycheck}
+\begin{exercise}
+\label{exercise: S(A_K) dense in L^2(A_K)}
+    Let $\dx$ be a Haar measure on $\aa_K$, and define the space $L^2(\aa_K)$ using this measure. Show $S(\aa_K)$ is dense in $L^2(\aa_K)$.
+\end{exercise}
+Fix a nontrivial, continuous unitary character $\psi$ on $\aa_K$ such that $\psi \mid_K = 1$, and normalize a Haar measure $\dx$ to be self dual for $\psi$. We define the adelic Fourier transform on any $f \in S(\aa_K)$ by:
+\begin{equation*}
+    \hat{f}(y) := \int_{\aa_K} f(x) \psi(xy) \dx.
+\end{equation*}
+It is a non-obvious fact that this transform $f \mapsto \hat{f}$ induces an automorphism of $S(\aa_K)$. [Put in appendix or smth].\\
+
+We want to explore functions on the adele group that are invariant under translations by $K$ (recall we can diagonally embed $K$ into $\aa_K$). One such example is the aforementioned $\psi$. Another strategy we can do is to take an "average" over all of $K$. Specifically, for any $\phi \in S(\aa_K)$ we can take the following sum:
+\begin{equation*}
+    \widetilde{\phi}(x) := \sum_{y \in K} \phi(x + y).
+\end{equation*}
+When this sum is convergent then for any $z \in K$ we use the fact that $y \mapsto y + z$ is an automorphism of $K$ to see $\widetilde{\phi}(x + z) = \widetilde{x}$ for all $x \in \aa_K$.
+\begin{defn}
+\label{def: admissible function}
+    For any complex-valued function $f$ on $\aa_K$, define $\widetilde{f}$ as before. We say $f$ is \textbf{admissible} if both $\widetilde{f}$ and $\widetilde{\hat{f}}$ are absolutely and uniformly convergent on a compact subset. 
+\end{defn}
+
+\begin{lemma}
+\label{lemma: all adelic-SB-functions are admissible}
+All $f \in S(\aa_K)$ are admissible.
+\end{lemma}
+\begin{proof}
+    [Finish later]
+\end{proof}
+
+\begin{theorem}[Poisson Summation Formula]
+\label{thm: Poisson Summation formula}
+For a global field $K$, any adelic Schwartz-Bruhat function $f$ on $\aa_K$ satisfies
+\begin{equation*}
+    \widetilde{f} = \widetilde{\hat{f}}.
+\end{equation*}
+\end{theorem}
+\begin{proof}
+[FINISH LATER]
+\end{proof}
+
+Number theorists are interested [Why??] in the "average"
+\begin{equation*}
+    \sum_{\alpha \in K} f(x\alpha )
+\end{equation*}
+for $x \in \ii_K$. 
+
+\begin{theorem}[(Adelic) Riemann-Roch]
+\label{thm: Riemann-Roch}
+Let $x$ be an idele of a global field $K$ and let $f$ be an element of $S(\aa_K)$. Then
+\begin{equation*}
+    \sum_{ \alpha \in K}f(x\alpha ) = \frac{1}{\abs{x}}\sum_{\alpha  \in K} \hat{f}(\inv{x}\alpha)
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Fix some $x \in \aa_K$ and for some arbitrary $y \in \aa_K$ define
+\begin{equation*}
+    h(y) := f(xy).
+\end{equation*}
+It is evident that $h \in S(\aa_K)$ as well, so by the Poisson summation formula (\ref{thm: Poisson Summation formula}) we have:
+\begin{equation*}
+    \sum_{\alpha \in K} h(\alpha) = \sum_{\alpha \in K} \hat{h}(\alpha).
+\end{equation*}
+Expanding and manipulating the Fourier transform, we get:
+\begin{align*}
+    \hat{h}(y) &= \int_{\aa_K} f(xy) \psi(\alpha y) \d{\alpha}\\
+    &= \frac{1}{\abs{x}} \int_{\aa_K} f(y) \psi(\alpha y \inv{x}) \d{\alpha}\\
+    &= \frac{1}{\abs{x}} \hat{f}(\alpha \inv{x}),
+\end{align*}
+whence the theorem follows.
+\end{proof}
+
+We now explore the Riemann-Roch in a more geometric setting.
+\begin{defn}
+    A \textbf{divisor} on a 
+\end{defn}
+
+\subsection{Volume of $C^1_K$ and the Regulator}
+
+
+\begin{theorem}
+    For $K$ a number field, we have:
+    \begin{equation}
+        \label{eqn: C^1_K volume formula}
+        -\res_{s = 1}\zeta_K(s) = \vol(C^1_K) = 
+    \end{equation}
+\end{theorem}
+
+
+\section{Applications of Tate's Thesis}
+
+\subsection{Dirichlet's Class Number Formula}
+
+
+
+\chapter{Modular Forms and Automorphic Representations (a.k.a $\GL_2$)}
+
+
+\chapter{The Conjectures of Langland (a.k.a $\GL_n$)}
+\appendix
+
+
+\chapter*{Appendices} 
+\addcontentsline{toc}{chapter}{Appendices}
+\renewcommand{\thesection}{\Alph{section}}
+
 \section{Fourier Theory of Locally Compact Groups}
 \label{section: Pontryagin Duality}
 
@@ -661,6 +1951,7 @@ Here we build up the language required to discuss the
 In this section we start to do how to do Fourier transforms on an abelian topological group $G$, via the \textit{dual} $\hat{G}$, the group of continuous homomorphisms $G \to S^1$. 
 
 \begin{defn}
+    \label{def: Pontryagin Dual}
 The \textbf{Pontryagin\footnote{A Russian name, sometimes also anglicized as Pontrjagin or Pontriagin} Dual} of $G$, denoted $\hat{G}$, is the group of all continuous
 complex homomorphisms $G \to S^1$ (where $S^1$ is given its standard subspace topology
 from $\cc$), with multiplication as the group operation. Elements of $\hat{G}$ are often
@@ -1427,1156 +2718,10 @@ to be the \textit{ring of Fourier transforms} on $G$ (sometimes also denoted $\h
 \label{subsection: Pontryagin Duality}
 
 
-\newpage
-
-
-
-\newpage
-
-\chapter{Tate's Thesis}
-
-\newpage
-
-\section{Adeles and Ideles}
-\label{section: Adeles&Ideles}
-
-
-\subsection{The General Restricted Product}
-\label{subsection: Restricted Products}
-Let $J$ be an indexing set (the reason for choosing $J$ over $I$ will become apparent
-later when we get introduced to the Ideles), suppose that for every $v \in J$ we have 
-a locally compact group indexed by $G_v$. We fix a finite subset $J_\infty$ of $J$ (which
-will later represent the infinite places), and suppose that for all $v \notin J_\infty$
-we have a compact open (and thus closed) subgroup $H_v \leq G_v$.
-
-\begin{defn}
-\label{def: resprod}
-The \textbf{restricted direct product} (also just called the \textbf{restricted product}) of the $G_v$ with respect to the $H_v$ is defined as 
-\begin{equation*}
-    \rprod_{v \in J} G_v := \set{(x_v) \in \prod G_v : x_v \in H_v \text{ for all but finitely many } v}
-\end{equation*}
-\end{defn}
-
-\begin{remark}
-The notation I've used for the restricted product (product and coproduct symbol overlayed on one another) is non-standard, but more distinct than the usual $\prod'$. I first saw this in Andrew Sutherland's lecture notes for 18.875 at MIT.
-\end{remark}
-
-Let us denote this restricted product $G$. Note $G \subseteq \prod G_v$ (the normal
-direct product of groups). We want to topologize $G$, but as it turns out, the subspace topology induced by the product topology on $\prod G_v$ is insufficient. For reasons that will become clear later, we'll want sets like $\prod H_v$ to be open, which won't be true in the subspace topology unless $H_v = G_v$ for all but finitely many $v \in J$.
-
-\begin{defn}
-\label{def: resprod topology}
-    The \textbf{restricted product topology} on $\rprod G_v$ is given by the basis
-    \begin{equation*}
-        \calb := \set{\prod U_v : U_v \subseteq_{\text{open}} G_v, \ e \in U_v \text{ and } U_v = H_v \text{ for all but finitely many } v}
-    \end{equation*}
-\end{defn}
-
-\begin{observation}
-Suppose we have a family of compact opens $H'_v \subseteq G_v$ such that $H'_v = H_v$ for all but finitely many $v \in J$. Then we note that $\rprod G_v$ wrt to the $H_v$ is the same (both set-theoretically and topologically) as $\rprod G_v$ wrt to the $H'_v$ (work this out rigorously if it's not clear!). It thus suffices to specify the $H_v$ for all but finitely many $v$. A parallel observation we make is that for any finite positive integer $n$ we have the topological isomorphism:
-\begin{align}
-\label{eqn: resprod dir-prod isomorphism}
-    \rprod_v G_v^n  &\cong \prod^n \brack{ \rprod_v G_v} \nonumber \\
-    \brack{ \ldots, \brack{g_{v, 1}, \ldots, g_{v, n}}, \ldots}_v &\mapsto \brack{\brack{g_{v, 1}}_v, \ldots, \brack{g_{v, n}}_v},
-\end{align}
-where, naturally, $G^n_v$ is the $n$-fold direct-product of $G_v$ with itself. 
-\end{observation}
-
-We introduce a handy piece of notation that'll come in useful later. Let $S$ be any finite subset of the index set $J$ containing $J_\infty$. Then we define
-\begin{equation}
-\label{eqn: G_S restricted prod}
-    G_S := \prod_{v \in S} G_v \times \prod_{v \notin S} H_v
-\end{equation}
-
-For every $S, T$ such that $S \subseteq T$, consider the inclusion maps $i_{S, T}: G_S \inj G_T$. Then the restricted product $G$ is in fact the colimit of this directed system, i.e:
-\begin{equation}
-\label{eqn: resprod colim expression}
-    G = \dlim_{S} G_S 
-\end{equation}
-
-\begin{exercise}
-\label{exercise: restricted product as colimit}
-Verify the abstract-nonsense characterization of the restricted product given in Equation \ref{eqn: resprod colim expression} coincides (as a topological isomorphism) with the explicit description in \ref{def: resprod}.
-\end{exercise}
-
-\begin{prop}
-\label{restricted product properties}
-Let $G_v, H_v$ be as defined above and $G$ be the restricted product. Then
-\begin{enumerate}[(a)]
-    \item $G$ is a locally compact group.
-    \item A subset $Y \subseteq G$ has compact closure iff $Y \subseteq \prod K_v$ for some family of compact subsets $K_v \subseteq G_v$ such that $K_v = H_v$ for all but finitely many $v$.
-\end{enumerate}
-\end{prop}
-\begin{proof}
-\textbf{\underline{(a)}}\\
-We first verify (in perhaps a bit more rigor than required, but as good practice to get a feel for this construction) that it is indeed a topological group. The group structure is clear; for continuity of the group maps, recall any open set is of the form
-\begin{equation*}
-    \calu := \prod_{v \in S} U_v \times \prod_{v \notin S} H_v
-\end{equation*}
-for some finite indexing set $S$ and opens $U_v \subseteq G_v$. Since each $H_v$ is a subgroup, the preimage of $\calu$ under the inversion map is:
-\begin{equation*}
-    \prod_{v \in S} \inv{\brack{U_v}} \times \prod_{v \notin S} H_v,
-\end{equation*}
-which is also open since each $G_v$ is a topological group, thereby giving us continuity of inversion.\\
-For multiplication, the topological isomorphism in Equation \ref{eqn: resprod dir-prod isomorphism} gives us $G \times G \cong \rprod_v (G_v \times G_v)$, allowing us to similarly look at preimages component by component. In particular, consider any element
-\begin{equation*}
-    \brack{ \brack{k_v, k'_v}_{v \in S}, \brack{k_v, k'_v}_{v \notin S}}
-\end{equation*}
-in the preimage of $\calu$ under the addition map. We note that by definition, away from some finite index set $T \supseteq S$, we must have that $(k_v, k'_v) \in H_v \times H_v$ for all $v \notin T$, and clearly $H_v \times H_v$ is in the pre-image of $\calu$. For any $v \in T$, we know from the fact that $G_v$ is a topological group that $(k_v, k'_v)$ has some open neighborhood $W_v \times W'_v$ contained in the pre-image of $\calu$. Thus:
-\begin{equation*}
-    \brack{ \brack{k_v, k'_v}_{v \in S}, \brack{k_v, k'_v}_{v \notin S}}  \in \prod_{v \in T} \brack{W_v \times W'_v} \times \prod_{v \notin T} \brack{H_v \times H_v} \subseteq \inv{\text{add}}(\calu),  
-\end{equation*}
-and so multiplication is continuous. Thus $G$ is a topological group.
-\begin{warning}
-    Our work above seems (and may very well be) a tad pedantic with the details, and indeed several texts leave the fact of the restricted product being a topological group as a trivial observation. However it is worth being careful about constructions such as this; one might be tempted to think that if we have \textit{any} directed system of topological groups with inclusion maps and define a colimit as in \ref{eqn: resprod colim expression}, that the product must surely be a topological group. The editors of MIT's second-edition \textit{Encyclopedic Dictionary of Mathematics} thought so too. However this turns out NOT the case: the colimit of the directed system of $G_i := \qq \times \rr^i$ does not have continuous addition; \cite{Shimomura-topgrp-colimit} shows that we do get a nice output in this colimit construction when the groups are all locally compact.
-\end{warning}
-We now show local compactness. Since each $H_v$ is compact, Tychonoff tells us $\prod_{v \notin S} H_v$ is also compact. Thus $G_S$ is the product of finitely many locally compact spaces with a compact space, and is thus itself locally compact. Moreover, the product topology on $G_S$ is the SAME as the subspace topology induced by $G$, and since any $(x_v) \in G$ is contained in such a $G_S$, we conclude $G$ must be locally compact as well.\\
-
-\textbf{\underline{(b)}}\\
-If $Y$ is contained in some product of compact sets $ K = \prod K_v$ (which is compact by Tychonoff) its closure $\bar{Y}$ is a closed subset of a compact subset of a Hausdorff space $G$, and thus $\bar{Y}$ is compact too.\\
-For the other direction, suppose $\bar{Y}$ is a compact subset of $G$. Since the sets $G_S$ defined above cover $G$, a finite number of $G_S$ must cover $\bar{Y}$. Note a union of a finite number of $G_S$ is just a set of the form $G_{\fans}$, for $\fans$ being the union of all the $S$ such that $G_S$ is in the cover of $\bar{Y}$.\\
-Consider the (continuous!) projection maps $\rho_v: G \to G_v$. Thus each $\rho_v(\bar{Y}) \subseteq G_v$ is compact. And since all but finitely many components of $G_{\fans}$ are equal to $H_v$, the image $\rho_v(\bar{Y}) \subseteq H_v$ for all but finitely many $v$.\\
-Thus $\bar{Y}$, and therefore $Y$, is contained in a set of the desired form.
-\end{proof}
-
-\begin{corollary}
-\label{cor: each component is closed subgrp of resprod}
-
-\end{corollary}
-
-We now proceed to flesh out the theory of measures on this restricted product.
-
-
-\begin{prop}
-\label{Haar Measure on restricted product}
-For all but finitely many $v$, suppose $\dg_v$ be a (left) Haar measure on $G_v$ normalized so that $\int_{H_v} \dg_v = 1$. Then there is a unique Haar measure $\dg$ on $G$ such that the restriction $\dg_S$ of $\dg$ on any $G_S$ is exactly the product measure.
-\end{prop}
-\begin{proof}
-Choose such a set $S$ and define $\dg_S$ as the product of the measures $\dg_v$. Note the measure of the compact group $\prod_{v \notin S} H_v$ is indeed finite, by how we've normalized things. It is a verification of axioms to deduce the rest that $\dg_S$ is indeed a Haar measure on $G_S$.\\
-Suppose we have another finite set of indices $T \supseteq S$. Then, by construction it follows that $\dg_S$ coincides with the restriction of $\dg_T$ to $G_S \leq G_T$.\\
-
-Since $G$ is locally compact, we know it has a Haar measure, which restructs to a Haar measure on any $G_S$. Fixing any $S$, we can define [ASK QUESTION HERE ABOUT EXISTENCE OF THING THAT RESTRICTS APPROPRIATELY]
-\end{proof}
-
-Thus we write 
-\begin{equation*}
-    \dg = \prod_v \dg_v
-\end{equation*}
-for the left Haar measure on $G$, oftened referred to as the measure induced by the component measures.\\
-
-Our next goal is integration.
-\begin{prop}
-\label{Restricted Product Integral is limit of finite integrals}
-
-Let $f$ be an integrable function on $G$. Then
-\begin{equation*}
-    \int_G f(g) \dg = \lim_S \int_{G_S}f(g_S) \dg_S
-\end{equation*}
-
-\end{prop}
-
-\begin{exercise}
-    Verify the above.
-\end{exercise}
-
-Our next result will be that integrals behave fairly well with respect to products. We first introduce a bunch of notation.\\
-Let $S_0$ be a finite set of indices containing $J_\infty$ and the $v$ for which $\vol(H_v, \dg_v) \neq 1$.\\
-Suppose for each $v$ we have a continuous integrable $f_v$ on $G_v$ such that $f_v \mid_{H_v} = 1$ for all $v \notin S_0$.\\
-For $g = (g_v) \in G$, define
-\begin{equation*}
-    f(g) = \prod_v f_v(g_v)
-\end{equation*}
-\begin{prop}
-\label{Product of integrals is Integral in restricted product}
-With the notation above, the function $f$ is well-defined and continuous. For any $S \supseteq S_0$, we have
-\begin{equation*}
-    \int_{G_S}f(g_S)\dg_S = \prod_{v \in S} \int_{G_v}f_v(g_v)\dg_v
-\end{equation*}
-\end{prop}
-\begin{proof}
-Since $g = (g_v)$ is in the restricted direct product, then $g_v \in H_v$ for all but finitely many $v$. Combining this with the fact that $f_v \mid_{H_v} = 1$ for almost all $v$, we deduce $\prod f_v(g_v)$ is a finite product, and thus well-defined.\\
-To show $f$ is continuous, consider a base for $G$ consisting of sets of the form
-\begin{equation*}
-    \prod U_v \times \prod H_v
-\end{equation*}
-where the first product contains all the (finitely many!) components of $G$ where $f_v$ is non-trivial. Thus $f$ can be computed locally as a finite product of continuous functions, and is thus locally continuous, and thus globally.\\
-The fact that the integral behaves well with products is a consequence of definitions itself, and the fact that $f$ is a well-defined function.
-\end{proof}
-
-\begin{corollary}
-\label{Product integral restricted product Corollary}
-    With the notation as in the above result, 
-    \begin{equation*}
-        \int_G f(g) \dg = \prod_v \int_{G_v}f_v(g_v) \dg_v
-    \end{equation*}
-    and $f \in L^1(G)$ provided that the RHS is a finite product.
-\end{corollary}
-\begin{proof}
-By \ref{Restricted Product Integral is limit of finite integrals}, we know $f$ is integrable iff $\lim_S \int_{G_S}f(g_S)\dg_S < \infty$, which is true iff
-\begin{equation*}
-    \lim_S \prod_{v \in S}\int_{G_v}f_v(g_v) \dg_v = \prod_{v} \int_{G_v}f_v(g_v) \dg_v < \infty,
-\end{equation*}
-by the equation in \ref{Product of integrals is Integral in restricted product}.
-\end{proof}
-
-
-\begin{prop}
-\label{Fourier Transform on restricted product is integrable}
-Suppose all the $G_v$ are abelian, and suppose we have functions $\{f_v\}$ on $G_v$ such that they are the characteristic functions for $H_v$ for all but finitely many $v$. Then $f$'s Fourier transform is integrable and given by
-\begin{equation*}
-    \hat{f}_v(g) = \prod_v \hat{f}_v(g_v)
-\end{equation*}
-\end{prop}
-\begin{proof}
-Firstly note that even in the non-abelian case, by \ref{Product integral restricted product Corollary}, we have 
-\begin{equation*}
-    \int_G f(g) \dg = \prod_v \int_{G_v}f_v(g_v) \dg_v = \prod_{v \in S} \int_{G_v} f_v(g_v) \dg_v
-\end{equation*}
-for some finite set $S$, since $f_v$ is the characteristic function of $H_v$. Thus we have a finite product of continuous functions, and thus integrable.\\
-In the abelian case, let $\chi = (\chi_v)$ denote a character of $G$, and define
-\begin{equation*}
-    h = \prod_v \brack{h_v := f_v\chi_v}
-\end{equation*}
-Since $\chi$ is unitary, $h$ must be integrable, and applying the identity in \ref{Product integral restricted product Corollary}, we get our desired result in terms of the Fourier transform.
-\end{proof}
-
-From now on assume all groups are abelian. We want to build a measure on the Pontryagin dual $\hat{G}$ that is dual to $\dg$ in the sense of the Fourier inversion theorem.
-
-[FINISH THIS PART HERE]
-
-
-\subsection{Adeles, Ideles and Approximations}
-\label{subsection: Approximation theorem Adeles}
-
-Let $K$ be a global field, and let $K_v$ denote its completion at a place $v$. With respect to addition, note $K_v$ is a locally compact additive group. For all finite places $v$, recall $K_v$ admits its local ring of integers $\calo_v$ as an open compact subgroup.
-
-\begin{defn}
-    The \textbf{adele group} $\aa_K$ of a global field $K$ is the restricted direct product of $K_v$ with respect to the open subgroups $\calo_v$. Since this admits a natural ring structure as well, it is also referred to as the \textbf{adele ring}.
-\end{defn}
-
-Note we have an embedding
-\begin{equation*}
-\begin{split}
-    K & \inj \aa_K\\
-    x &\mapsto (x, x, \ldots)
-\end{split}
-\end{equation*}
-This is well-defined since $K$ always has a natural embedding in $K_v$ for any place $v$, and by unique factorization, every element is a local integer for all but finitely many $v$.\\
-
-Similarly, we can conisder $K^\times$, the locally compact group of units of $K$ wrt to multiplication. Then the local units $\calo_v^\times$ are an open compact subgroup of each $K_v^\times$.
-\begin{defn}
-The \textbf{idele group} $\ii_K$ of a global field $K$ is the restricted direct product of the $K_v^\times$ with respect to $\calo_v^\times$.
-\end{defn}
-
-We have a similar embedding
-\begin{equation*}
-    \begin{split}
-    K^\times &\inj \ii_K\\
-    x &\mapsto (x, x, \ldots)
-    \end{split}
-\end{equation*}
-which is again well-defined.
-
-The induced topologies on the adele and idele group are called the \textbf{adelic} and \textbf{idelic} topologies, respectively.
-
-\begin{remark}
-Note that $\ii_K \cong \aa_K^\times$ as an algebraic isomorphism. However, this is not a topological embedding. For example, taking $K = \qq$ and $S$ being any finite collection of primes, and let $U_p$ be any neighborhood of 1 in $\qq_p$ for $P \in S$. Then
-\begin{equation*}
-    \brack{\prod_{p \in S}N_p \times \prod_{p \notin S}\zz_p} \cap \ii_\qq \nsubseteq \rr^\times \times \prod_{p < \infty} \zz_p^\times = \aa_\qq^\times 
-\end{equation*}
-Note we can select some $(x_p) \in \ii_\qq$ such that $x_p \in \zz_p \setminus \zz_p^\times$ for some $p \notin S$, which therefore excludes it from being in $\aa_\qq^\times$ on the RHS.\\
-Thus the idelic topology is finer than the induced subspace topology.
-\end{remark}
-
-Let $S_\omega$ denote the infinite places of $K$. We denote by $\aa_\omega$ the open subgroup $\aa_{S_\omega} \subseteq \aa_k$, i.e the elements of the adele group where all the components at the finite places are integral.
-
-\begin{theorem}[Approximation]
-\label{Approximation Theorem}
-For every global field $K$,
-\begin{equation*}
-    \aa_K = K + A_\omega
-\end{equation*}
-where $K$ is identified with its natural diagonal embedding.
-\end{theorem}
-\begin{proof}
-Given some $x = (x_v) \in \aa_K$, we want to find some $y \in K$ such that $x_v - y \in \calo_v$ for all $v$.\\
-By definition, $x_v \in \calo_v$ for all but finitely many places $v$, each corresponding to a prime $\pp_v \ideal \calo_v$. Letting $p_v \in \calo_K$ be an element of $\pp$-adic valuation 1 in each of these ideals, note that there must exist some $n_v \in \nn$ such that $p_v^{n_v}x_v \in \calo_v$. Set 
-\begin{equation*}
-    q := \prod_{v \in T} p_v^{n_v} 
-\end{equation*}
-where $T$ is the (finite!) set of finite places where $x_v \notin \calo_v$. By CRT, we can find some $\lambda \in \calo_K$ such that $qx_v - \lambda \in \pp_v^{n_v}$ for all $v \in T$. Letting $y = \lambda/q$, then by construction $x_v - y \in \calo_v$ for all $v$, as desired. [FILL IN MORE DETAIL LATER]
-\end{proof}
-\begin{corollary}
-    With the notation above, $K \cap \aa_\omega = \calo_K$
-\end{corollary}
-\begin{sanitycheck}
-    Verify the above corollary.
-\end{sanitycheck}
-
-\subsection{Geometry of $\aa_K/K$}
-\label{subsection: Geometry of A_K/K}
-We explore the behavior of the adeles under base-change.
-\begin{lemma}
-\label{A_K/K Lemma}
-Take $E/K$ a finite extension of global fields, and let $\set{u_1, \ldots u_n}$ be a $K$-basis of $E$. Then the natural map
-\begin{equation*}
-    \begin{split}
-    \alpha: \prod^n_{j=1} \aa_K &\to \aa_E\\
-    ((x_{v, j})_v)_j &\mapsto \sum_j u_j(x_{v, j})v
-    \end{split}
-\end{equation*}
-is an isomorphism of topological groups.
-\end{lemma}
-\begin{proof}
-[FINISH LATER]
-\end{proof}
-
-
-\begin{theorem}
-\label{thm: K discrete and cocompact in A_K}
-
-Any global field is a discrete, cocompact subgroup of its adele ring.
-
-\end{theorem}
-\begin{proof}
-Let $K_0$ denote the smallest global subfield of $K$ (i.e $\qq$ or $\ff_p(t)]$), and let $n := [K: K_0]$. Then by \ref{A_K/K Lemma}, we have the following commutative diagram:
-\begin{center}
-    \begin{tikzcd}
-        \prod^n_{j=1}\aa_{K_0} \arrow[r] & \aa_K\\
-        \prod^n_{j=1} K_0 \arrow[r] \arrow[u, hookrightarrow] & K \arrow[u, hookrightarrow]
-    \end{tikzcd}
-\end{center}
-where the horizontal maps are topological isomorphisms. Thus $\aa_K/K$ is compact iff $(\aa_{K_0}/K_0)^n$ is compact, which is true iff $\aa_{K_0}/K_0$ is compact.\\
-Thus it suffices to consider $K=K_0$, in which case we have exactly one infinite place. Define a subset $C$ of the adele group by 
-\begin{equation*}
-    C := \set{x \in \aa_K : \abs{x_\infty}_\infty \leq \frac{1}{2} \text{ and } \abs{x_v}_v \leq 1, \ \forall v \neq \infty}
-\end{equation*}
-If we show that $C \cap K = \set{0}$ and $\aa_K = C+K$, we will be done, since $C \cong \aa_K/K$.\\
-If $x \in K \cap C$, then we must have $x \in \calo_K$, since $x \in \calo_v$ for every place $v$. If $K = \qq$ then this condition ($x \in \zz$) combined with the condition that $\abs{x_\infty}_\infty \leq 1/2$ forces. $x = 0$. If $K = \ff_p(t)$, then let the infinite place be the one defined by $1/t$. Then $\abs{x}_\infty  = p^{-\ord_{1/t}(x)}$, which is $\geq 1$ for anything in $\calo_K = \ff_p[t]$. Thus $C \cap K = \set{0}$.\\
-
-[FINISH TEDIOUS DETAILS HERE]
-\end{proof}
-
-
-
-[FINISH STUFF HERE]
-
-\subsection{Class Groups}
-\label{subsection: Class Groups}
-\begin{defn}
-For a global field $K$, the quotient
-\begin{equation*}
-    C_K := \ii_K/K^\times
-\end{equation*}
-is called the \textbf{idele class group} of $K$.
-\end{defn}
-\begin{warning}
-As seen in the previous section, $\aa_K/K$ is compact. One might be led to think $\ii_K/K^\times$ is also compact but this is NOT the case, as we'll see later.
-\end{warning}
-
-To analyze this, we first standardize the absolute value functions we're using.
-
-\begin{defn}
-For $k$ a local field, the \textbf{normalized} absolute value $\abs{\cdot}_k$ on $k$ is defined as follows:
-\begin{enumerate}[(a)]
-    \item For $k = \rr$ we set $\abs{\cdot}_k$ to be the usual absolute value function.
-    \item For $k = \cc$ we set $\abs{z}_k := z \bar{z}$, which is the square of the usual absolute value function on $\cc$.
-    \item For $k$ non-Archimedean with uniformizer $\pi$ and residue order $q$, we set $\abs{\pi}_k := \inv{q}$. (Note this extends uniquely to $k$). 
-\end{enumerate}
-\end{defn}
-
-Recall that if $k'/k$ is a finite extension of local fields then $\abs{x}_{k'} = \abs{N_{k'/k}(x)}_k$. 
-
-\begin{defn}
-    Let $K$ be a global field, and let $\abs{\cdot}_v$ denote the normalized absolute value on the completion $K_v$. Then the \textbf{idelic absolute value} is defined by:
-    \begin{equation*}
-        \begin{split}
-            \abs{\cdot}_{\aa_K} : \ii_K &\to \rr_{> 0} \\
-            x = (x_v)_v &\mapsto \prod_v \abs{x_v}_v
-        \end{split}
-    \end{equation*}
-\end{defn}
-\begin{sanitycheck}
-    Why is the product defined above well-defined?
-\end{sanitycheck}
-
-\begin{theorem}[Artin's Product Formula]
-\label{Artin product formula}
-    Let $K$ be a global field. Then for every $x \in K^\times$ we have $\abs{x}_{\aa_K} = 1$
-\end{theorem}
-\begin{proof}
-Let $E/K$ be finite separable. Then 
-\begin{equation*}
-    \begin{split}
-        \abs{x}_{\aa_E} &= \prod_{u \in \fanp_K} \prod_{v \in \fanp_E, v \mid u} \abs{x}_v\\
-        &= \prod_{u \in \fanp_K} \prod_{v \in \fanp_E, v \mid u} \abs{N_{E_v/K_u}(x)}_u\\
-        &= \prod_u \abs{N_{E/K}(x)}_u
-    \end{split}
-\end{equation*}
-[ASK QUESTION ABOUT MISSING EXPONENT ABOVE]
-\end{proof}
-
-We are now ready to define a subgroup of the ideles for which the embedding of $K$ IS cocompact.
-
-\begin{defn}
-For $K$ a global field, the \textbf{ideles of norm one} are:
-\begin{equation*}
-    \ii^1_K := \ker(\abs{\cdot}_{\aa_K})
-\end{equation*}
-and the \textbf{norm-one idele class group} is the quotient:
-\begin{equation*}
-    C^1_K := \ii_K^1/K^\times
-\end{equation*}
-\end{defn}
-
-Note by the Artin product formula (\ref{Artin product formula}) that $K^\times \subseteq \ii_K^1$, so this quotient is well-defined. We also have the SES
-\begin{equation*}
-    1 \to C^1_K \to C_K \to \abs{\ii_K}_{\aa_K} \to 1.
-\end{equation*}
-
-
-\begin{theorem}
-The norm-one idele class-group is always compact.
-\end{theorem}
-\begin{proof}
-Recall from the proof of \ref{thm: K discrete and cocompact in A_K} that there exists some compact subset $Y \subseteq \aa_K$ such that $\aa_K = K + Y$. Fix a Haar measure $\mu$ on $\aa_K$ (which exists as it's a locally compact group), then $\mu(Y) < \infty$. Choose a compact subset $Z \subseteq \aa_K$ such that $\mu(Z) > \mu(Y)$. Consider the following two subsets:
-\begin{equation*}
-    \begin{split}
-        Z_1 & := \set{z_1 - z_2 : z_1, z_2 \in Z}\\
-        Z_2 & := \set{z_1z_2 : z_1, z_2 \in Z}
-    \end{split}
-\end{equation*}
-By continuity of addition and multiplication these two sets are also compact. Since $K$ is discrete in $\aa_K$, we have $K \cap Z_2$ is finite, with non-zero elements $x_1, \ldots, x_r$. 
-[LOTS OF EXERCISE NONSENSE READ IN DETAIL and COMPLETE LATER]
-\end{proof}
-
-
-For a given finite set $S$ of places of $K$ containing $S_\infty$, the Archimedean places, it is useful to have $S$-versions of the aforementioned groups.
-
-\begin{warning}
-[SOME WEIRD SHIT ABOUT NOTATION EXCLUDING INFINITE PLACES]
-\end{warning}
-
-\begin{defn}
-Take $S$ a finite set of places of a global field $K$ containing the Archimedean places. Then:
-\begin{enumerate}[(a)]
-    \item The \textbf{$S$-adeles} of $K$ are defined as:
-    \begin{equation*}
-        \aa_{K, S} := \prod_{v \in S} K_v \times \prod_{v \notin S} \calo_v
-    \end{equation*}
-    \item The \textbf{ring of $S$-integers} is defined as:
-    \begin{equation*}
-        \calo_{K, S} := K \cap \aa_{K, S}
-    \end{equation*}
-    i.e the elements of $K$ that are $v$-integral for all $v \notin S$.
-    \item The \textbf{$S$-ideles} are defined as:
-    \begin{equation*}
-        \ii_{K, S} := \prod_{v \in S}K_v^\times \times \prod_{v \notin S}\calo_v^\times 
-    \end{equation*}
-    \item The \textbf{$S$-ideles of norm one} defined as:
-    \begin{equation*}
-        \ii_{K, S}^1 := \ii_K^1 \cap \ii_{K, S}
-    \end{equation*}
-\end{enumerate}
-\end{defn}
-
-\begin{observation}
-
-\end{observation}
-
-\begin{exercise}
-    Prove the above observation.
-\end{exercise}
-
-\subsection{Practical Example: Characters on $\qq$ and $C_\qq$}
-\label{subsection: character group of Q}
-We begin by computing the character group $\hat{\qq}$ of homomorphisms $\qq \to S^1$.
-\begin{warning}
-    Despite previous instances where we've used the notation $\hat{G}$, in this case we are NOT requiring that $\chi \in \hat{\qq}$ be a continuous map (unless of course we give $\qq$ the discrete topology).
-\end{warning}
-It is a standard result from algebraic topology that the only continuous homomorphisms from $\rr$ to $S^1$ are of the form
-\begin{equation*}
-    x \mapsto e^{i \lambda x}
-\end{equation*}
-for any $\lambda \in \rr$. It follows that the restriction of the above map to $\qq$ is also a homomorphism to the circle. One might be tempted to think that this, too, characterizes all homomorphisms, but this is NOT the case.\\
-
-[Insert stuff here]
-
-We now proceed to a slightly more advanced task
-
-\newpage
-
-\section{Id\'ele Zeta Functions}
-\label{section: Id\'ele Zeta Functions}
-A lot of the major strides in classical analytic number theory were made in the 19th and 20th century, where it was discovered that a lot of information about the structure of prime numbers could be deduced by studying the Riemann zeta function
-\begin{equation*}
-    \zeta(s) := \sum^\infty_{n=1} \frac{1}{n^s},
-\end{equation*}
-which is absolutely convergent for complex $s$ such that $\re{s} > 1$. This function admits an analytic continuation to the entire complex plane, save for a simple pole at $s=1$, and satisfies the functional equation:
-\begin{equation*}
-    \xi(s) = \xi(1-s),
-\end{equation*}
-where the Riemann-xi function is defined as
-\begin{equation*}
-    \xi(s) := \frac{1}{2}s(s-1)\pi^{-s/2} \Gamma(s/2) \zeta(s.
-\end{equation*}
-Much of the early work for $\zeta(s)$ for real $s$ was done by Euler, who established the classic Euler product expansion
-\begin{equation*}
-    \zeta(s) = \prod_{p \text{ prime}} \frac{1}{1-p^{-s}}.
-\end{equation*}
-A generalization of the zeta function can be done via Dirichlet series. Given any multiplicative sequence $\set{a_n}$ (i.e $\gcd(m, n) = 1 \implies a{mn} = a_ma_n$) we can create the series 
-\begin{equation*}
-    L(s) := \sum \frac{a_n}{n^s}.
-\end{equation*}
-
-\begin{example}[Dirichlet $L$-function]
-\label{example: Dirichlet L-func}
-    Recall a \textbf{Dirichlet character} with modulus $m \in \zz_{> 0}$ is a completely multiplicative function $\chi: \zz \to \cc$ that is $m$-periodic, nonzero on any input coprime to $m$ and zero otherwise.\\
-    Given a Dirichlet character $\chi$, its \textbf{Dirichlet $L$-series} is given by:
-    \begin{equation*}
-        L(s, \chi) = \sum^\infty_{n=1} \frac{\chi(n)}{n^s}.
-    \end{equation*}
-\end{example}
-
-Studying the analytic properties of the various $L$-series is vital for decoding properties of prime numbers in the integers. In particular, it is famously used to show Dirichlet's theorem that any arithmetic series with coprime base and difference contains infinitely many primes.\\
-
-As a generalization, we can craft similar $L$-functions over number fields.
-
-\begin{example}[Generalized Dedekind Zeta Function]
-\label{example: Generalized Dedekind Zeta}
-Let $K$ be a number field, and let $\chi$ be a character of standard ideal class group $\cl(K)$, then we can construction the Dirichlet series:
-\begin{equation*}
-    L(s, \chi) = \sum_{(0) \neq \fraka \ideal \calo_K} \frac{\chi(\fraka)}{N(\fraka)^s},
-\end{equation*}
-where $N(\fraka)$ is the standard ideal norm taken over $\qq$ as the base field. When $\chi = 1$ this is known as the \textbf{Dedekind zeta function}.
-\end{example}
-
-It turns out the residues of the analytic continutations these generalized Dedekind zeta functions encode information about the class numbers of the their number fields. 
-
-One can generalize the above even further to consider crafting a series $L(s, \chi)$ for any $\chi$ that is a continuous character of the idele class group $C_K$. It is a famous result of Hecke that $L(s, \chi)$ has analytic continuation and satisfies an appropriate functional equation for any number field $K$ and any idele class character $\chi$. The original formulation of this result involved a complicated computation with these things called theta functions. Moreover in the functional equation a so-called \textit{root number} $W(\chi)$ associated o each $\chi$ kept popping up, with no good explanation for its value.\\
-Under the guidance of Emil Artin, in his 1950 thesis John Tate made use of Fourier analysis on adele groups to reprove the results of Hecke and establish these "local" functional equations that gave an "explicit factorization" of the root number.\\
-
-In his thesis, Tate worked with some ad-hoc function spaces over local and global fields. We standardize our workings over the so-called \textit{Schwarz-Bruhat functions} on local fields. Over an Archimedean number field (i.e $\rr$ or $\cc$), recall a \textbf{Schwarz} function (more commonly known as a \textit{rapidly-decreasing function}) is a smooth $\cc$-valued function $f$ such that
-\begin{equation*}
-    \lim_{x \to \infty} p(x)f(x) = 0
-\end{equation*}
-for all polynomials $p(x)$.
-\begin{defn}
-\label{def: Schwarz-Bruhat functions}
-A \textbf{Schwarz-Bruhat} function on a local field $F$ is a Schwarz function if $F$ is Archimedean and a smooth\footnote{A function on a non-Archimedean local field is smooth if it is locally constant.}, compactly-supported function in $F$ is non-Archimedean. We denote by $S(F)$ the complex vector space of Schwarz-Bruhat functions on $F$.
-\end{defn}
-We use these functions because they guarantee that taking their integral over the entire group is well-defined.
-
-\subsection{Local Zeta Functions}
-Motivated by the "local-global principle", before analyzing the global zeta function of a function on an adele group of a global field, we first understand the induced zeta functions on each of the local components. The goal of this subsection will be to introduce so-called \textit{local $L$-factors} associated to a character $\chi$ (and its dual under the Fourier transform $\chi^\lor$) of a local field. In particular, these local $L$-factors will be realized as the gcd of some local zeta functions. We start with a slew of notations and definitions, so buckle up.\\
-
-Let $F$ be a local field with absolute value $\abs{\cdot}$ and Haar measure $\dx$.
-Let $X(F^\times) := \Hom_{cont}(F^\times, \cc^\times)$ be the continuous group homomorphisms into the complex numbers. The elements $\chi \in X(F^\times)$ will be referred to as \textbf{characters} of $F^\times$.
-\begin{remark}
-    Sometimes the elements of $X(F^\times)$ are called \textbf{quasi-characters} instead, with characters being reserved for continuous homomorphisms into the circle (in fact, this is the convention used by Tate in his original thesis). For our purposes we refer to the latter cases as \textbf{unitary characters}. Using the notation of Section \ref{section: Pontryagin Duality}, unitary characters would be the elements of $\hat{F^\times}$. We use this convention as the term "character" used more generally for a multiplicative homomorphism into the unit group of an arbitrary field.
-\end{remark}
-
-When $F$ is non-Archimedean, let $\calo_F$ denote its ring of integers, $\pp$ its maximal ideal with uniformizer $\pi$ and residue field $\ff_q$. Recall that we can write $F^\times \cong U_F \times \cals_F$, where $U_F$ is the group of unit-absolute-value elements of $F$, and $\cals_F = \abs{F^\times}$, i.e. the image of $F^\times$ in the valuation map\footnote{recall this is $\rr_{> 0}$ in the Archimedean case and $q^\zz$ otherwise}.\\
-We make the observation that any $\chi \in X(F^\times)$ factors into a product:
-\begin{equation*}
-    \chi = \mu \abs{\cdot}^s,
-\end{equation*}
-where $s \in \cc$ and $\mu$ is the pullback of a unitary character on $U_F$ (defined uniquely by restriction of $\chi$!). This is because compactness of $U_F$ forces any character on it to be unitary, and the only characters on $\cals_F$ are maps $t \mapsto t^s$.
-\begin{defn}
-\label{def: exponent and unramified character}
-    For any character $\chi = \mu \abs{\cdot}^s \in X(F^\times)$, we call $\re{s}$ the \textbf{exponent} of $\chi$.\\
-    Furthermore, we say $\chi$ is \textbf{unramified} if $\mu = 1$.
-\end{defn}
-\begin{warning}
-    Recall that for any $q \in \rr_{> 0}$ we have the formula:
-    \begin{equation*}
-        q^i = \cos(\ln(q)) + i \sin(\ln(q)).
-    \end{equation*}
-    In particular, in the non-Archimedean case the value of $s$ is NOT uniquely determined (e.g $i$ and $(1 + 2\pi)i$ would correspond to the same map). However, the real part of $s$ IS uniquely determined, so the exponent is well-defined.
-\end{warning}
-
-We now define the local $L$-factors $L(\chi)$.
-
-\begin{enumerate}[(1)]
-    \item In the non-Archimedean case, we set:
-    \begin{equation}
-        \label{eqn: non-Arch local L-factor}
-        L(\chi) := \begin{cases}
-            \inv{\brack{1 - \chi(\pi_F)}}, & \text{ if } \chi \text{ is unramified,}\\
-            1, & \text{otherwise}.
-        \end{cases}
-    \end{equation}
-    \item In the Archimedean case we recall by Gelfand-Mazur that $F = \cc$ or $\rr$. 
-    \begin{enumerate}[(i)]
-        \item If $F = \cc$, note any $\chi$ is of the form:
-        \begin{equation*}
-            \chi_{s, n}: re^{i\theta} \mapsto r^s e^{i n \theta}
-        \end{equation*}
-         for $s \in \cc$ and $n \in \zz$ uniquely defined. Here we use our result in \ref{example: dual of S^1 is Z} to characterize the unitary characters of $U_\cc = S^1$ and writing our domain in polar coordinates automatically makes $r$ equal to the absolute value of our complex input. We then set:
-         \begin{equation}
-        \label{eqn: complex local L-factor}
-            L(\chi_{s, n}) := \Gamma_\cc(s + \frac{\abs{n}}{2}) := \brack{2 \pi}^{-\brack{s + \frac{\abs{n}}{2}}}\Gamma(s + \frac{\abs{n}}{2}).
-         \end{equation} 
-         \item If $F = \rr$ the $U_F = \set{\pm 1}$. Note any character is of the form $\chi = \mu \abs{\cdot}^s$, where $\mu$ and $s$ are uniquely defined, and $\mu$ is either trivial or the sign character $\sgn: x \mapsto x/\abs{x}$. We then set:
-         \begin{equation}
-        \label{eqn: real local L-factor}
-             L(\chi) := \begin{cases}
-                 \Gamma_\rr(s) := \pi^{-s/2}\Gamma(s/2), & \mu = 1,\\
-                 \Gamma_\rr(s+1), & \mu = \sgn.
-             \end{cases}
-         \end{equation}
-    \end{enumerate}
-\end{enumerate}
-
-
-\begin{defn}
-\label{def: shifted dual and L(s, chi) notation}
-    If $\chi \in X(F^\times)$ and $s \in \cc$ then $\chi \abs{\cdot}^s$ is also a character, and we use the following notation for its local $L$-factor:
-    \begin{equation*}
-        L(s, \chi) := L(\chi \abs{\cdot}^s).
-    \end{equation*}
-    Moreover we define the \textbf{shifted dual} of $\chi$ by:
-    \begin{equation*}
-        \chi^\lor := \inv{\chi}\abs{\cdot},
-    \end{equation*}
-    so that
-    \begin{equation*}
-        L\brack{(\chi \abs{\cdot}^s)^\lor} = L\brack{1-s, \inv{\chi}}.
-    \end{equation*}
-\end{defn}
-
-We now state a result that we will later extend to adele groups.
-\begin{prop}
-\label{prop: local field is isomorphic to dual}
-Any local field $F$ is isomorphic (as a LCAG) to $\hat{F} = \Hom_{cont}(F, S^1)$. For any fixed $\psi \in \hat{F}$, the map
-\begin{equation*}
-    a \mapsto \psi_a := \psi(a \cdot  -)
-\end{equation*}
-is an topological group isomorphism.
-\end{prop}
-\begin{exercise}
-    Prove \ref{prop: local field is isomorphic to dual}. [CHANGE THIS this is way too lengthy to be an exercise]
-\end{exercise}
-
-In such a case of a \textit{self-dual} local field $F$, we can also speak of its Haar measure $\dx$ being self-dual, with the dual defined in \ref{def: dual measure}. Define 
-\begin{equation}
-\label{eqn: measure on F^times}
-    \d{^*x} := c \cdot \frac{\dx}{\abs{x}}
-\end{equation}
-for some $c \in \rr_{> 0}$, which we always set to 1 in the Archimedean case. Then $\d{^*x}$ is a Haar measure on $F^\times$.\\
-Fixing an additive (unitary) character $\psi \in \hat{F}$, for any $f \in S(F)$ we can define its Fourier transform by:
-\begin{equation}
-\label{eqn: Fourier transform local-zeta-func}
-    \hat{f}(y) := \int_F f(x)\psi(xy)\dx.
-\end{equation}
-Note this almost the same formulation as in \ref{def: Fourier transform}, though we drop the conjugation in the second factor of the integrand, as a simple matter of notational convenience to make our lives easier in coming calculations. The function $\hat{f}$ is well-defined and in-fact again lies in $S(F)$, though it depends on our choice of $\psi$ and $\dx$. In Tate's original thesis he normalizes his Haar measure to be self-dual relative to $\psi$, from which he obtained the nice identity $f(x) = \hat{\hat{f}}(x)$. We avoid this normalization for the local non-Archimedean case (WHY??).
-
-\begin{defn}
-\label{def: local zeta function}
-    Given $f \in S(F)$ and $\chi \in X(F^\times)$, we define the associated \textbf{local zeta function} to be:
-    \begin{equation*}
-        Z(f, \chi) := \int_{F^\times} f(x)\chi(x)\d{^*x}.
-    \end{equation*} 
-\end{defn}
-
-The following is the main result of this subsection.
-
-\begin{theorem}
-\label{thm: local zeta function convergence and func-eqn}
-    Let $F$ be a local field, and take  $f \in S(F)$ and $\chi = \mu \abs{\cdot}^s \in X(F^\times)$ with exponent $\sigma = \re{s}$. Then:
-    \begin{enumerate}[(a)]
-        \item \label{thmitem: abs-convg of local zeta function} If $\sigma > 0$ then the local zeta function $Z(f, \chi)$ is absolutely convergent.
-        \item \label{thmitem: functional-eqn of local zeta func} If $\sigma \in (0, 1)$ then the following functional equation holds:
-        \begin{equation*}
-            Z(\hat{f}, \chi^\lor) = \gamma(\chi, \psi, \dx) Z(f, \chi)
-        \end{equation*}
-        for some $\gamma$ independent of $f$ and meromorphic as a function of $s$.
-        \item \label{thmitem: epsilon factor local-zeta-func}There exists a factor $\varepsilon(\chi, \psi, \dx)$ nonzero for all inputs and satisfies:
-        \begin{equation*}
-            \gamma(\chi, \psi, \dx ) = \varepsilon(\chi, \psi, \dx) \frac{L(\chi^\lor)}{L(\chi)}
-        \end{equation*}
-    \end{enumerate} 
-\end{theorem}
-
-\begin{observation}
-Note that part \ref{thmitem: abs-convg of local zeta function} tells us that $Z(f, \chi)$ is absolutely convergent to the right of 0 on the complex plane, from which it follows by construction that $Z(\hat{f}, \chi^\lor)$ is absolutely convergent to the left of 1. Using this domain overlap along with part \ref{thmitem: functional-eqn of local zeta func}, we see that this theorem automatically yields a meromorphic continuation of the local zeta function. 
-\end{observation}
-
-\begin{proof}[proof of \ref{thmitem: abs-convg of local zeta function} in \ref{thm: local zeta function convergence and func-eqn}]
-To show $Z(f, \chi)$ is absolutely convergent, using our relationship between our Haar measures in Equation \ref{eqn: measure on F^times} and the fact that $\mu$ is unitary, it suffices to show that:
-\begin{equation*}
-    I(f, \sigma) = c \int_{F \setminus \set{0}} \abs{f(x)} \abs{x}^{\sigma - 1} \dx < \infty.
-\end{equation*}
-In the Archimedean case, finiteness of $I(f, \sigma)$ follows from the fact that $f$ is a Schwarz function, and thus rapidly decaying as $\abs{x}$ approaches infinity. Moreover, around zero since $\sigma > 0$ the $\abs{x}^{\sigma - 1}$ part is integrable, so we are happy.
-
-
-In the non-Archimedean case, $f$ is locally constant with compact support, it must factor through some finite group quotient of the form $\pp^m/\pp^m$, for some integers $m \leq n$ (here $\pp^k = \brangle{\pi^k}$ represents the fractional ideal of $\calo_F$ generated by the $k$-th power of its uniformizer). By linearity and translation-invariance of the Haar measure, it suffices to check finiteness of the integral for functions $f$ that are just the characteristic functions of the various ideals $\pp^j$.\\
-Using unique factorizaition in any fractional ideal, we can decompose it into a disjoint union:
-\begin{equation*}
-    \pp^j \setminus \set{0} = \bigsqcup^\infty_{k=j} \pi^k \calo_F^\times.
-\end{equation*}
-Thus our integral becomes:
-\begin{align*}
-        I(f, \sigma) &= c \int_{F \setminus \set{0}} \abs{f(x)} \abs{x}^{\sigma - 1} \dx \\
-        &= \int_{F^\times} \abs{f(x)} \abs{x}^\sigma \d{^*x}\\
-        &= \sum_{k \geq j} \int_{\pi^k \calo_F^\times} \abs{x}^\sigma \d{^*x}\\
-        &= \sum_{k \geq j}\vol(\calo_F^\times, \d{^*x})q^{-k \sigma}\\
-        &= \vol(\calo_F^\times, \d{^*x}) \frac{q^{-j\sigma}}{1 - q^{- \sigma}}
-\end{align*}
-which is finite when $\sigma > 0$, as desired.
-\end{proof}
-
-To prove the next part of our main theorem, we use a lemma that was key in Tate's original thesis. 
-\begin{lemma}
-\label{lemma: local-zeta-func func eqn}
-    Select some auxiliary function $g \in S(F)$. Then for all characters $\chi$ with exponent $\sigma \in (0, 1)$, we have:
-    \begin{equation*}
-        Z(f, \chi) Z(\hat{g}, \chi^\lor) = Z(\hat{f}, \chi^\lor)Z(g, \chi).
-    \end{equation*}
-\end{lemma}
-\begin{proof}
-Expanded out, the LHS of the Lemma statement is the following product of integrals:
-\begin{equation*}
-    Z(f, \chi) Z(\hat{g}, \chi^\lor) = \int_{F^\times} f(x) \chi(x) \d{^*x} \cdot \int_{F^\times} \hat{g}(y) \inv{\chi}(y) \abs{y} \d{^*y},
-\end{equation*}
-both of which are absolutely convergent by part \ref{thmitem: abs-convg of local zeta function} of \ref{thm: local zeta function convergence and func-eqn}. We can turn this into a double integral over the product space by:
-\begin{equation*}
-    \iint_{F^\times \times F^\times} f(x)\hat{g}(y) \chi(x \inv{y}) \abs{y} \d{^*x} \d{^*y}.
-\end{equation*}
-Using invariance of the product measure under the "shearing" automorphism $(x, y) \mapsto (x, xy)$, we obtain:
-\begin{equation*}
-    \iint_{F^\times \times F^\times} f(x)\hat{g}(xy)\chi(\inv{y}) \abs{xy} \d{^*x} \d{^*y},
-\end{equation*}
-which, by Fubini's theorem, is equal to:
-\begin{equation*}
-    \int \brack{\int f(x)\hat{g}(xy) \abs{x} \d{^*x}} \chi(\inv{y}) \abs{y} \d{^*y}.
-\end{equation*}
-To prove the lemma it remains to show that the inner integral is symmetric in $f$ and $g$. Expanding out the Fourier transform of $g$ (recalling our convention in Equation \ref{eqn: Fourier transform local-zeta-func} and transferring it to an integral over $F$ using Equation \ref{eqn: measure on F^times}), we get that the inner integral is equal to:
-\begin{equation*}
-    c \iint_{F \times F} f(x) g(z) \psi(xyz) \dz \dx.
-\end{equation*}
-Note there is a (slight) abuse of notation here as technically we shouldn't be integrating over elements in the product containing a 0, but we ignore it as a set of measure zero. We switch the order of the derivatives via Fubini to obtain:
-\begin{equation*}
-    c \iint_{F \times F} f(x) g(z) \psi(xyz) \dx \dz = c \int_F g(z) \hat{f}(zy) \dz = \int_{F^\times}  g(z) \hat{f}(zy) \abs{z} \d{^*z}
-\end{equation*}
-which gives us the desired result.
-\end{proof}
-
-\begin{proof}[proof of \ref{thmitem: functional-eqn of local zeta func} in \ref{thm: local zeta function convergence and func-eqn}]
-Our functional equation in Lemma \ref{lemma: local-zeta-func func eqn} tells us that:
-\begin{equation*}
-    \gamma(\chi, \psi, \dx) := \frac{Z(\hat{f}, \chi^\lor)}{Z(f, \chi)}
-\end{equation*}
-is independent of our choice of $f \in S(F)$. Note that:
-\begin{equation*}
-    \chi^lor = \brack{\mu \abs{\cdot}^s}^\lor = \inv{\mu} \abs{\cdot}^{1-s}
-\end{equation*}
-By part \ref{thmitem: abs-convg of local zeta function} of the main theorem, we deduce that $Z(\hat{f}, \chi^\lor)$ is absolutely convergent when $\sigma = \re{s} < 1$, and we have already seen that the denominator of $\gamma$ is absolutely convergent for all positive $\sigma$, so the functional equation in terms of $\gamma$ holds for all $\sigma \in (0, 1)$ as desired.\\
-To show $\gamma$ is meromorphic as a function of $s$, we turn to the proof of part \ref{thmitem: epsilon factor local-zeta-func} of the theorem.
-\end{proof}
-
-\begin{proof}[proof of \ref{thmitem: epsilon factor local-zeta-func} in \ref{thm: local zeta function convergence and func-eqn} in the Archimedean case]
-As shown in the proof of part \ref{thmitem: functional-eqn of local zeta func} of the theorem, the value of the $\gamma$ function is independent of our choice of $f \in S(F)$. Thus we may choose a special function, or family of functions, for each of the possible cases of $F$ to make our computations convenient. We will select a standard measure $\dx$ for each case, which is self-dual for an appropriate choice of $\psi$, and then extend our results to arbitrary $\dx$ and $\psi$ afterwords.\\
-
-\textbf{\underline{Case 1: $F = \rr$}}\\
-We take $\dx$ to be the usual Lebesgue measure, and set our additive character to be:
-\begin{equation*}
-    \psi(x) = e^{- 2 \pi i x}.
-\end{equation*}
-As we noted in our discussion of the local $L$-factors, any $\chi \in X(\rr^\times)$ is of the form $\abs{\cdot}^s$ or $\sgn \abs{\cdot}^s$.\\
-
-\underline{Sub-Case (i): $\chi = \abs{\cdot}^s$}\\
-Take $f(x) = e^{- \pi x^2}$, which is visibly in $S(\rr)$. Then recalling that we set the scaling constant in the measure transformation of Equation \ref{eqn: measure on F^times} to 1, we get:
-\begin{equation*}
-    Z(f, \chi) = \int_{\rr^\times} e^{-\pi x^2} \abs{x}^s \d{^*x} = 2 \int^\infty_0 e^{-\pi x^2} x^{s-1} \dx.
-\end{equation*}
-Using a substitution $u = \pi x^2$ (hence $\du = 2 \pi x \dx$),  the integral becomes:
-\begin{equation*}
-    \pi^{-s/2} \int^\infty_0 e^{-u} u^{s/2 - 1} \du = \pi^{-s/2} \Gamma(s/2).
-\end{equation*}
-and we see from Equation \ref{eqn: real local L-factor} that this is exactly our local $L$-factor, so in fact $Z(f, \chi) = L(\chi)$ for all characters of this form. Next we claim that $f$ is self-dual via the Fourier transform, i.e.
-\begin{equation*}
-    \hat{f}(y) = \int_\rr e^{-\pi x^2} e^{-2 \pi i xy} \dx = f(x).
-\end{equation*}
-We are omitting the details of the final equality but this is a well-known identity in classical functional analysis, and provable via a simple countour integral. Thus, we have:
-\begin{equation*}
-    Z(\hat{f}, \chi^\lor) = \int_{\rr^\times} \hat{f}(x) \chi^\lor(x) \d{^*x} = \int_{\rr^\times} f(x) \chi^\lor(x) \d{^*x} = Z(f, \chi^\lor)
-\end{equation*}
-which is equal to $L(\chi^\lor)$ by our previous calculation in this proof. Thus if $\chi = \abs{\cdot}^s$, we have:
-\begin{align}
-\label{eqn: real epsilon factor 1}
-    \gamma(\chi, \psi, \dx) &= \frac{L(\chi^\lor)}{L(\chi)} \nonumber \\
-    \implies \varepsilon(\chi, \psi, \dx) &= 1.
-\end{align}
-
-\underline{Sub-Case (ii): $\chi = \sgn \abs{\cdot}^s$}\\
-In this case we choose $f(x) = xe^{-\pi x^2}$, which is again immediately verifiable as rapidly decaying. Expanding the local zeta function we get:
-\begin{align*}
-    Z(f, \chi) &= \int_{\rr^\times} x e^{-\pi x^2} \frac{x}{\abs{x}} \abs{x}^s \d{^*x}\\
-    &= \int_{\rr^\times} e^{-\pi x^2} \abs{x}^{s+1} \d{^*x}\\
-    &= \pi^{-(s+1)/2} \Gamma\brack{\frac{s+1}{2}}.\\
-    &= \Gamma_\rr(s+1)
-\end{align*}
-which we again recall from Equation \ref{eqn: real local L-factor} as by definition our real local $L$-factor $L(\chi)$.\\
-Via another contour integral that we handwave, it can be shown that the Fourier transform of this function is of the form:
-\begin{equation*}
-    \hat{f}(y) = i y e^{- \pi y^2 } = i f(y)
-\end{equation*} 
-from which it follows 
-\begin{equation*}
-    Z(\hat{f}, \chi^\lor) = \int_{\rr^\times} i f(y) \chi^\lor \d{^*x} = i L(\chi^\lor),
-\end{equation*}
-and thus by a similar calculation to the last sub-case we deduce:
-\begin{align}
-\label{eqn: real epsilon factor 2}
-    \varepsilon(\chi, \psi, \dx) = i.
-\end{align}
-
-\textbf{\underline{Case 2: $F = \cc$}}\\
-Here we let our measure on $\cc$ be $\dz \d{\bar{z}} = 2 \dx\dy$, or double the standard Lebesgue measure. In polar coordinates this means $\dz = 2 \dr \dtheta$, which also implies $\d{^*z} = (2/r) \dr \dtheta$. We choose this as it is self-dual with respect to the character
-\begin{equation*}
-    \psi(z) := e^{- 2 \pi i (z + \bar{z})}.
-\end{equation*} 
-We also adjust the standard norm on $\cc$ to agree with the module, i.e
-\begin{equation*}
-    \abs{z} := z \bar{z}.
-\end{equation*}
-Since $\cc^\times = \rr_{> 0} \times S^1$, any multiplicative character must be of the form:
-\begin{equation*}
-    \chi_{s, n} := (re^{i\theta} \mapsto r^s e^{i n \theta})
-\end{equation*}
-for $s \in \cc$ and $n \in \zz$ uniquely defined. We choose our class of functions to be:
-\begin{equation*}
-    f_n(z) := \begin{cases}
-        \frac{1}{2\pi} \brack{\bar{z}}^n e^{- 2 \pi z \bar{z}}, & n \geq 0,\\
-        \frac{1}{2\pi} z^{-n} e^{- 2 \pi z \bar{z}}, & n < 0.
-    \end{cases}
-\end{equation*}
-We note that $f$ is visibly a Schwartz function for any $n$. Computing the local zeta function for non-negative $n$, we get:
-\begin{align*}
-    Z(f_n, \chi_{s, n}) &= \int_{\cc^\times} f_n(z) \chi_{s, n}(z)\d{^*z}\\
-    &= \frac{1}{2\pi} \int_{\cc^\times}\brack{\bar{z}}^ne^{ - 2 \pi z \bar{z}}(z \bar{z})^s e^{i n \arg(z)}\d{^*z}\\
-    &= \frac{1}{2\pi} \int^{2 \pi}_0 \int^\infty_0 (re^{-i \theta})^n e^{-2 \pi r^2} (r^2)^s e^{i n \theta} (2/r) \dr \dtheta\\
-    &= \frac{1}{\pi} \int^{2\pi}_0 \int^\infty_0 r^{2s + n - 1} e^{-2 \pi r^2} \dr \dtheta\\
-    &= (2 \pi)^{-\brack{s + \frac{n}{2}}} \int_0^\infty e^{- 2 \pi r^2} (2 \pi r)^{s + \frac{n}{2} - 1} 4 \pi r \dr\\
-    &= (2 \pi)^{-\brack{s + \frac{n}{2}}} \int^\infty_0 e^{-t} t^{s + \frac{n}{2} - 1} \dt\\
-    &= (2\pi)^{-\brack{s + \frac{n}{2}}} \Gamma(s + \frac{n}{2}) = L(\chi_{s, n})
-\end{align*}
-where we recall our definition of the local $L$-factor in \ref{eqn: complex local L-factor}. A similar calculation also shows that $Z(f_n, \chi_{s, n}) = L(\chi_{s, n})$ when $n < 0$.\\
-It remains to compute the "dual" local zeta function. We do this via a mixture of handwaving and clever observations. First we notice that $\chi^\lor_{n, s} = \chi_{1-s, -n}$ for any $s$ and $n$. Moreover, we via yet another hand-waved complex integral, we deduce that
-\begin{equation*}
-    \hat{f_n}(z) = \frac{1}{2\pi} i^{\abs{n}}f_{-n}(z)
-\end{equation*}
-for all $n$. Thus, using the fact that our computation was linear in the exponents $s$ and $n$, we deduce that
-\begin{equation*}
-    Z(\hat{f_n}, \chi^\lor_{s, n})  = i^{\abs{n}}L(\chi^\lor_{s, n}).
-\end{equation*}
-The reader is welcome to rigorously verify this calculation. In any event, as a consequence we get that:
-\begin{align*}
-    \label{eqn: complex epislon factor}
-    \gamma(\chi_{s, n}, \psi, \dx) &= i^{\abs{n}} \frac{L(\chi^\lor_{s, n})}{\chi_{s, n}}\\
-    \implies  \varepsilon(\chi_{s, n}, \psi, \dx) &= i^{\abs{n}},
-\end{align*}
-completing the complex case.\\
-
-To conclude our analysis on the Archimdean local fields, we note by looking at all the (nowhere-vanishing!) local epsilon factors computed in \ref{eqn: real epsilon factor 1}, \ref{eqn: real epsilon factor 2} and \ref{eqn: complex epislon factor}, and their corresponding local $L$-factors that $\gamma(\chi, \psi, \dx)$ is indeed meromorphic as a function of $s$, completing our proof.
-\end{proof}
-
-Before we proceed complete the proof of the final part of the theorem for the non-Archimedean case, we need to build some more tools and lemmas to use.
-\begin{defn}
-    \label{def: Gauss sum}
-    Given a ring $R$ with an additive (unitary) character $\psi: R \to S^1$ and a multiplicative (unitary) character $\chi: R^\times \to S^1$, we define their associated \textbf{Gauss sum} to be:
-    \begin{equation*}
-        g(\chi, \psi) := \int_{R^\times} \chi(u) \psi(u) \d{^*u}.
-    \end{equation*}
-    \end{defn}
-    \begin{remark}
-        Gauss sums turn out to be a hugely convenient notation that show up in a host of different applications, from theta-functions to cyclotomic fields. In fact, Weil made use of these Gauss-sums as a key step in his diagonal variety point-counting argument to motivate the famed Weil Conjectures in his original 1936 paper.
-    \end{remark}
-
-
-We now build the notion of a conductor of a character. As is standard we work with a local field $F$ with ring of integers $\calo_F$, prime ideal $\pp$, and  uniformizer $\pi$.
-\begin{defn}
-\label{def: conductor}
-Let $\psi$ be an additive character on $F$. Then the \textbf{conductor} of $\psi$ is the ideal $\pp^m$, where 
-\begin{equation*}
-    m := \min \set{r \in \zz : \psi \vert_{\pp^r} = 1},
-\end{equation*}
-i.e the conductor is the largest fractional ideal of $\calo_F$ on which $\psi$ is trivial. In the case that $\psi$ is trivial we set the conductor to be $\calo_F$ itself.\\
-Now suppose $\chi$ is a multiplicative character on $F^\times$. Then its \textbf{conductor} is $\pp^n$, where
-\begin{equation*}
-    n := \min \set{r \in \nn : \chi \vert_{1 + \pp^n} = 1},
-\end{equation*}
-i.e the conductor is the largest possible unit subgroup of $\calo_F$ on which $\chi$ is trivial.\\
-Sometimes the conductors are defined as the integers $m$ and $n$ themselves rather than the ideals, but we avoid this convention.
-\end{defn}
-\begin{remark}[Terminology]
-    The origin of the term "conductor" comes from Dedekind, who denoted by "\textit{F\"uhrer}" (whose meaning was closer to "guide", "attendant" or "conductor" in the original German, rather than its modern assocations) an ideal of an order in a number field, which is why classical texts denote conductors using $\frakf$. It drifted via osmosis to other fields in number theory, and its use in relation to characters and representations was popularized in large part by Artin and the eponymous Artin conductor of local field extensions.
-\end{remark}
-
-Our goal will be to use this language and notation of conductors and Gauss sums to simplify the integrands of the local-zeta functions. The main tool is the following key lemma.
-
-\begin{lemma}
-\label{lemma: gauss-sum conductor relations}
-Let $\chi$ be a multiplicative (unitary) character on $\calo_F^\times$ and $\psi$ be an additive (unitary) character, and suppose they have conductors $\pp^n$ and $\pp^m$ respectively. Then:
-\begin{enumerate}[(a)]
-    \item If $m < n$ then $g(\chi, \psi) = 0$.
-    \item If $m = n$ then $\abs{g(\chi, \psi)}^2 = c \vol(\calo_F, \dx) \vol(1 + \pp^n, \d{^*x})$.
-    \item If $m > n$ then $\abs{g(\chi, \psi)}^2 = c \vol(\calo_F, \dx) \brack{\vol(1 + \pp^n, \d{^*x}) - \vol(1 + \pp^{m-1}, \d{^*x})}$.
-\end{enumerate}
-\end{lemma}
-\begin{proof}
-\underline{Case 1: $m < n$}\\
-We decompose $\calo_F^\times$ into the disjoint union of (finitely many!) cosets of the unit subgroup $U_m := 1 + \pp^m$. Note for any $a, b \in \calo_F$ we have
-\begin{equation*}
-    \psi(a(1 + \pi^m b)) = \psi(a) \psi(a\pi^m b) = \psi(a),
-\end{equation*}
-by definition of the conductor $\pp^m = \brangle{\pi^m}$. The Gauss sum thus becomes:
-\begin{equation*}
-    g(\chi, \psi) = \sum_{\calo_F^\times/U_m} \brack{\psi(a) \chi(a) \int_{U_m} \chi(u) \d{^*u}}.
-\end{equation*}
-However since $m < n$, the subgroup $U_m$ is a strict superset of $U_n$, and so, by definition of the conductor, the character $\chi$ is non-trivial on $U_m$. Recall the integral of a character over a compact subgroup is zero, which in turn makes the entire Gauss sum zero, as desired. This proves (i).\\
-
-\underline{Case 2: $m \geq n$}\\
-Expanding out the expression and making use of Fubini, we get:
-\begin{align*}
-    \abs{g(\chi, \psi)}^2 &= g(\chi, \psi) \bar{g(\chi, \psi)}\\
-    &= \int_{\calo_F^\times} \chi(x) \psi(x) \d{^*x} \cdot \bar{\int_{\calo_F^\times} \chi(y) \psi(y) \d{^*y}}\\
-    &= \iint_{\calo_F^\times} \chi(x\inv{y})\psi(x-y)  \d{^*x} \d{^*y}.
-\end{align*}
-Making the substitution $x\inv{y} \mapsto z$ the above integral becomes
-\begin{equation*}
-    \int_{\calo_F^\times} \chi(z) h(z) \d{^*z},
-\end{equation*}
-where 
-\begin{equation*}
-    h(z) := \int_{\calo_F^\times} \psi(yz - y)\d{^*y} = c \int_{\calo_F^\times} \psi(y(z-1)) \dy.
-\end{equation*}
-Note we can switch the Haar measure in the second equality using Equation \ref{eqn: measure on F^times} and the fact that $\abs{y} = 1$ for all $y \in \calo_F^\times$. Making use of the fact that $\calo_F$ is a local ring, we get:
-\begin{equation*}
-    h(z) = c \brack{\int_{\calo_F} \psi(y(z - 1)) \dy - \int_\pp \psi(y(z - 1)) \dy}.
-\end{equation*}
-Note that if $\nu_\pp(z-1)  <  m-1$ then in the above expression $\psi$ takes values outside of its conductor in both of the integrals, and thus is a non-trivial character over $\calo_F$. If $\nu_\pp(z-1) = m - 1$ then $\psi$ is trivial only over $\pp$, not $\calo_F$, and otherwise it is trivial over the entire ring. These observations give us:
-\begin{equation*}
-    h(z) = \begin{cases}
-        0, & \nu_\pp(z-1) < m-1\\
-        -c\frac{\vol(\calo_F, \dx)}{q}, & \nu_\pp(z-1) = m-1\\
-        c\vol(\calo_F, \dx)\brack{1 - \frac{1}{q}}, &   \nu_\pp(z-1) \geq m.
-    \end{cases}
-\end{equation*}
-All that remains is to substitute these cases back into the integral $\int \chi(z)h(z) \d{^*z}$ to show the desired equalities in part (ii) and part (iii), which we leave as an exercise.
-\end{proof}
-
-
-\begin{exercise}
-\label{exercise: last part of gauss-sum conductor proof}
-Finish the last part of the proof of \ref{lemma: gauss-sum conductor relations}.
-\end{exercise}
-
-\begin{proof}[proof of \ref{thmitem: epsilon factor local-zeta-func} in \ref{thm: local zeta function convergence and func-eqn} in the non-Archimedean char 0 case]
-Here $F$ is a finite extension of $\qq_p$ for $p$ a prime number. We first define our "canonical" additive character $\psi_p$.\\
- finish this\\
-
-Next we classify our multiplicative characters. Recall from our discussion in the prelude to Definition \ref{def: exponent and unramified character} that any such character of $F^\times$ is of the form:
-\begin{equation*}
-    \chi_{s, n} := \brack{x \mapsto \abs{x}^s \omega(x/\abs{x})},
-\end{equation*}
-where $\omega$ is a unitary character with conductor $\pp^n$. Note the indices $s, n$ do not completely determine the character $\chi_{s, n}$, as there is some choice of $\omega$ to be made, but this notation will end up sufficing for the computations ahead. Note also that in the unramified case (i.e $n=0$), the unitary character $\omega$ is trivial. This fact will be used later.
-
-Now the class of functions we work with. Supposing our additive character $\psi$ have conductor $\pp^m$, we define:
-\begin{equation*}
-    f(x) := \begin{cases}
-        \psi(x), & x \in \pp^{m-n}\\
-        0, & \text{ otherwise}.
-    \end{cases}
-\end{equation*}
-This is a Schwartz-Bruhat function as it is compactly-supported by definition and the canonical character $\psi$ is trivial on $\zz_p$, so it is also locally constant. We now compute the local zeta functions $Z(f, \chi_{s, n})$ in two cases: $n$ zero, and $n$ positive.\\
-
-\underline{\textbf{Case 1: $n = 0$}}\\
-This means that $\omega$ is trivial everywhere, i.e $\chi_{s, 0}$ is an unramified character. We recall $\psi$ is trivial on $\pp^m$, and therefore $f$ is zero outside of the conductor of $\psi$. Using similar methods as in the proof of \ref{lemma: gauss-sum conductor relations}, we compute:
-\begin{align}
-\label{eqn: local zeta function non-Arch unramified}
-    Z(f, \chi_{s, 0}) &= \int_{F^\times} f(x)\chi_{s, 0}(x) \d{^*x} \nonumber \\
-    &= \int_{\pp^m \setminus \set{0}} \psi(x) \abs{x}^s \omega(x/\abs{x}) \d{^*x} \nonumber \\
-    &= \int_{\pp^m \setminus \set{0}} \abs{x}^s \d{^*x}\nonumber \\
-    &= \sum_{k \geq m} \brack{\int_{\pi^k \calo_F^\times} \abs{x}^s \d{^*x}}\nonumber \\
-    &= \vol(\calo_F^\times, \d{^*x}) \sum_{k \geq m} q^{-ks}\nonumber \\
-    &= q^{-ms} \vol(\calo_F^\times, \d{^*x} ) L(\chi_{s, 0}),
-\end{align}
-where we recall our definition of the local $L$-factor in the unramified case in Equation \ref{eqn: non-Arch local L-factor}.\\
-
-\underline{\textbf{Case 2: $n > 0$}}\\
-Recalling that $f$ is zero outside of $\pp^{m-n}$, by similar logic as in the $n=0$ case we get:
-\begin{align*}
-    Z(f, \chi_{s, n}) &= \sum_{k \geq m-n} \brack{ \int_{\pi^k \calo_F^\times} \psi(x) \omega(x/\abs{x}) \d{^*x}}\\
-    &= \sum_{k \geq m-n} \brack{ \int_{\calo_F^\times} \psi(\pi^k u) \omega(\pi^k u)/\omega(\pi^k) \d{^*u}}\\
-    &= \sum_{k \geq m-n} q^{-ks} \brack{\int_{\calo_F^\times} \psi(\pi^k u) \omega(u) \d{^*u}}\\
-    &= \sum_{k \geq m-n}q^{-ks}g(\omega, \psi_{\pi^k}).
-\end{align*}
-In the last line the Gauss sum notation comes as a typographical godsave for us, where $\psi_{\pi^k}(x) := \psi(x \pi^k)$. We note that the conductor of $\psi_{\pi^k}$ is $m-k$, so in particular if $k > m - n$ it contains the conductor of $\omega$. From $\ref{lemma: gauss-sum conductor relations}$ we thus get:
-\begin{equation}
-\label{eqn: local zeta function non-Arch ramified}
-    Z(f, \chi_{s, n}) = q^{(n-m)s} g(\omega, \psi_{\pi^{m-n}}) = q^{(n-m)s} c \vol(\calo_F, \dx) \vol(1 + \pp^n, \d{^*x})
-\end{equation}
-which is nothing but a non-trivial exponential function in $s$ with no zeroes or poles, which is what we want since the local $L$-factor is 1 in this case.\\
-
-Now we need to compute the local zeta function of the dual. Note by definition that:
-\begin{equation}
-\label{eqn: non-Arch Fourier transform integral}
-    \hat{f}(y) = \int_F f(x)\psi(xy) \dx = \int_{\pp^{m-n}} \psi(x(y+1)) \dx. 
-\end{equation}
-We proceed with similar casework to before.
-
-\underline{\textbf{Case 1: $n=0$}}\\
-Since the conductor of $\psi$ is $\pp^m$, we observe from the integral in Equation \ref{eqn: non-Arch Fourier transform integral} that $\hat{f}(y)$ is the integral of $\psi(x(y+1))$ taken over $\pp^m$. The character is non-trivial on $\pp^m$, and thus $\hat{f}(y)$ is zero, exactly when $y \notin \calo_F$. Thus in this case we have:
-\begin{equation*}
-    \hat{f}(y) = \begin{cases}
-    \vol(\pp^m, \dx), & y \in \calo_F\\
-    0, & \text{ otherwise},
-    \end{cases}
-\end{equation*}
-i.e we have a scaled characteristic function of the ring of integers. Using this, we compute:
-\begin{align}
-\label{eqn: dual local zeta function non-Arch unramified case}
-    Z(\hat{f}, \chi^\lor_{s, 0}) &= \int_{\calo_F \setminus \set{0}} \hat{f}(x) \chi^\lor_{s, 0}(x) \d{^*x} \nonumber \\
-    &= \vol(\pp^m, \dx) \sum_{k \geq 0} \brack{\int_{\calo_F^\times} \abs{\pi^k x}^{1-s} \d{^*x}} \nonumber \\
-    &= \vol(\pp^m, \dx) \vol(\calo_F^\times, \d{^*x}) \frac{1}{1 - q^{(1-s)}} \nonumber \\
-    &= \vol(\pp^m, \dx) \vol(\calo_F^\times, \d{^*x}) L(\chi^\lor_{s, 0})
-\end{align}
-which is what we wanted. Combing \ref{eqn: local zeta function non-Arch unramified} and \ref{eqn: dual local zeta function non-Arch unramified case}, we get that for $\chi = \chi_{s, 0}$ we have:
-\begin{align}
-\label{eqn: local epsilon factor non-Arch unramified}
-    \gamma(\chi, \psi, \dx) &= q^{ms} \vol(\pp^m, \dx) \frac{L(\chi^\lor)}{L(\chi)} \nonumber \\
-    \implies \varepsilon(\chi, \psi, \dx) &= q^{ms}\vol(\pp^m, \dx).
-\end{align}
-
-\textbf{\underline{Case 2: $n > 0$}}\\
-Examining \ref{eqn: Fourier transform local-zeta-func} again, we see that the integrand $\psi(x(y+1))$ is trivial over $\pp^{m-n}$ exactly when $y + 1 \in \pp^n$, and otherwise it is a trivial character and thus $\hat{f}(y) = 0$. We deduce then that $\hat{f}$ is the characteristic function of $\pp^n - 1$ scaled by the factor $\vol(\pp^{m-n}, \dx)$. Noting that $\pp^n - 1 \subseteq \calo_F^\times$, we computing the dual local zeta function:
-\begin{align}
-\label{eqn: dual local zeta funtion non-Arch ramified}
-    Z(\hat{f}, \chi^\lor_{s, n}) &= \int_{\pp^n - 1} \hat{f}(x) \chi^\lor_{s, n}(x) \d{^*x} \nonumber \\
-    &= \vol(\pp^{m-n}, \dx) \int_{\pp^n - 1} \abs{x}^{1-s} \bar{\omega}(x) \d{^*x} \nonumber \\
-    &= q^{n-m} \vol(\calo_F, \dx) \int_{1 + \pp^n} \bar{\omega}(x) \d{^*x} \nonumber \\
-    &= q^{n-m} \vol(\calo_F, \dx) \vol(1 + \pp^n, \d{^*x}) \omega(-1),
-\end{align}
-where the last line follows from the fact that the conductor of $\omega$ is equal to the conductor of its conjugate, so it is trivial on all of $\vol(1 + \pp^n, \d{^*x})$. We also note that this is constant in $s$, which is what we want, as we recall from $\ref{eqn: non-Arch local L-factor}$ that the local $L$-factor of a non-unramified character is 1. Combining \ref{eqn: local zeta function non-Arch ramified} and \ref{eqn: dual local zeta funtion non-Arch ramified} for $\chi = \chi_{s, n}$, we get:
-\begin{equation}
-\label{eqn: epsilon factor non-Arch ramified}
-    \varepsilon(\chi, \psi, \dx) = \gamma(\chi, \psi, \dx) = \frac{q^{(m-n)(s-1)} \omega(-1)}{ c g( \omega, \psi_{\pi^{m-n}})} = \frac{1}{c}q^{(m-n)(s-1)}g(\bar{\omega}, \psi_{\pi^{m-n}}).
-\end{equation}
-\begin{sanitycheck}
-    If it's not already clear, the final equality above made use of the following string of identities that any Gauss sum satisfies:
-    \begin{equation*}
-        1/g(\chi, \psi) = \bar{g(\chi, \psi)} = \chi(-1) g(\bar{\chi}, \psi).
-    \end{equation*}
-    Verify that each one of them makes sense.
-\end{sanitycheck}
-
-We now conclude our analysis. The equality involving the epsilon factor and relevant local $L$-factors have been shown in\ref{eqn: local epsilon factor non-Arch unramified} and \ref{eqn: epsilon factor non-Arch ramified}, from all of which $\gamma(\chi, \psi, \dx)$ is visibly meromorphic, completing our proof.
-\end{proof}
-
-
-
-\subsection{The Root Number}
-\label{subsection: The Root Number}
-
-
-\section{Riemann-Roch}
-\label{section: Riemann-roch}
-
-
-
-\subsection{Riemann-Roch Theorem}
-\label{subsection: Riemann-Roch}
-
-A standard result of classical Fourier analysis is the Poisson summation formula, and its nontrivial extension the Riemann-Roch theorem. We explore both these results in an adelic setting. We begin with another slew of notation.\\
-Let $K$ be a global field.
-\begin{defn}
-\label{def: adelic SB-functions}
-An \textbf{adelic Schwartz-Bruhat function} is a "restricted tensor product" of Schwartz-Bruhat functions on the completions of $K$, i.e
-\begin{equation*}
-    f = \bigtensor f_v : \forall v, \ f_v \in S(K_v) \text{ and } f_v\mid_{\calo_v} = 1 \text{ for almost all } v.
-\end{equation*}
-The space of such functions is denoted $S(\aa_K)$.
-\end{defn}
-\begin{sanitycheck}
-    Verify for any $x = (x_v) \in \aa_K$ and $f \in S(\aa_K)$ that it makes sense to write $f(x) = \prod f_v(x_v)$ (i.e. this is a well-defined product), and that the integral $\int_{\aa_K} f(x) \dx$ is finite, for $\dx$ a Haar measure on $\aa_K$.
-\end{sanitycheck}
-\begin{exercise}
-\label{exercise: S(A_K) dense in L^2(A_K)}
-    Let $\dx$ be a Haar measure on $\aa_K$, and define the space $L^2(\aa_K)$ using this measure. Show $S(\aa_K)$ is dense in $L^2(\aa_K)$.
-\end{exercise}
-Fix a nontrivial, continuous unitary character $\psi$ on $\aa_K$ such that $\psi \mid_K = 1$, and normalize a Haar measure $\dx$ to be self dual for $\psi$. We define the adelic Fourier transform on any $f \in S(\aa_K)$ by:
-\begin{equation*}
-    \hat{f}(y) := \int_{\aa_K} f(x) \psi(xy) \dx.
-\end{equation*}
-It is a non-obvious fact that this transform $f \mapsto \hat{f}$ induces an automorphism of $S(\aa_K)$. [Put in appendix or smth].\\
-
-We want to explore functions on the adele group that are invariant under translations by $K$ (recall we can diagonally embed $K$ into $\aa_K$). One such example is the aforementioned $\psi$. Another strategy we can do is to take an "average" over all of $K$. Specifically, for any $\phi \in S(\aa_K)$ we can take the following sum:
-\begin{equation*}
-    \widetilde{\phi}(x) := \sum_{y \in K} \phi(x + y).
-\end{equation*}
-When this sum is convergent then for any $z \in K$ we use the fact that $y \mapsto y + z$ is an automorphism of $K$ to see $\widetilde{\phi}(x + z) = \widetilde{x}$ for all $x \in \aa_K$.
-\begin{defn}
-\label{def: admissible function}
-    For any complex-valued function $f$ on $\aa_K$, define $\widetilde{f}$ as before. We say $f$ is \textbf{admissible} if both $\widetilde{f}$ and $\widetilde{\hat{f}}$ are absolutely and uniformly convergent on a compact subset. 
-\end{defn}
-
-\begin{lemma}
-\label{lemma: all adelic-SB-functions are admissible}
-All $f \in S(\aa_K)$ are admissible.
-\end{lemma}
-\begin{proof}
-    [Finish later]
-\end{proof}
-
-\begin{theorem}[Poisson Summation Formula]
-\label{thm: Poisson Summation formula}
-For a global field $K$, any adelic Schwartz-Bruhat function $f$ on $\aa_K$ satisfies
-\begin{equation*}
-    \widetilde{f} = \widetilde{\hat{f}}.
-\end{equation*}
-\end{theorem}
-\begin{proof}
-[FINISH LATER]
-\end{proof}
-
-Number theorists are interested [Why??] in the "average"
-\begin{equation*}
-    \sum_{\alpha \in K} f(x\alpha )
-\end{equation*}
-for $x \in \ii_K$. 
-
-\begin{theorem}[(Adelic) Riemann-Roch]
-\label{thm: Riemann-Roch}
-Let $x$ be an idele of a global field $K$ and let $f$ be an element of $S(\aa_K)$. Then
-\begin{equation*}
-    \sum_{ \alpha \in K}f(x\alpha ) = \frac{1}{\abs{x}}\sum_{\alpha  \in K} \hat{f}(\inv{x}\alpha)
-\end{equation*}
-\end{theorem}
-\begin{proof}
-Fix some $x \in \aa_K$ and for some arbitrary $y \in \aa_K$ define
-\begin{equation*}
-    h(y) := f(xy).
-\end{equation*}
-It is evident that $h \in S(\aa_K)$ as well, so by the Poisson summation formula (\ref{thm: Poisson Summation formula}) we have:
-\begin{equation*}
-    \sum_{\alpha \in K} h(\alpha) = \sum_{\alpha \in K} \hat{h}(\alpha).
-\end{equation*}
-Expanding and manipulating the Fourier transform, we get:
-\begin{align*}
-    \hat{h}(y) &= \int_{\aa_K} f(xy) \psi(\alpha y) \d{\alpha}\\
-    &= \frac{1}{\abs{x}} \int_{\aa_K} f(y) \psi(\alpha y \inv{x}) \d{\alpha}\\
-    &= \frac{1}{\abs{x}} \hat{f}(\alpha \inv{x}),
-\end{align*}
-whence the theorem follows.
-\end{proof}
-
-We now explore the Riemann-Roch in a more geometric setting.
-\begin{defn}
-    A \textbf{divisor} on a 
-\end{defn}
-
-
 \printbibliography
+
+
+
+
+
 \end{document}
