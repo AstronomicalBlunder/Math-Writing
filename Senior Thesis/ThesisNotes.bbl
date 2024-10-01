@@ -17,6 +17,76 @@
 \endgroup
 
 \datalist[entry]{anyt/global//global/global}
+  \entry{bernstein2013introduction}{book}{}
+    \name{author}{8}{}{%
+      {{hash=BJ}{%
+         family={Bernstein},
+         familyi={B\bibinitperiod},
+         given={J.},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=KS}{%
+         family={Kudla},
+         familyi={K\bibinitperiod},
+         given={S.S.},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=GS}{%
+         family={Gelbart},
+         familyi={G\bibinitperiod},
+         given={S.},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=KE}{%
+         family={Kowalski},
+         familyi={K\bibinitperiod},
+         given={E.},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=dSE}{%
+         prefix={de},
+         prefixi={d\bibinitperiod},
+         family={Shalit},
+         familyi={S\bibinitperiod},
+         given={E.},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=GD}{%
+         family={Gaitsgory},
+         familyi={G\bibinitperiod},
+         given={D.},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=CJ}{%
+         family={Cogdell},
+         familyi={C\bibinitperiod},
+         given={J.W.},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=BD}{%
+         family={Bump},
+         familyi={B\bibinitperiod},
+         given={D.},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Birkh{\"a}user Boston}%
+    }
+    \strng{namehash}{BJ+1}
+    \strng{fullhash}{BJKSGSKESEdGDCJBD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Ber+13}
+    \field{labelyear}{2013}
+    \field{labeldatesource}{}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{isbn}{9780817682262}
+    \field{title}{An Introduction to the Langlands Program}
+    \field{year}{2013}
+  \endentry
+
   \entry{CharGroupOfQ}{unpublished}{}
     \name{author}{1}{}{%
       {{hash=CK}{%
@@ -38,6 +108,160 @@
     \verb{url}
     \verb https://kconrad.math.uconn.edu/blurbs/gradnumthy/characterQ.pdf
     \endverb
+  \endentry
+
+  \entry{diamond2006first}{book}{}
+    \name{author}{2}{}{%
+      {{hash=DF}{%
+         family={Diamond},
+         familyi={D\bibinitperiod},
+         given={F.},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Shurman},
+         familyi={S\bibinitperiod},
+         given={J.},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer New York}%
+    }
+    \strng{namehash}{DFSJ1}
+    \strng{fullhash}{DFSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{DS06}
+    \field{labelyear}{2006}
+    \field{labeldatesource}{}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{isbn}{9780387272269}
+    \field{series}{Graduate Texts in Mathematics}
+    \field{title}{A First Course in Modular Forms}
+    \field{year}{2006}
+  \endentry
+
+  \entry{lang1994algebraic}{book}{}
+    \name{author}{1}{}{%
+      {{hash=LS}{%
+         family={Lang},
+         familyi={L\bibinitperiod},
+         given={S.},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{LS1}
+    \strng{fullhash}{LS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Lan94}
+    \field{labelyear}{1994}
+    \field{labeldatesource}{}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{isbn}{9780387942254}
+    \field{series}{Graduate Texts in Mathematics}
+    \field{title}{Algebraic Number Theory}
+    \field{year}{1994}
+  \endentry
+
+  \entry{miyake2006modular}{book}{}
+    \name{author}{2}{}{%
+      {{hash=MT}{%
+         family={Miyake},
+         familyi={M\bibinitperiod},
+         given={T.},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=MY}{%
+         family={Maeda},
+         familyi={M\bibinitperiod},
+         given={Y.},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer Berlin Heidelberg}%
+    }
+    \strng{namehash}{MTMY1}
+    \strng{fullhash}{MTMY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{MM06}
+    \field{labelyear}{2006}
+    \field{labeldatesource}{}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{isbn}{9783540295938}
+    \field{series}{Springer Monographs in Mathematics}
+    \field{title}{Modular Forms}
+    \field{year}{2006}
+  \endentry
+
+  \entry{ramakrishnan1998fourier}{book}{}
+    \name{author}{2}{}{%
+      {{hash=RD}{%
+         family={Ramakrishnan},
+         familyi={R\bibinitperiod},
+         given={D.},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=VR}{%
+         family={Valenza},
+         familyi={V\bibinitperiod},
+         given={R.J.},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer New York}%
+    }
+    \strng{namehash}{RDVR1}
+    \strng{fullhash}{RDVR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{RV98}
+    \field{labelyear}{1998}
+    \field{labeldatesource}{}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{isbn}{9780387984360}
+    \field{series}{Graduate Texts in Mathematics}
+    \field{title}{Fourier Analysis on Number Fields}
+    \verb{url}
+    \verb https://books.google.com/books?id=g_K0HqWU538C
+    \endverb
+    \field{year}{1998}
+  \endentry
+
+  \entry{MIT18.786notes}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=SA}{%
+         family={Sutherland},
+         familyi={S\bibinitperiod},
+         given={Andrew},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SA1}
+    \strng{fullhash}{SA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Sut24}
+    \field{labelyear}{2024}
+    \field{labeldatesource}{}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{Lecture notes for 18.876 (Graduate Number Theory II)}
+    \verb{url}
+    \verb https://math.mit.edu/classes/18.786/2024/lectures.html
+    \endverb
+    \field{year}{2024}
   \endentry
 
   \entry{Shimomura-topgrp-colimit}{article}{}
@@ -85,6 +309,33 @@
     \field{volume}{38}
     \field{journaltitle}{Journal of Mathematics of Kyoto University}
     \field{year}{1998}
+  \endentry
+
+  \entry{weil1974basic}{book}{}
+    \name{author}{1}{}{%
+      {{hash=WA}{%
+         family={Weil},
+         familyi={W\bibinitperiod},
+         given={Andr\'ei},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer New York}%
+    }
+    \strng{namehash}{WA1}
+    \strng{fullhash}{WA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Wei74}
+    \field{labelyear}{1974}
+    \field{labeldatesource}{}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{isbn}{9783540069355}
+    \field{series}{Die Grundlehren der mathematischen Wissenschaften in Einzeldarstellungen}
+    \field{title}{Basic Number Theory}
+    \field{year}{1974}
   \endentry
 \enddatalist
 \endinput

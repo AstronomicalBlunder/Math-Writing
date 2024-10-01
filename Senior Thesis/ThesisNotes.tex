@@ -19,7 +19,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead[L]{Senior Thesis}
-\rhead{\footnotesize Email Questions,  Comments and Corrections to:\\aaryan11@stanford.edu}
+\rhead{\footnotesize Aaryan Sukhadia}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -123,6 +123,7 @@
 \newcommand{\frakn}{\mathfrak{n}}
 \newcommand{\frakf}{\mathfrak{f}}
 \newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{H}}
 \newcommand{\jj}{\mathfrak{j}}
 %% MATHCAL LETTERS %%
 \newcommand{\calc}{\mathcal{C}}
@@ -143,24 +144,28 @@
 \newcommand{\caln}{\mathcal{N}}
 \newcommand{\cals}{\mathcal{S}}
 \newcommand{\calu}{\mathcal{U}}
+\newcommand{\calq}{\mathcal{Q}}
 %% FANCY LETTERS %%
-\newcommand{\fanc}{\mathscr{C}}
+\newcommand{\fana}{\mathscr{A}}
 \newcommand{\fanb}{\mathscr{B}}
+\newcommand{\fanc}{\mathscr{C}}
+\newcommand{\fand}{\mathscr{D}}
 \newcommand{\fane}{\mathscr{E}}
 \newcommand{\fanf}{\mathscr{F}}
-\newcommand{\fanp}{\mathscr{P}}
-\newcommand{\fanl}{\mathscr{L}}
-\newcommand{\fana}{\mathscr{A}}
-\newcommand{\fanx}{\mathscr{X}}
-\newcommand{\fany}{\mathscr{Y}}
-\newcommand{\fanz}{\mathscr{Z}}
 \newcommand{\fang}{\mathscr{G}}
 \newcommand{\fanh}{\mathscr{H}}
 \newcommand{\fani}{\mathscr{I}}
+\newcommand{\fanj}{\mathscr{J}}
+\newcommand{\fanp}{\mathscr{P}}
+\newcommand{\fanl}{\mathscr{L}}
+\newcommand{\fanx}{\mathscr{X}}
+\newcommand{\fany}{\mathscr{Y}}
+\newcommand{\fanz}{\mathscr{Z}}
 \newcommand{\fanm}{\mathscr{M}}
 \newcommand{\fann}{\mathscr{N}}
 \newcommand{\fans}{\mathscr{S}}
 \newcommand{\fanu}{\mathscr{U}}
+\newcommand{\fanq}{\mathscr{Q}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -173,7 +178,7 @@
 %% Maps %%
 \newcommand{\inj}{\hookrightarrow}
 \newcommand{\surj}{\twoheadrightarrow}
-\newcommand{\bij}{\overset{\sim}{\to}}
+\newcommand{\bij}{\stackrel{\sim}{\smash{\longrightarrow}\rule{0pt}{0.5ex}}}
 \newcommand{\dlim}{\varinjlim}
 \newcommand{\inlim}{\varprojlim}  
 %% Topology Things %%
@@ -370,7 +375,6 @@
 
 \counterwithout{section}{chapter}
 \renewcommand{\thechapter}{\Roman{chapter}}
-\setcounter{chapter}{-1}
 
 %%%%%%%%%%%%%%%%%%% CUSTOM COUNTER(S)  %%%%%%%%%%%%%%%%%%%%
 \newcounter{exercises}
@@ -390,7 +394,7 @@
 {
     \begin{flushright}
     \begin{adjustwidth}{0.125\textwidth}{}
-    "\textit{#1}"\\
+    "\textit{\small #1}"\\
     \end{adjustwidth}
     \rule{.75\linewidth}{0.5pt}\\
     #2\\ \textsc{#3}
@@ -587,19 +591,21 @@ TBC. Some key ones:\\
 
 \tableofcontents
 
-\chapter{Introduction}
+\chapter*{Introduction}
 
 \section*{Overview}
 \label{section: Overview}
 \addcontentsline{toc}{section}{\protect\numberline{}Overview}
  Add smth here. Broadly: Expository work on adelic language, and what Langlands has to say about it (at least the NT side). We'll see how far into this we get before the thesis deadline.\\
 
- Dream Goal:\\
+Goal:\\
  - Ch 1: Adeles - Motivation, basic properties, adelic points of a scheme maybe??\\
  - Ch 2: Tate's Thesis, basically.\\
+ We follow the exposition of \cite{ramakrishnan1998fourier} and \cite{weil1974basic}.
  - Ch 3: A primer on modular forms, and why they correspond to $GL_2(\aa)$\\
  - Ch 4: A (very) rough overview of what the Langlands conjectures say and some of the ideas that motivate(d) them.
 
+ May not fully reach Ch4 but good to keep as a dream for now.
 
 
 
@@ -672,8 +678,9 @@ The goal of this text is that if you're conceptually comfortable with some open 
 \textbf{Measures and Topological Groups}
 \begin{itemize}
     \item The phrase \textbf{"almost everywhere"} means we are considering a set whose complement has measure zero.
-    \item Almost everywhere in this text, we work with locally compact topological groups. In most cases we the groups are also assumed to be abelian. We use the abreviation "\textbf{LCA group}" in such cases.
-    \item Recall that every locally compact group admits a (bi-invariant) Haar measure, which we often denote by $\dx$ or $\dy$ or $\dz$, and so on.
+    \item By a \textbf{locally compact group} we mean $G$ is Hausdorff and every point has a compact neighborhood. Note we will ALWAYS assume the Hausdorff hypothesis.
+    \item In many cases the locally compact groups we work with are also assumed to be abelian. We use the abreviation "\textbf{LCA group}" in such cases.
+    \item Recall that every locally compact group admits a (bi-invariant) \textbf{Haar measure}, which we often denote by $\dx$ or $\dy$ or $\dz$, and so on.
     \item Given a Borel (i.e measurable) set on $A \subseteq G$ with Haar measure $\dx$, for sake of clarity we denote by $\vol(A, \dx)$ the value $\dx(A)$, i.e the measure of $A$ with respect to $\dx$.
     \item We use terms like \textbf{comeasure/covolume}/etc, to mean "measure/volume/etc of the complement".
     \item For $G$ a topological group, we denote by $\hat{G}$ the \textbf{Pontryagin dual group} of continuous characters $G \to S^1$. See Appendix \ref{section: Pontryagin Duality} for a detailed discussion.
@@ -689,13 +696,18 @@ The goal of this text is that if you're conceptually comfortable with some open 
 \chapter{Hello, Adele}
 \label{chapter: Hello, Adele}
 
+\begin{myquote}{In retrospect, we see now that the real numbers appear there as $\ldots$ neither more nor less interesting to the arithmetician than its $p$-adic companions, and that there is at least one language and one technique, that of the \textbf{adeles}, for bringing them all together under one roof and making them cooperate for a common purpose.}{Preface to \textit{Basic Number Theory}}{Andr\'e Weil}
+
+\end{myquote}
+
 
 \section{Adeles and Ideles}
 \label{section: Adeles&Ideles}
 
-\begin{myquote}{In retrospect, we see now that the real numbers appear there as one of the infinitely many completions of the prime field, one which is neither more nor less interesting to the arithmetician than its p-adic companions, and that there is at least one language and one technique, that of the \textbf{adeles}, for bringing them all together under one roof and making them cooperate for a common purpose.}{Preface to \textit{Basic Number Theory}}{Andr\'e Weil}
 
-\end{myquote}
+\begin{remark}
+    Some texts (e.g \cite{bernstein2013introduction}) use the accented terms "ad\'eles" and "id\'eles", but Chevalley introduced these terms more as a wordplay on "ideals," and so they don't necessarily exactly correspond to French words. Besides, I've never seen accents used for these terms by a French writer (see \cite{weil1974basic} and \cite{lang1994algebraic}), so I have chosen not to accent them in this text either.
+\end{remark}
 
 We begin by computing the character group $\hat{\qq}$ of homomorphisms $\qq \to S^1$, a task often done with assumptions of deep algebraic number theory. We follow the more elementary method of \cite{CharGroupOfQ}, and from it we motivate the object of our interest: adeles.
 \begin{warning}
@@ -707,13 +719,11 @@ It is a standard result that the only continuous homomorphisms from $\rr$ to $S^
 \end{equation*}
 for any $\lambda \in \rr$ (see the proof of \ref{example: dual of S^1 is Z} for a more detailed discussion). It follows that the restriction of the above map to $\qq$ is also a homomorphism to the circle. One might be tempted to think that this, too, characterizes all homomorphisms on $\qq$, but this is NOT the case.\\
 
-
-\begin{remark}
-    Some texts 
-\end{remark}
+[COMPLETE THIS]
 
 \subsection{The General Restricted Product}
 \label{subsection: Restricted Products}
+
 Let $J$ be an indexing set (the reason for choosing $J$ over $I$ will become apparent
 later when we get introduced to the Ideles), suppose that for every $v \in J$ we have 
 a locally compact group indexed by $G_v$. We fix a finite subset $J_\infty$ of $J$ (which
@@ -819,14 +829,14 @@ We now proceed to flesh out the theory of measures on this restricted product.
 
 \begin{prop}
 \label{Haar Measure on restricted product}
-For all but finitely many $v$, suppose $\dg_v$ be a (left) Haar measure on $G_v$ normalized so that $\vol(H_v, \d{g_v}) = 1$. Then there is a unique Haar measure $\dg$ on $G$ such that the restriction $\d{g_S}$ of $\dg$ on any $G_S$ is exactly the product measure.
+For all but finitely many $v$, suppose $\dg_v$ be a (left) Haar measure on $G_v$ normalized so that $\vol(H_v, \d{g_v}) = 1$. Then there is a unique Haar measure $\dg$ on $G$ such that the restriction $\d{g_S}$ of $\dg$ to any $G_S$ is exactly the product measure.
 \end{prop}
 \begin{proof}
-Choose such a set $S$ and define $\d{g_S}$ as the product of the measures $\d{g_v}$. Note the measure of the compact group $\prod_{v \notin S} H_v$ is indeed finite, by how we've normalized things. It is a verification of axioms to deduce the rest that $\dg_S$ is indeed a Haar measure on $G_S$.\\
+Choose such a set $S$ satisfying the conditions of finiteness and containin $J_\infty$, and define $\d{g_S}$ as the product of the measures $\d{g_v}$. Note the measure of the compact group $\prod_{v \notin S} H_v$ is indeed finite, by how we've normalized things. It is a verification of axioms to deduce the rest that $\dg_S$ is indeed a Haar measure on $G_S$.\\
 Suppose we have another finite set of indices $T \supseteq S$. Then, by construction,
-it follows that $\d{g_S}$ coincides with the restriction of $\d{g_T}$ to $G_S \leq G_T$.\\
+it follows that $\d{g_S}$ coincides with the restriction of $\d{g_T}$ to $G_S \subseteq G_T$.\\
 
-Since $G$ is locally compact, we know it has a Haar measure, which restructs to a Haar measure on any $G_S$. Fixing any $S$, we can define [ASK QUESTION HERE ABOUT EXISTENCE OF THING THAT RESTRICTS APPROPRIATELY]
+Since $G$ is locally compact, we know it has a (unique up to scaling!) Haar measure, which restructs to a Haar measure on any $G_S$ . Fixing any $S$, we can scale our Haar measure on $G$ so that when it restricts to $G_S$ it exactly coincides with $\d{g_S}$. 
 \end{proof}
 
 Thus we write 
@@ -836,7 +846,7 @@ Thus we write
 \end{equation}
 for the left Haar measure on $G$, oftened referred to as the measure induced by the component measures.\\
 
-Our next goal is integration.
+As in an AP Calc class, now that we've covered the "differentials", we move onto integration.
 \begin{prop}
 \label{Restricted Product Integral is limit of finite integrals}
 
@@ -1210,11 +1220,16 @@ Take $S$ a finite set of places of a global field $K$ containing the Archimedean
 We now proceed to a slightly more advanced task
 
 
+\section{Something about Adelic points of schemes maybe??}
 
 
 
 \chapter{The Thesis of Tate (a.k.a, $\GL_1$)}
 \label{chapter: Tate's thesis}
+
+\begin{myquote}{In hindsight, Tate's work may be viewed as $\ldots$ a fundamental reference and starting point for anyone interested in the modern theory of automorphic representations.}{Ch. 6 of \textit{An Introduction to the Langlands Program}}{Stephen S. Kudla}
+
+\end{myquote}
 
 
 \section{Idele Zeta Functions}
@@ -1790,7 +1805,7 @@ We now conclude our analysis. The equality involving the epsilon factor and rele
 
 
 
-\subsection{The Root Number}
+\subsection{The Root and Riemann-Roch}
 \label{subsection: The Root Number}
 
 
@@ -1819,115 +1834,9 @@ We fix a global field $K$ with standard character $\psi_K$ on the adele group $\
 \end{enumerate}
 \end{lemma}
 
-\section{Riemann-Roch}
-\label{section: Riemann-roch}
+\section{Hecke's L-function}
 
-
-
-\subsection{Riemann-Roch Theorem}
-\label{subsection: Riemann-Roch}
-
-A standard result of classical Fourier analysis is the Poisson summation formula, and its nontrivial extension the Riemann-Roch theorem. We explore both these results in an adelic setting. We begin with another slew of notation.\\
-Let $K$ be a global field.
-\begin{defn}
-\label{def: adelic SB-functions}
-An \textbf{adelic Schwartz-Bruhat function} is a "restricted tensor product" of Schwartz-Bruhat functions on the completions of $K$, i.e
-\begin{equation*}
-    f = \bigtensor f_v : \forall v, \ f_v \in S(K_v) \text{ and } f_v\mid_{\calo_v} = 1 \text{ for almost all } v.
-\end{equation*}
-The space of such functions is denoted $S(\aa_K)$.
-\end{defn}
-\begin{sanitycheck}
-    Verify for any $x = (x_v) \in \aa_K$ and $f \in S(\aa_K)$ that it makes sense to write $f(x) = \prod f_v(x_v)$ (i.e. this is a well-defined product), and that the integral $\int_{\aa_K} f(x) \dx$ is finite, for $\dx$ a Haar measure on $\aa_K$.
-\end{sanitycheck}
-\begin{exercise}
-\label{exercise: S(A_K) dense in L^2(A_K)}
-    Let $\dx$ be a Haar measure on $\aa_K$, and define the space $L^2(\aa_K)$ using this measure. Show $S(\aa_K)$ is dense in $L^2(\aa_K)$.
-\end{exercise}
-Fix a nontrivial, continuous unitary character $\psi$ on $\aa_K$ such that $\psi \mid_K = 1$, and normalize a Haar measure $\dx$ to be self dual for $\psi$. We define the adelic Fourier transform on any $f \in S(\aa_K)$ by:
-\begin{equation*}
-    \hat{f}(y) := \int_{\aa_K} f(x) \psi(xy) \dx.
-\end{equation*}
-It is a non-obvious fact that this transform $f \mapsto \hat{f}$ induces an automorphism of $S(\aa_K)$. [Put in appendix or smth].\\
-
-We want to explore functions on the adele group that are invariant under translations by $K$ (recall we can diagonally embed $K$ into $\aa_K$). One such example is the aforementioned $\psi$. Another strategy we can do is to take an "average" over all of $K$. Specifically, for any $\phi \in S(\aa_K)$ we can take the following sum:
-\begin{equation*}
-    \widetilde{\phi}(x) := \sum_{y \in K} \phi(x + y).
-\end{equation*}
-When this sum is convergent then for any $z \in K$ we use the fact that $y \mapsto y + z$ is an automorphism of $K$ to see $\widetilde{\phi}(x + z) = \widetilde{x}$ for all $x \in \aa_K$.
-\begin{defn}
-\label{def: admissible function}
-    For any complex-valued function $f$ on $\aa_K$, define $\widetilde{f}$ as before. We say $f$ is \textbf{admissible} if both $\widetilde{f}$ and $\widetilde{\hat{f}}$ are absolutely and uniformly convergent on a compact subset. 
-\end{defn}
-
-\begin{lemma}
-\label{lemma: all adelic-SB-functions are admissible}
-All $f \in S(\aa_K)$ are admissible.
-\end{lemma}
-\begin{proof}
-    [Finish later]
-\end{proof}
-
-\begin{theorem}[Poisson Summation Formula]
-\label{thm: Poisson Summation formula}
-For a global field $K$, any adelic Schwartz-Bruhat function $f$ on $\aa_K$ satisfies
-\begin{equation*}
-    \widetilde{f} = \widetilde{\hat{f}}.
-\end{equation*}
-\end{theorem}
-\begin{proof}
-[FINISH LATER]
-\end{proof}
-
-Number theorists are interested [Why??] in the "average"
-\begin{equation*}
-    \sum_{\alpha \in K} f(x\alpha )
-\end{equation*}
-for $x \in \ii_K$. 
-
-\begin{theorem}[(Adelic) Riemann-Roch]
-\label{thm: Riemann-Roch}
-Let $x$ be an idele of a global field $K$ and let $f$ be an element of $S(\aa_K)$. Then
-\begin{equation*}
-    \sum_{ \alpha \in K}f(x\alpha ) = \frac{1}{\abs{x}}\sum_{\alpha  \in K} \hat{f}(\inv{x}\alpha)
-\end{equation*}
-\end{theorem}
-\begin{proof}
-Fix some $x \in \aa_K$ and for some arbitrary $y \in \aa_K$ define
-\begin{equation*}
-    h(y) := f(xy).
-\end{equation*}
-It is evident that $h \in S(\aa_K)$ as well, so by the Poisson summation formula (\ref{thm: Poisson Summation formula}) we have:
-\begin{equation*}
-    \sum_{\alpha \in K} h(\alpha) = \sum_{\alpha \in K} \hat{h}(\alpha).
-\end{equation*}
-Expanding and manipulating the Fourier transform, we get:
-\begin{align*}
-    \hat{h}(y) &= \int_{\aa_K} f(xy) \psi(\alpha y) \d{\alpha}\\
-    &= \frac{1}{\abs{x}} \int_{\aa_K} f(y) \psi(\alpha y \inv{x}) \d{\alpha}\\
-    &= \frac{1}{\abs{x}} \hat{f}(\alpha \inv{x}),
-\end{align*}
-whence the theorem follows.
-\end{proof}
-
-We now explore the Riemann-Roch in a more geometric setting.
-\begin{defn}
-    A \textbf{divisor} on a 
-\end{defn}
-
-\subsection{Volume of $C^1_K$ and the Regulator}
-
-
-\begin{theorem}
-    For $K$ a number field, we have:
-    \begin{equation}
-        \label{eqn: C^1_K volume formula}
-        -\res_{s = 1}\zeta_K(s) = \vol(C^1_K) = 
-    \end{equation}
-\end{theorem}
-
-
-\section{Applications of Tate's Thesis}
+\section{Some Applications}
 
 \subsection{Dirichlet's Class Number Formula}
 
@@ -1935,17 +1844,29 @@ We now explore the Riemann-Roch in a more geometric setting.
 
 \chapter{Modular Forms and Automorphic Representations (a.k.a $\GL_2$)}
 
+\section{Automorphic Forms}
+We follow the notes of \cite{MIT18.786notes}.
+
+
 
 \chapter{The Conjectures of Langland (a.k.a $\GL_n$)}
+
+
+
+
 \appendix
+
 
 
 \chapter*{Appendices} 
 \addcontentsline{toc}{chapter}{Appendices}
 \renewcommand{\thesection}{\Alph{section}}
+\titleformat{\section}[display]{\Large}{\bfseries \scshape Appendix \thesection}{0.1em}{ \huge \scshape}[]
 
 \section{Fourier Theory of Locally Compact Groups}
 \label{section: Pontryagin Duality}
+
+[Probably cut down on this a LOT, mostly wrote this up to help me keep track of the content.]
 
 \subsection*{Introduction}
 In this section we start to do how to do Fourier transforms on an abelian topological group $G$, via the \textit{dual} $\hat{G}$, the group of continuous homomorphisms $G \to S^1$. 
@@ -2717,7 +2638,65 @@ to be the \textit{ring of Fourier transforms} on $G$ (sometimes also denoted $\h
 \subsection{Pontryagin Duality}
 \label{subsection: Pontryagin Duality}
 
+\newpage
+\section{Local and Global Fields}
 
+
+\newpage
+\section{Geometry of the Upper Half Plane}
+Introduction mainly follows \cite{diamond2006first} and \cite{miyake2006modular}.
+
+\subsection{Smth}
+
+The group of 2x2 complex invertible matrices act on the Riemann sphere $\bp^1_\cc$ via the following map:
+\begin{equation*}
+    \begin{bmatrix}
+        a & b\\ c & d
+    \end{bmatrix} \cdot z = \frac{az + b}{cz + d},
+\end{equation*}
+and the class of such maps are known as \textbf{fractional linear transformations}.
+
+\begin{defn}
+\label{def: Upper half-plane}
+The \textbf{upper half plane} is what it sounds like, namely the set:
+\begin{equation*}
+    \frakh := \set{z \in \cc : \im{z} > 0}.
+\end{equation*}
+\end{defn}
+
+We handwave the following elementary result:
+
+\begin{theorem}
+    \label{thm: Upper-HalfPlane Automorphisms}
+    \begin{itemize}[(a)]
+        \item For any $z \in \frakh$ there exists $\alpha \in \SL_2(\rr)$ such that $\alpha i = z$.
+        \item We have the following chain of isomorphisms:
+        \begin{equation*}
+            \GL_2^+(\rr)/\rr^\times \cong \SL_2(\rr) / \set{ \pm 1} \cong \aut(\frakh).
+        \end{equation*}
+        \item The $\SL_2(\rr)$-stabilizer of $i \in \frakh$ is $\SO_2(\rr)$.
+    \end{itemize}
+\end{theorem}
+
+Recalling that when group acting on the space is ALSO locally compact and second countable, then the algebraic orbit-stabilizer isomorphism is in fact a homeomorphism. This gives us the following corollary.
+\begin{corollary}
+    The map
+    \begin{equation*}
+        \alpha \SO_2(\rr) \mapsto \alpha_i
+    \end{equation*}
+    is a homeomorphism $\SL_2(\rr)/\SO_2(\rr) \bij \frakh$.
+\end{corollary}
+
+Thus we can represent elements $z \in \frakh$ as right cosets $\beta \SO_2(\rr)$ for $\beta \in \SL_2(\rr)$. Thus, the action of $\SL_2(\rr)$ on $H$ can be computed by
+\begin{equation*}
+    \alpha \cdot z = \alpha \beta \SO_2(\rr),
+\end{equation*}
+i.e left matrix multiplication rather than fractional linear transformation.
+
+
+
+
+\renewcommand{\bibname}{References}
 \printbibliography
 
 
