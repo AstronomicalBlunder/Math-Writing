@@ -1,16 +1,14 @@
 # Fdb version 4
-["bibtex ThesisNotes"] 1727758036 "ThesisNotes.aux" "ThesisNotes.bbl" "ThesisNotes" 1727758866 0
-  "./ThesisNotes-blx.bib" 1727758866 344 4180c9efb303db0600cc9f0bfd9acce1 ""
-  "./refs.bib" 1727755747 2761 ac1adba73c073b0b6fe498b7e0be12b7 ""
-  "/usr/local/texlive/2023/texmf-dist/bibtex/bst/biblatex/biblatex.bst" 1678141846 65484 b7949c47a88ed6dca66ebc7a04577312 ""
-  "ThesisNotes.aux" 1727758866 50967 0e78e1b3c4f771ef0008067eda0f2b29 "pdflatex"
+["biber ThesisNotes"] 1728891076 "ThesisNotes.bcf" "ThesisNotes.bbl" "ThesisNotes" 1728893716 0
+  "./refs.bib" 1728890944 4522 9eea3903a5f7adc9da4834f42a2af4b0 ""
+  "ThesisNotes.bcf" 1728893716 108943 7173feb8140acd4c6c6dfde765991b07 "pdflatex"
   (generated)
   "ThesisNotes.bbl"
   "ThesisNotes.blg"
   (rewritten before read)
-["pdflatex"] 1727758863 "/Users/aaryan/Desktop/Math-Writing/Senior Thesis/ThesisNotes.tex" "ThesisNotes.pdf" "ThesisNotes" 1727758866 0
-  "/Users/aaryan/Desktop/Math-Writing/Senior Thesis/ThesisNotes.tex" 1727758863 144382 f7f7b03e6c34ac0f88dd868ace606ac7 ""
-  "/dev/null" 1727758866 0 d41d8cd98f00b204e9800998ecf8427e ""
+["pdflatex"] 1728893713 "/Users/aaryan/Desktop/Math-Writing/Senior Thesis/ThesisNotes.tex" "ThesisNotes.pdf" "ThesisNotes" 1728893716 0
+  "/Users/aaryan/Desktop/Math-Writing/Senior Thesis/ThesisNotes.tex" 1728893713 143913 cbf536face1eab7c7ae0246817b299e1 ""
+  "/dev/null" 1728893715 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc" 1490131464 2933 9ad527ce78d7c5fa0a642dead095f172 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc" 1490131464 2934 a4a9158faed2e9e89c771b4e3b7fc12f ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_dhi6qf.enc" 1558472472 2914 3d1e3c4123f03ab27df5767d5039d109 ""
@@ -195,7 +193,6 @@
   "/usr/local/texlive/2023/texmf-dist/tex/latex/biblatex/biblatex.cfg" 1342308459 69 249fa6df04d948e51b6d5c67bea30c42 ""
   "/usr/local/texlive/2023/texmf-dist/tex/latex/biblatex/biblatex.def" 1678141846 92527 8f6b3a677f74ea525477a813f33c4e65 ""
   "/usr/local/texlive/2023/texmf-dist/tex/latex/biblatex/biblatex.sty" 1678141846 528517 7eed285c714f532e12ae48b360c080f8 ""
-  "/usr/local/texlive/2023/texmf-dist/tex/latex/biblatex/blx-bibtex.def" 1678141846 24610 e8a51da6c1318fc1c283dff9fb3c65a6 ""
   "/usr/local/texlive/2023/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty" 1609451401 8433 72f8188742e7214b7068f345cd0287ac ""
   "/usr/local/texlive/2023/texmf-dist/tex/latex/biblatex/blx-compat.def" 1643926307 13919 5426dbe90e723f089052b4e908b56ef9 ""
   "/usr/local/texlive/2023/texmf-dist/tex/latex/biblatex/blx-dm.def" 1643926307 32455 8d3e554836db11aab80a8e11be62e1b1 ""
@@ -322,15 +319,15 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1693331271 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1693331254 7883453 d7034f9ff9638f7742b2c1b0bf0634ef ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "ThesisNotes.aux" 1727758866 50967 0e78e1b3c4f771ef0008067eda0f2b29 "pdflatex"
-  "ThesisNotes.bbl" 1727758036 9054 79c596d9b3a8c3cc581cba076f1b55ae "bibtex ThesisNotes"
-  "ThesisNotes.out" 1727758866 6335 084f58f21cc7ee2ce81d39560970b547 "pdflatex"
-  "ThesisNotes.run.xml" 1727758866 2621 14c9263d585821beb8ed3fd44ec44f0a "pdflatex"
-  "ThesisNotes.tex" 1727758863 144382 f7f7b03e6c34ac0f88dd868ace606ac7 ""
-  "ThesisNotes.toc" 1727758866 2710 5555fee5ecc312c56f469cb3897d21e6 "pdflatex"
+  "ThesisNotes.aux" 1728893716 52251 566c1cce572027e4d32f8e7363b49b06 "pdflatex"
+  "ThesisNotes.bbl" 1728891091 18926 93baf35c044dbd9a9d1be6a6a3578c08 "biber ThesisNotes"
+  "ThesisNotes.out" 1728893716 5343 29530091abcb08ab325e5cc3e02a26a7 "pdflatex"
+  "ThesisNotes.run.xml" 1728893716 2354 cc173216051169e44f24910efab8f961 "pdflatex"
+  "ThesisNotes.tex" 1728893713 143913 cbf536face1eab7c7ae0246817b299e1 ""
+  "ThesisNotes.toc" 1728893716 2372 54c8e1809d92c409e8f82967effa6b11 "pdflatex"
   (generated)
-  "ThesisNotes-blx.bib"
   "ThesisNotes.aux"
+  "ThesisNotes.bcf"
   "ThesisNotes.log"
   "ThesisNotes.out"
   "ThesisNotes.pdf"
