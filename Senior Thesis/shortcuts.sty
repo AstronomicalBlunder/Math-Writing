@@ -1,0 +1,336 @@
+%% Some Key Packages
+
+\RequirePackage{import}
+\usepackage{amsthm, amssymb, amsmath, centernot, graphicx}
+\usepackage{thmtools}
+\usepackage{stmaryrd}
+
+\newcommand*{\declarecommand}{%
+  \@star@or@long\declare@command
+}
+\newcommand*{\declare@command}[1]{%
+  \provide@command{#1}{}%
+  % \let#1\@empty % would be more efficient, but without error checking
+  \renew@command{#1}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% CUSTOM COMMANDS %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% STYLIZED LETTERS %%%%%%%%%%%%%%%%
+%% BB LETTERS (only Capitals)%%
+\declarecommand{\aa}{\mathbb{A}}
+\declarecommand{\bb}{\mathbb{B}}
+\declarecommand{\cc}{\mathbb{C}}
+\declarecommand{\dd}{\mathbb{D}}
+\declarecommand{\ee}{\mathbb{E}}
+\declarecommand{\ff}{\mathbb{F}}
+\declarecommand{\gg}{\mathbb{G}}
+\declarecommand{\hh}{\mathbb{H}}
+\declarecommand{\ii}{\mathbb{I}}
+\declarecommand{\jj}{\mathbb{J}}
+\declarecommand{\kk}{\mathbb{K}}
+\declarecommand{\ll}{\mathbb{L}}
+\declarecommand{\bm}{\mathbb{M}}
+\declarecommand{\nn}{\mathbb{N}}
+\declarecommand{\oo}{\mathbb{O}}
+\declarecommand{\bp}{\mathbb{P}}
+\declarecommand{\qq}{\mathbb{Q}}
+\declarecommand{\rr}{\mathbb{R}}
+\declarecommand{\bs}{\mathbb{S}}
+\declarecommand{\tt}{\mathbb{T}}
+\declarecommand{\uu}{\mathbb{U}}
+\declarecommand{\vv}{\mathbb{V}}
+\declarecommand{\ww}{\mathbb{W}}
+\declarecommand{\xx}{\mathbb{X}}
+\declarecommand{\yy}{\mathbb{Y}}
+\declarecommand{\zz}{\mathbb{Z}}
+
+\declarecommand{\rp}{\mathbb{RP}}
+\declarecommand{\cp}{\mathbb{CP}}
+
+
+%% BOLDED LETTERS %%
+\declarecommand{\ba}{\mathbf{A}}
+\declarecommand{\bx}{\mathbf{x}}
+\declarecommand{\by}{\mathbf{y}}
+\declarecommand{\bv}{\mathbf{v}}
+\declarecommand{\bu}{\mathbf{u}}
+\declarecommand{\bw}{\mathbf{w}}
+\declarecommand{\bzero}{\mathbf{0}}
+\declarecommand{\bone}{\mathbb{1}}
+
+
+%% MATHFRAK LETTERS %%
+
+% (some) lowercase letters%
+\declarecommand{\fraka}{\mathfrak{a}}
+\declarecommand{\frakb}{\mathfrak{b}}
+\declarecommand{\frakc}{\mathfrak{c}}
+\declarecommand{\frakd}{\mathfrak{d}}
+\declarecommand{\frake}{\mathfraj{e}}
+\declarecommand{\frakf}{\mathfrak{f}}
+\declarecommand{\frakg}{\mathfrak{g}}
+\declarecommand{\fraki}{\mathfrak{i}}
+\declarecommand{\frakj}{\mathfrak{j}}
+\declarecommand{\frakk}{\mathfrak{k}}
+\declarecommand{\pp}{\mathfrak{p}}
+
+% (some) upper-case %
+\declarecommand{\PP}{\mathfrak{P}}
+\declarecommand{\frakq}{\mathfrak{q}}
+\declarecommand{\frakQ}{\mathfrak{Q}}
+\declarecommand{\mm}{\mathfrak{m}}
+\declarecommand{\MM}{\mathfrak{M}}
+\declarecommand{\frako}{\mathfrak{o}}
+\declarecommand{\frakD}{\mathfrak{D}}
+\declarecommand{\frakn}{\mathfrak{n}}
+\declarecommand{\frakh}{\mathfrak{H}}
+
+
+%% MATHCAL LETTERS (only Capitals) %%
+\declarecommand{\cala}{\mathcal{A}}
+\declarecommand{\calb}{\mathcal{B}}
+\declarecommand{\calc}{\mathcal{C}}
+\declarecommand{\cald}{\mathcal{D}}
+\declarecommand{\cale}{\mathcal{E}}
+\declarecommand{\calf}{\mathcal{F}}
+\declarecommand{\calg}{\mathcal{G}}
+\declarecommand{\calh}{\mathcal{H}}
+\declarecommand{\cali}{\mathcal{I}}
+\declarecommand{\calj}{\mathcal{J}}
+\declarecommand{\calk}{\mathcal{K}}
+\declarecommand{\call}{\mathcal{L}}
+\declarecommand{\calm}{\mathcal{M}}
+\declarecommand{\caln}{\mathcal{N}}
+\declarecommand{\calo}{\mathcal{O}}
+\declarecommand{\calp}{\mathcal{P}}
+\declarecommand{\calq}{\mathcal{Q}}
+\declarecommand{\calr}{\mathcal{R}}
+\declarecommand{\cals}{\mathcal{S}}
+\declarecommand{\calt}{\mathcal{T}}
+\declarecommand{\calu}{\mathcal{U}}
+\declarecommand{\calv}{\mathcal{V}}
+\declarecommand{\calw}{\mathcal{W}}
+\declarecommand{\calx}{\mathcal{X}}
+\declarecommand{\caly}{\mathcal{Y}}
+\declarecommand{\calz}{\mathcal{Z}}
+
+
+%% FANCY LETTERS (only Capitals) %% 
+\declarecommand{\fana}{\mathscr{A}}
+\declarecommand{\fanb}{\mathscr{B}}
+\declarecommand{\fanc}{\mathscr{C}}
+\declarecommand{\fand}{\mathscr{D}}
+\declarecommand{\fane}{\mathscr{E}}
+\declarecommand{\fanf}{\mathscr{F}}
+\declarecommand{\fang}{\mathscr{G}}
+\declarecommand{\fanh}{\mathscr{H}}
+\declarecommand{\fani}{\mathscr{I}}
+\declarecommand{\fanj}{\mathscr{J}}
+\declarecommand{\fank}{\mathscr{K}}
+\declarecommand{\fanl}{\mathscr{L}}
+\declarecommand{\fanm}{\mathscr{M}}
+\declarecommand{\fann}{\mathscr{N}}
+\declarecommand{\fano}{\mathscr{O}}
+\declarecommand{\fanp}{\mathscr{P}}
+\declarecommand{\fanq}{\mathscr{Q}}
+\declarecommand{\fanr}{\mathscr{R}}
+\declarecommand{\fans}{\mathscr{S}}
+\declarecommand{\fant}{\mathscr{T}}
+\declarecommand{\fanu}{\mathscr{U}}
+\declarecommand{\fanv}{\mathscr{V}}
+\declarecommand{\fanw}{\mathscr{W}}
+\declarecommand{\fanx}{\mathscr{X}}
+\declarecommand{\fany}{\mathscr{Y}}
+\declarecommand{\fanz}{\mathscr{Z}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% OPERATIONS, CONNECTORS & SEPARATORS %%%%%%%%%%%%
+%%% Module Things %%
+\declarecommand{\tensor}{\otimes}
+\declarecommand{\bigtensor}{\bigotimes}
+\declarecommand{\dsum}{\oplus}
+\declarecommand{\bigdsum}{\bigoplus}
+%% Maps %%
+\declarecommand{\inj}{\hookrightarrow}
+\declarecommand{\surj}{\twoheadrightarrow}
+\declarecommand{\bij}{\stackrel{\sim}{\smash{\longrightarrow}\rule{0pt}{0.5ex}}}
+\declarecommand{\dlim}{\varinjlim}
+\declarecommand{\colim}{\varinjlim}
+\declarecommand{\invlim}{\varprojlim}  
+%% Topology Things %%
+\declarecommand{\bar}[1]{\overline{#1}}
+\declarecommand{\csum}{\#}
+\DeclareMathOperator{\topint}{int}
+\declarecommand{\topwedge}{\vee}
+\declarecommand{\bigtopwedge}{\bigvee}
+%% Left-Righting Things %%
+\declarecommand{\set}[1]{\left\{ #1 \right\}}
+\declarecommand{\brangle}[1]{\left\langle #1 \right\rangle}
+\declarecommand{\brack}[1]{\left(   #1 \right)}
+\declarecommand{\abs}[1]{\left| \kern0.1em #1  \kern0.1em \right|}
+\declarecommand{\norm}[1]{\left\lVert #1 \right \rVert}
+\declarecommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\declarecommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\declarecommand{\sqbrack}[1]{\left[ #1 \right]}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% CUSTOM SYMBOLS FOR FUNZIES %%%%%%%%%%%%%%%%%
+\declarecommand{\fish}{ %% For R.V. w/ Poisson dist %%
+  \mathchoice
+    {\mathrel{\ooalign{$\alpha$\cr\hidewidth \kern -0.13em $\cdot$\hidewidth}}}% \displaystyle
+    {\mathrel{\ooalign{$\alpha$\cr\hidewidth \kern -0.13em$\cdot$\hidewidth}}}% \textstyle
+    {\mathrel{\ooalign{$\scriptstyle\alpha$\cr\hidewidth\kern -0.13em $\scriptstyle\cdot$\hidewidth}}}% \scriptstyle
+    {\mathrel{\ooalign{$\scriptscriptstyle\alpha$\cr\hidewidth \kern -0.13em $\scriptscriptstyle\cdot$\hidewidth}}}% \scriptscriptstyle
+}
+
+\declarecommand{\notimplies}{
+\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+
+
+%% Restricted Product %%
+\declarecommand{\rprod}{
+{\mathrel{\ooalign{\hidewidth $\ \displaystyle \prod\limits$ \hidewidth \cr $\  \displaystyle \coprod\limits$}}}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%% MISC OPS&COMMANDS %%%%%%%%%%%%%%%%%
+\declarecommand{\hat}{\widehat}
+\declarecommand{\tilde}{\widetilde}
+%% Categorical tingz %%
+\DeclareMathOperator{\Set}{\underline{\mathsf{Set}}}
+\DeclareMathOperator{\Ab}{\underline{\mathsf{Ab}}}
+\DeclareMathOperator{\Grp}{\underline{\mathsf{Grp}}}
+\DeclareMathOperator{\Top}{\underline{\mathsf{Top}}}
+\DeclareMathOperator{\Diff}{\underline{\mathsf{Diff}}}
+\DeclareMathOperator{\Rmod}{\underline{\mathsf{R-Mod}}}
+\DeclareMathOperator{\Zmod}{\underline{Z-\mathsf{Mod}}}
+\DeclareMathOperator{\Amod}{\underline{\mathsf{A-Mod}}}
+\DeclareMathOperator{\Vect}{\underline{\mathsf{Vect}}}
+\DeclareMathOperator{\Ring}{\underline{\mathsf{Ring}}}
+\DeclareMathOperator{\CRing}{\underline{\mathsf{CRing}}}
+\DeclareMathOperator{\Meas}{\underline{\mathsf{Meas}}}
+\DeclareMathOperator{\Met}{\underline{\mathsf{Met}}}
+\DeclareMathOperator{\Cat}{\underline{\mathsf{Cat}}}
+\DeclareMathOperator{\Man}{\underline{\mathsf{Man}}}
+\DeclareMathOperator{\Sh}{\underline{\mathsf{Sh}}}
+\DeclareMathOperator{\Presh}{\underline{\mathsf{PreSh}}}
+\DeclareMathOperator{\PreSh}{\underline{\mathsf{PreSh}}}
+\DeclareMathOperator{\Open}{\underline{\mathsf{Open}}}
+\DeclareMathOperator{\Et}{\underline{\mathsf{Et}}}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\mor}{Mor}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\ob}{Ob}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\op}{\mathsf{op}}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\coim}{coim}
+%% Algebra Tingz %%
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\lcm}{lcm}
+\declarecommand{\char}{char}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\gal}{Gal}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\sep}{sep}
+\declarecommand{\ideal}{\trianglelefteq}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\nil}{nil}
+\DeclareMathOperator{\ann}{ann}
+\DeclareMathOperator{\ab}{ab}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\trdeg}{trdeg}
+\DeclareMathOperator{\orb}{Orb}
+\DeclareMathOperator{\stab}{Stab}
+\declarecommand{\acts}{\curverightarrow}
+\declarecommand{\actson}{\curverightarrow}
+\declarecommand{\action}{\curverightarrow}
+%% ANT Tings %%
+\declarecommand{\zzz}[1]{\zz/#1 \zz}
+\DeclareMathOperator{\pic}{Pic}
+\DeclareMathOperator{\cl}{Cl}
+\DeclareMathOperator{\bigdiv}{Div}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\smalldiv}{div}
+\DeclareMathOperator{\trace}{Tr}
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\disc}{disc}
+%% Function Tingz %%
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\image}{Im}
+\declarecommand{\im}[1]{\mathfrak{Im} \left( #1 \right)}
+\declarecommand{\re}[1]{\mathfrak{Re} \left( #1 \right)}
+\declarecommand{\inv}[1]{#1^{-1}}
+%% Alg Geo Tingz %%
+\declarecommand{\homsheaf}{\mathcal{H}\text{om}}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\mspec}{Max-Spec}
+\DeclareMathOperator{\supp}{Supp}
+\DeclareMathOperator{\ass}{Ass}
+\DeclareMathOperator{\weakass}{WeakAss}
+\DeclareMathOperator{\proj}{Proj}
+\DeclareMathOperator{\et}{et}
+%% Matrix Tingz %%
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\mat}{Mat}
+\DeclareMathOperator{\mot}{Mot}
+\DeclareMathOperator{\rep}{Rep}
+\DeclareMathOperator{\res}{Res}
+%% Analysis Tingz %%
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\curl}{curl}
+\declarecommand{\dA}{\, \mathrm{d}A \ }
+\declarecommand{\dq}{\, \mathrm{d}q \ }
+\declarecommand{\dr}{\, \mathrm{d}r \ }
+\declarecommand{\ds}{\, \mathrm{d}s \ }
+\declarecommand{\dt}{\, \mathrm{d}t \ }
+\declarecommand{\du}{\, \mathrm{d}u \ }
+\declarecommand{\dv}{\, \mathrm{d}v \ }
+\declarecommand{\dV}{\, \mathrm{d}V \ }
+\declarecommand{\dx}{\, \mathrm{d}x \ }
+\declarecommand{\dy}{\, \mathrm{d}y \ }
+\declarecommand{\dz}{\, \mathrm{d}z \ }
+\declarecommand{\df}{\, \mathrm{d}f \ }
+\declarecommand{\dg}{\, \mathrm{d}g \ }
+\declarecommand{\dtheta}{\, \mathrm{d}\theta \ }
+\declarecommand{\domega}{\, \mathrm{d}\omega \ }
+\declarecommand{\dchi}{\, \mathrm{d}\chi \ }
+\declarecommand{\d}[1]{\, \mathrm{d}#1 \ }
+\declarecommand{\del}{\partial}
+\DeclareMathOperator{\vol}{Vol}
+%% Topology Tingz %%
+\DeclareMathOperator{\rel}{rel}
+\declarecommand{\lift}[1]{\widetilde{#1}}
+%% Logic Tingz %%
+\declarecommand{\semantics}[1]{[\![\textnormal{$ #1 $\/}]\!]}
+\declarecommand{\entails}{\Vdash}
+%% Prob Tingz %%
+\declarecommand{\given}{\mid}
+\DeclareMathOperator{\opt}{opt}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\bin}{Bin}
+\DeclareMathOperator{\geo}{Geo}
+\DeclareMathOperator{\poi}{Poi}
+\DeclareMathOperator{\ber}{Ber}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
