@@ -2361,37 +2361,6 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">refs.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1" intorder="1">ChevalleyPaper</bcf:citekey>
-    <bcf:citekey order="2" intorder="1">TatesThesis</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">serre2012algebraic</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">ramakrishnan1998fourier</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">weil1974basic</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">TatesThesis</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">rudin1991fourier</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">Hartshorne</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">bernstein2013introduction</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">weil1974basic</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">lang1994algebraic</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">MIT18.785notes</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">Shimomura-topgrp-colimit</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">TatesThesis</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">serre2012algebraic</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">serre2012algebraic</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">serre2012algebraic</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">serre2012algebraic</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">weil1974basic</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">ramakrishnan1998fourier</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">artin-whaples</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">neukirch2010algebraic</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">ChildressCFT</bcf:citekey>
-    <bcf:citekey order="24" intorder="1">WeilOG_Paper</bcf:citekey>
-    <bcf:citekey order="25" intorder="1">serre2012algebraic</bcf:citekey>
-    <bcf:citekey order="26" intorder="1">weil1974basic</bcf:citekey>
-    <bcf:citekey order="27" intorder="1">serre2012algebraic</bcf:citekey>
-    <bcf:citekey order="28" intorder="1">weil1974basic</bcf:citekey>
-    <bcf:citekey order="29" intorder="1">WeilOG_Paper</bcf:citekey>
-    <bcf:citekey order="30" intorder="1">weil1974basic</bcf:citekey>
-    <bcf:citekey order="31" intorder="1">ramakrishnan1998fourier</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="anyt">
@@ -2426,13 +2395,4 @@
     </bcf:sort>
   </bcf:sortingtemplate>
   <!-- DATALISTS -->
-  <bcf:datalist section="0"
-                name="anyt/global//global/global"
-                type="entry"
-                sortingtemplatename="anyt"
-                sortingnamekeytemplatename="global"
-                labelprefix=""
-                uniquenametemplatename="global"
-                labelalphanametemplatename="global">
-  </bcf:datalist>
 </bcf:controlfile>

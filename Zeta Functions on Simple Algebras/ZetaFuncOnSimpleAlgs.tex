@@ -1,0 +1,665 @@
+\documentclass[11pt, x11names, openany]{book}
+\setlength{\headheight}{22pt}
+
+% Typesetting Packages
+\usepackage[x11names]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[a4paper, total={7in, 9.5in}]{geometry}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{import}
+\usepackage{csquotes}
+\usepackage[style=alphabetic, backend=biber,
+            autocite=footnote, notetype=endonly, labeldateparts]{biblatex}
+\addbibresource{refs.bib}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage[justification=centering]{caption}
+
+%%%%%%%%%%%%%%% HEADERS/FOOTERS %%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{\footnotesize \rightmark}
+\rhead{\footnotesize Aaryan Sukhadia}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% MATH PACKAGES %%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsthm, amssymb, amsmath, centernot, graphicx}
+\usepackage{thmtools}
+\usepackage{stmaryrd}
+\usepackage[shortlabels]{enumitem}
+\usepackage{xfrac}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%% EQN SPACING %%%%%%%%%%%%%%%%%%%%
+\expandafter\def\expandafter\normalsize\expandafter{%
+    \normalsize%
+    \setlength\abovedisplayskip{6pt}%
+    \setlength\belowdisplayskip{6pt}%
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%% FONTS %%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{calligra, mathrsfs}
+\usepackage{lmodern}
+\usepackage[T2A,T1]{fontenc}
+
+% Other Font Options
+\usepackage{mathpazo} % The Rising Sea
+% \usepackage{euler}
+
+ %\usepackage{euler} % Vaughan's notes
+ %\usepackage{eulervm}
+
+%\usepackage{kpfonts}  
+\usepackage{libertine} 
+%\usepackage{libertinust1math}
+
+%\usepackage{amsfonts} % Stacks project math font
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%% GRAPHICS AND DESIGN %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+\usepackage{framed}
+\usepackage[many]{tcolorbox}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{pagecolor}
+\usepackage{etoolbox}
+\usepackage{listings}
+
+%%%%%%%%% Custom Colors %%%%%%%%%%%%%%
+\definecolor{shadecolor}{RGB}{244, 244, 244}
+\definecolor{darkcardinal}{RGB}{130, 0, 0}
+\definecolor{cardinalred}{RGB}{140, 21, 21}
+\definecolor{lightcardinal}{RGB}{148, 54, 75}
+\definecolor{stanfordpoppy}{RGB}{199, 70, 50}
+\definecolor{stanfordilluminating}{RGB}{233, 131, 0}
+
+
+% General Utilities 
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+            linkcolor = DeepPink1,
+            citecolor = DeepPink1}
+\usepackage{lipsum}
+\newcommand{\chref}[2]{\href{#1}{\color{blue}{\underline{#2}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%% CUSTOM COMMANDS %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{shortcuts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%% SECTION & COUNTER FORMATTING %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+\usepackage[titles]{tocloft}
+\allowdisplaybreaks
+\raggedbottom
+
+%% Sectional Title Formatting %%
+\titleformat{\chapter}[frame]{\LARGE \color{cardinalred}}{\bfseries \centering Chapter \thechapter}{1em}{\bfseries \centering \Huge \scshape \color{black}}[]
+\titleformat{\section}[display]{\Large \color{cardinalred}}{\bfseries \scshape  Section \thesection}{0.1em}{ \huge \scshape \color{black}}[]
+\titleformat{\subsection}[block]{\Large \centering}{ \color{cardinalred} \S \thesubsection}{1em}{}[]
+
+%% Customized Counter Arithmetic %%
+\counterwithout{section}{chapter}
+\setcounter{chapter}{-1}
+\renewcommand{\thechapter}{\Roman{chapter}}
+\counterwithin{equation}{subsection}
+\renewcommand{\theequation}{\color{DeepPink1} \thesection-\arabic{equation}\color{black}}
+\counterwithin{table}{subsection}
+\renewcommand{\thetable}{\thesubsection.\Alph{table}}
+
+%%% Custom Command for Hiding Appendix Subsections from TOC %%
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+
+
+%%%%%%%%%%%%%%%%%%% CUSTOM COUNTER(S)  %%%%%%%%%%%%%%%%%%%%
+\newcounter{exercises}
+\counterwithin{exercises}{subsection}
+\renewcommand{\theexercises}{\thesubsection.\Alph{exercises}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+%%%%%%%%%%%%%%%% ENVIRONMENTS AND PROOFS %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{myquote}[3]
+{
+    \begin{flushright}
+    \begin{adjustwidth}{0.125\textwidth}{}
+    "\textit{\small #1}"\\
+    \end{adjustwidth}
+    \rule{.75\linewidth}{0.5pt}\\
+    #2\\ \textsc{#3}
+
+}
+{
+    \end{flushright}
+}
+
+
+%% RMK ENV %%
+\declaretheoremstyle[
+headfont= \color{DodgerBlue4},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=5pt,
+  skipbelow=5pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  leftline=false,
+  roundcorner=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=10pt}
+]{sidebarstyle}
+
+%%%%%%%% DEFN ENV %%%%%%%%%%%%%
+\declaretheoremstyle[
+headfont=\color{cardinalred},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=10pt,
+  skipbelow=10pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=cardinalred,
+  linewidth=3pt,
+  roundcorner=0pt,
+  backgroundcolor=LavenderBlush1,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{defstyle}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% EXAMPLE ENV %%
+\declaretheoremstyle[
+headfont= \color{stanfordilluminating},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=10pt,
+  skipbelow=10pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=stanfordilluminating,
+  linewidth=3pt,
+  roundcorner=0pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{examplestyle}
+
+
+%% THM ENV %%
+\declaretheoremstyle[
+headfont=\color{cardinalred},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=10pt,
+  skipbelow=5pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=darkgray,
+  linewidth=3pt,
+  roundcorner=0pt,
+  backgroundcolor={shadecolor},
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{resultstyle}
+
+
+%% EXERCISE ENV %%
+\declaretheoremstyle[
+headfont= \color{darkgray},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=5pt,
+  skipbelow=5pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  linecolor=Cyan4,
+  backgroundcolor=Azure2,
+  linewidth=3pt,
+  roundcorner=0pt,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt}
+]{exercisestyle}
+
+%%% EXCLAMATION ENV %%%%%
+\declaretheoremstyle[
+headfont= \color{Red2!90!black},
+notefont=\mdseries, notebraces={(}{)},
+bodyfont=\normalfont\color{black},
+postheadspace=0.5em,
+spaceabove=0pt,
+mdframed={
+  skipabove=5pt,
+  skipbelow=5pt,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  leftline=false,
+  roundcorner=0pt,
+  innerleftmargin=0pt,
+  innerrightmargin=10pt}
+]{exclamationstyle}
+
+
+
+%%%%%%%%%%%%%%% RESULTS %%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Theorem},style=resultstyle,within=section]{thm}
+\declaretheorem[name=\textsc{Theorem},style=resultstyle, sibling=thm]{theorem}
+\declaretheorem[name=\textsc{Lemma},style=resultstyle,sibling=thm]{lemma}
+\declaretheorem[name=\textsc{Proposition},style=resultstyle,sibling=thm]{proposition}
+\declaretheorem[name=\textsc{Proposition},style=resultstyle,sibling=thm]{prop}
+\declaretheorem[name=\textsc{Corollary},style=resultstyle,sibling=thm]{corollary}
+\declaretheorem[name=\textsc{Corollary},style=resultstyle,parent=thm]{cor}
+\declaretheorem[name=\textsc{Conjecture},style=resultstyle, numbered=no]{conj}
+%%%%%%%%%%%%  DEFINITIONS & EXAMPLES  %%%%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Definition},style=defstyle,sibling=thm]{defn}
+\declaretheorem[name=\textsc{Example},style=examplestyle,sibling=thm]{example}
+\declaretheorem[name=\textsc{Non-Example},style=examplestyle,sibling=thm]{nonexample}
+%%%%%%%%%%%%% EXERCISES %%%%%%%%%%%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Exercise},style=exercisestyle, sibling=exercises]{exercise}
+%%%%%%%%%%%%%% EXCLAMATIONS %%%%%%%%%%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Sanity Check},style=exclamationstyle, numbered=no]{sanitycheck}
+\declaretheorem[name=\textsc{Warning},style=exclamationstyle, numbered=no]{warning}
+%%%%%%%%%%%%%% SIDEBARS & TANGENTS %%%%%%%%%%%%%%
+\declaretheorem[name=\textsc{Remark},style=sidebarstyle, numbered=no]{remark}
+\declaretheorem[name=\textsc{Question},style=sidebarstyle, numbered=no]{question}
+\declaretheorem[name=\textsc{Observation},style=sidebarstyle, numbered=no]{obs}
+\declaretheorem[name=\textsc{Observation},style=sidebarstyle, numbered=no]{observation}
+\declaretheorem[name=\textsc{Blackbox},style=sidebarstyle, numbered=no]{blackbox}
+\declaretheorem[name=\textsc{Joke},style=sidebarstyle, numbered=no]{joke}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\scshape
+
+\title{\Huge \color{cardinalred}  Zeta Functions of Simple Algebras}
+
+\author{\LARGE  and adaptation of the book by \\ \LARGE Jacquet and Godement \\~\\}
+\date{\Large by  \Large Aaryan Sukhadia \\~\\  \Large Supervised by Daniel Bump \\  \Large Stanford University \\~\\
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[width = .25 \linewidth]{SU_Seal_Red.png}
+\end{figure*}}
+
+\onehalfspacing
+
+\maketitle 
+
+
+\upshape
+
+%TOC
+\begingroup
+\hypersetup{linkcolor=.}
+    \setlength\cftbeforesecskip{0pt}
+    \setlength\cftbeforesubsecskip{-2.5pt}
+    \setlength\cftparskip{0pt}
+    \renewcommand\cftchapfont{\bfseries \color{darkcardinal}}
+    \renewcommand\cftsecfont{\color{cardinalred}}
+    \renewcommand\cftsubsecfont{\color{lightcardinal}}
+    \tableofcontents
+\endgroup
+
+\chapter{Introduction}
+
+\chapter{The Local Theory}
+
+
+\section{Convergence Lemmas}
+In this section, we establish the convergence of some integrals which will be needed later. Let $F$ be a (commutative) local field and $H$ a division algebra with center $F$. Let $M$ be the simple algebra of $m \times m$ matrices with entries in $H$. If $d^2$ is the rank of $H$ over $F$, then rank of $M$ over $F$ is $n^2$, where $n = md$.
+
+\begin{example}[Prototypical Example]
+The simplest non-trivial example of the above setup would be when $H = F$, and 
+\begin{equation*}
+    M = \mat_{n \times n}(F), \ M^\times = \GL_n(F).
+\end{equation*}
+\end{example}
+
+We recall some terminology and properties about central simple algebras.
+
+\begin{defn}
+\label{def: CSA splitting field}
+Let $F$ be a field, and $A$ a central simple $F$-algebra (i.e $A$ is a finite-dimensional associative $F$-algebra whose center is $F$). A finite extension $K/F$ is said to be a \textbf{splitting field for} $A$ if 
+\begin{equation*}
+    K \tensor_F A \cong \mat_{n \times n}(K)
+\end{equation*}
+for some $n$. We take it as a fact here (which is not too hard to show) that every such $A$ admits a splitting field.
+\end{defn}
+
+As a consequence, if we let $K$ be the splitting field of $H$ over $F$ and $G$ the unit group of $M$, the above definition/fact tells us that any such $G$ is of the form $\mat_{m \times m}^\times(H)$, and thus base changing to $K$ gives:
+\begin{equation*}
+    G_K \cong \mat_{m \times m}^\times(K \tensor_F H) \cong \GL_{m}(\mat_{k \times k}(K)). 
+\end{equation*}
+Thus we deduce that any such $G$ is a \textbf{reductive} algebraic group. 
+
+\begin{defn}
+\label{def: reduced norm and trace}
+With the setup as above, the \textbf{reduced norm}, denoted $\nu_M: M \to F$, is the unique polynomial maps such that the following diagram commutes:
+
+\begin{center}
+    \begin{tikzcd}
+    M \arrow[r, " \nu_M"] \arrow[d, hookrightarrow] & F \arrow[d, hookrightarrow]\\
+    K \tensor M \arrow[r, "\nu_M \tensor \bone"] \arrow[d, "\sim" {rotate=90, anchor=north}]  & K \arrow[d, equals] \\
+    \mat_{k \times k}(K) \arrow[r, "\det"] & K.
+    \end{tikzcd}\\
+\end{center}
+
+The \textbf{reduced trace} $\tau_M : M \to F$ is defined similarly.
+
+\end{defn}
+
+
+
+\begin{prop}
+Let $\phi$ be in $\fans(M)$ and $\d{^\times x}$ a Haar measure on $G(F)$. Then the integral
+\begin{equation*}
+    \int_{G(F)}\phi(x) \abs{\nu_M(x)}^s \d{^\times x}
+\end{equation*}
+is absolutely convergent for $\re{s} > d(m-1)$.
+\end{prop}
+\begin{proof}
+Since $H$ is a central simple algebra over $F$, we may identify the center $Z(G(F))$ with $F^\times$. By virtue of $\phi$ being a Schwartz-Bruhat function, we may suppose $\phi \geq 0$ and $s \in \rr$. Then the integral in the proposition statement is equal to
+\begin{equation*}
+    \int_{G(F)/Z(G(F))} \abs{\nu_M(\bar{g})}^s \d{\bar{g}} \int_{F^\times} \phi(ga) \abs{a}^{ns} \d{^\times a}.
+\end{equation*}
+
+First assume $m = 1$...\\
+
+Assume now $m = 1$
+\end{proof}
+
+
+
+\section{Induced Representations}
+
+Throughout this section, $F$ is a non-Archimedean local field, and $M$ is a semi-simple algebra over $F$ such that
+\begin{equation*}
+  M \cong \bigdsum_i M_i,
+\end{equation*}
+where each of the $M_i$ are central simple $F$-algebras.
+
+The multiplicative group $G$ of such an $M$ as above is a reductive algebraic group defined over $F$ (whose $R$-rational points we denote $G(R)$ for any $F$-algebra $R$, though we often just write $G$ if context is clear) and clearly we have
+\begin{equation}
+  G \cong \prod_i G_i,
+\end{equation}
+where $G_i := M_i^\times$. 
+
+We are interested in representations $\pi$ of $G(F)$ -- henceforth denoted as just $G$ -- on a $\cc$-vector space $V$ that are \textit{smooth and admissible}.
+\begin{defn}
+  \label{def: smooth and admissible repns}
+  A representation $(\pi, V)$ of $G$ is said to be \textbf{smooth} if $\stab_G(v)$ is an open subgroup of $G$ for every $v \in V$. It is \textbf{admissible} if it is smooth and and $V^{H}$ (the space of vectors in $V$ stabilized by $H$) is finite dimensional for every compact open subgroup $H$.
+\end{defn}
+
+\begin{remark}
+One can verify that smoothness of a representation is equivalent to continuity of the map
+\begin{align*}
+G \times V &\to V\\
+(g, v) &\mapsto \pi(g) v
+\end{align*}
+if we give $V$ the trivial locally convex topology in which every seminorm is continuous. 
+\end{remark}
+
+
+
+\begin{defn}
+  \label{def: hecke algebra}
+We denote by $\fanh(G(F))$ the space of locally constant and compactly supported complex-valued functions on $G(F)$. Convolution turns this into a complex algebra, known as the \textbf{Hecke algebra}. 
+\end{defn}
+
+
+Suppose $(\pi, V)$ is a smooth representation of $G$. Then for any $f \in \fanh(G)$ we may define an operator $\pi(f)$ on $V$ in the following manner:
+\begin{equation}
+  \label{eqn: repn of H(G)}
+  \pi(f) : v \mapsto \int_G f(g) \pi(g) v \dg.
+\end{equation}
+Note by assumption $f$ is locally constant and compactly supported, so the above integral is in fact a finite linear combination of vectors in $V$. Thus we may also view $\pi : f \mapsto \pi(f)$ as a representation of $\fanh(G)$ on $V$.
+
+If we denote by $\lambda$ the shift operator on $\fanh(G)$, i.e 
+\begin{equation*}
+  \lambda(g)f (h) := f( \inv{g}h),
+\end{equation*}
+then we note we have the identity
+\begin{align*}
+  \pi (\lambda(g)f) v &= \int_G f(\inv{g}h) \pi(h)v \dh\\
+  &= \int_G f(h) \pi(hg) v \dh\\
+  &= \int_G f(h) \pi(g) \pi(h) v \dh\\
+  &= \pi(g)\pi(f) v.
+\end{align*}
+
+\begin{lemma}
+  \label{lemma: admissible repns}
+A representation $(\pi, V)$ of $G$ is smooth if and only if the induced representation $\pi$ on $\fanh(G)$ satisfies that for every $v \in V$ there exists some $f \in \fanh(G)$ so that $\pi(f)v = v$.
+\end{lemma}
+\begin{proof}
+If $\pi$ is smooth, then by assumption $\stab_G(v)$ is an open (hence closed!) subgroup. We may pick $f$ then to be an appropriate multiple of the characteristic function of a  compact open set $C$ within this open subgroup (specifically it should be multiplied by the reciprocal of the Haar measur of the compact open), which would immediately give
+\begin{equation*}
+  \pi(f)v := \int_G f(g) \pi(g) v \dg = \frac{1}{\vol(C)} \int_C \pi(g)v \dg = \frac{1}{\vol(C)} \cdot \vol(C) v = v.
+\end{equation*}
+Conversely, suppose we have a representation $(\pi, V)$ of $\fanh(G)$ so that every vector $v$ has some $f$ so that $\pi(f)v = v$. We will construct a smooth $(\pi', V)$ representation of $G$ so that
+\begin{equation*}
+  \pi(f) v = \int_G f(g) \pi'(g) v \dg
+\end{equation*}
+for every $v \in V$.
+
+
+\end{proof}
+
+
+\begin{defn}
+\label{def: absolutely cuspidal}
+An irreducible admissible representation 
+\end{defn}
+
+
+
+\section{Reduction to the absolutely cuspidal case}
+
+We keep the notation of the previous section but we assume that $M$ here is a simple algebra. In particular, we can take
+\begin{equation*}
+  G = \GL_m(H),
+\end{equation*}
+where $H$ is a central division algebra over $F$. We note that the center of $G$ may be identified with $F^\times$. As always by abuse of notation we denote by $M$ or $G$
+
+We denote by $\fans(M)$ the space of compactly supported, locally constant functions from $M$ to $\cc$. We denote by $\tau, \nu$ the reduced trace and reduced norm respectively. 
+\begin{defn}
+  \label{def: Fourier transform}
+  Let $\psi$ be a nontrivial additive character of a local field $F$, and $M$ a simple matrix algebra over $F$. The \textbf{Fourier transform} of a function $\phi \in \fans(M)$ is
+  \begin{equation*}
+    \hat{\phi}(x) := \int_M \phi(y) \psi \brack{\tau(xy)} \dy .
+  \end{equation*}
+  Here the Haar measure $\dy$ is chosen so that $\int_M \hat{\phi}(x) \dx = \phi(0)$.
+\end{defn}
+
+Need to know that the trace bilinear form is non-degenerate, i.e the map. 
+
+\begin{defn}
+\label{def: coefficient of repn}
+Let $(\pi, V)$ be an admissible representation of $G$. A \textbf{coefficient} of $\pi$ is a function $f$ of the form 
+\begin{equation*}
+  f(g) = \brangle{\pi(g)v, \tilde{v}},
+\end{equation*}
+where $v \in V$ and ...
+\end{defn}
+
+
+
+\section{Example: Spherical Functions}
+Again we assume that 
+\begin{equation*}
+  G = \GL_m(H),
+\end{equation*}
+where $H$ is a division algebra of center $F^\times$ and rank $d^2$. Let 
+\begin{equation*}
+  K := \GL_m(\calo_H),
+\end{equation*}
+which is a maximal compact subgroup of $G$. We may assign $K$ to have measure one.\\
+
+Assume first $m = 1$. Then $K$ is the group $G_0$ of(reduced) norm 1 elements of $G$. If $\pi$ is an irreducible representation of $G$ that contains the unit representation of $G_0$, it must have the form 
+\begin{equation*}
+  \pi = \chi \circ \nu,
+\end{equation*}
+where $\chi$ is an unramified quasicharacter of $F^\times$. We have seen in this case that
+\begin{equation*}
+  L(s, \pi) = L(s, \chi \mu_1)
+\end{equation*}
+
+
+\chapter{Global Theory}
+
+\section{Automorphic Forms}
+In this chapter $K$ will be a global field, $H$ will be a division algebra of center $F$ and rank $d^2$, $M$ will be the simple algebra $\mat_{m \times m}(H)$, and $G$ will be group $M^\times$. We will denote by $\aa_K$ and $\ii_K$ the adeles and ideles of $K$ respectively. For each place $v \in \fanp_K$ we denote by $K_v$ the (local!) completion of $K$ at $v$ and put
+\begin{equation*}
+  H_v := H \tensor_K K_v, \quad M_v := M \tensor_K K_v, \quad G_v := \GL_m(H_v).
+\end{equation*}
+For each $v$ we choose an isomorphism
+\begin{equation}
+  \label{eqn: H_v isom}
+  H_v \bij \mat_{m_v' \times m_v'}(H_v'),
+\end{equation}
+where $H_v'$ is a division algebra of center $K_v$ and rank $(d_v')^2$, and $d = m_v' d_v'$. From \ref{eqn: H_v isom}, we derive isomorphisms
+\begin{equation}
+  \label{eqn: M_v, G_v isoms}
+  M_v \bij \mat_{m m_v' \times mm_v'}(H_v'), \quad G_v \bij \GL_{m m_v'}(H_v').
+\end{equation}
+The isomorphism in (\ref{eqn: H_v isom}) -- and therefore the isomorphisms in \ref{eqn: M_v, G_v isoms} -- are defined up to an inner automorphism. In particular, our choice of isomorphism does not affect the representation theory.
+
+For each $v \in \fanp_K$ we also define the constant
+\begin{equation}
+  \label{eqn: a_v constant}
+a_v := (-1)^{m m_v' (d_v' - 1)}
+\end{equation}
+Note that for almost all (i.e. cofinitely many) $v$ we have
+\begin{equation*}
+  H_v = \mat_{d_v \times d_v}(K_v), \ H_v' = K_v, \ M_v = \mat_{n \times n}(K_v), \ G_v = \GL_n(K_v),
+\end{equation*}
+with
+\begin{equation*}
+  d_v' = 1, \ m_v' = 1, \ a_v = 1.
+\end{equation*} 
+It is an easy consequence of the reciprocity law (in the Hasse form) that
+\begin{equation*}
+  \prod_{v \in \fanp_K} a_v = 1.
+\end{equation*}
+We shall give a direct proof of this later {\color{red} [Where?]}.
+
+Using the identification of $G_v$ in (\ref{eqn: M_v, G_v isoms}), we define for each $v$ a compact subgroup $H_v \leq G_v$. If $v$ is Archimedean, $H_v$ is the group of the \S 8, and if $v$ is non-Archimedean then $H_v$ is the group 
+\begin{equation*}
+  \GL_{m m_v'}(R_v'),
+\end{equation*}  
+where $R_v'$ is the ring of integers in $H_v'$.
+
+The product
+\begin{equation*}
+  H := \prod_{v \in \fanp_K} H_v
+\end{equation*}
+is a maximal compact subgroup of the adelic group
+\begin{equation*}
+  G(\aa_K) = \GL_m(H(\aa_K)).
+\end{equation*}
+We denote by $G_0$ the subgroup of $g \in G(\aa_K)$ such that $\abs{\nu_M(g)} = 1$.
+
+Exactly as in {\color{red} Insert source here} we define the 
+
+
+\begin{defn}
+\label{def: cuspidal func on G_A/G_K}
+A continuous function $\phi$ on $G(K) \backslash G(\aa_K)$ is said to be \textbf{cuspidal} if the integral
+\begin{equation*}
+  \int_{U_K \backslash U(\aa_K)} \phi(u g) \du
+\end{equation*}
+vanishes for all $U$ that are unipotent radicals of a proper $K$-parabolic subgroup of $G$.
+\end{defn}
+
+Let $T$ be a maximal $K$-split torus of $G$ and $\alpha_i$ (for $i \in [1, m-1]$) a system of simple roots of $T$. We put
+\begin{equation*}
+  \eta(t) := \inf_{i} \abs{\alpha_i(t)}, \quad \kappa(t) := \sup_i \abs{\alpha_i(t)}.
+\end{equation*}
+
+\begin{defn}
+\label{def: slowly increasing + rapidly decreasing function on G_A/G_K}
+A function $\phi$ on $G(K) \backslash G(\aa_K)$ is said to be \textbf{slowly increasing} (resp. \textbf{rapidly decreasing}) if for any compact $C \subseteq G$ and any $c > 0$ we have $p \geq 1$ and $c' > 0$ such that the relations
+\begin{equation*}
+  g \in C, \ t \in T(\aa_K) \cap G_0, \ \eta(t) \geq c
+\end{equation*}
+imply
+\begin{equation*}
+  \abs{\phi(tg)} \leq c' \kappa(t)^{p} \text{ (resp. }  \abs{\phi(tg)} \leq c' \kappa(t)^{-p} \text{)}
+\end{equation*}
+Whether these  condition is satisfied or not is independent of our choice of maximal torus $T$ or simple roots $\set{\alpha_i}$.
+\end{defn}
+
+When $m = H$, then being slowly increasing is equivalent to being rapidly decreasing, and both conditions are equivalent $\phi$ being bounded on every compact subset of $G(\aa_K)$. Since $(Z(\aa_K)G(K)\backslash G(\aa_K))$ is compact, then it is sufficient that $\phi$ is continuous and there is a Hecke character $\chi: \ii_K/K^\times$ such that
+\begin{equation*}
+  \phi(ag) = \chi(a) \phi(g) \ \forall a \in \ii_K, g \in G(\aa_K)
+\end{equation*}
+
+Let $X$ be a closed subset of $\ii_K$ such that the map $x \mapsto \abs{x}_{\ii_K}$ is proper. Let also $C$ be a compact subset of $G(\aa_K)$ and $C'$ a compact subset of $U_0(\aa_K)$. Finally, let $c$ be a strictly positive constant.\\
+
+
+
+
+
+
+
+
+\end{document}

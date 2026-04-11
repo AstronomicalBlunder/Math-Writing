@@ -1,0 +1,9 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {}Introduction}{3}{chapter.0}%
+\contentsline {chapter}{\numberline {I}The Local Theory}{4}{chapter.1}%
+\contentsline {section}{\numberline {1}Convergence Lemmas}{4}{section.1.1}%
+\contentsline {section}{\numberline {2}Induced Representations}{5}{section.1.2}%
+\contentsline {section}{\numberline {3}Reduction to the absolutely cuspidal case}{7}{section.1.3}%
+\contentsline {section}{\numberline {4}Example: Spherical Functions}{7}{section.1.4}%
+\contentsline {chapter}{\numberline {II}Global Theory}{9}{chapter.2}%
+\contentsline {section}{\numberline {5}Automorphic Forms}{9}{section.2.5}%

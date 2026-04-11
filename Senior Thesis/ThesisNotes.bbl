@@ -114,7 +114,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{9780817682262}
       \field{title}{An Introduction to the Langlands Program}
       \field{year}{2013}
     \endentry
@@ -156,6 +155,63 @@
       \verb http://www.jstor.org/stable/1969013
       \endverb
     \endentry
+    \entry{ChildressCFT}{book}{}
+      \name{author}{1}{}{%
+        {{hash=1f9cbb75d728686c40c51fd0ac6378ad}{%
+           family={Childress},
+           familyi={C\bibinitperiod},
+           given={Nancy},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{1f9cbb75d728686c40c51fd0ac6378ad}
+      \strng{fullhash}{1f9cbb75d728686c40c51fd0ac6378ad}
+      \strng{bibnamehash}{1f9cbb75d728686c40c51fd0ac6378ad}
+      \strng{authorbibnamehash}{1f9cbb75d728686c40c51fd0ac6378ad}
+      \strng{authornamehash}{1f9cbb75d728686c40c51fd0ac6378ad}
+      \strng{authorfullhash}{1f9cbb75d728686c40c51fd0ac6378ad}
+      \field{labelalpha}{Chi09}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Universitext}
+      \field{title}{Class Field Theory}
+      \field{year}{2009}
+    \endentry
+    \entry{Hartshorne}{book}{}
+      \name{author}{1}{}{%
+        {{hash=ee65baaab88f9233fbad3d51c399ee25}{%
+           family={Hartshorne},
+           familyi={H\bibinitperiod},
+           given={Robin},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{ee65baaab88f9233fbad3d51c399ee25}
+      \strng{fullhash}{ee65baaab88f9233fbad3d51c399ee25}
+      \strng{bibnamehash}{ee65baaab88f9233fbad3d51c399ee25}
+      \strng{authorbibnamehash}{ee65baaab88f9233fbad3d51c399ee25}
+      \strng{authornamehash}{ee65baaab88f9233fbad3d51c399ee25}
+      \strng{authorfullhash}{ee65baaab88f9233fbad3d51c399ee25}
+      \field{labelalpha}{Har77}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Graduate Texts in Mathematics}
+      \field{title}{{Algebraic Geometry}}
+      \field{volume}{52}
+      \field{year}{1977}
+    \endentry
     \entry{lang1994algebraic}{book}{}
       \name{author}{1}{}{%
         {{hash=abb50aa6b4dac78307182a4b8c05743e}{%
@@ -180,7 +236,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{9780387942254}
       \field{series}{Graduate Texts in Mathematics}
       \field{title}{Algebraic Number Theory}
       \field{year}{1994}
@@ -214,16 +269,9 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{9783642084737}
       \field{series}{Grundlehren der mathematischen Wissenschaften}
       \field{title}{Algebraic Number Theory}
       \field{year}{2010}
-      \verb{urlraw}
-      \verb https://books.google.com/books?id=YUBOcgAACAAJ
-      \endverb
-      \verb{url}
-      \verb https://books.google.com/books?id=YUBOcgAACAAJ
-      \endverb
     \endentry
     \entry{rudin1991fourier}{book}{}
       \name{author}{1}{}{%
@@ -249,16 +297,9 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{9780471523642}
       \field{series}{Wiley Classics Library}
       \field{title}{Fourier Analysis on Groups}
       \field{year}{1991}
-      \verb{urlraw}
-      \verb https://books.google.com/books?id=WlzLFUo0VzYC
-      \endverb
-      \verb{url}
-      \verb https://books.google.com/books?id=WlzLFUo0VzYC
-      \endverb
     \endentry
     \entry{ramakrishnan1998fourier}{book}{}
       \name{author}{2}{}{%
@@ -289,16 +330,9 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{9780387984360}
       \field{series}{Graduate Texts in Mathematics}
       \field{title}{Fourier Analysis on Number Fields}
       \field{year}{1998}
-      \verb{urlraw}
-      \verb https://books.google.com/books?id=g_K0HqWU538C
-      \endverb
-      \verb{url}
-      \verb https://books.google.com/books?id=g_K0HqWU538C
-      \endverb
     \endentry
     \entry{serre2012algebraic}{book}{}
       \name{author}{1}{}{%
@@ -317,66 +351,16 @@
       \strng{authorbibnamehash}{07241de515f0ce74ecf4f65ef83d0ce2}
       \strng{authornamehash}{07241de515f0ce74ecf4f65ef83d0ce2}
       \strng{authorfullhash}{07241de515f0ce74ecf4f65ef83d0ce2}
-      \field{extraname}{1}
-      \field{labelalpha}{Ser12}
+      \field{labelalpha}{Ser88}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{9781461210351}
       \field{series}{Graduate Texts in Mathematics}
       \field{title}{Algebraic Groups and Class Fields}
-      \field{year}{2012}
-      \verb{urlraw}
-      \verb https://books.google.com/books?id=RZHaBwAAQBAJ
-      \endverb
-      \verb{url}
-      \verb https://books.google.com/books?id=RZHaBwAAQBAJ
-      \endverb
-    \endentry
-    \entry{SerreLocalFields}{book}{}
-      \name{author}{1}{}{%
-        {{hash=523a41970d92b80420ca6d5307619da7}{%
-           family={Serre},
-           familyi={S\bibinitperiod},
-           given={Jean-Pierre},
-           giveni={J\bibinithyphendelim P\bibinitperiod}}}%
-      }
-      \list{location}{1}{%
-        {New York, NY}%
-      }
-      \list{publisher}{1}{%
-        {Springer New York}%
-      }
-      \strng{namehash}{523a41970d92b80420ca6d5307619da7}
-      \strng{fullhash}{523a41970d92b80420ca6d5307619da7}
-      \strng{bibnamehash}{523a41970d92b80420ca6d5307619da7}
-      \strng{authorbibnamehash}{523a41970d92b80420ca6d5307619da7}
-      \strng{authornamehash}{523a41970d92b80420ca6d5307619da7}
-      \strng{authorfullhash}{523a41970d92b80420ca6d5307619da7}
-      \field{extraname}{2}
-      \field{labelalpha}{Ser79}
-      \field{sortinit}{S}
-      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Local Fields}
-      \field{isbn}{978-1-4757-5673-9}
-      \field{title}{Discriminant and Different}
-      \field{year}{1979}
-      \verb{doi}
-      \verb 10.1007/978-1-4757-5673-9_4
-      \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.1007/978-1-4757-5673-9_4
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1007/978-1-4757-5673-9_4
-      \endverb
+      \field{year}{1988}
     \endentry
     \entry{MIT18.785notes}{misc}{}
       \name{author}{1}{}{%
@@ -432,7 +416,7 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Fourier Analysis in Number Fields and Hecke's Zeta Functhttps://www.youtube.com/watch?v=nuoqby6kFrAion}
+      \field{title}{Fourier Analysis in Number Fields and Hecke's Zeta Function}
       \field{type}{Doctoral Dissertation}
       \field{year}{1950}
     \endentry
@@ -487,6 +471,39 @@
       \verb https://doi.org/10.1215/kjm/1250518067
       \endverb
     \endentry
+    \entry{WeilOG_Paper}{article}{}
+      \name{author}{1}{}{%
+        {{hash=f5987f3b70bd698e3c1139b23bb8026b}{%
+           family={Weil},
+           familyi={W\bibinitperiod},
+           given={André},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Mathematical Society}%
+      }
+      \strng{namehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{fullhash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{bibnamehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{authorbibnamehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{authornamehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{authorfullhash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \field{extraname}{1}
+      \field{labelalpha}{Wei49}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bulletin of the American Mathematical Society}
+      \field{number}{5}
+      \field{title}{{Numbers of solutions of equations in finite fields}}
+      \field{volume}{55}
+      \field{year}{1949}
+      \field{pages}{497\bibrangedash 508}
+      \range{pages}{12}
+    \endentry
     \entry{weil1974basic}{book}{}
       \name{author}{1}{}{%
         {{hash=4155327f520efbfe583def57bc59a21a}{%
@@ -504,6 +521,7 @@
       \strng{authorbibnamehash}{4155327f520efbfe583def57bc59a21a}
       \strng{authornamehash}{4155327f520efbfe583def57bc59a21a}
       \strng{authorfullhash}{4155327f520efbfe583def57bc59a21a}
+      \field{extraname}{2}
       \field{labelalpha}{Wei74}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
@@ -511,7 +529,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{9783540069355}
       \field{series}{Die Grundlehren der mathematischen Wissenschaften in Einzeldarstellungen}
       \field{title}{Basic Number Theory}
       \field{year}{1974}
